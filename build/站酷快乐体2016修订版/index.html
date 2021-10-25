@@ -1,0 +1,34 @@
+`
+<!DOCTYPE html>
+<html lang="ch-CN">
+<!-- 生成测试模板文件 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./result.css">
+</head>
+<style>
+    body {
+        font-family: HappyZcool-2016;
+        overflow-wrap: break-word;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <div id="en"></div>
+    <div id='ch'></div>
+</body>
+<script>
+    fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/src/en-word.json').then(res => res.json()).then(res =>
+        document.getElementById('en').innerText = res.join('')
+    )
+    fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/src/word.json').then(res => res.json()).then(res =>
+        document.getElementById('ch').innerText = res.join('')
+    )
+</script>
+
+</html>`;

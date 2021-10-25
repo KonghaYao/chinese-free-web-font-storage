@@ -3,8 +3,8 @@ import fse from "fs-extra";
 import { resolve, extname } from "path";
 import genTestHTML from "./genTestHTML.js";
 
-const fontFileName = "站酷庆科黄油体";
-const license = "./fonts/站酷庆科黄油体使用声明.txt"; // 字体版权说明文件， 有则填路径即可
+const fontFileName = "站酷快乐体2016修订版";
+const license = "./fonts/license.txt"; // 字体版权说明文件， 有则填路径即可
 const FontPath = `./fonts/${fontFileName}.ttf`;
 
 fse.emptyDirSync("./build");
@@ -32,7 +32,7 @@ fontSplit({
             return fse
                 .outputFile(
                     resolve(
-                        `./build/${fontFileName}/license.` + extname(license)
+                        `./build/${fontFileName}/license` + extname(license)
                     ),
                     fse.readFileSync(license)
                 )
