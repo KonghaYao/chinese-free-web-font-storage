@@ -1,14 +1,15 @@
 import fontSplit from "@konghayao/cn-font-split";
 import fse from "fs-extra";
 import { resolve, extname } from "path";
-// 需要先进行 npm run build 生成字体文件
+import genTestHTML from "./genTestHTML.js";
 
 const fontFileName = "站酷庆科黄油体";
-const license = ""; // 字体版权说明文件， 有则填即可
+const license = "./fonts/站酷庆科黄油体使用声明.txt"; // 字体版权说明文件， 有则填路径即可
+const FontPath = `./fonts/${fontFileName}.ttf`;
 
 fse.emptyDirSync("./build");
 fontSplit({
-    FontPath: `./fonts/${fontFileName}.ttf`, // 字体位置
+    FontPath, // 字体位置
     destFold: `./build/${fontFileName}`, // 必须设置为名称
     css: {
         fontStyle: "normal",
@@ -21,10 +22,18 @@ fontSplit({
         totalSize: 6000, // 总共会抽取的字符数
         chunkSize: 600, // 每个分段的字符数
     },
-}).then((res) => {
-    if (license)
-        fse.outputFileSync(
-            resolve(`./build/${fontFileName}/license.` + extname(license)),
-            fse.readFileSync(license)
-        );
-});
+})
+    .then(() => genTestHTML())
+    .then(() => console.log("测试文件生产完毕"))
+    .then(() => {
+        if (license) {
+            return fse
+                .outputFile(
+                    resolve(
+                        `./build/${fontFileName}/license.` + extname(license)
+                    ),
+                    fse.readFileSync(license)
+                )
+                .then(() => console.log("声明文件生成完毕"));
+        }
+    });
