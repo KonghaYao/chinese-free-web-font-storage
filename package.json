@@ -1,0 +1,24 @@
+{
+    "name": "webfontproject",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KonghaYao/chinese-free-web-font-storage.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/KonghaYao/chinese-free-web-font-storage/issues"
+    },
+    "homepage": "https://github.com/KonghaYao/chinese-free-web-font-storage#readme",
+    "type": "module",
+    "dependencies": {
+        "@konghayao/cn-font-split": "^1.0.5",
+        "fs-extra": "^10.0.0"
+    }
+}
