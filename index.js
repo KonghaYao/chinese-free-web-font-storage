@@ -1,4 +1,4 @@
-import fontSplit from "@konghayao/cn-font-split";
+import fontSplit from "@konghayao/cn-font-split/dist/fontSplit.esm.js";
 import fse from "fs-extra";
 import { resolve, extname } from "path";
 import genTestHTML from "./genTestHTML.js";
@@ -23,7 +23,9 @@ fontSplit({
         chunkSize: 600, // 每个分段的字符数
     },
 })
-    .then(() => genTestHTML())
+    .then(({ fontFamily }) => {
+        return genTestHTML(fontFamily, fontFileName);
+    })
     .then(() => console.log("测试文件生产完毕"))
     .then(() => {
         if (license) {
