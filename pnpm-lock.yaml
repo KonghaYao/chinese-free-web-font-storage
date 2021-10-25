@@ -1,11 +1,11 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@konghayao/cn-font-split': ^1.1.1
+  '@konghayao/cn-font-split': ^1.2.0
   fs-extra: ^10.0.0
 
 dependencies:
-  '@konghayao/cn-font-split': 1.1.1
+  '@konghayao/cn-font-split': 1.2.0
   fs-extra: 10.0.0
 
 packages:
@@ -243,8 +243,8 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /@konghayao/cn-font-split/1.1.1:
-    resolution: {integrity: sha512-BiyGjVpVcHc2XEY8nbr5VjgeoWUA+ER5ZFjt+4jcHAoVY+KsvPI3Zsm2mnFthR2jwV9lpLhbn1wMD4HzrC+/eA==}
+  /@konghayao/cn-font-split/1.2.0:
+    resolution: {integrity: sha512-nJoEF5iJAeSs9NASFQuK3E23FLNFJySn07LAtXrceL0KjS02mkGcLfakYGpNSMbMSxRwUSsKXDOpPAt8/0M0DA==}
     dependencies:
       '@rollup/plugin-json': 4.1.0
       code-points: 2.0.0-1
