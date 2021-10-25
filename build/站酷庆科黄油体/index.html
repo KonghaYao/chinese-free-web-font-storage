@@ -12,7 +12,7 @@
 </head>
 <style>
     body {
-        font-family: HappyZcool-2016;
+        font-family: zcoolqingkehuangyouti-Regular;
         overflow-wrap: break-word;
         font-size: 18px;
     }
@@ -27,7 +27,7 @@
         document.getElementById('en').innerText = res.join('')
     )
     fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/src/word.json').then(res => res.json()).then(res =>
-        document.getElementById('ch').innerText = res.join('')
+        document.getElementById('ch').innerText = res.slice(0, 100).join('')
     )
 </script>
 
