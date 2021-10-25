@@ -18,7 +18,7 @@
     "homepage": "https://github.com/KonghaYao/chinese-free-web-font-storage#readme",
     "type": "module",
     "dependencies": {
-        "@konghayao/cn-font-split": "^1.1.1",
+        "@konghayao/cn-font-split": "^1.2.0",
         "fs-extra": "^10.0.0"
     }
 }

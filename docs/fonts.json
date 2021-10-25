@@ -1,0 +1,12 @@
+[
+    {
+        "name": "站酷庆科黄油体",
+        "css": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/%E7%AB%99%E9%85%B7%E5%BA%86%E7%A7%91%E9%BB%84%E6%B2%B9%E4%BD%93/result.min.css",
+        "fontFamily": "zcoolqingkehuangyouti-Regular"
+    },
+    {
+        "name": "站酷快乐体",
+        "css": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/result.min.css",
+        "fontFamily": "HappyZcool-2016"
+    }
+]

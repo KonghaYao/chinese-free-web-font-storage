@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!-- 字体查看网站 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="force-cache" />
+    <meta http-equiv="Pragma" content="force-cache" />
+    <meta http-equiv="Expires" content="10000000" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/base.min.css">
+    <!-- <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/%E7%AB%99%E9%85%B7%E5%BA%86%E7%A7%91%E9%BB%84%E6%B2%B9%E4%BD%93/result.css"> -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id='app'>
+        <header>
+            <h3>江夏尧的字体仓库</h3>
+        </header>
+        <main>
+            <div class="font-block" v-for='(font) in fonts' :key='font.name'>
+                <h4>{{font.name}}</h4>
+                <div :style='{
+                    fontFamily:font.fontFamily
+                }'>
+                    {{config.test}}
+                </div>
+                <link rel="stylesheet" :href="font.css">
+                </link>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
+<script type="module" src="./index.js"></script>
+
+</html>
