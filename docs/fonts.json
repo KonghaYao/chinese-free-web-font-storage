@@ -8,5 +8,35 @@
         "name": "站酷快乐体",
         "css": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/result.min.css",
         "fontFamily": "HappyZcool-2016"
+    },
+    {
+        "name": "站酷仓耳渔阳体",
+        "css": [
+            {
+                "fontFamily": "站酷仓耳渔阳体",
+                "fontWeight": 100,
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W01/result.min.css"
+            },
+            {
+                "fontFamily": "站酷仓耳渔阳体",
+                "fontWeight": 200,
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W02/result.min.css"
+            },
+            {
+                "fontFamily": "站酷仓耳渔阳体",
+                "fontWeight": 400,
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W03/result.min.css"
+            },
+            {
+                "fontFamily": "站酷仓耳渔阳体",
+                "fontWeight": 600,
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W04/result.min.css"
+            },
+            {
+                "fontFamily": "站酷仓耳渔阳体",
+                "fontWeight": 800,
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W05/result.min.css"
+            }
+        ]
     }
 ]
