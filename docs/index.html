@@ -18,21 +18,24 @@
 
 <body>
     <div id='app'>
-        <header>
-            <h3>江夏尧的字体仓库</h3>
+        <header class="header flex">
+            <h3 class="title">江夏尧的字体仓库</h3>
+            <div class="little">纵享中文字体之美</div>
         </header>
-        <main>
+        <main class="font-show flex">
             <div class="font-block" v-for='(font) in fonts' :key='font.name'>
                 <h4>{{font.name}}</h4>
                 <div :style='{
-                    fontFamily:font.fontFamily
+                    fontFamily:font.css[0].fontFamily,
+                    fontWeight:font.css[0].fontWeight||"normal"
                 }'>
                     {{config.test}}
                 </div>
-                <link rel="stylesheet" :href="font.css">
+                <link rel="stylesheet" :href="font.css[0].url">
                 </link>
             </div>
         </main>
+        <nav></nav>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>

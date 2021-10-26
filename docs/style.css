@@ -1,7 +1,36 @@
 body {
-    font-family: zcoolqingkehuangyouti-Regular;
+    font-family: 微软雅黑;
 }
+
 h3 {
     font-size: 3rem;
     padding: 0 1rem;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.header {
+    box-shadow: 0 8px 12px #ebedf0;
+    justify-content: space-between;
+}
+.title {
+    font-family: zcoolqingkehuangyouti-Regular;
+}
+.little {
+    padding: 0 4rem;
+}
+.font-show {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.font-block {
+    width: 20rem;
+    box-shadow: 0 8px 12px #ebedf0;
+    padding: 1rem;
+    margin: 0.5rem;
 }
