@@ -6,6 +6,9 @@ h3 {
     font-size: 3rem;
     padding: 0 1rem;
 }
+h4 {
+    font-size: 1.5rem;
+}
 .flex {
     display: flex;
     flex-direction: row;
@@ -21,6 +24,8 @@ h3 {
 }
 .little {
     padding: 0 4rem;
+    font-family: 千图笔锋手写体;
+    font-size: 1.5rem;
 }
 .font-show {
     display: flex;

@@ -18,6 +18,15 @@
         ]
     },
     {
+        "name": "千图笔锋手写体",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css",
+                "fontFamily": "千图笔锋手写体"
+            }
+        ]
+    },
+    {
         "name": "站酷仓耳渔阳体",
         "css": [
             {
