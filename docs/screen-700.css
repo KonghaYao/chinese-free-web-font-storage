@@ -1,0 +1,19 @@
+@media screen and (max-width: 700px) {
+    .title {
+        font-size: 2rem;
+    }
+    .little {
+        font-size: 1rem;
+    }
+    .font-block {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 520px) {
+    .title {
+        font-size: 1.2rem;
+    }
+    .little {
+        font-size: 0.7rem;
+    }
+}

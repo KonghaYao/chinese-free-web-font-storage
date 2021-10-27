@@ -1,5 +1,29 @@
 [
     {
+        "name": "优设标题黑",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/优设标题黑/result.min.css",
+                "fontFamily": "YouSheBiaoTiHei"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/优设标题黑/license.txt"
+        }
+    },
+    {
+        "name": "斗鱼追光体",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/斗鱼追光体/result.min.css",
+                "fontFamily": "DOUYU Font"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/斗鱼追光体/license.txt"
+        }
+    },
+    {
         "name": "站酷庆科黄油体",
         "css": [
             {

@@ -11,9 +11,12 @@
     <meta http-equiv="Expires" content="10000000" />
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/base.min.css">
-    <link rel="stylesheet" href="./Material Icons.css">
-    <link rel="stylesheet" href="./Dancing Script.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/combine/gh/konghayao/chinese-free-web-font-storage/css/Material Icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./screen-700.css">
 
 </head>
 
@@ -27,7 +30,7 @@
             <div class="little">纵享中文字体之美</div>
         </header>
         <main class="font-show flex">
-            <div class="font-block" v-for='(font,index) in fonts' :key='font.name'
+            <vue-lazy-component class="font-block flex flex-col" v-for='(font,index) in fonts' :key='font.name'
                 @click='chooseFont({index,type:"font"})'>
 
                 <div class="font-header flex">
@@ -39,7 +42,8 @@
                     <h4 class="font-name">{{font.name}}</h4>
                 </div>
 
-                <div :style='{
+                <div class="flex-grow" :style='{
+                    overflow:"scroll",
                     fontFamily:font.css[0].fontFamily,
                     fontWeight:font.css[0].fontWeight||"normal"
                 }'>
@@ -48,7 +52,7 @@
                     </link>
                 </div>
 
-            </div>
+            </vue-lazy-component>
             <footer class="footer flex ">
                 <div class="flex " style="height: 100%;">
                     <div class="footer-name" style="text-align: right;">Design By KonghaYao <br />Please give me a star
@@ -130,6 +134,7 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
 <script src="https://unpkg.com/vue-toasted@1.1.26/dist/vue-toasted.min.js"></script>
+<script src="https://unpkg.com/@xunlei/vue-lazy-component@1.0.7/dist/vue-lazy-component.js"></script>
 <script type="module" src="./index.js"></script>
 
 </html>

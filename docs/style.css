@@ -1,3 +1,4 @@
+@import url(https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css);
 body {
     font-family: 微软雅黑;
 }
@@ -69,12 +70,13 @@ h4 {
     font-size: 1.5rem;
 }
 .font-show {
+    max-width: 1000px;
     flex-grow: 1;
     overflow-y: scroll;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .code-template {
     cursor: default;
@@ -91,12 +93,16 @@ h4 {
     background-color: white;
 }
 .font-block {
+    overflow: hidden;
+    justify-content: flex-start;
+    height: 12rem;
+    text-overflow: ellipsis;
     cursor: default;
     width: 20rem;
     font-size: 1.2rem;
     transition: box-shadow 0.3s, transform 0.3s;
     box-shadow: 0 3px 12px #ebedf0;
-    padding: 1.4rem;
+    padding: 1.5rem;
     margin: 0.5rem;
 }
 .copy-title {
@@ -112,6 +118,8 @@ h4 {
     box-shadow: 0 8px 10px 3px #ebedf0;
 }
 .font-header {
+    width: 100%;
+    height: 4rem;
     justify-content: space-between;
     border-bottom: 1px solid #777;
     margin-bottom: 0.6rem;
