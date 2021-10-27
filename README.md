@@ -1,5 +1,7 @@
 # 中文 Web 免费可商用字体库
 
+[Github 主页](https://konghayao.github.io/chinese-free-web-font-storage/)
+
 ## 简介
 
 这是一个用于存储免费可商用的 **web 字体文件** 的仓库！
