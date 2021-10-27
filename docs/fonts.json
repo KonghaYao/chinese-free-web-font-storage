@@ -1,5 +1,17 @@
 [
     {
+        "name": "逐浪萌芽字",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/逐浪萌芽字/result.min.css",
+                "fontFamily": "ZoomlaMengyas-A080"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/逐浪萌芽字/license.txt"
+        }
+    },
+    {
         "name": "优设标题黑",
         "css": [
             {
