@@ -11,34 +11,125 @@
     <meta http-equiv="Expires" content="10000000" />
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/base.min.css">
-    <!-- <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/%E7%AB%99%E9%85%B7%E5%BA%86%E7%A7%91%E9%BB%84%E6%B2%B9%E4%BD%93/result.css"> -->
+    <link rel="stylesheet" href="./Material Icons.css">
+    <link rel="stylesheet" href="./Dancing Script.css">
     <link rel="stylesheet" href="./style.css">
+
 </head>
 
 <body>
-    <div id='app'>
+    <div id='app' class="flex flex-col">
         <header class="header flex">
-            <h3 class="title">江夏尧的字体仓库</h3>
+            <div class="flex flex-col">
+                <h3 class="title">江夏尧的字体仓库</h3>
+            </div>
+
             <div class="little">纵享中文字体之美</div>
         </header>
         <main class="font-show flex">
-            <div class="font-block" v-for='(font) in fonts' :key='font.name'>
-                <h4>{{font.name}}</h4>
+            <div class="font-block" v-for='(font,index) in fonts' :key='font.name'
+                @click='chooseFont({index,type:"font"})'>
+
+                <div class="font-header flex">
+                    <div class="flex">
+                        <div @click='chooseFont({index,type:"font"})' class="Icon Btn flex">translate</div>
+                        <div @click.stop='chooseFont({index,type:"license"})' class="Icon Btn flex">balance</div>
+                    </div>
+
+                    <h4 class="font-name">{{font.name}}</h4>
+                </div>
+
                 <div :style='{
                     fontFamily:font.css[0].fontFamily,
                     fontWeight:font.css[0].fontWeight||"normal"
                 }'>
                     {{config.test}}
+                    <link rel="stylesheet" :href="font.css[0].url">
+                    </link>
                 </div>
-                <link rel="stylesheet" :href="font.css[0].url">
-                </link>
+
             </div>
+            <footer class="footer flex ">
+                <div class="flex " style="height: 100%;">
+                    <div class="footer-name" style="text-align: right;">Design By KonghaYao <br />Please give me a star
+                    </div>
+                    <div class="mid-bar"></div>
+                    <div class="footer-name" style="text-align: left;">江夏尧设计 <br /> 请给我一个赞吧</div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex" style="justify-content: space-around;width: 100%;">
+                        <a href='https: //gitee.com/dongzhongzhidong'>
+                            <img class="link"
+                                src="https://portrait.gitee.com/uploads/avatars/user/1780/5342313_dongzhongzhidong_1604048676.png!avatar200">
+                        </a>
+                        <a href='https://github.com/KonghaYao/chinese-free-web-font-storage'><img class="link"
+                                src="./github.svg" alt=""></a>
+                    </div>
+                    <div class="footer-name">Click and Star Me</div>
+
+                </div>
+            </footer>
         </main>
-        <nav></nav>
+        <nav class="Overlay flex flex-col z-1" v-show='show.overlay1'>
+
+            <div class="font-detail card " v-if='show.fontDetail==="font"'>
+                <div class="Icon close-btn flex" @click='show.overlay1=false'>close</div>
+                <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                <div class="flex-grow font-families-wrap">
+                    <div v-for='(item,index) in fontDetail.css||[]' :key='item.fontFamily' class="font-families">
+                        <div class="en-name">{{item.fontFamily}} {{item.fontWeight||"normal"}}</div>
+                        <div class="example">
+                            <div :style='{
+                    fontFamily:item.fontFamily,
+                    fontWeight:item.fontWeight||" normal" }'>
+                                {{config.test}}
+                                <link rel="stylesheet" :href="item.url">
+                                </link>
+
+                            </div>
+                            <div class="font-sidebar flex ">
+                                <div class="text flex" @click='chooseCSS(index)'>
+                                    <span class="Icon flex">add</span>
+                                    选择字体
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="font-detail card " v-if='show.fontDetail==="license"'>
+                <div class="Icon close-btn flex" @click='show.overlay1=false'>close</div>
+                <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                <div class="flex-grow " style="white-space: pre-wrap;overflow: scroll;">
+                    <div>{{choose.license}}</div>
+                </div>
+            </div>
+        </nav>
+        <nav class="Overlay z-2 flex" v-show='show.overlay2'>
+            <div class="select-Box">
+                <div class="Icon close-btn flex" @click='show.overlay2=false'>close</div>
+                <div class="card-name">选择字体</div>
+                <div class="flex-grow">
+                    <div class="flex copy-title">
+                        <span>CSS 样式复制</span>
+                        <span class="Icon Btn flex" @click='copy(codeTemplate)'>content_copy</span>
+                    </div>
+
+                    <div class="code-template">
+                        <code>
+                            {{codeTemplate}}
+                        </code>
+                    </div>
+
+
+                </div>
+            </div>
+        </nav>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-toasted@1.1.26/dist/vue-toasted.min.js"></script>
 <script type="module" src="./index.js"></script>
 
 </html>

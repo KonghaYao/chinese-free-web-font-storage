@@ -6,7 +6,10 @@
                 "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.min.css",
                 "fontFamily": "zcoolqingkehuangyouti-Regular"
             }
-        ]
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/license.txt"
+        }
     },
     {
         "name": "站酷快乐体",
@@ -15,7 +18,10 @@
                 "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/result.min.css",
                 "fontFamily": "HappyZcool-2016"
             }
-        ]
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/license.txt"
+        }
     },
     {
         "name": "千图笔锋手写体",
@@ -24,10 +30,17 @@
                 "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css",
                 "fontFamily": "千图笔锋手写体"
             }
-        ]
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/license.txt"
+        }
     },
     {
         "name": "站酷仓耳渔阳体",
+
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W01/license.txt"
+        },
         "css": [
             {
                 "fontFamily": "站酷仓耳渔阳体",

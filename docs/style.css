@@ -1,7 +1,23 @@
 body {
     font-family: 微软雅黑;
 }
+* {
+    transition: all 0.3s;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    height: 2px;
+    width: 2px;
+    background-color: transparent;
+}
 
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    height: 2px;
+    width: 2px;
+    border-radius: 2px;
+    background-color: #ccc;
+}
 h3 {
     font-size: 3rem;
     padding: 0 1rem;
@@ -15,12 +31,37 @@ h4 {
     align-items: center;
     justify-content: space-around;
 }
+.flex-col {
+    flex-direction: column;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.Icon {
+    user-select: none;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+    font-family: "Material Icons";
+}
+#app {
+    width: 100vw;
+    height: 100vh;
+}
 .header {
+    width: 100%;
     box-shadow: 0 8px 12px #ebedf0;
     justify-content: space-between;
 }
 .title {
+    cursor: default;
     font-family: zcoolqingkehuangyouti-Regular;
+}
+.z-1 {
+    z-index: 10;
+}
+.z-2 {
+    z-index: 20;
 }
 .little {
     padding: 0 4rem;
@@ -28,14 +69,168 @@ h4 {
     font-size: 1.5rem;
 }
 .font-show {
+    flex-grow: 1;
+    overflow-y: scroll;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-.font-block {
-    width: 20rem;
-    box-shadow: 0 8px 12px #ebedf0;
+.code-template {
+    cursor: default;
+    width: 100%;
+    overflow: scroll;
+    font-size: 0.2rem;
+}
+.select-Box {
     padding: 1rem;
+    position: relative;
+    height: 20rem;
+    width: 20rem;
+    border-radius: 1rem;
+    background-color: white;
+}
+.font-block {
+    cursor: default;
+    width: 20rem;
+    font-size: 1.2rem;
+    transition: box-shadow 0.3s, transform 0.3s;
+    box-shadow: 0 3px 12px #ebedf0;
+    padding: 1.4rem;
     margin: 0.5rem;
+}
+.copy-title {
+    padding: 0.3rem 0;
+    font-size: 1.1rem;
+    justify-content: space-between;
+    font-family: Dancing Script, 千图笔锋手写体;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+.font-block:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 10px 3px #ebedf0;
+}
+.font-header {
+    justify-content: space-between;
+    border-bottom: 1px solid #777;
+    margin-bottom: 0.6rem;
+}
+.font-name {
+    font-style: italic;
+    text-align: right;
+}
+.Btn {
+    margin: 0 0.2rem;
+    height: 1.2em;
+    font-size: 1rem;
+    width: 1.2em;
+    border: 1px solid #aaa;
+    color: #e93e4b;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+.Icon.Btn:hover {
+    border: 0;
+    border-radius: 50%;
+    background-color: #e93e4b;
+    color: white;
+}
+.footer {
+    margin: 2rem 0;
+    width: 100%;
+    height: 3em;
+}
+.footer-name {
+    text-align: center;
+    font-family: Dancing Script, 千图笔锋手写体;
+}
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #3b3b3b22;
+}
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #5f6368;
+    transition: all 0.3s;
+}
+.close-btn:hover {
+    background-color: #eee;
+}
+.en-name {
+    font-weight: lighter;
+    font-size: 0.8rem;
+    color: #5f6368;
+}
+.mid-bar {
+    width: 0.1rem;
+    height: 100%;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+    background-color: #aaa;
+}
+.card {
+    position: relative;
+    padding: 1rem;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.card-name {
+    font-family: 千图笔锋手写体;
+    margin-bottom: 0.3rem;
+}
+.font-families {
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+}
+.font-families-wrap {
+    overflow-y: scroll;
+}
+.font-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 10rem;
+    justify-content: flex-end;
+    background-image: linear-gradient(90deg, transparent, white, white, white);
+    font-weight: bold;
+    color: #1aeaea;
+}
+.font-sidebar .text {
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0.2rem 0.5rem;
+}
+.font-sidebar:hover .text {
+    background-color: #1aeaea22;
+}
+.example {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 2rem;
+}
+.link {
+    height: 2.2rem;
+    width: 2.2rem;
+
+    border-radius: 50%;
+    overflow: hidden;
 }
