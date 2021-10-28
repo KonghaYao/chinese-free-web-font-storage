@@ -12,17 +12,18 @@ new Vue({
                 license: "",
                 cssIndex: 0,
             },
-            show: { overlay1: false, fontDetail: "font", overlay2: false },
+            show: { overlay1: true, fontDetail: "font", overlay2: true },
         };
     },
     computed: {
         codeTemplate() {
+            return `<link rel="stylesheet" href="${this.chosenFont.url}">`;
+        },
+        chosenFont() {
             try {
-                return `<link rel="stylesheet" href="${
-                    this.fontDetail.css[this.choose.cssIndex].url
-                }">`;
+                return this.fontDetail.css[this.choose.cssIndex];
             } catch (e) {
-                return "err";
+                return {};
             }
         },
         fontDetail() {
@@ -49,7 +50,9 @@ new Vue({
         copy(text) {
             window.navigator.clipboard.writeText(text).then((res) => {
                 if (!res) {
-                    this.$toasted.show("复制完成");
+                    this.$toasted.show("复制完成", {
+                        duration: 1000,
+                    });
                 }
             });
         },
@@ -58,9 +61,11 @@ new Vue({
             this.choose.cssIndex = index;
         },
         async getLicense(index) {
+            this.$toasted.show("加载文件中", { duration: 1000 });
             const license = await fetch(this.fontDetail.license.link).then(
                 (res) => res.text()
             );
+
             this.choose.license = license;
         },
     },

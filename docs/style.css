@@ -38,6 +38,7 @@ h4 {
 .flex-grow {
     flex-grow: 1;
 }
+
 .Icon {
     user-select: none;
     cursor: pointer;
@@ -50,6 +51,7 @@ h4 {
     height: 100vh;
 }
 .header {
+    z-index: 1;
     width: 100%;
     box-shadow: 0 8px 12px #ebedf0;
     justify-content: space-between;
@@ -71,6 +73,7 @@ h4 {
 }
 .font-show {
     max-width: 1000px;
+    background-color: white;
     flex-grow: 1;
     overflow-y: scroll;
     display: flex;
@@ -101,9 +104,15 @@ h4 {
     width: 20rem;
     font-size: 1.2rem;
     transition: box-shadow 0.3s, transform 0.3s;
-    box-shadow: 0 3px 12px #ebedf0;
-    padding: 1.5rem;
-    margin: 0.5rem;
+    box-shadow: 0 4px 20px -12px hsl(0deg 57% 85%);
+
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+.font-block:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 20px 37px -26px hsl(0deg 93% 88%);
 }
 .copy-title {
     padding: 0.3rem 0;
@@ -113,10 +122,7 @@ h4 {
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
 }
-.font-block:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 10px 3px #ebedf0;
-}
+
 .font-header {
     width: 100%;
     height: 4rem;
@@ -130,10 +136,10 @@ h4 {
 }
 .Btn {
     margin: 0 0.2rem;
-    height: 1.2em;
-    font-size: 1rem;
-    width: 1.2em;
-    border: 1px solid #aaa;
+    height: 2em;
+    font-size: 1.2rem;
+    width: 2em;
+    border: 1px solid #eee;
     color: #e93e4b;
     border-radius: 50%;
     transition: all 0.2s;
@@ -145,9 +151,10 @@ h4 {
     color: white;
 }
 .footer {
-    margin: 2rem 0;
+    box-shadow: 0 -10px 11px -14px hsl(240deg 77% 82%);
+    margin: 1rem 0;
+    padding: 2rem 0;
     width: 100%;
-    height: 3em;
 }
 .footer-name {
     text-align: center;

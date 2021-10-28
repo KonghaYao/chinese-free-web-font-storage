@@ -30,27 +30,28 @@
             <div class="little">纵享中文字体之美</div>
         </header>
         <main class="font-show flex">
-            <vue-lazy-component class="font-block flex flex-col" v-for='(font,index) in fonts' :key='font.name'
-                @click='chooseFont({index,type:"font"})'>
+            <vue-lazy-component v-for='(font,index) in fonts' :key='font.name'>
+                <div @click='chooseFont({index,type:"font"})' class="font-block flex flex-col">
+                    <div class="font-header flex">
+                        <div class="flex">
+                            <div @click='chooseFont({index,type:"font"})' class="Icon Btn flex">translate</div>
+                            <div @click.stop='chooseFont({index,type:"license"})' class="Icon Btn flex">balance</div>
+                        </div>
 
-                <div class="font-header flex">
-                    <div class="flex">
-                        <div @click='chooseFont({index,type:"font"})' class="Icon Btn flex">translate</div>
-                        <div @click.stop='chooseFont({index,type:"license"})' class="Icon Btn flex">balance</div>
+                        <h4 class="font-name">{{font.name}}</h4>
                     </div>
 
-                    <h4 class="font-name">{{font.name}}</h4>
+                    <div class="flex-grow" :style='{
+        overflow:"scroll",
+        fontFamily:font.css[0].fontFamily,
+        fontWeight:font.css[0].fontWeight||"normal"
+    }'>
+                        {{config.test}}
+                        <link rel="stylesheet" :href="font.css[0].url">
+                        </link>
+                    </div>
                 </div>
 
-                <div class="flex-grow" :style='{
-                    overflow:"scroll",
-                    fontFamily:font.css[0].fontFamily,
-                    fontWeight:font.css[0].fontWeight||"normal"
-                }'>
-                    {{config.test}}
-                    <link rel="stylesheet" :href="font.css[0].url">
-                    </link>
-                </div>
 
             </vue-lazy-component>
             <footer class="footer flex ">
@@ -120,10 +121,10 @@
                         <span class="Icon Btn flex" @click='copy(codeTemplate)'>content_copy</span>
                     </div>
 
-                    <div class="code-template">
-                        <code>
-                            {{codeTemplate}}
-                        </code>
+
+                    <div class="flex copy-title">
+                        <span>CSS 文件地址复制</span>
+                        <span class="Icon Btn flex" @click='copy(chosenFont.url)'>content_copy</span>
                     </div>
 
 
