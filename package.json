@@ -10,8 +10,8 @@
         "type": "git",
         "url": "git+https://github.com/KonghaYao/chinese-free-web-font-storage.git"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "江夏尧<dongzhongzhidong@qq.com>",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/KonghaYao/chinese-free-web-font-storage/issues"
     },
