@@ -1,4 +1,5 @@
 Vue.use(window.Toasted);
+import copy from "./copy.js";
 new Vue({
     el: "#app",
     data() {
@@ -12,7 +13,7 @@ new Vue({
                 license: "",
                 cssIndex: 0,
             },
-            show: { overlay1: true, fontDetail: "font", overlay2: true },
+            show: { overlay1: false, fontDetail: "font", overlay2: false },
         };
     },
     computed: {
@@ -48,7 +49,7 @@ new Vue({
             if (type === "license") this.getLicense(index);
         },
         copy(text) {
-            window.navigator.clipboard.writeText(text).then((res) => {
+            copy(text).then((res) => {
                 if (!res) {
                     this.$toasted.show("复制完成", {
                         duration: 1000,
