@@ -1,5 +1,41 @@
 [
     {
+        "name": "钟齐志莽行书",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/钟齐志莽行书/result.min.css",
+                "fontFamily": "Zhi Mang Xing Regular"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/钟齐志莽行书/license.txt"
+        }
+    },
+    {
+        "name": "汇文明朝体",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/汇文明朝体/result.min.css",
+                "fontFamily": "Huiwen-mincho"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/汇文明朝体/license.txt"
+        }
+    },
+    {
+        "name": "ipix像素字体",
+        "css": [
+            {
+                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/ipix_12px/result.min.css",
+                "fontFamily": "ipix_12px"
+            }
+        ],
+        "license": {
+            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/ipix_12px/license.txt"
+        }
+    },
+    {
         "name": "逐浪萌芽字",
         "css": [
             {
