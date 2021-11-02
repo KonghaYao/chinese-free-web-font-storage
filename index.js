@@ -9,8 +9,8 @@ import genTestHTML from "./genTestHTML.js";
  * 3. 填写下面的 fontFileName 和license 路径
  */
 
-const fontFileName = "站酷仓耳渔阳体-W05";
-const license = "./fonts/站酷仓耳渔阳体使用声明.txt"; // 字体版权说明文件， 有则填路径即可
+const fontFileName = "汇文明朝体";
+const license = "./fonts/汇文明朝体.txt"; // 字体版权说明文件， 有则填路径即可
 const FontPath = `./fonts/${fontFileName}.ttf`;
 
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
@@ -19,6 +19,11 @@ create([
         fontFileName,
         FontPath,
         license,
+        chunkOptions: {
+            allowEn: true,
+            totalSize: 6000, // 总共会抽取的字符数
+            chunkSize: 600, // 每个分段的字符数
+        },
     },
 ]).then(() => {
     console.log("全部完成");
