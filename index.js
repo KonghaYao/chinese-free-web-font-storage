@@ -32,7 +32,7 @@ function create(fontArray) {
     fse.emptyDirSync("./build");
     //======== 下面的代码请勿修改 =========
     const promises = fontArray.map(
-        ({ fontFileName, FontPath, license }, index) => {
+        ({ fontFileName, FontPath, license, css, chunkOptions }, index) => {
             return fontSplit({
                 FontPath, // 字体位置
                 destFold: `./build/${fontFileName}`, // 必须设置为名称
@@ -41,11 +41,13 @@ function create(fontArray) {
                     fontWeight: "normal",
                     fontDisplay: "swap",
                     fontFamily: null, // 如果不设置的话将会使用默认的字体名称哦
+                    ...css,
                 },
                 chunkOptions: {
                     allowEn: false,
                     totalSize: 6000, // 总共会抽取的字符数
                     chunkSize: 600, // 每个分段的字符数
+                    ...chunkOptions,
                 },
             })
                 .then(({ fontFamily }) => {
