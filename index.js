@@ -1,7 +1,6 @@
-import fontSplit from "@konghayao/cn-font-split/dist/fontSplit.esm.js";
+import fontSplit from "@konghayao/cn-font-split";
 import fse from "fs-extra";
 import { resolve, extname } from "path";
-import genTestHTML from "./genTestHTML.js";
 
 /**
  * 1. 确认自己在 create 分支
@@ -19,20 +18,32 @@ create([
         fontFileName,
         FontPath,
         license,
+        css: {
+            fontWeight: "normal",
+        },
+        charset: {
+            other: true,
+            TC: true,
+            SC: true,
+        },
         chunkOptions: {
-            allowEn: true,
-            totalSize: 6000, // 总共会抽取的字符数
-            chunkSize: 600, // 每个分段的字符数
+            TC: 6,
+            SC: 12,
+            other: 1,
         },
     },
 ]).then(() => {
     console.log("全部完成");
 });
+
 function create(fontArray) {
     fse.emptyDirSync("./build");
     //======== 下面的代码请勿修改 =========
     const promises = fontArray.map(
-        ({ fontFileName, FontPath, license, css, chunkOptions }, index) => {
+        (
+            { fontFileName, FontPath, license, css, chunkOptions, charset },
+            index
+        ) => {
             return fontSplit({
                 FontPath, // 字体位置
                 destFold: `./build/${fontFileName}`, // 必须设置为名称
@@ -43,17 +54,19 @@ function create(fontArray) {
                     fontFamily: null, // 如果不设置的话将会使用默认的字体名称哦
                     ...css,
                 },
+                charset: {
+                    other: true,
+                    TC: true,
+                    SC: true,
+                    ...charset,
+                },
                 chunkOptions: {
-                    allowEn: false,
-                    totalSize: 6000, // 总共会抽取的字符数
-                    chunkSize: 600, // 每个分段的字符数
+                    TC: 3,
+                    SC: 6,
+                    other: 1,
                     ...chunkOptions,
                 },
             })
-                .then(({ fontFamily }) => {
-                    return genTestHTML(fontFamily, fontFileName);
-                })
-                .then(() => console.log(fontFileName + "--测试文件生产完毕"))
                 .then(() => {
                     if (license) {
                         return fse
