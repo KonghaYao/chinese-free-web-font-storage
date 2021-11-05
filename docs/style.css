@@ -66,7 +66,7 @@ h4 {
 }
 .little {
     padding: 0 4rem;
-    font-family: 千图笔锋手写体;
+    font-family: qiantubifengshouxieti;
     font-size: 1.5rem;
 }
 .font-show {
@@ -109,6 +109,11 @@ h4 {
     padding: 1rem;
     margin: 1rem;
 }
+.font-block > div {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
 .font-block:hover {
     transform: translateY(-10px);
     box-shadow: 0px 20px 37px -26px hsl(0deg 93% 88%);
@@ -117,7 +122,7 @@ h4 {
     padding: 0.3rem 0;
     font-size: 1.1rem;
     justify-content: space-between;
-    font-family: Dancing Script, 千图笔锋手写体;
+    font-family: Dancing Script, qiantubifengshouxieti;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
 }
@@ -157,7 +162,7 @@ h4 {
 }
 .footer-name {
     text-align: center;
-    font-family: Dancing Script, 千图笔锋手写体;
+    font-family: Dancing Script, qiantubifengshouxieti;
 }
 .Overlay {
     position: fixed;
@@ -203,7 +208,7 @@ h4 {
     flex-direction: column;
 }
 .card-name {
-    font-family: 千图笔锋手写体;
+    font-family: qiantubifengshouxieti;
     margin-bottom: 0.3rem;
 }
 .font-families {

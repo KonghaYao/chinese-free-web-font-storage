@@ -1,4 +1,7 @@
 Vue.use(window.Toasted);
+Vue.use(VueLazyload, {
+    lazyComponent: true,
+});
 import copy from "./copy.js";
 new Vue({
     el: "#app",
@@ -6,7 +9,7 @@ new Vue({
         return {
             fonts: [],
             config: {
-                root: "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@latest/build/",
+                root: "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/",
                 test: "与之斯部他行出不上公成地会个时学了后日月以和有大于人国中是为在一年的",
             },
             choose: {
@@ -19,7 +22,9 @@ new Vue({
     },
     computed: {
         codeTemplate() {
-            return `<link rel="stylesheet" href="${this.chosenFont.url}">`;
+            return `<link rel="stylesheet" href="${
+                this.config.root + this.chosenFont.url
+            }">`;
         },
         chosenFont() {
             try {
@@ -42,6 +47,9 @@ new Vue({
             });
     },
     methods: {
+        fontLink(src) {
+            return src.replace(/\.css$/, ".min.css");
+        },
         chooseFont({ index, type }) {
             this.choose.fontIndex = index;
             this.show.fontDetail = type;
@@ -49,6 +57,7 @@ new Vue({
             this.choose.cssIndex = 0;
             if (type === "license") this.getLicense(index);
         },
+
         copy(text) {
             copy(text).then((res) => {
                 if (!res) {

@@ -20,5 +20,8 @@
     "dependencies": {
         "@konghayao/cn-font-split": "2.0.4",
         "fs-extra": "^10.0.0"
+    },
+    "devDependencies": {
+        "node-fetch": "^3.0.0"
     }
 }
