@@ -8,8 +8,8 @@ import { resolve, extname } from "path";
  * 3. 填写下面的 fontFileName 和license 路径
  */
 
-const fontFileName = "汇文明朝体";
-const license = "./fonts/汇文明朝体.txt"; // 字体版权说明文件， 有则填路径即可
+const fontFileName = "站酷仓耳渔阳体-W01";
+const license = "./fonts/站酷仓耳渔阳体使用声明.txt"; // 字体版权说明文件， 有则填路径即可
 const FontPath = `./fonts/${fontFileName}.ttf`;
 
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
@@ -19,17 +19,13 @@ create([
         FontPath,
         license,
         css: {
-            fontWeight: "normal",
-        },
-        charset: {
-            other: true,
-            TC: true,
-            SC: true,
+            fontFamily: "站酷仓耳渔阳体",
+            fontWeight: 100,
         },
         chunkOptions: {
-            TC: 6,
-            SC: 12,
             other: 1,
+            SC: 4,
+            TC: 1,
         },
     },
 ]).then(() => {
@@ -37,7 +33,7 @@ create([
 });
 
 function create(fontArray) {
-    fse.emptyDirSync("./build");
+    fse.emptyDirSync(`./build/${fontFileName}`);
     //======== 下面的代码请勿修改 =========
     const promises = fontArray.map(
         (

@@ -3,141 +3,141 @@
         "name": "钟齐志莽行书",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/钟齐志莽行书/result.min.css",
-                "fontFamily": "Zhi Mang Xing Regular"
+                "url": "钟齐志莽行书/result.css",
+                "fontFamily": "Zhi Mang Xing"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/钟齐志莽行书/license.txt"
+            "link": "钟齐志莽行书/license.txt"
         }
     },
     {
         "name": "汇文明朝体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/汇文明朝体/result.min.css",
+                "url": "汇文明朝体/result.css",
                 "fontFamily": "Huiwen-mincho"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/汇文明朝体/license.txt"
+            "link": "汇文明朝体/license.txt"
         }
     },
     {
         "name": "ipix像素字体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/ipix_12px/result.min.css",
+                "url": "ipix_12px/result.css",
                 "fontFamily": "ipix_12px"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/ipix_12px/license.txt"
+            "link": "ipix_12px/license.txt"
         }
     },
     {
         "name": "逐浪萌芽字",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/逐浪萌芽字/result.min.css",
+                "url": "逐浪萌芽字/result.css",
                 "fontFamily": "ZoomlaMengyas-A080"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/逐浪萌芽字/license.txt"
+            "link": "逐浪萌芽字/license.txt"
         }
     },
     {
         "name": "优设标题黑",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/优设标题黑/result.min.css",
+                "url": "优设标题黑/result.css",
                 "fontFamily": "YouSheBiaoTiHei"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/优设标题黑/license.txt"
+            "link": "优设标题黑/license.txt"
         }
     },
     {
         "name": "斗鱼追光体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/斗鱼追光体/result.min.css",
+                "url": "斗鱼追光体/result.css",
                 "fontFamily": "DOUYU Font"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/斗鱼追光体/license.txt"
+            "link": "斗鱼追光体/license.txt"
         }
     },
     {
         "name": "站酷庆科黄油体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.min.css",
-                "fontFamily": "zcoolqingkehuangyouti-Regular"
+                "url": "站酷庆科黄油体/result.css",
+                "fontFamily": "zcoolqingkehuangyouti"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/license.txt"
+            "link": "站酷庆科黄油体/license.txt"
         }
     },
     {
         "name": "站酷快乐体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/result.min.css",
+                "url": "站酷快乐体2016修订版/result.css",
                 "fontFamily": "HappyZcool-2016"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷快乐体2016修订版/license.txt"
+            "link": "站酷快乐体2016修订版/license.txt"
         }
     },
     {
         "name": "千图笔锋手写体",
         "css": [
             {
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css",
+                "url": "千图笔锋手写体/result.css",
                 "fontFamily": "千图笔锋手写体"
             }
         ],
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/license.txt"
+            "link": "千图笔锋手写体/license.txt"
         }
     },
     {
         "name": "站酷仓耳渔阳体",
 
         "license": {
-            "link": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W01/license.txt"
+            "link": "站酷仓耳渔阳体-W01/license.txt"
         },
         "css": [
             {
                 "fontFamily": "站酷仓耳渔阳体",
                 "fontWeight": 100,
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W01/result.min.css"
+                "url": "站酷仓耳渔阳体-W01/result.css"
             },
             {
                 "fontFamily": "站酷仓耳渔阳体",
                 "fontWeight": 200,
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W02/result.min.css"
+                "url": "站酷仓耳渔阳体-W02/result.css"
             },
             {
                 "fontFamily": "站酷仓耳渔阳体",
                 "fontWeight": 400,
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W03/result.min.css"
+                "url": "站酷仓耳渔阳体-W03/result.css"
             },
             {
                 "fontFamily": "站酷仓耳渔阳体",
                 "fontWeight": 600,
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W04/result.min.css"
+                "url": "站酷仓耳渔阳体-W04/result.css"
             },
             {
                 "fontFamily": "站酷仓耳渔阳体",
                 "fontWeight": 800,
-                "url": "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷仓耳渔阳体-W05/result.min.css"
+                "url": "站酷仓耳渔阳体-W05/result.css"
             }
         ]
     }

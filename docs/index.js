@@ -6,6 +6,7 @@ new Vue({
         return {
             fonts: [],
             config: {
+                root: "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@latest/build/",
                 test: "与之斯部他行出不上公成地会个时学了后日月以和有大于人国中是为在一年的",
             },
             choose: {
