@@ -71,6 +71,7 @@ h4 {
 }
 .font-show {
     max-width: 1000px;
+    height: 100%;
     background-color: white;
     flex-grow: 1;
     overflow-y: scroll;
