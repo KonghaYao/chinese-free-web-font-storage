@@ -1,17 +1,17 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@konghayao/cn-font-split': 2.0.3
+  '@konghayao/cn-font-split': 2.0.4
   fs-extra: ^10.0.0
 
 dependencies:
-  '@konghayao/cn-font-split': 2.0.3
+  '@konghayao/cn-font-split': 2.0.4
   fs-extra: 10.0.0
 
 packages:
 
-  /@konghayao/cn-font-split/2.0.3:
-    resolution: {integrity: sha512-C/Ct84YmS5zf6+AeDNd1VPmdOFXwOoPBv3Wal6WLbZcnit4pow74ER8+wT5hsaJ6QoyDZ6CI9IVW3obWA5R2dw==}
+  /@konghayao/cn-font-split/2.0.4:
+    resolution: {integrity: sha512-pd5AnJFMKfHKllIhO+27pluLgO+EUI4Tp6c+Zx6nl+xgjEmP8Uk+ok02OMfSYvXzXirHpXwD9YsPzCwrFL77tA==}
     dependencies:
       '@konghayao/promise-transaction': 1.4.0
       code-points: 2.0.0-1
@@ -19,10 +19,18 @@ packages:
       fs-extra: 10.0.0
       lodash-es: 4.17.21
       nanoid: 3.1.30
+      threads: 1.7.0
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@konghayao/promise-transaction/1.4.0:
     resolution: {integrity: sha512-wgxcEeD4abMkN1M8TWsGZakveVcsC4avCUkAt8SFBB/z7S+tizctRK021MtSqcXjoY3GobAmMp1GQ6dGoD9OcQ==}
+    dev: false
+
+  /callsites/3.1.0:
+    resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
+    engines: {node: '>=6'}
     dev: false
 
   /code-point/1.1.0:
@@ -34,6 +42,24 @@ packages:
     dependencies:
       code-point: 1.1.0
     dev: false
+
+  /debug/4.3.2:
+    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+    dev: false
+
+  /esm/3.2.25:
+    resolution: {integrity: sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==}
+    engines: {node: '>=6'}
+    dev: false
+    optional: true
 
   /fonteditor-core/2.1.8:
     resolution: {integrity: sha512-cBPTY+TTLSB74HCxMQdvezfb60La4+a3+iwaG9BzkttbALFlC5V+Y8M66BPmCn2H9cyiCAd5DSMBaZXR+SC4LA==}
@@ -54,6 +80,11 @@ packages:
     resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
     dev: false
 
+  /is-observable/2.1.0:
+    resolution: {integrity: sha512-DailKdLb0WU+xX8K5w7VsJhapwHLZ9jjmazqCJq4X12CTgqq73TKnbRcnSLuXYPOoLQgV5IrD7ePiX/h1vnkBw==}
+    engines: {node: '>=8'}
+    dev: false
+
   /jsonfile/6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
     dependencies:
@@ -66,11 +97,40 @@ packages:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
+  /ms/2.1.2:
+    resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+    dev: false
+
   /nanoid/3.1.30:
     resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: false
+
+  /observable-fns/0.6.1:
+    resolution: {integrity: sha512-9gRK4+sRWzeN6AOewNBTLXir7Zl/i3GB6Yl26gK4flxz8BXVpD3kt8amREmWNb0mxYOGDotvE5a4N+PtGGKdkg==}
+    dev: false
+
+  /threads/1.7.0:
+    resolution: {integrity: sha512-Mx5NBSHX3sQYR6iI9VYbgHKBLisyB+xROCBGjjWm1O9wb9vfLxdaGtmT/KCjUqMsSNW6nERzCW3T6H43LqjDZQ==}
+    dependencies:
+      callsites: 3.1.0
+      debug: 4.3.2
+      is-observable: 2.1.0
+      observable-fns: 0.6.1
+    optionalDependencies:
+      tiny-worker: 2.3.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /tiny-worker/2.3.0:
+    resolution: {integrity: sha512-pJ70wq5EAqTAEl9IkGzA+fN0836rycEuz2Cn6yeZ6FRzlVS5IDOkFHpIoEsksPRQV34GDqXm65+OlnZqUSyK2g==}
+    requiresBuild: true
+    dependencies:
+      esm: 3.2.25
+    dev: false
+    optional: true
 
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
