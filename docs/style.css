@@ -2,9 +2,7 @@
 body {
     font-family: 微软雅黑;
 }
-* {
-    transition: all 0.3s;
-}
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 ::-webkit-scrollbar {
     height: 2px;
@@ -58,7 +56,7 @@ h4 {
 }
 .title {
     cursor: default;
-    font-family: zcoolqingkehuangyouti-Regular;
+    font-family: zcoolqingkehuangyouti;
 }
 .z-1 {
     z-index: 10;

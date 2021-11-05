@@ -47,7 +47,7 @@
         fontWeight:font.css[0].fontWeight||"normal"
     }'>
                         {{config.test}}
-                        <link rel="stylesheet" :href="font.css[0].url">
+                        <link rel="stylesheet" :href="config.root+font.css[0].url">
                         </link>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                     fontFamily:item.fontFamily,
                     fontWeight:item.fontWeight||" normal" }'>
                                 {{config.test}}
-                                <link rel="stylesheet" :href="item.url">
+                                <link rel="stylesheet" :href="config.root+item.url">
                                 </link>
 
                             </div>

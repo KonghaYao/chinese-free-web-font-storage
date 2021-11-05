@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./result.css">
+</head>
+<style>
+    body {
+        font-family: DOUYU Font;
+        overflow-wrap: break-word;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <h1>其他字符</h1>
+    <div id="Symbol"></div>
+
+    <h1>简体字符</h1>
+    <div id='SC'></div>
+
+    <h1>繁体字符</h1>
+    <div id='TC'></div>
+</body>
+<script>
+    fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@2/src/charset/symbol.txt').then(res => res.text()).then(
+        res => { document.getElementById('Symbol').innerText = res }
+    );
+    fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@2/src/charset/SC.txt').then(res => res.text()).then(
+        res => { window.SC = res; document.getElementById('SC').innerText = res }
+    )
+    fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@2/src/charset/TCDiff.txt').then(res => res.text()).then(
+        res => {
+            window.TCDiff = res;
+            document.getElementById('TC').innerText = res.split('').filter((_, i) => (i % 2)).join('')
+        }
+    )
+
+</script>
+
+</html>
