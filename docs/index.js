@@ -48,7 +48,7 @@ new Vue({
     },
     methods: {
         fontLink(src) {
-            return src.replace(/\.css$/, ".min.css");
+            return src
         },
         chooseFont({ index, type }) {
             this.choose.fontIndex = index;
