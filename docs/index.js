@@ -3,6 +3,7 @@ Vue.use(VueLazyload, {
     lazyComponent: true,
 });
 import copy from "./copy.js";
+
 new Vue({
     el: "#app",
     data() {
@@ -17,6 +18,7 @@ new Vue({
                 license: "",
                 cssIndex: 0,
             },
+            showFontSize: 16,
             show: { overlay1: false, fontDetail: "font", overlay2: false },
         };
     },
@@ -48,7 +50,7 @@ new Vue({
     },
     methods: {
         fontLink(src) {
-            return src.replace(/\.css$/, ".min.css");
+            return src;
         },
         chooseFont({ index, type }) {
             this.choose.fontIndex = index;

@@ -8,8 +8,8 @@ import { resolve, extname } from "path";
  * 3. 填写下面的 fontFileName 和license 路径
  */
 
-const fontFileName = "站酷仓耳渔阳体-W01";
-const license = "./fonts/站酷仓耳渔阳体使用声明.txt"; // 字体版权说明文件， 有则填路径即可
+const fontFileName = "Cubic";
+const license = "./fonts/Cubic.txt"; // 字体版权说明文件， 有则填路径即可
 const FontPath = `./fonts/${fontFileName}.ttf`;
 
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
@@ -19,7 +19,7 @@ create([
         FontPath,
         license,
         css: {
-            fontFamily: "站酷仓耳渔阳体",
+            fontFamily: "Cubic",
             fontWeight: 100,
         },
         chunkOptions: {
