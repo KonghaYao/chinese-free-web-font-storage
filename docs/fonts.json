@@ -12,6 +12,18 @@
         }
     },
     {
+        "name": "俐方体11号",
+        "css": [
+            {
+                "url": "Cubic/result.css",
+                "fontFamily": "Zhi Mang Xing"
+            }
+        ],
+        "license": {
+            "link": "Cubic/license.txt"
+        }
+    },
+    {
         "name": "汇文明朝体",
         "css": [
             {
