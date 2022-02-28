@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="Icon flex">
+    <div class="Icon flex text-base items-center justify-center">
         <slot></slot>
     </div>
 </template>
@@ -12,8 +12,6 @@
 .Icon {
     user-select: none;
     cursor: pointer;
-    width: 1em;
-    height: 1em;
     font-family: "Material Icons";
 }
 </style>
