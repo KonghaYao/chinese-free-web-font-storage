@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "lazy-load-vue3": "^1.2.7",
+    "pinia": "^2.0.11",
     "vue": "^3.2.25"
   },
   "devDependencies": {

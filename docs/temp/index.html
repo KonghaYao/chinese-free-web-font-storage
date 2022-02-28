@@ -28,57 +28,6 @@
 
     <body>
         <div id="app" class="flex flex-col">
-            <main class="font-show flex" ref="main">
-                <lazy-component
-                    v-for="(font,index) in fonts"
-                    :key="font.name"
-                    @click='chooseFont({index,type:"font"})'
-                    class="font-block flex flex-col"
-                    :viewport="$refs.main"
-                >
-                    <div class="font-header flex">
-                        <div class="flex">
-                            <div
-                                @click='chooseFont({index,type:"font"})'
-                                class="Icon Btn flex"
-                            >
-                                translate
-                            </div>
-                            <div
-                                @click.stop='chooseFont({index,type:"license"})'
-                                class="Icon Btn flex"
-                            >
-                                balance
-                            </div>
-                        </div>
-
-                        <h4 class="font-name">{{font.name}}</h4>
-                    </div>
-
-                    <div
-                        class="flex-grow"
-                        :style='{
-                    fontFamily:font.css[0].fontFamily,
-                    fontWeight:font.css[0].fontWeight||"normal"
-                }'
-                    >
-                        {{config.test}}
-                        <link
-                            rel="stylesheet"
-                            :href="fontLink(config.root+font.css[0].url)"
-                        />
-                    </div>
-
-                    <div
-                        slot="skeleton"
-                        style="
-                            width: 100%;
-                            height: 100%;
-                            background-color: pink;
-                        "
-                    ></div>
-                </lazy-component>
-            </main>
             <nav class="Overlay flex flex-col z-1" v-show="show.overlay1">
                 <div class="font-detail card" v-if='show.fontDetail==="font"'>
                     <div
