@@ -1,14 +1,11 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 
 import LayaComponent from "lazy-load-vue3/src/LazyComponent";
 
 import Card from '../components/Card.vue';
 import { useGlobalStore } from './globalStore'
 const store = useGlobalStore()
-onMounted(() => {
-    if (store.fonts.length === 0) store.fetchFonts()
-})
+
 
 
 </script>

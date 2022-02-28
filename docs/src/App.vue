@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import Header from './views/Header.vue'
 import Footer from './views/Footer.vue';
-import Content from './views/Content.vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
   <div class="flex flex-col h-full bg-gray-50">
     <Header></Header>
-    <Content class="flex-grow overflow-hidden"></Content>
+    <RouterView class="flex-grow overflow-hidden"></RouterView>
+
     <Footer></Footer>
   </div>
 </template>
