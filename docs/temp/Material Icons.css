@@ -1,0 +1,46 @@
+/**
+Material Design icons by Google
+    https://github.com/google/material-design-icons
+
+License
+    We have made these icons available for you to incorporate into your products under the Apache License Version 2.0. Feel free to remix and re-share these icons and documentation in your products. We'd love attribution in your app's about screen, but it's not required.
+*/
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v109/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+        format("woff2");
+}
+
+@font-face {
+    font-family: "Material Icons Outlined";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v81/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2)
+        format("woff2");
+}
+
+@font-face {
+    font-family: "Material Icons Round";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialiconsround/v80/LDItaoyNOAY6Uewc665JcIzCKsKc_M9flwmP.woff2)
+        format("woff2");
+}
+
+@font-face {
+    font-family: "Material Icons Sharp";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialiconssharp/v81/oPWQ_lt5nv4pWNJpghLP75WiFR4kLh3kvmvR.woff2)
+        format("woff2");
+}
+
+@font-face {
+    font-family: "Material Icons Two Tone";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialiconstwotone/v79/hESh6WRmNCxEqUmNyh3JDeGxjVVyMg4tHGctNCu0.woff2)
+        format("woff2");
+}

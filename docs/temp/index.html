@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- 字体查看网站 -->
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <title>江夏尧的字体仓库</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/base.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/combine/gh/konghayao/chinese-free-web-font-storage/css/Material Icons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css"
+        />
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./screen-700.css" />
+    </head>
+
+    <body>
+        <div id="app" class="flex flex-col">
+            <header class="header flex">
+                <div class="flex flex-col">
+                    <h3 class="title">江夏尧的字体仓库</h3>
+                </div>
+
+                <div class="little">纵享中文字体之美</div>
+            </header>
+            <main class="font-show flex" ref="main">
+                <lazy-component
+                    v-for="(font,index) in fonts"
+                    :key="font.name"
+                    @click='chooseFont({index,type:"font"})'
+                    class="font-block flex flex-col"
+                    :viewport="$refs.main"
+                >
+                    <div class="font-header flex">
+                        <div class="flex">
+                            <div
+                                @click='chooseFont({index,type:"font"})'
+                                class="Icon Btn flex"
+                            >
+                                translate
+                            </div>
+                            <div
+                                @click.stop='chooseFont({index,type:"license"})'
+                                class="Icon Btn flex"
+                            >
+                                balance
+                            </div>
+                        </div>
+
+                        <h4 class="font-name">{{font.name}}</h4>
+                    </div>
+
+                    <div
+                        class="flex-grow"
+                        :style='{
+                    fontFamily:font.css[0].fontFamily,
+                    fontWeight:font.css[0].fontWeight||"normal"
+                }'
+                    >
+                        {{config.test}}
+                        <link
+                            rel="stylesheet"
+                            :href="fontLink(config.root+font.css[0].url)"
+                        />
+                    </div>
+
+                    <div
+                        slot="skeleton"
+                        style="
+                            width: 100%;
+                            height: 100%;
+                            background-color: pink;
+                        "
+                    ></div>
+                </lazy-component>
+                <footer class="footer flex">
+                    <div class="flex" style="height: 100%">
+                        <div class="footer-name" style="text-align: right">
+                            Design By KonghaYao <br />Please give me a star
+                        </div>
+                        <div class="mid-bar"></div>
+                        <div class="footer-name" style="text-align: left">
+                            江夏尧设计 <br />
+                            请给我一个赞吧
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div
+                            class="flex"
+                            style="justify-content: space-around; width: 100%"
+                        >
+                            <a href="https://gitee.com/dongzhongzhidong">
+                                <img
+                                    class="link"
+                                    src="https://portrait.gitee.com/uploads/avatars/user/1780/5342313_dongzhongzhidong_1604048676.png!avatar200"
+                                />
+                            </a>
+                            <a
+                                href="https://github.com/KonghaYao/chinese-free-web-font-storage"
+                                ><img class="link" src="./github.svg" alt=""
+                            /></a>
+                        </div>
+                        <div class="footer-name">Click and Star Me</div>
+                    </div>
+                </footer>
+            </main>
+            <nav class="Overlay flex flex-col z-1" v-show="show.overlay1">
+                <div class="font-detail card" v-if='show.fontDetail==="font"'>
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay1=false"
+                    >
+                        close
+                    </div>
+                    <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                    <div class="flex-grow font-families-wrap">
+                        <div
+                            v-for="(item,index) in fontDetail.css||[]"
+                            :key="item.fontFamily"
+                            class="font-families"
+                        >
+                            <div class="en-name">
+                                {{item.fontFamily}}
+                                {{item.fontWeight||"normal"}}
+                            </div>
+                            <div class="example">
+                                <div
+                                    :style='{
+                    fontFamily:item.fontFamily,
+                    fontWeight:item.fontWeight||" normal" }'
+                                >
+                                    {{config.test}}
+                                    <link
+                                        rel="stylesheet"
+                                        :href="fontLink(config.root+item.url)"
+                                    />
+                                </div>
+                                <div class="font-sidebar flex">
+                                    <div
+                                        class="text flex"
+                                        @click="chooseCSS(index)"
+                                    >
+                                        <span class="Icon flex">add</span>
+                                        选择字体
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="font-detail card"
+                    v-if='show.fontDetail==="license"'
+                >
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay1=false"
+                    >
+                        close
+                    </div>
+                    <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                    <div
+                        class="flex-grow"
+                        style="white-space: pre-wrap; overflow: scroll"
+                    >
+                        <div>{{choose.license}}</div>
+                    </div>
+                </div>
+            </nav>
+            <nav class="Overlay z-2 flex" v-show="show.overlay2">
+                <div class="select-Box">
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay2=false"
+                    >
+                        close
+                    </div>
+                    <div class="card-name">选择字体</div>
+                    <div class="flex-grow">
+                        <div class="flex copy-title">
+                            <span>CSS 样式复制</span>
+                            <span
+                                class="Icon Btn flex"
+                                @click="copy(codeTemplate)"
+                                >content_copy</span
+                            >
+                        </div>
+
+                        <div class="flex copy-title">
+                            <span>CSS 文件地址复制</span>
+                            <span
+                                class="Icon Btn flex"
+                                @click="copy(config.root+chosenFont.url)"
+                                >content_copy</span
+                            >
+                        </div>
+                        <div class="flex TestFont">
+                            <div>
+                                字体大小调节
+                                <input
+                                    type="number"
+                                    min="8"
+                                    max="128"
+                                    step="4"
+                                    v-model="showFontSize"
+                                />
+                                <input
+                                    type="range"
+                                    min="8"
+                                    max="128"
+                                    step="4"
+                                    v-model="showFontSize"
+                                />
+                            </div>
+                            <textarea
+                                :style="{
+                                    fontSize:showFontSize+'px',
+                                    fontFamily:chosenFont.fontFamily,
+                                    fontWeight:chosenFont.fontWeight||'normal'
+                                }"
+                            >
+请测试字体吧
+</textarea
+                            >
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-toasted@1.1.26/dist/vue-toasted.min.js"></script>
+    <script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
+    <script type="module" src="./index.js"></script>
+</html>
