@@ -8,19 +8,27 @@ import Footer from './views/Footer.vue';
   <div class="flex flex-col h-full bg-gray-50">
     <Header></Header>
 
-    <router-view v-slot="{ Component }" class="flex-grow overflow-hidden">
+    <router-view v-slot="{ Component }">
       <transition
+        mode="out-in"
         class="animate__animated"
-        enter-active-class="animate__backInLeft"
-        leave-active-class="animate__backOutLeft"
+        enter-active-class="animate__fadeInRight"
+        leave-active-class="animate__fadeOutLeft"
       >
-        <component :is="Component" />
+        <component class="flex-grow overflow-hidden" :is="Component" />
       </transition>
     </router-view>
 
     <Footer></Footer>
   </div>
 </template>
+
+<style scoped>
+/* This only changes this particular animation duration */
+.animate__animated {
+  --animate-duration: 0.3s;
+}
+</style>
 
 <style>
 @import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css");

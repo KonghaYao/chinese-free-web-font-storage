@@ -4,6 +4,9 @@ import { useRoute } from 'vue-router';
 import { useGlobalStore } from '../globalStore'
 import Icon from '../../components/Icon.vue';
 import ListItem from '../../components/list-item.vue';
+import { copy } from './copy'
+import { router } from '../../routes';
+
 const store = useGlobalStore()
 const route = useRoute()
 const reset = () => {
@@ -23,34 +26,19 @@ const resetData = () => {
 }
 
 watch(() => store.choose.fontIndex, resetData)
-/** 复制文本函数 */
-const copy = (Info: string) => {
-    const el = document.createElement("textarea");
-    el.value = Info;
-    el.setAttribute("readonly", "");
-    el.style.position = "absolute";
-    el.style.left = "-9999px";
-    document.body.appendChild(el);
-    const selected =
-        document.getSelection()!.rangeCount > 0
-            ? document.getSelection()!.getRangeAt(0)
-            : false;
-    el.select();
-    document.execCommand("copy");
-    document.body.removeChild(el);
-    if (selected) {
-        document.getSelection()!.removeAllRanges();
-        document.getSelection()!.addRange(selected);
-    }
-
-}
 const fontSize = ref(48)
 const testText = ref(store.config.test)
+const goBackToFont = () => {
+    router.push(`/font/${store.fontDetail?.name}/font`)
+}
 </script>
 
 <template>
     <div class="Font-Q divide-y divide-solid select-none text-2xl w-3/4">
-        <div class="Font-Q p-4">选择字体</div>
+        <div class="Font-Q py-4 flex justify-between">
+            <span>{{ store.fontDetail!.name }}</span>
+            <Icon class="text-2xl pl-4 text-red-400" @click="goBackToFont">cancel</Icon>
+        </div>
         <ListItem>
             <div class="flex">
                 <span>CSS 样式复制</span>
@@ -82,6 +70,7 @@ const testText = ref(store.config.test)
             </div>
             <template v-slot:detail>
                 <div class="flex flex-col border-t py-4">
+                    <div>可以自行输入想要的字来查看效果哦！</div>
                     <div class="flex items-center mx-4">
                         <input class="flex-grow m-4" type="range" v-model="fontSize" />
                         <label>{{ fontSize }}px</label>

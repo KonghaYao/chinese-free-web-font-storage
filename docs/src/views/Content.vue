@@ -20,7 +20,7 @@ const jumpToFontDetail = (index: number, type: string) => {
     <div
         class="grid-flow-row grid-cols-6 gap-4 lg:gap-2 py-4 grid h-full overflow-y-auto md:grid-cols-12 justify-items-center"
     >
-        <LazyComponent
+        <div
             v-for="(font, index) in store.fonts"
             :key="font.name"
             class="col-span-6 w-full sm:w-3/4 md:w-11/12 lg:col-span-4 lg:w-full xl:col-span-3"
@@ -34,7 +34,7 @@ const jumpToFontDetail = (index: number, type: string) => {
                 class="h-full"
                 @open="jumpToFontDetail"
             ></Card>
-        </LazyComponent>
+        </div>
     </div>
 </template>
 
