@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- 字体查看网站 -->
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Cache-Control" content="no-cache" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
+        <title>江夏尧的字体仓库</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.17/dist/base.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/combine/gh/konghayao/chinese-free-web-font-storage/css/Material Icons.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css"
+        />
+        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./screen-700.css" />
+    </head>
+
+    <body>
+        <div id="app" class="flex flex-col">
+            <nav class="Overlay flex flex-col z-1" v-show="show.overlay1">
+                <div class="font-detail card" v-if='show.fontDetail==="font"'>
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay1=false"
+                    >
+                        close
+                    </div>
+                    <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                    <div class="flex-grow font-families-wrap">
+                        <div
+                            v-for="(item,index) in fontDetail.css||[]"
+                            :key="item.fontFamily"
+                            class="font-families"
+                        >
+                            <div class="en-name">
+                                {{item.fontFamily}}
+                                {{item.fontWeight||"normal"}}
+                            </div>
+                            <div class="example">
+                                <div
+                                    :style='{
+                    fontFamily:item.fontFamily,
+                    fontWeight:item.fontWeight||" normal" }'
+                                >
+                                    {{config.test}}
+                                    <link
+                                        rel="stylesheet"
+                                        :href="fontLink(config.root+item.url)"
+                                    />
+                                </div>
+                                <div class="font-sidebar flex">
+                                    <div
+                                        class="text flex"
+                                        @click="chooseCSS(index)"
+                                    >
+                                        <span class="Icon flex">add</span>
+                                        选择字体
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="font-detail card"
+                    v-if='show.fontDetail==="license"'
+                >
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay1=false"
+                    >
+                        close
+                    </div>
+                    <h4 class="card-name">字体名称：{{fontDetail.name||''}}</h4>
+                    <div
+                        class="flex-grow"
+                        style="white-space: pre-wrap; overflow: scroll"
+                    >
+                        <div>{{choose.license}}</div>
+                    </div>
+                </div>
+            </nav>
+            <nav class="Overlay z-2 flex" v-show="show.overlay2">
+                <div class="select-Box">
+                    <div
+                        class="Icon close-btn flex"
+                        @click="show.overlay2=false"
+                    >
+                        close
+                    </div>
+                    <div class="card-name">选择字体</div>
+                    <div class="flex-grow">
+                        <div class="flex copy-title">
+                            <span>CSS 样式复制</span>
+                            <span
+                                class="Icon Btn flex"
+                                @click="copy(codeTemplate)"
+                                >content_copy</span
+                            >
+                        </div>
+
+                        <div class="flex copy-title">
+                            <span>CSS 文件地址复制</span>
+                            <span
+                                class="Icon Btn flex"
+                                @click="copy(config.root+chosenFont.url)"
+                                >content_copy</span
+                            >
+                        </div>
+                        <div class="flex TestFont">
+                            <div>
+                                字体大小调节
+                                <input
+                                    type="number"
+                                    min="8"
+                                    max="128"
+                                    step="4"
+                                    v-model="showFontSize"
+                                />
+                                <input
+                                    type="range"
+                                    min="8"
+                                    max="128"
+                                    step="4"
+                                    v-model="showFontSize"
+                                />
+                            </div>
+                            <textarea
+                                :style="{
+                                    fontSize:showFontSize+'px',
+                                    fontFamily:chosenFont.fontFamily,
+                                    fontWeight:chosenFont.fontWeight||'normal'
+                                }"
+                            >
+请测试字体吧
+</textarea
+                            >
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.1/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-toasted@1.1.26/dist/vue-toasted.min.js"></script>
+    <script src="https://unpkg.com/vue-lazyload/vue-lazyload.js"></script>
+    <script type="module" src="./index.js"></script>
+</html>
