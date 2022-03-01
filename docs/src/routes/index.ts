@@ -15,6 +15,7 @@ const routes = [
         children: [
             {
                 path: "font",
+                name: "Font",
                 meta: {
                     type: "font",
                 },
@@ -27,9 +28,10 @@ const routes = [
                 },
                 component: License,
             },
+            { path: ":pathMatch(.*)*", redirect: { name: "Font" } },
         ],
     },
-    // { path: "*", redirect: { name: "Home" } },
+    { path: "/:pathMatch(.*)*", redirect: "/home" },
 ] as RouterOptions["routes"];
 
 export const router = createRouter({

@@ -7,13 +7,20 @@ const store = useGlobalStore()
 const router = useRouter()
 const route = useRoute()
 
+/** 重置页面数据，为了让从路由跳转的用户可以看到该页面的数据 */
 const reset = () => {
     store.show.type = route.meta.type as string || 'font'
-
     const fontIndex = store.findFontIndex(route.params.fontName as string)
     store.WatchFont(fontIndex, store.show.type)
 }
 onMounted(reset)
+
+onMounted(() => {
+    if (store.fontDetail === null) {
+        // 没有匹配到数据时，将路由转化到首页
+        backToHome()
+    }
+})
 const backToHome = () => {
     router.push({ name: "Home" })
 }
