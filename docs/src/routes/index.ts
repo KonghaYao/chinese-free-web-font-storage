@@ -7,11 +7,13 @@ const routes = [
     {
         path: "/home",
         name: "Home",
+
         component: Content,
     },
     {
         path: "/font/:fontName",
         component: FontWatcher,
+
         children: [
             {
                 path: "font",

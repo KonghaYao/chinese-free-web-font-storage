@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import Header from './views/Header.vue'
 import Footer from './views/Footer.vue';
-import { RouterView } from 'vue-router';
+import { RouterViewTransition as RouterView } from '@duandz/vue-router-transition'
 </script>
 
 <template>
   <div class="flex flex-col h-full bg-gray-50">
     <Header></Header>
+
     <RouterView class="flex-grow overflow-hidden"></RouterView>
 
     <Footer></Footer>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex flex-col m-4 select-none py-4 shadow bg-white hover:shadow-lg transition-shadow duration-300"
+        class="flex flex-col m-4 min-h-fit select-none py-4 shadow bg-white hover:shadow-lg transition-shadow duration-300"
     >
         <div
             class="Font-Q flex justify-between items-center bg-amber-50 px-4 transition-colors duration-500 hover:bg-purple-500 hover:text-white"

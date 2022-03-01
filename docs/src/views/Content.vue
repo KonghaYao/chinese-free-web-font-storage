@@ -1,10 +1,18 @@
 <script setup lang="ts">
 
 import LazyComponent from "lazy-load-vue3/src/LazyComponent";
+import { useRouter } from "vue-router";
 
 import Card from '../components/Card.vue';
 import { useGlobalStore } from './globalStore'
 const store = useGlobalStore()
+const router = useRouter()
+const jumpToFontDetail = (index: number, type: string) => {
+    store.WatchFont(index, type)
+    if (store.fontDetail) {
+        router.push(`/font/${store.fontDetail?.name}/${type}`)
+    }
+}
 
 </script>
 
@@ -19,10 +27,7 @@ const store = useGlobalStore()
             @click="() => store.WatchFont(index, 'font')"
             :preLoad="0.1"
         >
-            <Card :font="font" :index="index" :config="store.config" @open="store.WatchFont"></Card>
-            <template #loading>
-                <span>loading...</span>
-            </template>
+            <Card :font="font" :index="index" :config="store.config" @open="jumpToFontDetail"></Card>
         </LazyComponent>
     </div>
 </template>
