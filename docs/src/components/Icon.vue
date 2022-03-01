@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 @import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/css/Material Icons.css");
 .Icon {
     user-select: none;
