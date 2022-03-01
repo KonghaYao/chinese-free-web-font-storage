@@ -50,8 +50,7 @@ import { RouterViewTransition as RouterView } from '@duandz/vue-router-transitio
 .Icon {
   user-select: none;
   cursor: pointer;
-  width: 1em;
-  height: 1em;
+
   font-family: "Material Icons";
 }
 .Font-Q {

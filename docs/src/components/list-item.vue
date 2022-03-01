@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Icon from './Icon.vue';
-const isOpened = ref(true)
+
+const { open = false } = defineProps<{ open?: boolean }>()
+
+const isOpened = ref(open)
 const toggle = () => {
     isOpened.value = !isOpened.value
 }
 </script>
 
 <template>
-    <div class="flex flex-col py-4">
+    <div class="flex flex-col py-2">
         <div class="w-full flex justify-between items-center">
             <slot></slot>
             <Icon @click="toggle" class="p-4">
