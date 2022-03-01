@@ -14,9 +14,9 @@ const toggle = () => {
     <div class="flex flex-col py-2">
         <div class="w-full flex justify-between items-center">
             <slot></slot>
-            <Icon @click="toggle" class="p-4">
+            <Icon @click="toggle" class="p-4 w-8 h-8 text-2xl">
                 {{
-                    isOpened ? "arrow_drop_up" : "arrow_drop_down"
+                    isOpened ? "arrow_drop_up" : "arrow_drop_down_circle"
                 }}
             </Icon>
         </div>

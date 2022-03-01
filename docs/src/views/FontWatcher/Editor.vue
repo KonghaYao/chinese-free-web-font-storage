@@ -10,7 +10,7 @@ const reset = () => {
     store.show.type = route.meta.type as string || 'font'
     const fontIndex = store.findFontIndex(route.params.fontName as string)
     store.WatchFont(fontIndex, store.show.type)
-    console.log(store);
+
 }
 onMounted(() => { reset(); resetData() })
 

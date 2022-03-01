@@ -1,7 +1,6 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@duandz/vue-router-transition': ^1.0.8
   '@vitejs/plugin-vue': ^2.2.0
   autoprefixer: ^10.4.2
   lazy-load-vue3: ^1.2.7
@@ -15,7 +14,6 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
-  '@duandz/vue-router-transition': 1.0.8
   lazy-load-vue3: 1.2.7_vue@3.2.31
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
   vue: 3.2.31
@@ -65,10 +63,6 @@ packages:
       '@babel/helper-validator-identifier': 7.16.7
       to-fast-properties: 2.0.0
     dev: true
-
-  /@duandz/vue-router-transition/1.0.8:
-    resolution: {integrity: sha512-0ykmv//7UU1HisQyYUMzjmPVM1K8KgoDWUJjpe4S0ck0WyfeXmdH47XY5jwD+v25d+WuanC+xw0xfLIu/mXx8w==}
-    dev: false
 
   /@emmetio/abbreviation/2.2.3:
     resolution: {integrity: sha512-87pltuCPt99aL+y9xS6GPZ+Wmmyhll2WXH73gG/xpGcQ84DRnptBsI2r0BeIQ0EB/SQTOe2ANPqFqj3Rj5FOGA==}

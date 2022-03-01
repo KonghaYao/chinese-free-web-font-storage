@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import Header from './views/Header.vue'
 import Footer from './views/Footer.vue';
-import { RouterViewTransition as RouterView } from '@duandz/vue-router-transition'
+
 </script>
 
 <template>
   <div class="flex flex-col h-full bg-gray-50">
     <Header></Header>
 
-    <RouterView class="flex-grow overflow-hidden"></RouterView>
+    <router-view v-slot="{ Component }" class="flex-grow overflow-hidden">
+      <transition
+        class="animate__animated"
+        enter-active-class="animate__backInLeft"
+        leave-active-class="animate__backOutLeft"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
 
     <Footer></Footer>
   </div>
@@ -19,6 +27,7 @@ import { RouterViewTransition as RouterView } from '@duandz/vue-router-transitio
 @import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.css");
 
 @import url("https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css");
+@import url("https://cdn.jsdelivr.net/npm/animate.css");
 
 @tailwind base;
 @tailwind components;
