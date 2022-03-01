@@ -16,6 +16,7 @@ import { RouterViewTransition as RouterView } from '@duandz/vue-router-transitio
 
 <style>
 @import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css");
+@import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.css");
 
 @import url("https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css");
 
@@ -58,6 +59,9 @@ import { RouterViewTransition as RouterView } from '@duandz/vue-router-transitio
 }
 .Font-E {
   font-family: "Dancing Script";
+}
+.Font-T {
+  font-family: zcoolqingkehuangyouti;
 }
 head,
 body {

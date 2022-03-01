@@ -1,10 +1,11 @@
+export type CssDetail = {
+    url: string;
+    fontFamily: string;
+    fontWeight?: "bolder" | "bold" | "normal";
+};
 export type FontDetail = {
     name: string;
-    css: {
-        url: string;
-        fontFamily: string;
-        fontWeight?: "bolder" | "bold" | "normal";
-    }[];
+    css: CssDetail[];
     license: {
         link: string;
     };

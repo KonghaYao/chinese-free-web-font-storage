@@ -18,16 +18,22 @@ const jumpToFontDetail = (index: number, type: string) => {
 
 <template>
     <div
-        class="grid-flow-row grid-cols-6 px-4 grid h-full overflow-y-auto md:grid-cols-12 justify-items-center"
+        class="grid-flow-row grid-cols-6 gap-8 py-4 grid h-full overflow-y-auto md:grid-cols-12 justify-items-center"
     >
         <LazyComponent
             v-for="(font, index) in store.fonts"
             :key="font.name"
-            class="col-span-6 w-full sm:w-2/3 md:w-5/6 lg:col-span-4 xl:col-span-3"
-            @click="() => store.WatchFont(index, 'font')"
+            class="col-span-6 w-full sm:w-3/4 md:w-5/6 lg:col-span-4 xl:col-span-3"
+            @click="() => jumpToFontDetail(index, 'font')"
             :preLoad="0.1"
         >
-            <Card :font="font" :index="index" :config="store.config" @open="jumpToFontDetail"></Card>
+            <Card
+                :font="font"
+                :index="index"
+                :config="store.config"
+                class="h-full"
+                @open="jumpToFontDetail"
+            ></Card>
         </LazyComponent>
     </div>
 </template>

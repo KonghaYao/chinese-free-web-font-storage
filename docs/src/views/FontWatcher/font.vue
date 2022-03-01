@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { useGlobalStore } from '../globalStore'
 import Icon from '../../components/Icon.vue';
-const chooseCSS = (index: number) => { }
+import { useRouter } from 'vue-router';
+const router = useRouter()
+const lookFont = (fontWeight: string = 'normal') => {
+    if (store.fontDetail) {
+        store.choose.fontWeight = fontWeight
+        router.push(`/font/${store.fontDetail.name}/editor/${fontWeight}`)
+    }
+}
 const store = useGlobalStore()
 </script>
 
 <template>
     <div
-        v-for="(item, index) in store.fontDetail!.css || []"
+        v-for="(item) in store.fontDetail!.css || []"
         :key="item.fontFamily"
         class="w-full md:w-3/4 shadow-md p-4 m-2 md:m-4 lg:m-6 rounded-lg overflow-hidden flex flex-col flex-none justify-start divide-y divide-double"
     >
@@ -39,10 +46,10 @@ const store = useGlobalStore()
                 <div class="w-5/6 pr-4 from-transparent to-white bg-gradient-to-r float-right">
                     <div
                         class="text-lg font-bold float-right px-2 py-2 rounded-md text-teal-400 h-fit cursor-pointer hover:bg-teal-100/50 flex items-center"
-                        @click="chooseCSS(index)"
+                        @click="lookFont(item.fontWeight)"
                     >
                         <Icon>add</Icon>
-                        <div>选择字体</div>
+                        <div>查看字体</div>
                     </div>
                 </div>
             </div>

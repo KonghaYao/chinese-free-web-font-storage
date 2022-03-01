@@ -1,6 +1,6 @@
 // stores/counter.js
 import { defineStore } from "pinia";
-import { FontDetail } from "../types";
+import { CssDetail, FontDetail } from "../types";
 import fonts from "../assets/fonts.json";
 export const useGlobalStore = defineStore("global", {
     state: () => {
@@ -18,6 +18,7 @@ export const useGlobalStore = defineStore("global", {
             choose: {
                 fontIndex: -1,
                 license: "",
+                fontWeight: "normal",
                 cssIndex: 0,
             },
         };
@@ -29,6 +30,18 @@ export const useGlobalStore = defineStore("global", {
         },
     },
     actions: {
+        getEditingFont(): null | CssDetail {
+            if (this.fontDetail) {
+                const fontWeight = this.choose.fontWeight ?? "normal";
+                const fontDetail = this.fontDetail!;
+                return (
+                    fontDetail.css.find((font) => {
+                        return font.fontWeight === fontWeight;
+                    }) || fontDetail.css[0]
+                );
+            }
+            return null;
+        },
         getFontByIndex(index: number) {
             return this.fonts[index];
         },
