@@ -1,11 +1,19 @@
 // stores/counter.js
 import { defineStore } from "pinia";
+import { reactive } from "vue";
 import { CssDetail, FontDetail } from "../types";
-import fonts from "../assets/fonts.json";
+const fonts = reactive([] as FontDetail[]);
+fetch(
+    "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/fonts.json"
+)
+    .then((res) => res.json())
+    .then((res) => {
+        fonts.push(...res);
+    });
 export const useGlobalStore = defineStore("global", {
     state: () => {
         return {
-            fonts: fonts as Array<FontDetail>,
+            fonts,
             config: {
                 root: "https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/",
                 test: "与之斯部他行出不上公成地会个时学了后日月以和有大于人国中是为在一年的",

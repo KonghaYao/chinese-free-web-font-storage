@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-import LazyComponent from "lazy-load-vue3/src/LazyComponent";
+//TODO lazy-component 尚未实现
 import { useRouter } from "vue-router";
 
 import Card from '../components/Card.vue';
