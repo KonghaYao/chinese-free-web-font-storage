@@ -152,5 +152,29 @@
                 "url": "站酷仓耳渔阳体-W05/result.css"
             }
         ]
+    },
+    {
+        "name": "霞鹜文楷",
+
+        "license": {
+            "link": "LXGWWenKai-Bold/license.txt"
+        },
+        "css": [
+            {
+                "fontFamily": "LXGWWenKai",
+                "fontWeight": 400,
+                "url": "LXGWWenKai-Regular/result.css"
+            },
+            {
+                "fontFamily": "LXGWWenKai",
+                "fontWeight": 300,
+                "url": "LXGWWenKai-Light/result.css"
+            },
+            {
+                "fontFamily": "LXGWWenKai",
+                "fontWeight": 700,
+                "url": "LXGWWenKai-Bold/result.css"
+            }
+        ]
     }
 ]
