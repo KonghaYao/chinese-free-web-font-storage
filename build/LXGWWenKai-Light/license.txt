@@ -1,0 +1,9 @@
+LXGW WenKai / 霞鹜文楷
+
+An open-source Chinese font derived from Fontworks' Klee One. 一款开源中文字体，基于 FONTWORKS 出品字体 Klee One 衍生。
+
+OFL-1.1 License
+
+版本：v1.233 22/04/02
+
+https://github.com/lxgw/LxgwWenKai
