@@ -16,12 +16,13 @@ const log = (log: string) => console.log(log)
 
 <template>
     <div
-        class="grid grid-flow-row grid-cols-6 gap-8 lg:gap-2 p-8 md:grid-cols-12 flex-grow overflow-y-auto justify-items-center"
+        class="grid grid-flow-row grid-cols-6 gap-8 lg:gap-12 p-8 md:grid-cols-12 flex-grow overflow-y-auto justify-items-center"
     >
         <lazy-component
             v-for="(font, index) in store.fonts"
             :key="font.name"
-            class="col-span-6 w-full sm:w-3/4 md:w-11/12 lg:col-span-4 lg:w-full xl:col-span-3 h-64"
+            preload="1.5"
+            class="col-span-6 w-full sm:w-3/4 md:w-11/12 lg:col-span-4 lg:w-full xl:col-span-3 h-56"
             @click="() => jumpToFontDetail(index, 'font')"
             @show="log(font.name)"
         >

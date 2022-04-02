@@ -12,21 +12,25 @@
         <div
             class="flex-grow p-4 flex items-center text-xl"
             :style="{
-                fontFamily: font.css[0].fontFamily,
+                fontFamily: font.css[0].fontFamily + ',system-ui',
                 fontWeight: font.css[0].fontWeight ?? 'normal'
             }"
         >
             {{ config.test }}
-            <link rel="stylesheet" :href="fontLink(config.root + font.css[0].url)" />
+            <teleport to="body">
+                <link rel="stylesheet" :href="fontLink(config.root + font.css[0].url)" />
+            </teleport>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import Icon from "./Icon.vue";
 import { FontDetail } from '../types';
+import { ref } from "vue";
 const fontLink = (src: string) => {
     return src;
 }
+const prepared = ref(false)
 const $emit = defineEmits<{
     (event: "open", index: number, type: string): void
 }>()
