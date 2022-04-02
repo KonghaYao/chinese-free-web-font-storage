@@ -13,33 +13,33 @@ const base = {
         SC: 4,
         TC: 1,
     },
-    license: "./fonts/LXGWWenKai.txt",
+    license: "./fonts/白无常可可体.txt",
 };
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
 create([
     {
-        fontFileName: "LXGWWenKai-Bold",
-        FontPath: "./fonts/LXGWWenKai-Bold.ttf",
+        fontFileName: "白无常可可体-Bold",
+        FontPath: "./fonts/白无常可可体-Bold.ttf",
         css: {
-            fontFamily: "LXGWWenKai",
+            fontFamily: "白无常可可体",
             fontWeight: 700,
         },
         ...base,
     },
     {
-        fontFileName: "LXGWWenKai-Light",
-        FontPath: "./fonts/LXGWWenKai-Light.ttf",
+        fontFileName: "白无常可可体-Light",
+        FontPath: "./fonts/白无常可可体-Light.ttf",
         css: {
-            fontFamily: "LXGWWenKai",
+            fontFamily: "白无常可可体",
             fontWeight: 300,
         },
         ...base,
     },
     {
-        fontFileName: "LXGWWenKai-Regular",
-        FontPath: "./fonts/LXGWWenKai-Regular.ttf",
+        fontFileName: "白无常可可体-Regular",
+        FontPath: "./fonts/白无常可可体-Regular.ttf",
         css: {
-            fontFamily: "LXGWWenKai",
+            fontFamily: "白无常可可体",
             fontWeight: 400,
         },
         ...base,
