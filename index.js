@@ -13,33 +13,15 @@ const base = {
         SC: 4,
         TC: 1,
     },
-    license: "./fonts/白无常可可体.txt",
+    license: "./fonts/猫啃网故障黑.txt",
 };
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
 create([
     {
-        fontFileName: "白无常可可体-Bold",
-        FontPath: "./fonts/白无常可可体-Bold.ttf",
+        fontFileName: "猫啃网故障黑",
+        FontPath: "./fonts/猫啃网故障黑.otf",
         css: {
-            fontFamily: "白无常可可体",
-            fontWeight: 700,
-        },
-        ...base,
-    },
-    {
-        fontFileName: "白无常可可体-Light",
-        FontPath: "./fonts/白无常可可体-Light.ttf",
-        css: {
-            fontFamily: "白无常可可体",
-            fontWeight: 300,
-        },
-        ...base,
-    },
-    {
-        fontFileName: "白无常可可体-Regular",
-        FontPath: "./fonts/白无常可可体-Regular.ttf",
-        css: {
-            fontFamily: "白无常可可体",
+            fontFamily: "猫啃网故障黑",
             fontWeight: 400,
         },
         ...base,
