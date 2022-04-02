@@ -6,7 +6,9 @@ import { router } from "./routes/index";
 createApp(App)
     .use(pinia)
     .use(Lazyload, {
+        preload: 1.5,
         lazyComponent: true,
+        throttleWait: 500,
     })
     .use(router)
     .mount("#app");

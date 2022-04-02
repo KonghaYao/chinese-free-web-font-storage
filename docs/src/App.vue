@@ -9,14 +9,7 @@ import Footer from './views/Footer.vue';
     <Header></Header>
 
     <router-view v-slot="{ Component }">
-      <transition
-        mode="out-in"
-        class="animate__animated"
-        enter-active-class="animate__fadeInRight"
-        leave-active-class="animate__fadeOutLeft"
-      >
-        <component class="flex-grow overflow-hidden" :is="Component" />
-      </transition>
+      <component class="flex-grow overflow-hidden" :is="Component" />
     </router-view>
 
     <Footer></Footer>

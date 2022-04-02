@@ -3,7 +3,6 @@ lockfileVersion: 5.3
 specifiers:
   '@vitejs/plugin-vue': ^2.2.0
   autoprefixer: ^10.4.2
-  lazy-load-vue3: ^1.2.7
   pinia: ^2.0.11
   postcss: ^8.4.7
   tailwindcss: ^3.0.23
@@ -15,7 +14,6 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
-  lazy-load-vue3: 1.2.7_vue@3.2.31
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
   vant: 3.4.7_vue@3.2.31
   vue: 3.2.31
@@ -964,14 +962,6 @@ packages:
       is-promise: 2.2.2
       promise: 7.3.1
     dev: true
-
-  /lazy-load-vue3/1.2.7_vue@3.2.31:
-    resolution: {integrity: sha512-sIZ47jIWlVM/HVKD4e+smLiWbwHjoJMCzRdxGoSzI5PwMq7BC50op9ki7wSxCTnpAPD0fi3vwEswIaTUdXLemQ==}
-    peerDependencies:
-      vue: '>=3.0.0'
-    dependencies:
-      vue: 3.2.31
-    dev: false
 
   /lilconfig/2.0.4:
     resolution: {integrity: sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==}

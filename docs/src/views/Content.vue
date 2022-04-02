@@ -1,5 +1,4 @@
 <script setup lang="ts">
-//TODO lazy-component 尚未实现
 import { useRouter } from "vue-router";
 
 import Card from '../components/Card.vue';
@@ -12,19 +11,19 @@ const jumpToFontDetail = (index: number, type: string) => {
         router.push(`/font/${store.fontDetail?.name}/${type}`)
     }
 }
-
+const log = (log: string) => console.log(log)
 </script>
 
 <template>
-    <lazy-component
-        class="grid grid-flow-row grid-cols-6 gap-8 lg:gap-2 p-8 md:grid-cols-12 h-full overflow-y-auto justify-items-center"
+    <div
+        class="grid grid-flow-row grid-cols-6 gap-8 lg:gap-2 p-8 md:grid-cols-12 flex-grow overflow-y-auto justify-items-center"
     >
-        <div
+        <lazy-component
             v-for="(font, index) in store.fonts"
             :key="font.name"
-            class="col-span-6 w-full sm:w-3/4 md:w-11/12 lg:col-span-4 lg:w-full xl:col-span-3"
+            class="col-span-6 w-full sm:w-3/4 md:w-11/12 lg:col-span-4 lg:w-full xl:col-span-3 h-64"
             @click="() => jumpToFontDetail(index, 'font')"
-            :preLoad="0.1"
+            @show="log(font.name)"
         >
             <Card
                 :font="font"
@@ -33,8 +32,8 @@ const jumpToFontDetail = (index: number, type: string) => {
                 class="h-full"
                 @open="jumpToFontDetail"
             ></Card>
-        </div>
-    </lazy-component>
+        </lazy-component>
+    </div>
 </template>
 
 <style scoped>
