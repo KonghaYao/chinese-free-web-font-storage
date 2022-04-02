@@ -1,5 +1,29 @@
 [
     {
+        "name": "白无常可可体",
+
+        "license": {
+            "link": "白无常可可体-Bold/license.txt"
+        },
+        "css": [
+            {
+                "fontFamily": "白无常可可体",
+                "fontWeight": 400,
+                "url": "白无常可可体-Regular/result.css"
+            },
+            {
+                "fontFamily": "白无常可可体",
+                "fontWeight": 300,
+                "url": "白无常可可体-Light/result.css"
+            },
+            {
+                "fontFamily": "白无常可可体",
+                "fontWeight": 700,
+                "url": "白无常可可体-Bold/result.css"
+            }
+        ]
+    },
+    {
         "name": "钟齐志莽行书",
         "css": [
             {
