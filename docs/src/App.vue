@@ -5,18 +5,11 @@ import Footer from './views/Footer.vue';
 </script>
 
 <template>
-  <div class="flex flex-col h-full bg-gray-50">
+  <div class="flex flex-col h-screen bg-gray-50">
     <Header></Header>
 
     <router-view v-slot="{ Component }">
-      <transition
-        mode="out-in"
-        class="animate__animated"
-        enter-active-class="animate__fadeInRight"
-        leave-active-class="animate__fadeOutLeft"
-      >
-        <component class="flex-grow overflow-hidden" :is="Component" />
-      </transition>
+      <component class="flex-grow overflow-hidden" :is="Component" />
     </router-view>
 
     <Footer></Footer>
