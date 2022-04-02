@@ -39,7 +39,9 @@ const backToHome = () => {
                 </div>
                 <h4 class="Font-Q text-2xl py-2 border-b-2">字体名称：{{ store.fontDetail!.name || '' }}</h4>
             </div>
-            <div class="flex flex-col flex-grow items-center pt-4 px-4 overflow-y-scroll bg-white">
+            <div
+                class="flex flex-col flex-grow items-center pt-4 px-4 overflow-y-scroll bg-gray-100"
+            >
                 <router-view></router-view>
             </div>
         </div>

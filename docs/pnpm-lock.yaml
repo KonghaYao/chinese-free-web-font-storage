@@ -8,6 +8,7 @@ specifiers:
   postcss: ^8.4.7
   tailwindcss: ^3.0.23
   typescript: ^4.5.4
+  vant: ^3.4.7
   vite: ^2.8.0
   vue: ^3.2.25
   vue-router: ^4.0.12
@@ -16,6 +17,7 @@ specifiers:
 dependencies:
   lazy-load-vue3: 1.2.7_vue@3.2.31
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
+  vant: 3.4.7_vue@3.2.31
   vue: 3.2.31
   vue-router: 4.0.12_vue@3.2.31
 
@@ -101,9 +103,27 @@ packages:
       fastq: 1.13.0
     dev: true
 
+  /@popperjs/core/2.11.4:
+    resolution: {integrity: sha512-q/ytXxO5NKvyT37pmisQAItCFqA7FD/vNb8dgaJy3/630Fsc+Mz9/9f2SziBoIZ30TJooXyTwZmhi1zjXmObYg==}
+    dev: false
+
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: true
+
+  /@vant/icons/1.7.3:
+    resolution: {integrity: sha512-tW4EqzxN4kXw1rnlnQJQHofEifPbt/gECOWiibomht8QLyvoGuE4iUmDFS288dJ07ZjuTy0bhdABj0SENo2fmQ==}
+    dev: false
+
+  /@vant/popperjs/1.1.0:
+    resolution: {integrity: sha512-8MD1gz146awV/uPxYjz4pet22f7a9YVKqk7T+gFkWFwT9mEcrIUEg/xPrdOnWKLP9puXyYtm7oVfSDSefZ/p/w==}
+    dependencies:
+      '@popperjs/core': 2.11.4
+    dev: false
+
+  /@vant/use/1.3.6:
+    resolution: {integrity: sha512-3z+nywPaV2F5BdJO7RQxWlgfzJeEOmViD2yHMb7Tg+R4NR/7iQskqW8v2Cnv9FWSJgTOSHlcr7UzeLpiTAP4HA==}
+    dev: false
 
   /@vitejs/plugin-vue/2.2.2_vite@2.8.4+vue@3.2.31:
     resolution: {integrity: sha512-3C0s45VOwIFEDU+2ownJOpb0zD5fnjXWaHVOLID2R1mYOlAx3doNBFnNbVjaZvpke/L7IdPJXjpyYpXZToDKig==}
@@ -1378,6 +1398,17 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
+
+  /vant/3.4.7_vue@3.2.31:
+    resolution: {integrity: sha512-/iafbNF3VPcDevIun8DMj84V9sGMcBZ2LW8j20uqthW6NpFmkMpDFJxMINQFIZ0myEogqVSDVhS6XFAwlx3nkQ==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      '@vant/icons': 1.7.3
+      '@vant/popperjs': 1.1.0
+      '@vant/use': 1.3.6
+      vue: 3.2.31
+    dev: false
 
   /vite/2.8.4:
     resolution: {integrity: sha512-GwtOkkaT2LDI82uWZKcrpRQxP5tymLnC7hVHHqNkhFNknYr0hJUlDLfhVRgngJvAy3RwypkDCWtTKn1BjO96Dw==}

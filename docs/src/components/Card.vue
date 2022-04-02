@@ -1,10 +1,8 @@
 <template>
     <div
-        class="flex flex-col m-4 min-h-fit rounded-2xl select-none py-4 shadow bg-white hover:shadow-lg transition-shadow duration-300"
+        class="flex flex-col m-4 min-h-fit rounded-2xl select-none py-4 shadow-lg bg-white duration-300 shadow-gray-200 active:scale-90 transition-transform"
     >
-        <div
-            class="Font-Q flex justify-between items-center bg-amber-50 px-4 shadow shadow-orange-100 transition-colors duration-500 hover:bg-purple-500 hover:text-white"
-        >
+        <div class="Font-Q flex justify-between items-center bg-amber-50 px-4 duration-500">
             <h4 class="text-lg">{{ font.name }}</h4>
             <div class="grid grid-flow-col gap-4 p-2 h-full">
                 <Icon @click="$emit('open', index, 'font')">translate</Icon>

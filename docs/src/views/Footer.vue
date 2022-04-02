@@ -1,5 +1,5 @@
  <template>
-    <footer class="flex Font-E p-4 justify-between items-center bg-gray-50">
+    <footer class="flex Font-E p-4 justify-between items-center bg-gray-100">
         <div class="flex h-full">
             <div class="text-sm text-right">
                 Design By KonghaYao
