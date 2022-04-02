@@ -16,7 +16,7 @@ const store = useGlobalStore()
     <div
         v-for="(item) in store.fontDetail!.css || []"
         :key="item.fontFamily"
-        class="w-full md:w-3/4 shadow-md p-4 m-2 md:m-4 lg:m-6 rounded-lg overflow-hidden flex flex-col flex-none justify-start divide-y divide-double"
+        class="w-full md:w-3/4 shadow-lg shadow-gray-300 p-4 m-2 md:m-4 lg:m-6 rounded-lg overflow-hidden flex flex-col flex-none justify-start divide-y divide-double bg-white"
     >
         <!--  字体信息 -->
         <div
