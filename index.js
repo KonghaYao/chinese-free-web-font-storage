@@ -46,7 +46,7 @@ function create(fontArray) {
                         fontStyle: "normal",
                         fontWeight: "normal",
                         fontDisplay: "swap",
-                        fontFamily: null, // 如果不设置的话将会使用默认的字体名称哦
+                        fontFamily: fontFileName,
                         ...css,
                     },
                     charset: {

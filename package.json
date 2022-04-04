@@ -19,9 +19,9 @@
     "type": "module",
     "dependencies": {
         "@konghayao/cn-font-split": "2.0.4",
-        "fs-extra": "^10.0.0"
+        "fs-extra": "^10.0.1"
     },
     "devDependencies": {
-        "node-fetch": "^3.0.0"
+        "node-fetch": "^3.2.3"
     }
 }

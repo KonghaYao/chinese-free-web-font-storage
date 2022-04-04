@@ -2,34 +2,36 @@ lockfileVersion: 5.3
 
 specifiers:
   '@konghayao/cn-font-split': 2.0.4
-  fs-extra: ^10.0.0
-  node-fetch: ^3.0.0
+  fs-extra: ^10.0.1
+  node-fetch: ^3.2.3
 
 dependencies:
   '@konghayao/cn-font-split': 2.0.4
-  fs-extra: 10.0.0
+  fs-extra: 10.0.1
 
 devDependencies:
-  node-fetch: 3.0.0
+  node-fetch: 3.2.3
 
 packages:
 
   /@konghayao/cn-font-split/2.0.4:
     resolution: {integrity: sha512-pd5AnJFMKfHKllIhO+27pluLgO+EUI4Tp6c+Zx6nl+xgjEmP8Uk+ok02OMfSYvXzXirHpXwD9YsPzCwrFL77tA==}
     dependencies:
-      '@konghayao/promise-transaction': 1.4.0
+      '@konghayao/promise-transaction': 1.5.2
       code-points: 2.0.0-1
       fonteditor-core: 2.1.8
-      fs-extra: 10.0.0
+      fs-extra: 10.0.1
       lodash-es: 4.17.21
-      nanoid: 3.1.30
+      nanoid: 3.3.2
       threads: 1.7.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@konghayao/promise-transaction/1.4.0:
-    resolution: {integrity: sha512-wgxcEeD4abMkN1M8TWsGZakveVcsC4avCUkAt8SFBB/z7S+tizctRK021MtSqcXjoY3GobAmMp1GQ6dGoD9OcQ==}
+  /@konghayao/promise-transaction/1.5.2:
+    resolution: {integrity: sha512-yne4MKCdK61MgRU9EiNBrn19WVhpdRgWxcl7elFDJz0MDLCIfF9l4yPROy3MWH6cGssTv1swkCE3HtE27u+d/w==}
+    dependencies:
+      koa-compose: 4.1.0
     dev: false
 
   /callsites/3.1.0:
@@ -47,13 +49,13 @@ packages:
       code-point: 1.1.0
     dev: false
 
-  /data-uri-to-buffer/3.0.1:
-    resolution: {integrity: sha512-WboRycPNsVw3B3TL559F7kuBUM4d8CgMEvk6xEJlOp7OBPjt6G7z8WMWlD2rOFZLk6OYfFIUGsCOWzcQH9K2og==}
-    engines: {node: '>= 6'}
+  /data-uri-to-buffer/4.0.0:
+    resolution: {integrity: sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==}
+    engines: {node: '>= 12'}
     dev: true
 
-  /debug/4.3.2:
-    resolution: {integrity: sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==}
+  /debug/4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -70,11 +72,12 @@ packages:
     dev: false
     optional: true
 
-  /fetch-blob/3.1.3:
-    resolution: {integrity: sha512-ax1Y5I9w+9+JiM+wdHkhBoxew+zG4AJ2SvAD1v1szpddUIiPERVGBxrMcB2ZqW0Y3PP8bOWYv2zqQq1Jp2kqUQ==}
+  /fetch-blob/3.1.5:
+    resolution: {integrity: sha512-N64ZpKqoLejlrwkIAnb9iLSA3Vx/kjgzpcDhygcqJ2KKjky8nCgUQ+dzXtbrLaWZGZNmNfQTsiQ0weZ1svglHg==}
     engines: {node: ^12.20 || >= 14.13}
     dependencies:
-      web-streams-polyfill: 3.1.1
+      node-domexception: 1.0.0
+      web-streams-polyfill: 3.2.0
     dev: true
 
   /fonteditor-core/2.1.8:
@@ -83,17 +86,24 @@ packages:
       xmldom: 0.5.0
     dev: false
 
-  /fs-extra/10.0.0:
-    resolution: {integrity: sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==}
+  /formdata-polyfill/4.0.10:
+    resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
+    engines: {node: '>=12.20.0'}
+    dependencies:
+      fetch-blob: 3.1.5
+    dev: true
+
+  /fs-extra/10.0.1:
+    resolution: {integrity: sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==}
     engines: {node: '>=12'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       jsonfile: 6.1.0
       universalify: 2.0.0
     dev: false
 
-  /graceful-fs/4.2.8:
-    resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==}
+  /graceful-fs/4.2.9:
+    resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
     dev: false
 
   /is-observable/2.1.0:
@@ -106,7 +116,11 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
+    dev: false
+
+  /koa-compose/4.1.0:
+    resolution: {integrity: sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==}
     dev: false
 
   /lodash-es/4.17.21:
@@ -117,18 +131,24 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: false
 
-  /nanoid/3.1.30:
-    resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
+  /nanoid/3.3.2:
+    resolution: {integrity: sha512-CuHBogktKwpm5g2sRgv83jEy2ijFzBwMoYA60orPDR7ynsLijJDqgsi4RDGj3OJpy3Ieb+LYwiRmIOGyytgITA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: false
 
-  /node-fetch/3.0.0:
-    resolution: {integrity: sha512-bKMI+C7/T/SPU1lKnbQbwxptpCrG9ashG+VkytmXCPZyuM9jB6VU+hY0oi4lC8LxTtAeWdckNCTa3nrGsAdA3Q==}
+  /node-domexception/1.0.0:
+    resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
+    engines: {node: '>=10.5.0'}
+    dev: true
+
+  /node-fetch/3.2.3:
+    resolution: {integrity: sha512-AXP18u4pidSZ1xYXRDPY/8jdv3RAozIt/WLNR/MBGZAz+xjtlr90RvCnsvHQRiXyWliZF/CpytExp32UU67/SA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
-      data-uri-to-buffer: 3.0.1
-      fetch-blob: 3.1.3
+      data-uri-to-buffer: 4.0.0
+      fetch-blob: 3.1.5
+      formdata-polyfill: 4.0.10
     dev: true
 
   /observable-fns/0.6.1:
@@ -139,7 +159,7 @@ packages:
     resolution: {integrity: sha512-Mx5NBSHX3sQYR6iI9VYbgHKBLisyB+xROCBGjjWm1O9wb9vfLxdaGtmT/KCjUqMsSNW6nERzCW3T6H43LqjDZQ==}
     dependencies:
       callsites: 3.1.0
-      debug: 4.3.2
+      debug: 4.3.4
       is-observable: 2.1.0
       observable-fns: 0.6.1
     optionalDependencies:
@@ -161,8 +181,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: false
 
-  /web-streams-polyfill/3.1.1:
-    resolution: {integrity: sha512-Czi3fG883e96T4DLEPRvufrF2ydhOOW1+1a6c3gNjH2aIh50DNFBdfwh2AKoOf1rXvpvavAoA11Qdq9+BKjE0Q==}
+  /web-streams-polyfill/3.2.0:
+    resolution: {integrity: sha512-EqPmREeOzttaLRm5HS7io98goBgZ7IVz79aDvqjD0kYXLtFZTc0T/U6wHTPKyIjb+MdN7DFIIX6hgdBEpWmfPA==}
     engines: {node: '>= 8'}
     dev: true
 
