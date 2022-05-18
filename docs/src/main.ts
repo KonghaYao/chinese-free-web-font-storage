@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import pinia from "./store";
+import pinia from "./store/index";
 import { Lazyload } from "vant";
 import { router } from "./routes/index";
 createApp(App)
