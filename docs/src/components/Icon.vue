@@ -1,5 +1,4 @@
-<script setup lang="ts">
-</script>
+
 
 <template>
     <div class="Icon flex text-base items-center justify-center">
@@ -8,7 +7,8 @@
 </template>
 
 <style scoped>
-@import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/css/Material Icons.css");
+@import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/css/Material Icons.css");
+
 .Icon {
     user-select: none;
     cursor: pointer;

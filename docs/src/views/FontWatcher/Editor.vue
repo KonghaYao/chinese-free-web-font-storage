@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useGlobalStore } from '../globalStore'
 import Icon from '../../components/Icon.vue';
 import ListItem from '../../components/list-item.vue';
 import { copy } from './copy'
-import { router } from '../../routes';
+
 
 const store = useGlobalStore()
+const router = useRouter()
 const route = useRoute()
 const reset = () => {
     store.show.type = route.meta.type as string || 'font'
@@ -42,10 +43,7 @@ const goBackToFont = () => {
         <ListItem>
             <div class="flex">
                 <span>CSS 样式复制</span>
-                <Icon
-                    class="bg-green-400 text-white rounded-full w-6 h-6"
-                    @click="copy(linkTag)"
-                >content_copy</Icon>
+                <Icon class="bg-green-400 text-white rounded-full w-6 h-6" @click="copy(linkTag)">content_copy</Icon>
             </div>
             <template v-slot:detail>
                 <div class="select-text text-sm text-left bg-gray-100 py-2 px-4">{{ linkTag }}</div>
@@ -55,10 +53,7 @@ const goBackToFont = () => {
         <ListItem>
             <div class="flex">
                 <span>CSS 文件地址复制</span>
-                <Icon
-                    class="bg-green-400 text-white rounded-full w-6 h-6"
-                    @click="copy(CssUrl)"
-                >content_copy</Icon>
+                <Icon class="bg-green-400 text-white rounded-full w-6 h-6" @click="copy(CssUrl)">content_copy</Icon>
             </div>
             <template v-slot:detail>
                 <div class="select-text text-sm text-left bg-gray-100 p-2 px-4">{{ CssUrl }}</div>
@@ -75,24 +70,17 @@ const goBackToFont = () => {
                         <input class="flex-grow m-4" type="range" v-model="fontSize" />
                         <label>{{ fontSize }}px</label>
                     </div>
-                    <textarea
-                        class="ring-1 ring-red-400 rounded-md"
-                        v-model="testText"
-                        :style="{
-                            fontFamily: store.getEditingFont()!.fontFamily,
-                            fontWeight: store.getEditingFont()!.fontWeight || 'normal',
-                            fontSize: fontSize + 'px',
-                            lineHeight: '1.3em',
-                            resize: 'none'
-                        
-                        }"
-                    ></textarea>
+                    <textarea class="ring-1 ring-red-400 rounded-md" v-model="testText" :style="{
+                        fontFamily: store.getEditingFont()!.fontFamily,
+                        fontWeight: store.getEditingFont()!.fontWeight || 'normal',
+                        fontSize: fontSize + 'px',
+                        lineHeight: '1.3em',
+                        resize: 'none'
+                    
+                    }"></textarea>
                     <link rel="stylesheet" :href="CssUrl" />
                 </div>
             </template>
         </ListItem>
     </div>
 </template>
-
-<style scoped>
-</style>

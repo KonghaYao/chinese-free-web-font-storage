@@ -5,6 +5,7 @@
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite App</title>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body>
         <div id="app"></div>
@@ -15,8 +16,12 @@
         <script type="importmap">
             {
                 "imports": {
-                    "rollup-web": "https://fastly.jsdelivr.net/npm/rollup-web@2.9.2",
-                    "rollup-web/": "https://fastly.jsdelivr.net/npm/rollup-web@2.9.2/",
+                    "pinia": "https://fastly.jsdelivr.net/npm/pinia@2.0.11/dist/pinia.esm-browser.js/+esm",
+                    "vue-router": "https://fastly.jsdelivr.net/npm/vue-router@4.0.12/dist/vue-router.esm-browser.js",
+                    "@vue/devtools-api": "https://fastly.jsdelivr.net/npm/@vue/devtools-api/+esm",
+                    "vue": "https://fastly.jsdelivr.net/npm/vue@3.2.25/dist/vue.runtime.esm-browser.js",
+                    "rollup-web": "./rollup-web/dist/index.js",
+                    "rollup-web/": "./rollup-web/",
                     "@rollup/": "https://esm.sh/@rollup/",
                     "mitt": "https://cdn.skypack.dev/mitt"
                 }

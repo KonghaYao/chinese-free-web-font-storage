@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-
 import Card from '../components/Card.vue';
 import { useGlobalStore } from './globalStore'
+
 const store = useGlobalStore()
 const router = useRouter()
 const jumpToFontDetail = (index: number, type: string) => {

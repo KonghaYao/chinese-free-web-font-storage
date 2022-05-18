@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from './views/Header.vue'
 import Footer from './views/Footer.vue';
-
+console.log('工作开始')
 </script>
 
 <template>
@@ -24,11 +24,10 @@ import Footer from './views/Footer.vue';
 </style>
 
 <style>
-@import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css");
-@import url("https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.css");
-
-@import url("https://cdn.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css");
-@import url("https://cdn.jsdelivr.net/npm/animate.css");
+@import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css");
+@import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.css");
+@import url("https://fastly.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css");
+@import url("https://fastly.jsdelivr.net/npm/animate.css");
 
 @tailwind base;
 @tailwind components;
@@ -57,21 +56,26 @@ import Footer from './views/Footer.vue';
   border-radius: 2px;
   background-color: #ccc;
 }
+
 .Icon {
   user-select: none;
   cursor: pointer;
 
   font-family: "Material Icons";
 }
+
 .Font-Q {
   font-family: qiantubifengshouxieti;
 }
+
 .Font-E {
   font-family: "Dancing Script";
 }
+
 .Font-T {
   font-family: zcoolqingkehuangyouti;
 }
+
 head,
 body {
   margin: 0;

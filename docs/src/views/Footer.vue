@@ -14,13 +14,12 @@
         <div class="flex flex-col">
             <div class="flex justify-evenly items-center">
                 <a href="https://gitee.com/dongzhongzhidong">
-                    <img
-                        class="rounded-full overflow-hidden h-8 w-8"
-                        src="https://portrait.gitee.com/uploads/avatars/user/1780/5342313_dongzhongzhidong_1604048676.png!avatar200"
-                    />
+                    <img class="rounded-full overflow-hidden h-8 w-8"
+                        src="https://portrait.gitee.com/uploads/avatars/user/1780/5342313_dongzhongzhidong_1604048676.png!avatar200" />
                 </a>
                 <a href="https://github.com/KonghaYao/chinese-free-web-font-storage">
-                    <img class="h-8 w-8" src="../assets/github.svg" />
+                    <img class="h-8 w-8"
+                        src="https://fastly.jsdelivr.net/gh/primer/octicons/icons/mark-github-16.svg" />
                 </a>
             </div>
             <div class="footer-name">Click and Star Me</div>
