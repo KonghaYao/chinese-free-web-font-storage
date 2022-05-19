@@ -14,6 +14,7 @@ const routes = [
     {
         path: "/font/:fontName",
         component: FontWatcher,
+        props: true,
 
         children: [
             {
@@ -38,10 +39,8 @@ const routes = [
                 },
                 component: Editor,
             },
-            { path: ":pathMatch(.*)*", redirect: { name: "Font" } },
         ],
     },
-    { path: "/:pathMatch(.*)*", redirect: "/home" },
 ] as RouterOptions["routes"];
 
 export const router = createRouter({

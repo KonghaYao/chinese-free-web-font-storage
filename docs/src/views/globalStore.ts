@@ -66,17 +66,18 @@ export const useGlobalStore = defineStore("global", {
                 this.show.type = type;
                 this.choose.cssIndex = 0;
             }
-            if (type === "license") {
-                const license = await this.preloadLicense(index);
-                this.choose.license = license;
-            }
+            // if (type === "license") {
+            //     const license = await this.preloadLicense(index);
+            //     this.choose.license = license;
+            // }
         },
         /** 提前获取 License 文本 */
         async preloadLicense(index: number) {
             const fontDetail = this.getFontByIndex(index);
-            return await fetch(this.config.root + fontDetail.license.link).then(
-                (res) => res.text()
-            );
+            const license = await fetch(
+                this.config.root + fontDetail.license.link
+            ).then((res) => res.text());
+            return license;
         },
         fontLink(url: string) {
             return url;
