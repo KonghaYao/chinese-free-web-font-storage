@@ -24,10 +24,7 @@ import {
 } from "rollup-web/dist/plugins/drawDependence.js";
 globalThis.MapperStore = MapperStore;
 
-const isDev = () => globalThis.location.host.split(":")[0] === "127.0.0.1";
-const CDN = isDev()
-    ? globalThis.location.href
-    : "https://fastly.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/docs/index.html";
+const CDN = globalThis.location.href;
 
 await initBabel();
 
