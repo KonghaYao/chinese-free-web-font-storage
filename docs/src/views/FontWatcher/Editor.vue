@@ -14,7 +14,6 @@ const reset = () => {
     store.show.type = route.meta.type as string || 'font'
     const fontIndex = store.findFontIndex(route.params.fontName as string)
     store.WatchFont(fontIndex, store.show.type)
-
 }
 onMounted(() => { reset(); resetData() })
 
@@ -38,6 +37,10 @@ const goBackToFont = () => {
     <div class="Font-Q divide-y divide-solid select-none text-2xl w-3/4">
         <div class="Font-Q py-4 flex justify-between">
             <span>{{ store.fontDetail!.name }}</span>
+            <span class="text-md select-text  align-text-bottom">
+                css 名称：
+                {{ store.getEditingFont()!.fontFamily }}
+            </span>
             <Icon class="text-2xl pl-4 text-red-400" @click="goBackToFont">cancel</Icon>
         </div>
         <ListItem>

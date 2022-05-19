@@ -81,17 +81,22 @@ const config = {
         server.createPlugin({}),
         {
             name: "css",
+            transform(css, id) {
+                if (/\.css/.test(id)) {
+                    return `
+                    const style = document.createElement('style')
+                    style.type="text/css"
+                    style.innerHTML = \`${css}\`
+                    document.head.appendChild(style)
+               
+                    `;
+                }
+            },
             async load(id) {
                 if (/\.css$/.test(id)) {
                     const text = await fetch(id).then((res) => res.text());
                     const css = await postcss().process(text);
-                    return `
-                    const link = document.createElement('style')
-                    link.type="text/css"
-                    link.innerHTML = \`${css}\`
-                    document.head.appendChild(link)
-               
-                    `;
+                    return { code: css };
                 }
             },
         },
