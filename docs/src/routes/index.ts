@@ -41,6 +41,7 @@ const routes = [
             },
         ],
     },
+    { path: "", redirect: { name: "Home" } },
 ] as RouterOptions["routes"];
 
 export const router = createRouter({
