@@ -1,6 +1,6 @@
 # 中文 Web 免费可商用字体库
 
-[Github 主页](https://konghayao.github.io/chinese-free-web-font-storage/)
+[Netlify 网页](https://chinese-font.netlify.app/#/home)
 [Gitee 主页](http://dongzhongzhidong.gitee.io/chinese-free-web-font-storage)
 
 ## 简介
