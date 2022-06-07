@@ -1,49 +1,35 @@
-// 导入打包产物
-import {
-    useRollup,
-    web_module,
-    sky_module,
-    ModuleEval,
-    DynamicServer,
-} from "rollup-web";
-
-// 导入各种插件
-import { initBabel, babel } from "rollup-web/dist/plugins/babel.js";
-import { vue } from "rollup-web/dist/plugins/vue3.js";
-import json from "@rollup/plugin-json";
-
-// 构建一个给 Solid 内部的 打包信息渠道
-import mitt from "mitt";
-const RollupHub = mitt();
-globalThis.RollupHub = RollupHub;
-
-import postcss from "https://esm.sh/postcss";
-import {
-    drawDependence,
-    MapperStore,
-} from "rollup-web/dist/plugins/drawDependence.js";
-globalThis.MapperStore = MapperStore;
-
 const CDN = globalThis.location.href;
 
-await initBabel();
+import "https://fastly.jsdelivr.net/npm/systemjs@6.12.1/dist/system.min.js";
+// 导入打包产物
+import {
+    Compiler,
+    Evaluator,
+    sky_module,
+    PluginLoader,
+} from "https://fastly.jsdelivr.net/npm/rollup-web/dist/index.js";
+import { vue } from "https://fastly.jsdelivr.net/npm/rollup-web/dist/plugins/vue3.js";
+import { babelCore } from "https://fastly.jsdelivr.net/npm/rollup-web/dist/plugins/babel.core.js";
 
-const server = new DynamicServer("_import", CDN);
+// 导入各种插件
+import typescript from "https://esm.sh/@babel/preset-typescript";
+
+const { default: json } = await PluginLoader.load("plugin-json");
+const { default: alias } = await PluginLoader.load("plugin-alias");
+const { css } = await PluginLoader.load("css");
+System.resolve = (url, par) => url;
 const config = {
-    external: ["vue", "vue-router", "pinia"],
-    // 直接采用 src 目录下的 index.ts 进行打包实验
-    input: "./src/main.ts",
-    output: {
-        format: "es",
-    },
     plugins: [
         json(),
-        vue(),
-        babel({
+        alias({
+            entries: [{ find: "@", replacement: "./" }],
+        }),
+
+        babelCore({
             babelrc: {
                 presets: [
                     [
-                        Babel.availablePresets["typescript"],
+                        typescript,
                         {
                             // 需要使用这种方式兼容 solid 配置
                             isTSX: true,
@@ -52,69 +38,48 @@ const config = {
                     ],
                 ],
             },
-            extensions: [".ts", ".js"],
+            extensions: [".ts"],
             log(id) {
-                console.log("%c babel ==> " + id, "color:blue");
+                console.log("%cBabel typescript > " + id, "color:orange");
             },
         }),
 
-        web_module({
-            root: CDN,
-            // 本地打包
-            extensions: [".vue", ".ts", ".js", ".json"],
-            log(url) {
-                console.log("%c Download ==> " + url, "color:green");
-            },
-        }),
-
+        vue({}),
+        css(),
         sky_module({
-            cdn(name) {
-                console.log("%c 默认CDN " + name, "color:purple");
-                return `https://fastly.jsdelivr.net/npm/${name}/+esm`;
+            cdn: (name) => `https://fastly.jsdelivr.net/npm/${name}/+esm`,
+            rename: {
+                pinia: "pinia@2.0.11/dist/pinia.esm-browser.js/+esm",
+                "vue-router":
+                    "vue-router@4.0.12/dist/vue-router.esm-browser.js",
+                "@vue/devtools-api": "@vue/devtools-api/+esm",
+                vue: "vue@3.2.25/dist/vue.runtime.esm-browser.js",
             },
-            ignore: ["vue", "vue-router", "pinia"],
         }),
-        // 这是一种异步导入方案，使用 全局的一个外置 Server 来保证代码的正确执行
-        server.createPlugin({}),
         {
-            name: "css",
-            transform(css, id) {
-                if (/\.css/.test(id)) {
-                    return `
-                    const style = document.createElement('style')
-                    style.type="text/css"
-                    style.innerHTML = \`${css}\`
-                    document.head.appendChild(style)
-               
-                    `;
-                }
-            },
-            async load(id) {
-                if (/\.css$/.test(id)) {
-                    const text = await fetch(id).then((res) => res.text());
-                    const css = await postcss().process(text);
-                    return { code: css };
+            resolveId(thisFile) {
+                if (thisFile.startsWith("http")) {
+                    return thisFile;
                 }
             },
         },
-
-        drawDependence({
-            log(mapperTag, newestMapper) {
-                RollupHub.emit(
-                    "drawDependence",
-                    {
-                        nodeParts: newestMapper.getNodeParts(),
-                        nodeMetas: newestMapper.getNodeMetas(),
-                    },
-                    newestMapper
-                );
-            },
-            mapperTag: "default",
-        }),
     ],
+    external: ["vue", "vue-router", "pinia"],
 };
-/** 需要在使用前注册一下这个server */
-server.registerRollupPlugins(config.plugins);
-const data = await useRollup(config);
-await ModuleEval(data.output[0].code);
-console.log("初始化打包完成");
+
+const compiler = new Compiler(config, {
+    root: CDN,
+    extensions: [".vue", ".ts", ".js", ".json"],
+    log(url) {
+        console.log("%cDownload " + url, "color:green");
+    },
+    useDataCache: {},
+    extraBundle: [],
+});
+
+const Eval = new Evaluator();
+await Eval.createEnv({
+    Compiler: compiler,
+    root: CDN,
+});
+await Eval.evaluate("./src/main.ts");
