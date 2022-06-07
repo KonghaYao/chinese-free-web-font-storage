@@ -10,20 +10,20 @@ import { resolve, extname } from "path";
 const base = {
     chunkOptions: {
         other: 1,
-        SC: 4,
-        TC: 1,
+        SC: 10,
+        TC: 3,
     },
-    license: "./fonts/猫啃网故障黑.txt",
 };
 // 单个字体文件的模板是这样子的，但是如果你想要批量的话，自己慢慢填就是了
 create([
     {
-        fontFileName: "猫啃网故障黑",
-        FontPath: "./fonts/猫啃网故障黑.otf",
+        fontFileName: "江西拙楷2.0",
+        FontPath: "./fonts/江西拙楷2.0.ttf",
         css: {
-            fontFamily: "猫啃网故障黑",
+            fontFamily: "'江西拙楷2.0'",
             fontWeight: 400,
         },
+        license: "./fonts/江西拙楷2.0.txt",
         ...base,
     },
 ]).then(() => {

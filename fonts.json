@@ -1,5 +1,17 @@
 [
     {
+        "name": "江西拙楷2.0",
+        "css": [
+            {
+                "url": "江西拙楷2.0/result.css",
+                "fontFamily": "'江西拙楷2.0'"
+            }
+        ],
+        "license": {
+            "link": "江西拙楷2.0/license.txt"
+        }
+    },
+    {
         "name": "白无常可可体",
         "license": {
             "link": "白无常可可体-Bold/license.txt"
