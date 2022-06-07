@@ -1,5 +1,17 @@
 [
     {
+        "name": "黄引齐招牌体",
+        "css": [
+            {
+                "url": "黄引齐招牌体/result.css",
+                "fontFamily": "黄引齐招牌体"
+            }
+        ],
+        "license": {
+            "link": "黄引齐招牌体/license.txt"
+        }
+    },
+    {
         "name": "江西拙楷2.0",
         "css": [
             {
