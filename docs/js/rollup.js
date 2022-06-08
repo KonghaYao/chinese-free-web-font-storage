@@ -2,14 +2,9 @@ const CDN = globalThis.location.href;
 
 import "https://fastly.jsdelivr.net/npm/systemjs@6.12.1/dist/system.min.js";
 // 导入打包产物
-import {
-    Compiler,
-    Evaluator,
-    sky_module,
-    PluginLoader,
-} from "https://fastly.jsdelivr.net/npm/rollup-web/dist/index.js";
-import { vue } from "https://fastly.jsdelivr.net/npm/rollup-web/dist/plugins/vue3.js";
-import { babelCore } from "https://fastly.jsdelivr.net/npm/rollup-web/dist/plugins/babel.core.js";
+import { Compiler, Evaluator, sky_module, PluginLoader } from "rollup-web";
+import { vue } from "rollup-web/dist/plugins/vue3.js";
+import { babelCore } from "rollup-web/dist/plugins/babel.core.js";
 
 // 导入各种插件
 import typescript from "https://esm.sh/@babel/preset-typescript";
@@ -17,7 +12,7 @@ import typescript from "https://esm.sh/@babel/preset-typescript";
 const { default: json } = await PluginLoader.load("plugin-json");
 const { default: alias } = await PluginLoader.load("plugin-alias");
 const { css } = await PluginLoader.load("css");
-System.resolve = (url, par) => url;
+
 const config = {
     plugins: [
         json(),
@@ -74,7 +69,6 @@ const compiler = new Compiler(config, {
         console.log("%cDownload " + url, "color:green");
     },
     useDataCache: {},
-    extraBundle: [],
 });
 
 const Eval = new Evaluator();
