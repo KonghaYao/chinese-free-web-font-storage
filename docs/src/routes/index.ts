@@ -41,6 +41,10 @@ const routes = [
             },
         ],
     },
+    {
+        path: "/material-icons",
+        component: () => import("../views/Material-Icons/index.vue"),
+    },
     { path: "", redirect: { name: "Home" } },
 ] as RouterOptions["routes"];
 

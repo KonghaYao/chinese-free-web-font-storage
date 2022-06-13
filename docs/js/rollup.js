@@ -38,9 +38,8 @@ const config = {
                 console.log("%cBabel typescript > " + id, "color:orange");
             },
         }),
-
-        vue({}),
         css(),
+        vue({}),
         sky_module({
             cdn: (name) => `https://fastly.jsdelivr.net/npm/${name}/+esm`,
             rename: {
@@ -68,7 +67,7 @@ const compiler = new Compiler(config, {
     log(url) {
         console.log("%cDownload " + url, "color:green");
     },
-    useDataCache: {},
+    // useDataCache: {},
 });
 
 const Eval = new Evaluator();

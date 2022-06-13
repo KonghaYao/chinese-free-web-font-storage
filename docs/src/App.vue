@@ -26,7 +26,7 @@ console.log('工作开始')
 <style>
 @import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/千图笔锋手写体/result.min.css");
 @import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/build/站酷庆科黄油体/result.css");
-@import url("https://fastly.jsdelivr.net/gh/konghayao/chinese-free-web-font-storage/css/Dancing Script-700.min.css");
+@import url("https://fastly.jsdelivr.net/npm/@fontsource/dancing-script@4.5.8/index.css");
 @import url("https://fastly.jsdelivr.net/npm/animate.css");
 
 @tailwind base;

@@ -7,7 +7,7 @@
 </template>
 
 <style scoped>
-@import url("https://fastly.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage/css/Material Icons.css");
+@import url("https://fastly.jsdelivr.net/npm/@fontsource/material-icons@4.5.4/index.css");
 
 .Icon {
     user-select: none;
