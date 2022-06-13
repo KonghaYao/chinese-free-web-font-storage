@@ -45,6 +45,10 @@ const routes = [
         path: "/material-icons",
         component: () => import("../views/Material-Icons/index.vue"),
     },
+    {
+        path: "/google-fonts",
+        component: () => import("../views/GoogleFonts/index.vue"),
+    },
     { path: "", redirect: { name: "Home" } },
 ] as RouterOptions["routes"];
 

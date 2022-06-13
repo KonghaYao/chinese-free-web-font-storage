@@ -19,6 +19,7 @@
     "type": "module",
     "dependencies": {
         "@konghayao/cn-font-split": "2.0.4",
+        "copy-to-clipboard": "^3.3.1",
         "fs-extra": "^10.0.1"
     },
     "devDependencies": {

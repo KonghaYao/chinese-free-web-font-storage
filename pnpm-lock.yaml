@@ -1,12 +1,14 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@konghayao/cn-font-split': 2.0.4
+  copy-to-clipboard: ^3.3.1
   fs-extra: ^10.0.1
   node-fetch: ^3.2.3
 
 dependencies:
   '@konghayao/cn-font-split': 2.0.4
+  copy-to-clipboard: 3.3.1
   fs-extra: 10.0.1
 
 devDependencies:
@@ -47,6 +49,12 @@ packages:
     resolution: {integrity: sha512-PuPoUdSqHY96e+CvEGe0+J9XkEqnQ4o79X+k+PJlZ84sZDoSJ2Q8/1OJT4dqYn8yL5EUxGCq/x2EcLEfvcGqaw==}
     dependencies:
       code-point: 1.1.0
+    dev: false
+
+  /copy-to-clipboard/3.3.1:
+    resolution: {integrity: sha512-i13qo6kIHTTpCm8/Wup+0b1mVWETvu2kIMzKoK8FpkLkFxlt0znUAHcMzox+T8sPlqtZXq3CulEjQHsYiGFJUw==}
+    dependencies:
+      toggle-selection: 1.0.6
     dev: false
 
   /data-uri-to-buffer/4.0.0:
@@ -175,6 +183,10 @@ packages:
       esm: 3.2.25
     dev: false
     optional: true
+
+  /toggle-selection/1.0.6:
+    resolution: {integrity: sha512-BiZS+C1OS8g/q2RRbJmy59xpyghNBqrr6k5L/uKBGRsTfxmu3ffiRnd8mlGPUVayg8pvfi5urfnu8TU7DVOkLQ==}
+    dev: false
 
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}

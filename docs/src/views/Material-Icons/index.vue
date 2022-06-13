@@ -63,14 +63,14 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="flex-grow h-full w-full flex flex-col">
-        <div class=" flex-shrink w-full flex  bg-white">
+    <div class="flex-grow h-full w-full flex flex-col Font-E">
+        <header class=" flex-shrink w-full flex  bg-white">
             <div v-for="item in AllIconType" class="p-2 m-2 cursor-pointer rounded-lg"
                 :class="[selectFont === item && 'bg-gray-100']" @click="load(item)">
                 {{ item }}
             </div>
             <div class="flex-grow"> </div>
-            <div class="flex justify-center items-center">
+            <nav class="flex justify-center items-center">
                 <div class="cursor-pointer flex items-center px-2" @click="CopyLink" title="复制 CSS 地址">
                     <div class="material-icons text-xs px-2">
                         content_copy
@@ -79,27 +79,27 @@ onMounted(async () => {
                         Copy CSS
                     </div>
                 </div>
-            </div>
-        </div>
+            </nav>
+        </header>
         <div class="flex-grow overflow-auto flex ">
-            <div class="flex overflow-auto  flex-col flex-none">
+            <nav class="flex overflow-auto  flex-col flex-none cursor-pointer">
                 <div :class="[selectedType === undefined && 'bg-gray-200']" class="p-1 rounded-lg m-2"
                     @click="selectedType = undefined"> All
                 </div>
                 <div :class="[selectedType === cate[0] && 'bg-gray-200']" class="p-1 rounded-lg m-2"
                     v-for="cate in allIcons" @click="selectedType = cate[0]"> {{ cate[0] }} </div>
-            </div>
-            <div class="flex-grow overflow-auto">
+            </nav>
+            <main class="flex-grow overflow-y-auto overflow-x-hidden w-full h-full">
 
-                <div class="flex flex-wrap h-fit">
-                    <div class="h-fit" v-for="icon in showingIcons" style="content-visibility: auto;">
-                        <div :class="[className]" class=" p-1 text-lg m-1 cursor-pointer hover:bg-gray-50" :title="icon"
+                <div class="flex flex-wrap  w-full justify-between">
+                    <div v-for="icon in showingIcons">
+                        <div :class="[className]" class=" p-1 text-lg m-1 cursor-pointer " :title="icon"
                             @click="CopyIcon(icon)">
                             {{ icon }}
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
 </template>
