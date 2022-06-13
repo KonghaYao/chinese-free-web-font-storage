@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { getIconList } from './getIconList'
+import copy from 'copy-to-clipboard';
 type IconType = 'normal' | "rounded" | "outlined" | "sharp" | "two-tone"
 const AllIconType = ['normal', "rounded", "outlined", "sharp", "two-tone"] as const
 const cssMap = {
@@ -50,7 +51,12 @@ const showingIcons = computed(() => {
     }
 })
 
-
+const CopyIcon = (icon: string) => {
+    copy(icon)
+}
+const CopyLink = () => {
+    copy(cssMap[selectFont.value])
+}
 onMounted(async () => {
     allIcons.value = await getIconList()
 })
@@ -62,6 +68,17 @@ onMounted(async () => {
             <div v-for="item in AllIconType" class="p-2 m-2 cursor-pointer rounded-lg"
                 :class="[selectFont === item && 'bg-gray-100']" @click="load(item)">
                 {{ item }}
+            </div>
+            <div class="flex-grow"> </div>
+            <div class="flex justify-center items-center">
+                <div class="cursor-pointer flex items-center px-2" @click="CopyLink" title="复制 CSS 地址">
+                    <div class="material-icons text-xs px-2">
+                        content_copy
+                    </div>
+                    <div class="text-sm text-gray-400 ">
+                        Copy CSS
+                    </div>
+                </div>
             </div>
         </div>
         <div class="flex-grow overflow-auto flex ">
@@ -76,8 +93,8 @@ onMounted(async () => {
 
                 <div class="flex flex-wrap h-fit">
                     <div class="h-fit" v-for="icon in showingIcons" style="content-visibility: auto;">
-                        <div :class="[className]" class=" p-1 text-lg m-1 cursor-pointer hover:bg-gray-50"
-                            :title="icon">
+                        <div :class="[className]" class=" p-1 text-lg m-1 cursor-pointer hover:bg-gray-50" :title="icon"
+                            @click="CopyIcon(icon)">
                             {{ icon }}
                         </div>
                     </div>
