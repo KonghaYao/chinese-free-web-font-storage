@@ -1,6 +1,4 @@
 const CDN = globalThis.location.href;
-
-import "https://fastly.jsdelivr.net/npm/systemjs@6.12.1/dist/system.min.js";
 // 导入打包产物
 import { Compiler, Evaluator, sky_module, PluginLoader } from "rollup-web";
 import { vue } from "rollup-web/dist/plugins/vue3.js";
@@ -11,7 +9,7 @@ import typescript from "https://esm.sh/@babel/preset-typescript";
 
 const { default: json } = await PluginLoader.load("plugin-json");
 const { default: alias } = await PluginLoader.load("plugin-alias");
-const { css } = await PluginLoader.load("css");
+const { postcss } = await PluginLoader.load("postcss");
 
 const config = {
     plugins: [
@@ -38,7 +36,16 @@ const config = {
                 console.log("%cBabel typescript > " + id, "color:orange");
             },
         }),
-        css(),
+        postcss({
+            filter(url) {
+                // console.warn(url);
+                return true;
+            },
+            // log(id, css) {
+            //     console.warn(id, css);
+            // },
+        }),
+        // css(),
         vue({}),
         sky_module({
             cdn: (name) => `https://fastly.jsdelivr.net/npm/${name}/+esm`,
@@ -54,6 +61,13 @@ const config = {
             resolveId(thisFile) {
                 if (thisFile.startsWith("http")) {
                     return thisFile;
+                } else if (thisFile.endsWith(".png")) {
+                    const id = new URL(thisFile, CDN).toString();
+                    console.warn(id);
+                    return {
+                        external: true,
+                        id,
+                    };
                 }
             },
         },
@@ -67,7 +81,7 @@ const compiler = new Compiler(config, {
     log(url) {
         console.log("%cDownload " + url, "color:green");
     },
-    // useDataCache: {},
+    useDataCache: {},
 });
 
 const Eval = new Evaluator();
