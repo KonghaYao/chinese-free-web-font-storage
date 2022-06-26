@@ -98,7 +98,7 @@ const compiler = new Compiler(config, {
     log(url) {
         console.log("%cDownload " + url, "color:green");
     },
-    // useDataCache: {},
+    useDataCache: {},
 });
 
 compiler.useWorker();
