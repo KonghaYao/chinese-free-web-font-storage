@@ -20,7 +20,7 @@
          <div class="flex flex-col">
              <div class="flex justify-evenly items-center">
                  <a href="https://gitee.com/dongzhongzhidong">
-                     <img class="rounded-full overflow-hidden h-8 w-8" src="/docs/public/avatar.png" />
+                     <img class="rounded-full overflow-hidden h-8 w-8" src="/public/avatar.png" />
                  </a>
                  <a href="https://github.com/KonghaYao/chinese-free-web-font-storage">
                      <img class="h-8 w-8"
