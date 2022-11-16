@@ -1,0 +1,7 @@
+src/components/Icon/IconNames.json
+visualizer/**/*
+**/dist/**/*
+**/dist_site/**/*
+**/node_modules/**/*
+**/pkg-dist/**/*
+locales/**/*

@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "jsx": "preserve",
+        "jsxImportSource": "solid-js",
+        "types": ["vite/client"],
+        "emitDeclarationOnly": true,
+
+        "declarationDir": "./dist",
+        "declaration": true,
+
+        "isolatedModules": true,
+        "resolveJsonModule": true
+    },
+    "include": ["src/**/*", "demo/**/*", "gallery/**/*", "notebook/**/*"]
+}

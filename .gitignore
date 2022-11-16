@@ -1,0 +1,7 @@
+node_modules
+dist
+dist_site
+visualizer
+story/story.index.json
+.env
+.netlify
