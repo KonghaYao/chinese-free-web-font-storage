@@ -7,7 +7,7 @@ on: workflow_dispatch
 
 jobs:
     build:
-        runs-on: windows-latest
+        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
               with:
@@ -16,7 +16,7 @@ jobs:
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
               with:
-                  node-version: 18
+                  node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm install
             - run: npm install pnpm -g
