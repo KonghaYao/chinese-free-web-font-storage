@@ -16,7 +16,7 @@ jobs:
               with:
                   node-version: 16
             - run: npm install pnpm -g
-            - run: pnpm install
+            - run: pnpm install --no-frozen-lockfile
             - run: pnpm build
     publish-npm:
         needs: build
@@ -31,7 +31,7 @@ jobs:
                   registry-url: https://registry.npmjs.org/
             - run: |
                   npm install pnpm -g
-                  pnpm install
+                  pnpm install --no-frozen-lockfile
                   pnpm  --filter @chinese-fonts/* publish --access public  --no-git-checks
             - uses: actions/checkout@v3
             - run: |
