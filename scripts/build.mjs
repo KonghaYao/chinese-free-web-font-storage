@@ -40,14 +40,14 @@ for (const iterator of packages) {
         const dest = `./packages/${iterator}/dist/${path
             .basename(name)
             .replace(/\.\w+$/, "")}`;
-        await fse.emptydir(dest);
-        await fontSplit({
-            FontPath: `./packages/${iterator}/fonts/${name}`,
-            destFold: dest,
-            targetType: "woff2",
-            chunkSize: 100 * 1024,
-            testHTML: false,
-        });
+        // await fse.emptydir(dest);
+        // await fontSplit({
+        //     FontPath: `./packages/${iterator}/fonts/${name}`,
+        //     destFold: dest,
+        //     targetType: "woff2",
+        //     chunkSize: 100 * 1024,
+        //     testHTML: false,
+        // });
     }
 
     // 重写 package.json

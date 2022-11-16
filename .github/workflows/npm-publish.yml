@@ -21,9 +21,7 @@ jobs:
             - run: npm install
             - run: npm install pnpm -g
             - run: pnpm build
-            - run: pnpm  --filter @chinese-fonts/* publish --access public  --no-git-checks
-
-            - uses: actions/checkout@v3
+            - run: pnpm --filter @chinese-fonts/* publish --access public  --no-git-checks
             - run: |
                   git config user.name github-actions
                   git config user.email github-actions@github.com
