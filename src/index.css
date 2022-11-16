@@ -1,12 +1,9 @@
 body {
     margin: 0;
     overflow: hidden;
-    @apply select-none bg-slate-900;
+    @apply select-none bg-neutral-100;
 }
 
-.font-global {
-    font-family: 'aclonica', 'jiangxizhuokai';
-}
 .font-global .en-words {
     font-size: 0.75rem;
 }
