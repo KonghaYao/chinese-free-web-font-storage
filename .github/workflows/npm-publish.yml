@@ -15,6 +15,7 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: 18
+            - run: npm install
             - run: npm install pnpm -g
             - run: pnpm build
     publish-npm:
@@ -29,7 +30,8 @@ jobs:
                   node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: |
-                  npm install pnpm -g
+                  npm install
+                  pnpm install pnpm -g
                   pnpm  --filter @chinese-fonts/* publish --access public  --no-git-checks
             - uses: actions/checkout@v3
             - run: |
