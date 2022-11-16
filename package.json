@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "new": "plop",
-        "build": "node ./scripts/build.mjs"
+        "build": "node ./scripts/build.mjs",
+        "dev": "ws --port=2048"
     },
     "keywords": [],
     "author": "",

@@ -45,7 +45,7 @@ for (const iterator of packages) {
             FontPath: `./packages/${iterator}/fonts/${name}`,
             destFold: dest,
             targetType: "woff2",
-            chunkSize: 50 * 1024,
+            chunkSize: 100 * 1024,
             testHTML: false,
         });
     }
