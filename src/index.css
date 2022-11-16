@@ -1,7 +1,12 @@
+@import url('https://unpkg.com/@chinese-fonts/jxzk@1.1.0/dist/江西拙楷/result.css');
 body {
     margin: 0;
     overflow: hidden;
     @apply select-none bg-neutral-100;
+}
+body {
+    --defaultFont: 'jiangxizhuokai';
+    font-family: var(--defaultFont), 'jiangxizhuokai';
 }
 
 .font-global .en-words {

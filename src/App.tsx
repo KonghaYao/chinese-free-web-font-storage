@@ -2,18 +2,19 @@ import { Component, createResource, onMount } from 'solid-js';
 import { atom } from '@cn-ui/use';
 import './home.css';
 const useEasyFont = () => {
-    const name = atom('');
+    const Url = atom('');
     const FontDom: Component = (props) => {
         return (
             <>
-                <link rel="stylesheet" href={name()} />
+                <link rel="stylesheet" href={Url()} />
             </>
         );
     };
     return {
         FontDom,
-        replaceFont(url: string) {
-            return name(url);
+        replaceFont(url: string, name: string) {
+            document.body.style.setProperty('--defaultFont', name);
+            return Url(url);
         },
     };
 };
@@ -50,16 +51,14 @@ const useFontRemote = () => {
 
 export const App = () => {
     const { FontDom, replaceFont } = useEasyFont();
-    onMount(() => {
-        replaceFont('https://unpkg.com/@chinese-fonts/jxzk@1.1.0/dist/江西拙楷/result.css');
-    });
+
     return (
         <div class="relative h-screen w-screen">
             <FontDom></FontDom>
             <div class="pointer-events-none ">
                 <div
                     class=" absolute top-48 -left-16  text-gray-300 opacity-50"
-                    style='font-family:"jiangxizhuokai";font-size:50vh'
+                    style="font-size:50vh"
                 >
                     江
                 </div>
