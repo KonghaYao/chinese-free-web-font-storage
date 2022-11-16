@@ -27,6 +27,7 @@ module.exports = (plop) => {
                         return {
                             type: "add",
                             path: root + i,
+                            force: true,
                             templateFile: "templates/" + i,
                         };
                     }),
