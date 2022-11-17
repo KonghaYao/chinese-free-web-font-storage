@@ -8,7 +8,9 @@ body {
     --defaultFont: 'jiangxizhuokai';
     font-family: var(--defaultFont), 'jiangxizhuokai';
 }
-
+a > * {
+    @apply text-amber-600;
+}
 .font-global .en-words {
     font-size: 0.75rem;
 }

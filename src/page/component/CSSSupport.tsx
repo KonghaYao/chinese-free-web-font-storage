@@ -16,8 +16,8 @@ export const CSSSupport = () => {
         <div class="divide-gry-400 flex flex-1 flex-col gap-4 divide-y-2">
             <div class="grid grid-cols-3 py-2">
                 <img
-                    height={24}
-                    width={24}
+                    height={32}
+                    width={32}
                     src="https://cdn.jsdelivr.net/gh/vscode-icons/vscode-icons/icons/folder_type_github.svg"
                     alt=""
                 />
@@ -26,21 +26,27 @@ export const CSSSupport = () => {
                     href={`https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch/packages/${FontStore.packageName}/fonts`}
                     target="_blank"
                 >
-                    <pre class="mx-2 rounded-lg bg-gray-200 px-4">
+                    <pre class="mx-2 rounded-lg bg-neutral-200 px-4">
                         <code>字体源文件地址</code>
                     </pre>
                 </a>
             </div>
             <div class="flex py-2">
-                <span class="flex-none text-lg">
+                <a
+                    class="flex-none"
+                    href={`https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}${
+                        FontStore.selectedVersion ? '/v/' + FontStore.selectedVersion : ''
+                    }`}
+                    target="_blank"
+                >
                     <img
-                        height={32}
-                        width={32}
+                        height={48}
+                        width={48}
                         src="https://cdn.jsdelivr.net/gh/vscode-icons/vscode-icons/icons/file_type_npm.svg"
                         alt=""
                     />
-                    NPM 支持：
-                </span>
+                    <span class="flex-none  text-lg">NPM 支持：</span>
+                </a>
                 <div class="flex flex-col gap-1 overflow-auto ">
                     <a
                         href={`https://www.npmjs.com/package/@chinese-fonts/${
@@ -48,13 +54,13 @@ export const CSSSupport = () => {
                         }${FontStore.selectedVersion ? '/v/' + FontStore.selectedVersion : ''}`}
                         target="_blank"
                     >
-                        <pre class="mx-2 select-text rounded-lg bg-gray-200 px-4">
+                        <pre class="mx-2 select-text rounded-lg bg-neutral-200 px-4">
                             <code>
                                 {` npm install @chinese-fonts/${FontStore.packageName}${FontStore.version}`}
                             </code>
                         </pre>
                     </a>
-                    <pre class="mx-2 select-text whitespace-pre-wrap rounded-lg bg-gray-200 px-4">
+                    <pre class="mx-2 select-text whitespace-pre-wrap rounded-lg bg-neutral-200 px-4">
                         <code>
                             {`import "@chinese-fonts/${FontStore.packageName}/dist/${FontStore.fontName}/result.css";\n`}
 
@@ -72,7 +78,7 @@ export const CSSSupport = () => {
                 />
                 <span class="text-lg">CSS CDN 支持：</span>
                 <button
-                    class="col-span-2 mx-4 bg-gray-200 px-2"
+                    class="col-span-2 mx-4 bg-neutral-200 px-2"
                     onClick={() => {
                         copy(selectedCSS());
                         Notice.success('复制成功');

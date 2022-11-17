@@ -11,7 +11,7 @@ export const PackageDetails = () => {
 
     return (
         <main class="m-auto flex h-screen w-screen max-w-md flex-col p-4">
-            <Show when={!FontStore.loading}>
+            <Show when={!FontStore.loading} fallback={<div> 加载数据中，请稍等</div>}>
                 <nav>
                     <div class="flex justify-between text-2xl">
                         <div>仓库代码</div>
