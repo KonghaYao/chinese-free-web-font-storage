@@ -40,14 +40,14 @@ for (const iterator of packages) {
         const dest = `./packages/${iterator}/dist/${path
             .basename(name)
             .replace(/\.\w+$/, "")}`;
-        // await fse.emptydir(dest);
-        // await fontSplit({
-        //     FontPath: `./packages/${iterator}/fonts/${name}`,
-        //     destFold: dest,
-        //     targetType: "woff2",
-        //     chunkSize: 100 * 1024,
-        //     testHTML: false,
-        // });
+        await fse.emptydir(dest);
+        await fontSplit({
+            FontPath: `./packages/${iterator}/fonts/${name}`,
+            destFold: dest,
+            targetType: "woff2",
+            chunkSize: 100 * 1024,
+            testHTML: false,
+        });
     }
 
     // 重写 package.json
@@ -69,3 +69,15 @@ for (const iterator of packages) {
     );
     console.log(`${iterator} 完成`, cacheData.version);
 }
+
+// 建立 index.json
+const data = fse.readdirSync("./packages");
+const overrides = fse.readJSONSync("./overrides.json");
+const index = {
+    packages: Object.fromEntries(
+        data.map((key) => {
+            return [key, overrides[key] ?? ""];
+        })
+    ),
+};
+fse.writeJSONSync("index.json", index);
