@@ -26,14 +26,18 @@ body {
 .user-selected .tag-button {
     @apply transition-transform active:scale-95;
 }
-.bg-grid {
-    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px !important;
-    background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px !important;
-    background-blend-mode: difference !important;
-    background-image: linear-gradient(rgb(130 130 130 / 35%) 1px, transparent 1px),
-        linear-gradient(90deg, rgb(130 130 130 / 28%) 1px, transparent 1px),
-        linear-gradient(rgb(130 130 130 / 37%) 1px, transparent 1px),
-        linear-gradient(90deg, rgb(130 130 130 / 38%) 1px, transparent 1px) !important;
+
+body::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('/noise.png');
+    position: absolute;
+    z-index: 0;
+    opacity: 0.05;
+    pointer-events: none;
+    touch-action: none;
 }
 .blur-background {
     backdrop-filter: blur(8px);

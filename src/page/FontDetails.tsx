@@ -1,75 +1,9 @@
-import { reflect } from '@cn-ui/use';
+import { atom, reflect } from '@cn-ui/use';
 import { Navigate, useParams } from '@solidjs/router';
-import { createStore } from 'solid-js/store';
-import { batch, createEffect, createResource, For, Show } from 'solid-js';
+import { batch, Component, createEffect, createResource, For, Match, Show, Switch } from 'solid-js';
 import { version } from 'xlsx';
-interface Reporter {
-    config: { FontPath: string; destFold: string; chunkSize: number };
-    data: { name: string; size: number; chars: string }[];
-    message: {
-        designer: string;
-        fontFamily: string;
-        fontSubFamily: string;
-        fullName: string;
-        manufacturer: string;
-        postScriptName: string;
-        tradeMark: string;
-        uniqueSubFamily: string;
-        urlOfFontDesigner: string;
-        urlOfFontVendor: string;
-        version: string;
-    };
-    record: { name: string; start: number; end: number }[];
-}
-export const [FontStore, setFontStore] = createStore({
-    packageName: '' as string,
-    fontName: '' as string,
-    loading: false,
-    selectedVersion: '',
-    get version() {
-        return this.selectedVersion ? '@' + this.selectedVersion : '';
-    },
-    versions: [] as string[],
-    fontList: [] as string[],
-    FontReporter: null as Reporter,
-});
-
-export const useFontWatcher = () => {
-    createEffect(async () => {
-        setFontStore('loading', true);
-        const { versions } = await fetch(
-            `https://data.jsdelivr.com/v1/package/npm/@chinese-fonts/${FontStore.packageName}`
-        ).then((res) => res.json());
-        setFontStore('loading', false);
-        setFontStore('selectedVersion', versions[0]);
-        setFontStore('versions', versions);
-    });
-    const autoLoadFontList = () => {
-        createEffect(() => {
-            if (FontStore.selectedVersion) {
-                fetch(
-                    `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
-                )
-                    .then((res) => res.json())
-                    .then((res) => setFontStore('fontList', res));
-            }
-        });
-    };
-    const autoLoadSingleFont = () => {
-        createEffect(async () => {
-            fetch(
-                `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
-            )
-                .then((res) => res.json())
-                .then((res) => setFontStore('FontReporter', res));
-        });
-    };
-    return {
-        autoLoadFontList,
-        autoLoadSingleFont,
-    };
-};
-
+import { useEasyFont } from '../App';
+import { setFontStore, useFontWatcher, FontStore } from './FontStore';
 export const FontDetails = () => {
     const { packageName, fontName } = useParams();
     batch(() => {
@@ -78,12 +12,28 @@ export const FontDetails = () => {
     });
 
     const { autoLoadSingleFont } = useFontWatcher();
+
     autoLoadSingleFont();
+    const { replaceFont } = useEasyFont();
+    createEffect(() => {
+        FontStore.FontReporter &&
+            replaceFont(
+                FontStore.FontSubFolder + `/result.css`,
+                `"${FontStore.FontReporter.message.fontFamily}"`,
+                FontStore.FontReporter.message.fontSubFamily.toLowerCase()
+            );
+    });
     return (
-        <div>
-            <Show when={FontStore.FontReporter}>
-                <Coverage></Coverage>
-            </Show>
+        <div class="flex h-screen w-screen flex-col">
+            <main class="my-4 flex flex-col">
+                <header class="text-2xl">{FontStore.fontName}</header>
+            </main>
+
+            <nav class="flex flex-col border-t border-gray-300">
+                <Show when={FontStore.FontReporter} fallback={<div>加载字体报告中。。。</div>}>
+                    <Coverage></Coverage>
+                </Show>
+            </nav>
         </div>
     );
 };
@@ -115,44 +65,129 @@ const Coverage = () => {
         return col + cur.chars;
     }, '');
     const result = range.map(([name, min, max]) => {
-        let exist = '';
-        let voids = '';
+        let exist: string[] = [];
+        let voids: string[] = [];
         for (let i = min; i <= max; i++) {
             const char = String.fromCharCode(i);
             const isExist = total.includes(char);
             if (isExist) {
-                exist += char;
+                exist.push(char);
             } else {
-                voids += char;
+                voids.push(char);
             }
         }
         return { name, exist, voids };
     });
+
+    const showDetails = atom<string | false>(false);
+    const matchDetails = reflect(
+        () => showDetails() && result.find((i) => i.name === showDetails())
+    );
     return (
-        <div class="grid grid-cols-3 gap-2 text-center">
-            <For each={result}>
-                {({ name, exist, voids }) => {
-                    const coverage =
-                        ((exist.length * 100) / (exist.length + voids.length)).toFixed(2) + '%';
-                    return (
-                        <>
-                            <span>{name}</span>
-                            <span class="relative col-span-2 w-96 overflow-hidden rounded-3xl bg-gray-200 px-2 text-center">
-                                <div
-                                    class="absolute top-0 left-0  h-full  bg-lime-400"
-                                    style={{
-                                        width: coverage,
-                                    }}
-                                ></div>
-                                <div class="relative z-10 block text-left">
-                                    包括 <b>{exist.length}</b>，缺失<b>{voids.length}</b>
-                                    <span class="float-right">{coverage}</span>
+        <main class="flex flex-col  text-center">
+            <header class="p-4 text-center text-xl">中文完整度检测</header>
+            <Switch>
+                <Match when={!showDetails()}>
+                    <nav class="py-2">点击查看详情</nav>
+                    <div class="m-auto grid max-w-2xl grid-cols-6 gap-4 text-center">
+                        <For each={result}>
+                            {({ name, exist, voids }) => {
+                                const coverage =
+                                    ((exist.length * 100) / (exist.length + voids.length)).toFixed(
+                                        2
+                                    ) + '%';
+                                return (
+                                    <>
+                                        <span>{name}</span>
+                                        <span
+                                            class="relative col-span-2  cursor-pointer overflow-hidden rounded-3xl bg-neutral-300 px-2 text-center"
+                                            onclick={() => showDetails(name)}
+                                        >
+                                            <div
+                                                class="absolute top-0 left-0  h-full  bg-lime-400"
+                                                style={{
+                                                    width: coverage,
+                                                }}
+                                            ></div>
+                                            <div class="relative z-10 block text-left">
+                                                包括 <b>{exist.length}</b>，缺失
+                                                <b>{voids.length}</b>
+                                                <span class="float-right">{coverage}</span>
+                                            </div>
+                                        </span>
+                                    </>
+                                );
+                            }}
+                        </For>
+                    </div>
+                </Match>
+                <Match when={matchDetails()}>
+                    <div class="flex flex-col overflow-hidden">
+                        <div class="grid  h-1/2  grid-cols-2">
+                            <main class="flex h-full flex-1 flex-col overflow-hidden">
+                                <div class="py-2 text-2xl">
+                                    覆盖字词 {matchDetails().exist.length}
                                 </div>
-                            </span>
-                        </>
-                    );
-                }}
-            </For>
+                                <div class="mx-16 grid grid-cols-6  gap-2 overflow-y-auto rounded-md  bg-gray-300 p-8 font-sans">
+                                    <For each={matchDetails().exist}>
+                                        {(item) => {
+                                            return <SingChar item={item}></SingChar>;
+                                        }}
+                                    </For>
+                                </div>
+                            </main>
+                            <main class="flex h-full flex-1 flex-col overflow-hidden">
+                                <div class="py-2 text-2xl">
+                                    未覆盖字词 {matchDetails().voids.length}
+                                </div>
+                                <div class="mx-16 grid grid-cols-6  gap-2 overflow-y-auto rounded-md  bg-gray-300 p-8 font-sans">
+                                    <For each={matchDetails().voids}>
+                                        {(item) => {
+                                            return <SingChar item={item}></SingChar>;
+                                        }}
+                                    </For>
+                                </div>
+                            </main>
+                        </div>
+                        <div
+                            class="mx-auto my-2 w-1/4 rounded-md bg-red-600 p-2 text-lg text-white"
+                            onclick={() => {
+                                showDetails(false);
+                            }}
+                        >
+                            返回
+                        </div>
+                    </div>
+                </Match>
+            </Switch>
+        </main>
+    );
+};
+import { VirtualContainer } from '@minht11/solid-virtual-container';
+const CharShower = () => {
+    return (
+        <VirtualContainer
+            items={createArray(30)}
+            scrollTarget={targetHorizontal}
+            itemSize={{ width: 50 }}
+            direction="horizontal"
+        >
+            {ListItem}
+        </VirtualContainer>
+    );
+};
+const SingChar: Component<{ item: string }> = (props) => {
+    return (
+        <div
+            class="flex flex-col justify-center "
+            style={{
+                'content-visibility': 'auto',
+            }}
+        >
+            <span class="text-lg">{props.item}</span>
+            <span class="font-sans text-xs font-thin">
+                U+{props.item.charCodeAt(0).toString(16)}
+            </span>
         </div>
     );
 };

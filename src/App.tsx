@@ -1,19 +1,22 @@
-import { Component, createResource, onMount } from 'solid-js';
-import { atom } from '@cn-ui/use';
+import { Component, createResource, For, onCleanup, onMount } from 'solid-js';
+import { atom, createIgnoreFirst } from '@cn-ui/use';
 import './home.css';
-const useEasyFont = () => {
+let link: HTMLLinkElement;
+export const useEasyFont = () => {
     const Url = atom('');
-    const FontDom: Component = (props) => {
-        return (
-            <>
-                <link rel="stylesheet" href={Url()} />
-            </>
-        );
-    };
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'stylesheet';
+        createIgnoreFirst(() => {
+            link.href = Url();
+        }, [Url]);
+        document.body.appendChild(link);
+    }
+
     return {
-        FontDom,
-        replaceFont(url: string, name: string) {
+        replaceFont(url: string, name: string, weight = 'normal') {
             document.body.style.setProperty('--defaultFont', name);
+            document.body.style.fontWeight = weight;
             return Url(url);
         },
     };
@@ -50,11 +53,10 @@ const useFontRemote = () => {
 };
 
 export const App = () => {
-    const { FontDom, replaceFont } = useEasyFont();
+    const { replaceFont } = useEasyFont();
 
     return (
         <div class="relative h-screen w-screen">
-            <FontDom></FontDom>
             <div class="pointer-events-none ">
                 <div
                     class=" absolute top-48 -left-16  text-gray-300 opacity-50"
@@ -88,13 +90,26 @@ export const App = () => {
                     <b class="px-2 font-bold">网站开发者</b>
                     提供美丽字体的项目。
                 </nav>
+
+                <div class="pt-6">
+                    <SearchBox></SearchBox>
+                </div>
             </section>
-            <div
-                class="absolute right-6 bottom-4 z-20 cursor-pointer rounded-2xl bg-red-500 p-4  text-4xl text-white transition-all active:brightness-90"
-                style='font-family:"jiangxizhuokai";'
-            >
-                查看字体
-            </div>
         </div>
+    );
+};
+
+const SearchBox = () => {
+    const list = atom<string[]>(['姐夫姐夫']);
+    return (
+        <>
+            <input
+                class=" mx-4 rounded-md p-2 font-medium outline-none ring ring-green-600"
+                placeholder="搜索字体项目"
+                type="search"
+                name=""
+            />
+            <button class="rounded-lg bg-red-600 p-2 text-white">跳转</button>
+        </>
     );
 };

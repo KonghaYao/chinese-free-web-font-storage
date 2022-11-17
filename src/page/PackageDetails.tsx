@@ -1,7 +1,7 @@
 import { atom } from '@cn-ui/use';
 import { Link, useParams } from '@solidjs/router';
 import { For, Show } from 'solid-js';
-import { FontStore, useFontWatcher, setFontStore } from './FontDetails';
+import { FontStore, useFontWatcher, setFontStore } from './FontStore';
 
 export const PackageDetails = () => {
     const { packageName } = useParams();
@@ -14,10 +14,10 @@ export const PackageDetails = () => {
             <Show when={!FontStore.loading}>
                 <nav>
                     <div class="flex justify-between text-2xl">
-                        <div>仓库代码：</div>
+                        <div>仓库代码</div>
                         <div>{packageName}</div>
                     </div>
-                    <div class="flex justify-between text-2xl">
+                    <div class="flex justify-between border-t border-gray-300 pt-2 text-2xl">
                         <div>版本号</div>
                         <select
                             value={FontStore.selectedVersion}
