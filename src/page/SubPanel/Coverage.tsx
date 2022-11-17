@@ -74,7 +74,7 @@ export const Coverage = () => {
                                                     width: coverage,
                                                 }}
                                             ></div>
-                                            <div class="relative z-10 block text-left">
+                                            <div class="relative z-10 block whitespace-nowrap text-left">
                                                 包括 <b>{exist.length}</b>，缺失
                                                 <b>{voids.length}</b>
                                                 <span class="float-right">{coverage}</span>

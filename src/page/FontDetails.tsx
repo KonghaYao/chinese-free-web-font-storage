@@ -11,6 +11,7 @@ import {
     Switch,
 } from 'solid-js';
 import { useEasyFont } from '../App';
+import { FontInformation } from './SubPanel/FontInformation';
 import { setFontStore, useFontWatcher, FontStore } from './FontStore';
 import { Coverage } from './SubPanel/Coverage';
 import { FontUsage } from './SubPanel/FontUsage';
@@ -39,15 +40,13 @@ export const FontDetails = () => {
     const ShowingPanel = atom('');
     const PanelList = [
         { value: '', label: '隐藏' },
-        { value: 'font-usage', label: '字体使用说明' },
+        { value: 'information', label: '字体详情' },
+        { value: 'font-usage', label: '尝试字体' },
         { value: 'coverage', label: '中文覆盖率' },
     ];
     return (
         <div class="flex h-screen w-screen flex-col">
-            <main class="my-4 flex w-screen  flex-1 flex-col">
-                <header class="text-2xl">{FontStore.fontName}</header>
-            </main>
-
+            <FontHome></FontHome>
             <div class="flex justify-center gap-4 py-2">
                 <For each={PanelList}>
                     {(item) => {
@@ -74,9 +73,20 @@ export const FontDetails = () => {
                         <Match when={ShowingPanel() === 'font-usage'}>
                             <FontUsage></FontUsage>
                         </Match>
+                        <Match when={ShowingPanel() === 'information'}>
+                            <FontInformation></FontInformation>
+                        </Match>
                     </Switch>
                 </Show>
             </nav>
         </div>
+    );
+};
+
+const FontHome = () => {
+    return (
+        <main class="my-4 flex w-screen  flex-1 flex-col">
+            <header class="text-2xl">{FontStore.fontName}</header>
+        </main>
     );
 };

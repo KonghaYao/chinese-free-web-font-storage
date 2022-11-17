@@ -1,7 +1,7 @@
 import { atom } from '@cn-ui/use';
 
 export const TextWriter = () => {
-    const fontSize = atom(16);
+    const fontSize = atom(32);
     return (
         <div class="flex flex-1 flex-col p-4">
             <div class="flex justify-between">
