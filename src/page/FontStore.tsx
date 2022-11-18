@@ -33,11 +33,22 @@ export const [FontStore, setFontStore] = createStore({
     versions: [] as string[],
     fontList: [] as string[],
     FontReporter: null as Reporter,
+    projectIndex: null as {
+        packages: Record<string, string>;
+    },
 });
 
 export const useFontWatcher = () => {
     createEffect(async () => {
         setFontStore('loading', true);
+        await fetch(
+            'https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@branch/index.json'
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                setFontStore('projectIndex', res);
+            });
+        if (!FontStore.packageName) return;
         const { versions } = await fetch(
             `https://data.jsdelivr.com/v1/package/npm/@chinese-fonts/${FontStore.packageName}`
         ).then((res) => res.json());

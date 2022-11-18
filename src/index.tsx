@@ -5,6 +5,8 @@ import { App } from './App';
 import { Router, hashIntegration, Route, Routes } from '@solidjs/router';
 import { FontDetails } from './page/FontDetails';
 import { PackageDetails } from './page/PackageDetails';
+import { createResource } from 'solid-js';
+
 render(() => {
     return (
         <>

@@ -24,7 +24,6 @@ export const FontDetails = () => {
     });
 
     const { autoLoadSingleFont } = useFontWatcher();
-
     autoLoadSingleFont();
     const { replaceFont } = useEasyFont();
     createEffect(() => {
