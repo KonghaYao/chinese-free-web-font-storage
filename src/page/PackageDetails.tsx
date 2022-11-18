@@ -1,4 +1,3 @@
-import { atom } from '@cn-ui/use';
 import { Link, useParams } from '@solidjs/router';
 import { For, Show } from 'solid-js';
 import { FontStore, useFontWatcher, setFontStore } from './FontStore';

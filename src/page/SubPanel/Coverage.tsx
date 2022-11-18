@@ -53,8 +53,8 @@ export const Coverage = () => {
             <header class="p-4 text-center text-xl">中文完整度检测</header>
             <Switch>
                 <Match when={!showDetails()}>
-                    <nav class="py-2">点击查看详情</nav>
-                    <div class="m-auto grid max-w-2xl grid-cols-6 gap-4 text-center">
+                    <nav class="py-1 text-center text-sm text-gray-600">点击进度条查看详情</nav>
+                    <div class="m-auto grid  grid-cols-6 gap-4 overflow-auto p-2 text-center">
                         <For each={result}>
                             {({ name, exist, voids }) => {
                                 const coverage =
@@ -86,9 +86,13 @@ export const Coverage = () => {
                         </For>
                     </div>
                 </Match>
+                {/* 完整度检测器 */}
                 <Match when={matchDetails()}>
                     <div class="flex flex-col overflow-hidden">
-                        <div class="grid  h-1/2  grid-cols-2">
+                        <div class="text-center text-sm text-gray-600">
+                            若没有出现相应的字词，那么请稍等，加载中。
+                        </div>
+                        <div class="grid  grid-cols-2">
                             <main class="flex h-full flex-1 flex-col overflow-hidden">
                                 <div class="py-2 text-2xl">
                                     覆盖字词 {matchDetails().exist.length}

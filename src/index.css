@@ -8,6 +8,15 @@ body {
     --defaultFont: 'jiangxizhuokai';
     font-family: var(--defaultFont), 'jiangxizhuokai';
 }
+.poetry {
+    writing-mode: tb;
+    white-space: pre-wrap;
+    letter-spacing: 0.4em;
+}
+.poetry p {
+    @apply px-3 text-lg text-gray-700;
+}
+
 a > * {
     @apply text-amber-600;
 }
@@ -36,7 +45,7 @@ body::before {
     height: 100%;
     background-image: url('/noise.png');
     position: absolute;
-    z-index: 0;
+    z-index: -1;
     opacity: 0.05;
     pointer-events: none;
     touch-action: none;
