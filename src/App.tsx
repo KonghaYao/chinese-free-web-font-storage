@@ -72,13 +72,13 @@ export const App = () => {
             </div>
 
             <section class="absolute z-10 flex h-screen w-screen flex-col items-center justify-center">
-                <div class=" xs:text-xl text-xs font-thin italic  leading-[1.1em] sm:text-4xl">
+                <div class=" xs:text-xl text-xs font-thin italic  leading-[1.1em] text-gray-600 sm:text-4xl">
                     Web Chinese Fonts Plan
                 </div>
                 <header class="home-title xs:text-[8vh] text-[6vh] leading-[1.1em] sm:text-[12vh] lg:text-[20vh]">
                     中文网字计划
                 </header>
-                <nav class=" max-w-[30em] px-4 pt-4 text-xs font-thin sm:max-w-[30em] sm:text-lg lg:max-w-none lg:text-2xl">
+                <nav class=" max-w-[30em] px-4 pt-4 text-xs font-thin text-gray-600 sm:max-w-[30em] sm:text-lg lg:max-w-none lg:text-2xl">
                     中文网字计划是收录众多中文字体并通过 Web Font 的形式为
                     <b class="px-2 font-bold">网站开发者</b>
                     提供美丽字体的项目。

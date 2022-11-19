@@ -78,7 +78,7 @@ const FontRemote = {
     async ChangeFont() {
         const { replaceFont } = useEasyFont();
 
-        // console.log(FontStore.FontSubFolder);
+        console.log(FontStore.FontSubFolder);
         return replaceFont(
             FontStore.FontSubFolder + `result.css`,
             `"${FontStore.FontReporter.message.fontFamily}"`,

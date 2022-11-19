@@ -1,5 +1,5 @@
 import { atom } from '@cn-ui/use';
-import { useParams } from '@solidjs/router';
+import { A, useParams } from '@solidjs/router';
 import { batch, Component, createSelector, For, Match, Show, Switch } from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
 import { setFontStore, initFontStore, FontStore } from './FontStore';
@@ -96,6 +96,12 @@ const FontHome = () => {
                     由于本站资源较多，故加载稍慢，请稍等。可以尝试刷新页面。
                 </div>
                 <div class="flex gap-4 py-2">
+                    <A
+                        href={'/fonts/' + FontStore.packageName}
+                        class="rounded-lg bg-neutral-200 px-2 py-1 transition-colors duration-300"
+                    >
+                        返回
+                    </A>
                     <For each={temp}>
                         {(item) => {
                             return (
