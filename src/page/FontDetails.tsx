@@ -2,7 +2,7 @@ import { atom } from '@cn-ui/use';
 import { useParams } from '@solidjs/router';
 import { batch, Component, createSelector, For, Match, Show, Switch } from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
-import { setFontStore, useFontWatcher, FontStore } from './FontStore';
+import { setFontStore, initFontStore, FontStore } from './FontStore';
 import { Coverage } from './SubPanel/Coverage';
 import { FontUsage } from './SubPanel/FontUsage';
 
@@ -12,9 +12,10 @@ export const FontDetails = () => {
         setFontStore('packageName', packageName);
     });
 
-    const { autoLoadSingleFont, autoChangeFont } = useFontWatcher();
-    autoLoadSingleFont();
-    autoChangeFont();
+    initFontStore().then(async (api) => {
+        await api.loadSingleFont();
+        await api.ChangeFont();
+    });
 
     const ShowingPanel = atom('');
     const PanelList = [

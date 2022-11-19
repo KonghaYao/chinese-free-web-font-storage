@@ -2,10 +2,10 @@ import { reflect } from '@cn-ui/use';
 import { A } from '@solidjs/router';
 import { For, useContext } from 'solid-js';
 import { SearchBox, SearchBoxContext } from '../SearchBox';
-import { useFontWatcher } from './FontStore';
+import { initFontStore } from './FontStore';
 
 export const SearchPage = () => {
-    useFontWatcher();
+    initFontStore();
     return (
         <div class="flex h-screen w-screen flex-col items-center p-4">
             <SearchBox>

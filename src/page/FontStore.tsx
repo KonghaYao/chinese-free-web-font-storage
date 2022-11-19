@@ -21,7 +21,7 @@ interface Reporter {
     record: { name: string; start: number; end: number }[];
 }
 export const [FontStore, setFontStore] = createStore({
-    packageName: '' as string,
+    packageName: 'jxzk' as string,
     fontName: '' as string,
     loading: false,
     selectedVersion: '',
@@ -39,65 +39,71 @@ export const [FontStore, setFontStore] = createStore({
     },
 });
 
-export const useFontWatcher = () => {
-    createEffect(async () => {
-        setFontStore('loading', true);
-        await fetch(
+const FontRemote = {
+    async getIndex() {
+        return fetch(
             'https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@branch/index.json'
         )
             .then((res) => res.json())
             .then((res) => {
                 setFontStore('projectIndex', res);
             });
-        if (!FontStore.packageName) return;
+    },
+    async getVersions() {
         const { versions } = await fetch(
             `https://data.jsdelivr.com/v1/package/npm/@chinese-fonts/${FontStore.packageName}`
         ).then((res) => res.json());
-        setFontStore('loading', false);
         setFontStore('selectedVersion', versions[0]);
         setFontStore('versions', versions);
-    });
-    const autoLoadFontList = () => {
-        createEffect(() => {
-            if (FontStore.selectedVersion) {
-                fetch(
-                    `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
-                )
-                    .then((res) => res.json())
-                    .then((res) => {
-                        batch(() => {
-                            setFontStore('fontList', res);
-                            setFontStore('fontName', res[0]);
-                        });
+    },
+    async loadFontList() {
+        if (FontStore.selectedVersion) {
+            fetch(
+                `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
+            )
+                .then((res) => res.json())
+                .then((res) => {
+                    batch(() => {
+                        setFontStore('fontList', res);
+                        setFontStore('fontName', res[0]);
                     });
-            }
-        });
-    };
-    const autoLoadSingleFont = () => {
-        createEffect(async () => {
+                });
+        }
+    },
+    async loadSingleFont() {
+        return (
             FontStore.fontName &&
-                fetch(
-                    `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
-                )
-                    .then((res) => res.json())
-                    .then((res) => setFontStore('FontReporter', res));
-        });
-    };
-    const autoChangeFont = () => {
+            fetch(
+                `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
+            )
+                .then((res) => res.json())
+                .then((res) => setFontStore('FontReporter', res))
+        );
+    },
+    async ChangeFont() {
         const { replaceFont } = useEasyFont();
-        createEffect(() => {
-            // console.log(FontStore.FontSubFolder);
+
+        // console.log(FontStore.FontSubFolder);
+        return (
             FontStore.FontReporter &&
-                replaceFont(
-                    FontStore.FontSubFolder + `result.css`,
-                    `"${FontStore.FontReporter.message.fontFamily}"`,
-                    FontStore.FontReporter.message.fontSubFamily.toLowerCase()
-                );
-        });
-    };
-    return {
-        autoLoadFontList,
-        autoLoadSingleFont,
-        autoChangeFont,
-    };
+            replaceFont(
+                FontStore.FontSubFolder + `result.css`,
+                `"${FontStore.FontReporter.message.fontFamily}"`,
+                FontStore.FontReporter.message.fontSubFamily.toLowerCase()
+            )
+        );
+    },
+};
+
+export const initFontStore = async () => {
+    setFontStore('loading', true);
+
+    await FontRemote.getIndex();
+    if (!FontStore.packageName) {
+        setFontStore('loading', false);
+        return;
+    }
+    FontRemote.getVersions();
+    setFontStore('loading', false);
+    return FontRemote;
 };

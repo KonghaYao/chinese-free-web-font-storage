@@ -1,6 +1,6 @@
 import { Link, useParams } from '@solidjs/router';
 import { batch, For, Show } from 'solid-js';
-import { FontStore, useFontWatcher, setFontStore } from './FontStore';
+import { FontStore, initFontStore, setFontStore } from './FontStore';
 
 export const PackageDetails = () => {
     const { packageName } = useParams();
@@ -8,11 +8,11 @@ export const PackageDetails = () => {
         setFontStore('packageName', packageName);
         setFontStore('selectedVersion', '');
     });
-    const { autoLoadFontList } = useFontWatcher();
-    const { autoLoadSingleFont, autoChangeFont } = useFontWatcher();
-    autoLoadFontList();
-    autoLoadSingleFont();
-    autoChangeFont();
+    initFontStore().then(async (api) => {
+        await api.loadFontList();
+        await api.loadSingleFont();
+        await api.ChangeFont();
+    });
 
     return (
         <main class="m-auto flex h-screen w-screen max-w-2xl flex-col gap-2 divide-y divide-gray-300 p-4">
