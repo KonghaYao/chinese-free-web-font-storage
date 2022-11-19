@@ -57,40 +57,32 @@ const FontRemote = {
         setFontStore('versions', versions);
     },
     async loadFontList() {
-        if (FontStore.selectedVersion) {
-            fetch(
-                `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
-            )
-                .then((res) => res.json())
-                .then((res) => {
-                    batch(() => {
-                        setFontStore('fontList', res);
-                        setFontStore('fontName', res[0]);
-                    });
+        return fetch(
+            `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
+        )
+            .then((res) => res.json())
+            .then((res) => {
+                batch(() => {
+                    setFontStore('fontList', res);
+                    setFontStore('fontName', res[0]);
                 });
-        }
+            });
     },
     async loadSingleFont() {
-        return (
-            FontStore.fontName &&
-            fetch(
-                `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
-            )
-                .then((res) => res.json())
-                .then((res) => setFontStore('FontReporter', res))
-        );
+        return fetch(
+            `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
+        )
+            .then((res) => res.json())
+            .then((res) => setFontStore('FontReporter', res));
     },
     async ChangeFont() {
         const { replaceFont } = useEasyFont();
 
         // console.log(FontStore.FontSubFolder);
-        return (
-            FontStore.FontReporter &&
-            replaceFont(
-                FontStore.FontSubFolder + `result.css`,
-                `"${FontStore.FontReporter.message.fontFamily}"`,
-                FontStore.FontReporter.message.fontSubFamily.toLowerCase()
-            )
+        return replaceFont(
+            FontStore.FontSubFolder + `result.css`,
+            `"${FontStore.FontReporter.message.fontFamily}"`,
+            FontStore.FontReporter.message.fontSubFamily.toLowerCase()
         );
     },
 };
