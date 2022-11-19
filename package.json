@@ -11,12 +11,11 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "dependencies": {},
     "devDependencies": {
-        "plop": "^3.1.1",
-        "@konghayao/cn-font-split": "^3.0.3",
+        "@konghayao/cn-font-split": "^3.0.4",
         "fs-extra": "^10.1.0",
         "md5": "^2.3.0",
+        "plop": "^3.1.1",
         "semver": "^7.3.8"
     }
 }
