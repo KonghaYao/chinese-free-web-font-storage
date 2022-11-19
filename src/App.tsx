@@ -1,9 +1,9 @@
 import { Component, createResource, For, onCleanup, onMount, Show } from 'solid-js';
-import { atom, createIgnoreFirst, reflect } from '@cn-ui/use';
+import { atom, createIgnoreFirst } from '@cn-ui/use';
 import './home.css';
 import { FontStore, useFontWatcher } from './page/FontStore';
-import { useNavigate } from '@solidjs/router';
-import { Notice } from './Notice';
+import { SearchBox } from './SearchBox';
+import { A } from '@solidjs/router';
 let link: HTMLLinkElement;
 export const useEasyFont = () => {
     const Url = atom('');
@@ -85,51 +85,11 @@ export const App = () => {
                 </nav>
 
                 <div class="pt-6">
-                    <Show when={FontStore.projectIndex}>
+                    <A href="/search">
                         <SearchBox></SearchBox>
-                    </Show>
+                    </A>
                 </div>
             </section>
         </div>
-    );
-};
-
-const SearchBox = () => {
-    const keyName = reflect(() => {
-        return new Map(
-            Object.entries(FontStore.projectIndex.packages).map(
-                (i) => i.reverse() as [string, string]
-            )
-        );
-    });
-    const nav = useNavigate();
-    const list = reflect(() => Object.keys(keyName()));
-    const packageKey = atom('');
-    return (
-        <>
-            <input
-                class=" mx-4 rounded-md p-2 font-medium outline-none ring ring-green-600"
-                placeholder="搜索字体项目"
-                value={packageKey()}
-                type="search"
-                name=""
-                oninput={(e: any) => {
-                    packageKey(e.target.value);
-                }}
-            />
-            <button
-                class="rounded-lg bg-red-600 p-2 text-white"
-                onclick={() => {
-                    const en = keyName().get(packageKey());
-                    if (en) {
-                        nav(`/fonts/${en}`);
-                    } else {
-                        Notice.error('没有找到该字体');
-                    }
-                }}
-            >
-                跳转
-            </button>
-        </>
     );
 };

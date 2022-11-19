@@ -1,5 +1,6 @@
 import { createStore } from 'solid-js/store';
-import { createEffect } from 'solid-js';
+import { batch, createEffect } from 'solid-js';
+import { useEasyFont } from '../App';
 
 interface Reporter {
     config: { FontPath: string; destFold: string; chunkSize: number };
@@ -33,8 +34,8 @@ export const [FontStore, setFontStore] = createStore({
     versions: [] as string[],
     fontList: [] as string[],
     FontReporter: null as Reporter,
-    projectIndex: null as {
-        packages: Record<string, string>;
+    projectIndex: {
+        packages: {} as Record<string, string>,
     },
 });
 
@@ -63,21 +64,40 @@ export const useFontWatcher = () => {
                     `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/index.json`
                 )
                     .then((res) => res.json())
-                    .then((res) => setFontStore('fontList', res));
+                    .then((res) => {
+                        batch(() => {
+                            setFontStore('fontList', res);
+                            setFontStore('fontName', res[0]);
+                        });
+                    });
             }
         });
     };
     const autoLoadSingleFont = () => {
         createEffect(async () => {
-            fetch(
-                `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
-            )
-                .then((res) => res.json())
-                .then((res) => setFontStore('FontReporter', res));
+            FontStore.fontName &&
+                fetch(
+                    `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
+                )
+                    .then((res) => res.json())
+                    .then((res) => setFontStore('FontReporter', res));
+        });
+    };
+    const autoChangeFont = () => {
+        const { replaceFont } = useEasyFont();
+        createEffect(() => {
+            // console.log(FontStore.FontSubFolder);
+            FontStore.FontReporter &&
+                replaceFont(
+                    FontStore.FontSubFolder + `result.css`,
+                    `"${FontStore.FontReporter.message.fontFamily}"`,
+                    FontStore.FontReporter.message.fontSubFamily.toLowerCase()
+                );
         });
     };
     return {
         autoLoadFontList,
         autoLoadSingleFont,
+        autoChangeFont,
     };
 };

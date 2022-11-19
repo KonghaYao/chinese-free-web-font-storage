@@ -77,7 +77,7 @@ body::before {
 ::-webkit-scrollbar-thumb {
     width: 4px;
     border-radius: 4px;
-    @apply bg-gray-600;
+    @apply bg-neutral-400;
 }
 /* 滚动条轨道 */
 ::-webkit-scrollbar-track {

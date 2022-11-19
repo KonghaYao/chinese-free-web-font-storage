@@ -1,31 +1,20 @@
 import { atom } from '@cn-ui/use';
-import { Navigate, useParams } from '@solidjs/router';
-import { batch, Component, createEffect, createSelector, For, Match, Show, Switch } from 'solid-js';
-import { useEasyFont } from '../App';
+import { useParams } from '@solidjs/router';
+import { batch, Component, createSelector, For, Match, Show, Switch } from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
 import { setFontStore, useFontWatcher, FontStore } from './FontStore';
 import { Coverage } from './SubPanel/Coverage';
 import { FontUsage } from './SubPanel/FontUsage';
 
 export const FontDetails = () => {
-    const { packageName, fontName } = useParams();
+    const { packageName } = useParams();
     batch(() => {
         setFontStore('packageName', packageName);
-        setFontStore('fontName', fontName);
     });
 
-    const { autoLoadSingleFont } = useFontWatcher();
+    const { autoLoadSingleFont, autoChangeFont } = useFontWatcher();
     autoLoadSingleFont();
-    const { replaceFont } = useEasyFont();
-    createEffect(() => {
-        // console.log(FontStore.FontSubFolder);
-        FontStore.FontReporter &&
-            replaceFont(
-                FontStore.FontSubFolder + `result.css`,
-                `"${FontStore.FontReporter.message.fontFamily}"`,
-                FontStore.FontReporter.message.fontSubFamily.toLowerCase()
-            );
-    });
+    autoChangeFont();
 
     const ShowingPanel = atom('');
     const PanelList = [
@@ -167,14 +156,14 @@ const IconLink = () => {
 };
 const BG: Component<{ class: string }> = (props) => {
     const text =
-        '景建传积寸严尽清川止诚基摄而羊德谷恶宝曰则温盛容初所仕去羔圣空因非君忠兴之映笃业登棠赞作正祸璧事力夙松取定荣优甘诗念表听尺父竭薄如滏安令学以染克端习庆资当履馨渊辞宜竞存丝贤形堂善竞孝深斯息言终无政悲维立虚缘是敬临兰不思慎甚从墨行名声福阴与命似流若美籍取';
+        '景建传积寸严尽清川止诚基而德谷恶宝曰则温盛容初所仕去圣空因非君忠兴之映笃业登棠赞作正祸璧事力夙松取定荣优甘诗念表听尺父竭薄如安令学以克端习庆资当履渊辞宜竞存丝贤形堂善竞孝深斯息言终无政悲维立虚缘是敬临兰不思慎甚从墨行名声福阴与命似流若美籍取';
     return (
         <div class={'flex rounded-2xl p-8 px-16 ' + props.class}>
             <div class="flex flex-col justify-evenly pr-8 text-9xl">
                 <div>永</div>
                 <div>远</div>
             </div>
-            <div class="grid grid-cols-9 gap-1 text-lg">
+            <div class="grid grid-cols-12 gap-1 text-lg">
                 <For each={text.split('')}>
                     {(item) => {
                         return <div>{item}</div>;

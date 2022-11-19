@@ -1,26 +1,35 @@
 import { Link, useParams } from '@solidjs/router';
-import { For, Show } from 'solid-js';
+import { batch, For, Show } from 'solid-js';
 import { FontStore, useFontWatcher, setFontStore } from './FontStore';
 
 export const PackageDetails = () => {
     const { packageName } = useParams();
-    setFontStore('packageName', packageName);
+    batch(() => {
+        setFontStore('packageName', packageName);
+        setFontStore('selectedVersion', '');
+    });
     const { autoLoadFontList } = useFontWatcher();
+    const { autoLoadSingleFont, autoChangeFont } = useFontWatcher();
     autoLoadFontList();
+    autoLoadSingleFont();
+    autoChangeFont();
 
     return (
-        <main class="m-auto flex h-screen w-screen max-w-md flex-col divide-y divide-gray-300 p-4">
+        <main class="m-auto flex h-screen w-screen max-w-2xl flex-col gap-2 divide-y divide-gray-300 p-4">
             <Show when={!FontStore.loading} fallback={<div> 加载数据中，请稍等</div>}>
                 <header class="py-4 text-center text-2xl">
                     {FontStore.projectIndex?.packages?.[packageName]}
                 </header>
-                <div class="flex justify-between text-2xl">
+
+                <div class="pt-2 text-center text-xs text-gray-400">字体加载需要时间，请稍等。</div>
+                <div class="flex justify-between pt-2 text-2xl ">
                     <div>仓库代码</div>
                     <div>{packageName}</div>
                 </div>
-                <div class="flex justify-between  pt-2 text-2xl">
+                <div class="flex justify-between pt-2   text-2xl ">
                     <div>版本号</div>
                     <select
+                        class="rounded-lg"
                         value={FontStore.selectedVersion}
                         onchange={(e) => setFontStore('selectedVersion', (e.target as any).value)}
                     >
