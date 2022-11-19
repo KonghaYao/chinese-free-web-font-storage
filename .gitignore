@@ -6,3 +6,4 @@ story/story.index.json
 .env
 .netlify
 .npmrc
+.pnpm-lock.yaml
