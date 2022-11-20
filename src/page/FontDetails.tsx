@@ -20,7 +20,6 @@ export const FontDetails = () => {
 
     const ShowingPanel = atom('');
     const PanelList = [
-        { value: '', label: '隐藏' },
         { value: 'information', label: '字体详情' },
         { value: 'font-usage', label: '尝试字体' },
         { value: 'web-support', label: 'Web 支持' },
@@ -47,15 +46,19 @@ export const FontDetails = () => {
                 </For>
             </div>
             <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
+                <nav
+                    class=" absolute top-0 left-0 h-screen w-screen"
+                    classList={{
+                        'pointer-events-auto': !!ShowingPanel(),
+                    }}
+                    onclick={() => {
+                        ShowingPanel('');
+                        console.log('关闭');
+                    }}
+                ></nav>
                 <div
                     class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg "
-                    data-self={true}
-                    onclick={(e) => {
-                        if ((e.target as HTMLElement).dataset.self && ShowingPanel() !== '') {
-                            ShowingPanel('');
-                            console.log('关闭');
-                        }
-                    }}
+                    classList={{}}
                 >
                     <Show when={FontStore.FontReporter} fallback={<div>加载字体报告中。。。</div>}>
                         <Switch>
