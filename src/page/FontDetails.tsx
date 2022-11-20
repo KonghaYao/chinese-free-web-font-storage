@@ -57,8 +57,11 @@ export const FontDetails = () => {
                     }}
                 ></nav>
                 <div
-                    class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg "
-                    classList={{}}
+                    class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg transition-transform duration-700"
+                    classList={{
+                        'scale-100 translate-y-0': !!ShowingPanel(),
+                        'scale-0 translate-y-96': !ShowingPanel(),
+                    }}
                 >
                     <Show when={FontStore.FontReporter} fallback={<div>加载字体报告中。。。</div>}>
                         <Switch>
