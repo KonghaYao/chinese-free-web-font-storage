@@ -34,7 +34,7 @@ export const FontDetails = () => {
                     {(item) => {
                         return (
                             <div
-                                class="cursor-pointer rounded-lg bg-neutral-200 p-2 text-lg transition-colors duration-300"
+                                class="flex-none cursor-pointer rounded-lg bg-neutral-200 p-2 text-lg transition-colors duration-300"
                                 classList={{
                                     ['bg-green-600 text-white']: ShowingPanel() === item.value,
                                 }}
@@ -112,7 +112,7 @@ const FontHome = () => {
                 <div class="flex gap-4 py-2">
                     <A
                         href={'/fonts/' + FontStore.packageName}
-                        class="rounded-lg bg-neutral-200 px-2 py-1 transition-colors duration-300"
+                        class="rounded-lg bg-neutral-300 px-2 py-1  transition-colors duration-300"
                     >
                         返回
                     </A>
@@ -133,7 +133,7 @@ const FontHome = () => {
                     </For>
                 </div>
             </header>
-            <main class="flex  items-center justify-center overflow-y-auto">
+            <main class=" overflow-y-auto">
                 {isSelected('poetry') && <Poetry></Poetry>}
                 {isSelected('white') && <BG class="bg-white text-black"></BG>}
                 {isSelected('black') && <BG class="bg-black text-white"></BG>}
@@ -157,7 +157,7 @@ const IconLink = () => {
         },
     ];
     return (
-        <span class="float-right flex gap-4">
+        <span class="float-right flex gap-2 sm:gap-4">
             <For each={temp}>
                 {(item) => {
                     return (
@@ -166,7 +166,7 @@ const IconLink = () => {
                             target="_blank"
                             class="overflow-hidden rounded-full bg-white  shadow-lg ring-amber-400 transition-all hover:ring"
                         >
-                            <img class="h-12 w-12 " src={item.icon} alt="" />
+                            <img class="h-8 w-8 sm:h-12 sm:w-12 " src={item.icon} alt="" />
                         </a>
                     );
                 }}
@@ -179,7 +179,7 @@ const BG: Component<{ class: string }> = (props) => {
     const text =
         '景建传积寸严尽清川止诚基而德谷恶宝曰则温盛容初所仕去圣空因非君忠兴之映笃业登棠赞作正祸璧事力夙松取定荣优甘诗念表听尺父竭薄如安令学以克端习庆资当履渊辞宜竞存丝贤形堂善竞孝深斯息言终无政悲维立虚缘是敬临兰不思慎甚从墨行名声福阴与命似流若美籍取';
     return (
-        <div class={'mx-2  flex rounded-2xl p-8 px-8 sm:px-16 ' + props.class}>
+        <div class={'mx-auto   flex w-fit rounded-2xl p-8 px-8 sm:px-16 ' + props.class}>
             <div class="flex flex-col justify-evenly pr-4  text-9xl sm:pr-8 ">
                 <div>永</div>
                 <div>远</div>
@@ -197,7 +197,7 @@ const BG: Component<{ class: string }> = (props) => {
 
 const Poetry = () => {
     return (
-        <div class="poetry">
+        <div class="poetry m-auto">
             <header class="px-2 text-2xl">沁园春 雪</header>
             <p>北国风光，千里冰封，万里雪飘。</p>
             <p>望长城内外，惟余莽莽；</p>

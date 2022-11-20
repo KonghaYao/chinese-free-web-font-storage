@@ -14,7 +14,7 @@ body {
     letter-spacing: 0.4em;
 }
 .poetry p {
-    @apply px-3 text-lg text-gray-700;
+    @apply px-1 text-lg text-gray-700 md:px-3;
 }
 
 a > * {

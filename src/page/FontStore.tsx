@@ -1,6 +1,7 @@
 import { createStore } from 'solid-js/store';
 import { batch, createEffect } from 'solid-js';
 import { useEasyFont } from '../App';
+import { Notice } from '../Notice';
 
 interface Reporter {
     config: { FontPath: string; destFold: string; chunkSize: number };
@@ -50,9 +51,10 @@ const FontRemote = {
             });
     },
     async getVersions() {
-        const { versions } = await fetch(
-            `https://data.jsdelivr.com/v1/package/npm/@chinese-fonts/${FontStore.packageName}`
+        const { versions: V } = await fetch(
+            `https://registry.npmmirror.com/@chinese-fonts/${FontStore.packageName}`
         ).then((res) => res.json());
+        const versions = Object.keys(V);
         setFontStore('selectedVersion', versions[0]);
         setFontStore('versions', versions);
     },
@@ -69,6 +71,7 @@ const FontRemote = {
             });
     },
     async loadSingleFont() {
+        Notice.success('加载字体报告中。。。');
         return fetch(
             `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/reporter.json`
         )

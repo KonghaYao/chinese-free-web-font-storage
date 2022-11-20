@@ -51,6 +51,7 @@ export const SearchBox: Component<{ children?: JSXElement }> = (props) => {
                             nav(`/fonts/${en}`);
                         } else {
                             Notice.error('没有找到该字体');
+                            nav(`/search`);
                         }
                     }}
                 >

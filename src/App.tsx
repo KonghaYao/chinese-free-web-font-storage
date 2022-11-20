@@ -1,7 +1,6 @@
-import { Component, createResource, For, onCleanup, onMount, Show } from 'solid-js';
 import { atom, createIgnoreFirst } from '@cn-ui/use';
 import './home.css';
-import { FontStore, initFontStore } from './page/FontStore';
+import { initFontStore } from './page/FontStore';
 import { SearchBox } from './SearchBox';
 import { A } from '@solidjs/router';
 let link: HTMLLinkElement;
