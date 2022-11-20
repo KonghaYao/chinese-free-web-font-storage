@@ -7,8 +7,11 @@ importers:
       '@konghayao/cn-font-split': ^3.0.4
       fs-extra: ^10.1.0
       md5: ^2.3.0
+      mri: ^1.2.0
       plop: ^3.1.1
       semver: ^7.3.8
+    dependencies:
+      mri: 1.2.0
     devDependencies:
       '@konghayao/cn-font-split': 3.0.4
       fs-extra: 10.1.0
@@ -880,6 +883,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dev: true
+
+  /mri/1.2.0:
+    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
+    engines: {node: '>=4'}
+    dev: false
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}

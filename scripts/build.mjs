@@ -3,7 +3,14 @@ import fse from "fs-extra";
 import md5 from "md5";
 import path from "path";
 import semver from "semver";
+import mri from "mri";
+
+const argv = process.argv.slice(2);
+
+const input = mri(argv);
 // 重新打包字体文件
+
+console.log("mode", input.mode);
 
 const packages = fse.readdirSync("./packages");
 for (const iterator of packages) {
@@ -62,7 +69,8 @@ for (const iterator of packages) {
         version: cacheData.version,
     });
 
-    fse.writeJSONSync(`./packages/${iterator}/cache.json`, cacheData);
+    if (input.mode !== "check")
+        fse.writeJSONSync(`./packages/${iterator}/cache.json`, cacheData);
     fse.writeJSONSync(
         `./packages/${iterator}/dist/index.json`,
         fontsName.map((i) => path.basename(i).replace(/\.\w+$/, ""))
