@@ -63,4 +63,6 @@ npm run new dyh # dyh 是字体的中文拼音的第一个英文组合
 
 # 然后你在 packages/dyh/fonts 文件夹中放入您的字体文件
 
+pnpm build --single=dyh --mode=check # 尝试打包文件
+
 ```

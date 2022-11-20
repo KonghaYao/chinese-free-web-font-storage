@@ -14,6 +14,9 @@ console.log("mode", input.mode);
 
 const packages = fse.readdirSync("./packages");
 for (const iterator of packages) {
+    if (input.single && input.single !== iterator) {
+        continue;
+    }
     // 找到项目对应的字体文件包
     /** 字体包的名称 */
     const fontsName = fse
