@@ -4,7 +4,7 @@ import { batch, Component, createSelector, For, Match, Show, Switch } from 'soli
 import { FontInformation } from './SubPanel/FontInformation';
 import { setFontStore, initFontStore, FontStore } from './FontStore';
 import { Coverage } from './SubPanel/Coverage';
-import { FontUsage } from './SubPanel/FontUsage';
+import { FontUsage, WebSupport } from './SubPanel/FontUsage';
 
 export const FontDetails = () => {
     const { packageName } = useParams();
@@ -23,6 +23,7 @@ export const FontDetails = () => {
         { value: '', label: '隐藏' },
         { value: 'information', label: '字体详情' },
         { value: 'font-usage', label: '尝试字体' },
+        { value: 'web-support', label: 'Web 支持' },
         { value: 'coverage', label: '中文覆盖率' },
     ];
     return (
@@ -46,7 +47,16 @@ export const FontDetails = () => {
                 </For>
             </div>
             <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
-                <div class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg ">
+                <div
+                    class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg "
+                    data-self={true}
+                    onclick={(e) => {
+                        if ((e.target as HTMLElement).dataset.self && ShowingPanel() !== '') {
+                            ShowingPanel('');
+                            console.log('关闭');
+                        }
+                    }}
+                >
                     <Show when={FontStore.FontReporter} fallback={<div>加载字体报告中。。。</div>}>
                         <Switch>
                             <Match when={ShowingPanel() === 'coverage'}>
@@ -54,6 +64,9 @@ export const FontDetails = () => {
                             </Match>
                             <Match when={ShowingPanel() === 'font-usage'}>
                                 <FontUsage></FontUsage>
+                            </Match>
+                            <Match when={ShowingPanel() === 'web-support'}>
+                                <WebSupport></WebSupport>
                             </Match>
                             <Match when={ShowingPanel() === 'information'}>
                                 <FontInformation></FontInformation>

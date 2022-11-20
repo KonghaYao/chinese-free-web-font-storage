@@ -6,7 +6,10 @@ export const CharShower: Component<{ list: string[]; class: string }> = (props) 
     return (
         <>
             <div
-                class={'mx-16 flex h-80 overflow-auto rounded-md  bg-gray-300 p-8 ' + props.class}
+                class={
+                    'mx-4 flex h-40 overflow-auto rounded-md bg-gray-300  p-8 md:h-80 ' +
+                    props.class
+                }
                 ref={scrollTargetElement}
             >
                 <VirtualContainer

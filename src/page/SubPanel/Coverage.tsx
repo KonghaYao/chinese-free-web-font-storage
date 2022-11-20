@@ -18,7 +18,7 @@ export const Coverage = () => {
         ['部首扩展', 0x2e80, 0x2ef3],
         ['兼容汉字', 0xf900, 0xfad9],
         ['兼容扩展', 0x2f800, 0x2fa1d],
-        ['PUA(GBK)部件', 0xe815, 0xe86f],
+        ['PUA(GBK)', 0xe815, 0xe86f],
         ['部件扩展', 0xe400, 0xe5e8],
         ['PUA增补', 0xe600, 0xe6cf],
         ['汉字笔画', 0x31c0, 0x31e3],
@@ -49,12 +49,12 @@ export const Coverage = () => {
         () => showDetails() && result.find((i) => i.name === showDetails())
     );
     return (
-        <main class="flex flex-col  text-center">
+        <main class="flex flex-col  p-4 text-center">
             <header class="p-4 text-center text-xl">中文完整度检测</header>
             <Switch>
                 <Match when={!showDetails()}>
                     <nav class="py-1 text-center text-sm text-gray-600">点击进度条查看详情</nav>
-                    <div class="m-auto grid  grid-cols-6 gap-4 overflow-auto p-2 text-center">
+                    <div class="m-auto grid max-h-[80vh] grid-cols-3 gap-4 overflow-auto  p-2 text-center sm:grid-cols-6 lg:grid-cols-12">
                         <For each={result}>
                             {({ name, exist, voids }) => {
                                 const coverage =
@@ -65,18 +65,19 @@ export const Coverage = () => {
                                     <>
                                         <span>{name}</span>
                                         <span
-                                            class="relative col-span-2  cursor-pointer overflow-hidden rounded-3xl bg-neutral-300 px-2 text-center"
+                                            class="relative col-span-2   cursor-pointer overflow-hidden rounded-3xl bg-neutral-200 px-2 text-center"
                                             onclick={() => showDetails(name)}
                                         >
                                             <div
-                                                class="absolute top-0 left-0  h-full  bg-lime-400"
+                                                class="absolute top-0 left-0  h-full  bg-lime-200"
                                                 style={{
                                                     width: coverage,
                                                 }}
                                             ></div>
                                             <div class="relative z-10 block whitespace-nowrap text-left">
-                                                包括 <b>{exist.length}</b>，缺失
-                                                <b>{voids.length}</b>
+                                                <b class="text-green-600">+ {exist.length}</b>
+                                                <span> </span>
+                                                <b class="text-red-600">-{voids.length}</b>
                                                 <span class="float-right">{coverage}</span>
                                             </div>
                                         </span>
@@ -92,7 +93,7 @@ export const Coverage = () => {
                         <div class="text-center text-sm text-gray-600">
                             若没有出现相应的字词，那么请稍等，加载中。
                         </div>
-                        <div class="grid  grid-cols-2">
+                        <div class="grid grid-cols-1  md:grid-cols-2">
                             <main class="flex h-full flex-1 flex-col overflow-hidden">
                                 <div class="py-2 text-2xl">
                                     覆盖字词 {matchDetails().exist.length}
