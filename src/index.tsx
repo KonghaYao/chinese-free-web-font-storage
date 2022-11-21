@@ -6,6 +6,7 @@ import { Router, hashIntegration, Route, Routes } from '@solidjs/router';
 import { FontDetails } from './page/FontDetails';
 import { PackageDetails } from './page/PackageDetails';
 import { SearchPage } from './page/SearchPage';
+import { GoogleFont } from './GoogleSupport/Google';
 
 render(() => {
     return (
@@ -16,6 +17,7 @@ render(() => {
                     <Route path="/search" element={SearchPage}></Route>
                     <Route path="/fonts/:packageName" element={PackageDetails}></Route>
                     <Route path="/fonts/:packageName/:fontName" element={FontDetails}></Route>
+                    <Route path="/google" element={GoogleFont}></Route>
                 </Routes>
             </Router>
         </>
