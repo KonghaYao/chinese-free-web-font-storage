@@ -26,22 +26,22 @@ export const AlgoliaSearchBox = () => {
                 placeholder: '请输入英文字体名称',
                 container: Container,
             }),
-            refinementList({
-                container: RefinementList,
-                attribute: 'category',
-                operator: 'and',
-                templates: {
-                    item(item, { html }) {
-                        const { url, label, count, isRefined } = item;
+            // refinementList({
+            //     container: RefinementList,
+            //     attribute: 'category',
+            //     operator: 'and',
+            //     templates: {
+            //         item(item, { html }) {
+            //             const { url, label, count, isRefined } = item;
 
-                        return html`
-                            <a href="${url}" style="${isRefined ? 'font-weight: bold' : ''}">
-                                <span>${label} (${count})</span>
-                            </a>
-                        `;
-                    },
-                },
-            }),
+            //             return html`
+            //                 <a href="${url}" style="${isRefined ? 'font-weight: bold' : ''}">
+            //                     <span>${label} (${count})</span>
+            //                 </a>
+            //             `;
+            //         },
+            //     },
+            // }),
 
             infiniteHits({
                 container: Hits,

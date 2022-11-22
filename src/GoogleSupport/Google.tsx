@@ -1,5 +1,4 @@
-import { atom } from '@cn-ui/use';
-import { Component, createEffect, createResource, For, onCleanup, onMount, Show } from 'solid-js';
+import { Component, For, onCleanup, onMount } from 'solid-js';
 import { useEasyFont } from '../App';
 import { selectDefPreviewText } from './defPreviewLanguages';
 

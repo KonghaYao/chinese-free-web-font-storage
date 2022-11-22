@@ -1,5 +1,5 @@
 import { createStore } from 'solid-js/store';
-import { batch, createEffect } from 'solid-js';
+import { batch } from 'solid-js';
 import { useEasyFont } from '../App';
 import { Notice } from '../Notice';
 

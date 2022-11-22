@@ -7,6 +7,7 @@ import { FontDetails } from './page/FontDetails';
 import { PackageDetails } from './page/PackageDetails';
 import { SearchPage } from './page/SearchPage';
 import { GoogleFont } from './GoogleSupport/Google';
+import { GoogleFontDetailed } from './GoogleSupport/GoogleFontDetailed';
 
 render(() => {
     return (
@@ -18,6 +19,7 @@ render(() => {
                     <Route path="/fonts/:packageName" element={PackageDetails}></Route>
                     <Route path="/fonts/:packageName/:fontName" element={FontDetails}></Route>
                     <Route path="/google" element={GoogleFont}></Route>
+                    <Route path="/google/:packageName" element={GoogleFontDetailed}></Route>
                 </Routes>
             </Router>
         </>
