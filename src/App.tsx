@@ -21,6 +21,13 @@ export const useEasyFont = () => {
             document.body.style.fontWeight = weight;
             return Url(url);
         },
+        addFont(url: string) {
+            link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = url;
+            document.body.appendChild(link);
+            return link;
+        },
     };
 };
 

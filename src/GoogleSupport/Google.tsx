@@ -1,5 +1,6 @@
 import { atom } from '@cn-ui/use';
 import { Component, createEffect, createResource, For, onCleanup, onMount, Show } from 'solid-js';
+import { useEasyFont } from '../App';
 import { selectDefPreviewText } from './defPreviewLanguages';
 
 export const GoogleFont = () => {
@@ -10,12 +11,13 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                show(true);
+                useEasyFont().addFont(
+                    `https://cdn.jsdelivr.net/npm/@fontsource/${prop.fontId}/index.css`
+                );
             }
         });
     }, {});
     let root: HTMLDivElement;
-    const show = atom(false);
     onMount(() => {
         observer.observe(root);
     });
@@ -26,7 +28,7 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
         <div class="w-full" ref={root}>
             <div
                 style={{
-                    'font-family': prop.family,
+                    'font-family': prop.fontName,
                     'font-weight': prop.weights[0],
                     'font-style': prop.styles[0],
                 }}
@@ -34,12 +36,7 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
             >
                 <header class="text-lg">{prop.fontId}</header>
                 <p>{selectDefPreviewText(prop.fontId, prop.subsets[0])}</p>
-                {show() && (
-                    <link
-                        rel="stylesheet"
-                        href={`https://cdn.jsdelivr.net/npm/@fontsource/${prop.fontId}/index.css`}
-                    />
-                )}
+
                 <div class="flex justify-between">
                     <div class="flex flex-wrap gap-2">
                         <For each={prop.subsets}>

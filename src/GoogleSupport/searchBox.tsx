@@ -2,9 +2,9 @@ import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { searchBox, infiniteHits, refinementList } from 'instantsearch.js/es/widgets';
 import 'instantsearch.css/themes/satellite-min.css';
-import { onCleanup, onMount } from 'solid-js';
+import { onMount } from 'solid-js';
 import { PreviewGoogleFont } from './Google';
-import { Portal, render } from 'solid-js/web';
+import { render } from 'solid-js/web';
 import { useNavigate } from '@solidjs/router';
 const searchClient = algoliasearch('WNFN3NF9AT', '6dc69558ce4d0f209113294678d7d5bf');
 const search = instantsearch({
