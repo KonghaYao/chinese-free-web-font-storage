@@ -2,7 +2,7 @@ import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { searchBox, infiniteHits, refinementList } from 'instantsearch.js/es/widgets';
 import 'instantsearch.css/themes/satellite-min.css';
-import { onMount } from 'solid-js';
+import { onCleanup, onMount } from 'solid-js';
 import { PreviewGoogleFont } from './Google';
 import { render } from 'solid-js/web';
 import { useNavigate } from '@solidjs/router';
@@ -20,6 +20,11 @@ export const AlgoliaSearchBox = () => {
     const createEl = (item: any, dom: HTMLDivElement) =>
         render(() => <PreviewGoogleFont {...item}></PreviewGoogleFont>, dom);
     const cacheItems = new Map<string, Function>();
+    onCleanup(() => {
+        for (let i of cacheItems.values()) {
+            i();
+        }
+    });
     onMount(() => {
         search.addWidgets([
             searchBox({
@@ -69,7 +74,7 @@ export const AlgoliaSearchBox = () => {
             }),
         ]);
 
-        search.start();
+        !search.started && search.start();
     });
     return (
         <div class="flex h-screen w-screen flex-col gap-2  overflow-hidden rounded-lg px-8 pt-8 shadow-md">

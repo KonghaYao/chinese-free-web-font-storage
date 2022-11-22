@@ -95,6 +95,9 @@ export const App = () => {
                         <SearchBox></SearchBox>
                     </A>
                 </div>
+                <div class="absolute right-2 top-2 rounded-lg  bg-blue-600 px-4 text-white">
+                    <A href="/google">Google Font</A>
+                </div>
             </section>
         </div>
     );

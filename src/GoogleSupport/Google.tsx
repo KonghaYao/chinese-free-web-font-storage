@@ -20,9 +20,6 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
     onMount(() => {
         observer.observe(root);
     });
-    onCleanup(() => {
-        console.log('被删除');
-    });
     return (
         <div class="w-full" ref={root}>
             <div
