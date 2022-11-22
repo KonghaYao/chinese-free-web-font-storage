@@ -1,99 +1,49 @@
-import { atom, reflect } from '@cn-ui/use';
-import { VirtualContainer, VirtualItemProps } from '@minht11/solid-virtual-container';
-import { Component, createEffect, createResource, For, onMount, Show } from 'solid-js';
+import { atom } from '@cn-ui/use';
+import { Component, createEffect, createResource, For, onCleanup, onMount, Show } from 'solid-js';
 import { selectDefPreviewText } from './defPreviewLanguages';
-import { subsets } from './subsets';
-import { getFontList } from './useGoogleFontData';
-import throttle from 'lodash-es/throttle';
+
 export const GoogleFont = () => {
-    const [fontList] = createResource(() => getFontList());
-    const packageKey = atom('');
-    let scrollTargetElement;
-    const subset = atom('all');
-    const showingList = reflect(() => {
-        // const filter = subset();
-        const reg = new RegExp(packageKey(), 'i');
-        if (fontList()) {
-            // if (filter === 'all') return fontList();
-            return fontList().filter((i) => reg.test(i));
-        } else {
-            return [];
-        }
-    });
-    onMount(() => {
-        // import('./searchBox');
-    });
-    return (
-        <div>
-            <div class="flex ">
-                <input
-                    class=" mx-4 rounded-md p-2 font-medium outline-none ring ring-green-600"
-                    placeholder="搜索字体项目"
-                    value={packageKey()}
-                    type="search"
-                    name=""
-                    oninput={throttle((e: any) => {
-                        packageKey(e.target.value);
-                    }, 300)}
-                />
-            </div>
-            <div>
-                <select value={subset()} onchange={(e: any) => subset(e.target.value)}>
-                    <For each={subsets}>{([en, cn]) => <option value={en}>{cn}</option>}</For>
-                </select>
-            </div>
-            <div
-                class={'mx-4 flex h-[80vh]   overflow-auto rounded-md  bg-gray-300  p-8 '}
-                ref={scrollTargetElement}
-            >
-                {showingList().length === 0 && <div>一个都没有</div>}
-                <VirtualContainer
-                    items={showingList() ?? []}
-                    scrollTarget={scrollTargetElement}
-                    itemSize={{ height: 150, width: 400 }}
-                    overscan={1}
-                    crossAxisCount={(measurements) => {
-                        return Math.floor(
-                            measurements.container.cross / measurements.itemSize.cross
-                        );
-                    }}
-                >
-                    {(item) => {
-                        return <PreviewGoogleFont {...item} name={item.item}></PreviewGoogleFont>;
-                    }}
-                </VirtualContainer>
-            </div>
-        </div>
-    );
+    return <AlgoliaSearchBox></AlgoliaSearchBox>;
 };
-import { getMetaData } from './useGoogleFontData';
-const PreviewGoogleFont: Component<VirtualItemProps<string> & { name: string }> = (prop) => {
-    const [meta, { refetch }] = createResource(() => getMetaData(prop.name));
-    createEffect(() => {
-        // 绑定 name 依赖
-        prop.name;
-        refetch();
+import { AlgoliaSearchBox } from './searchBox';
+export const PreviewGoogleFont: Component<any> = (prop) => {
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                show(true);
+            }
+        });
+    }, {});
+    let root: HTMLDivElement;
+    const show = atom(false);
+    onMount(() => {
+        observer.observe(root);
+    });
+    onCleanup(() => {
+        console.log('被删除');
     });
     return (
-        <div style={prop.style} class="mx-auto">
-            <Show when={meta()}>
-                <div
-                    style={{
-                        'font-family': meta().family,
-                        'font-weight': meta().weights[0],
-                        'font-style': meta().styles[0],
-                    }}
-                    class="rounded-xl bg-gray-100 p-2"
-                >
-                    <header class="text-lg">{prop.name}</header>
-                    <p>{selectDefPreviewText(meta().id, meta().subsets[0])}</p>
+        <div class="w-full" ref={root}>
+            <div
+                style={{
+                    'font-family': prop.family,
+                    'font-weight': prop.weights[0],
+                    'font-style': prop.styles[0],
+                }}
+                class="rounded-xl bg-gray-100 p-2 transition-transform duration-300  hover:-translate-y-2 hover:scale-105 "
+            >
+                <header class="text-lg">{prop.fontId}</header>
+                <p>{selectDefPreviewText(prop.fontId, prop.subsets[0])}</p>
+                {show() && (
                     <link
                         rel="stylesheet"
-                        href={`https://cdn.jsdelivr.net/npm/@fontsource/${meta().id}/index.css`}
+                        href={`https://cdn.jsdelivr.net/npm/@fontsource/${prop.fontId}/index.css`}
                     />
+                )}
+                <div class="flex justify-between">
                     <div class="flex flex-wrap gap-2">
-                        <For each={meta().subsets}>
-                            {(item) => {
+                        <For each={prop.subsets}>
+                            {(item: string) => {
                                 return (
                                     <span class="flex-none rounded-md bg-green-600 px-2 text-white">
                                         {item}
@@ -102,8 +52,19 @@ const PreviewGoogleFont: Component<VirtualItemProps<string> & { name: string }> 
                             }}
                         </For>
                     </div>
+                    <div class="flex flex-wrap gap-2">
+                        <For each={prop.weights}>
+                            {(item: string) => {
+                                return (
+                                    <span class="flex-none rounded-md bg-blue-600 px-2 text-xs text-white">
+                                        {item}
+                                    </span>
+                                );
+                            }}
+                        </For>
+                    </div>
                 </div>
-            </Show>
+            </div>
         </div>
     );
 };
