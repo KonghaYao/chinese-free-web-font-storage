@@ -31,27 +31,6 @@ export const useEasyFont = () => {
     };
 };
 
-function useKeepFetch<T>(fetcher: (page: number) => T) {
-    const page = atom(0);
-    const dataStore = atom<T[]>([]);
-
-    return {
-        page,
-        dataStore,
-
-        async move(index: number) {
-            if (index < 0) index = 0;
-            const nextIndex = index;
-            const data = await fetcher(nextIndex);
-            dataStore((i) => {
-                i[nextIndex] = data;
-                return [...i];
-            });
-            page(nextIndex);
-        },
-    };
-}
-
 export const App = () => {
     initFontStore();
     return (
@@ -95,8 +74,17 @@ export const App = () => {
                         <SearchBox></SearchBox>
                     </A>
                 </div>
-                <div class="absolute right-2 top-2 rounded-lg  bg-blue-600 px-4 text-white">
-                    <A href="/google">Google Font</A>
+                <div class="absolute right-2 top-2 flex gap-2  text-white">
+                    <A
+                        href="https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch"
+                        target="_blank"
+                        class="rounded-lg bg-gray-800 px-4"
+                    >
+                        Github
+                    </A>
+                    <A href="/google" class="rounded-lg bg-blue-600 px-4">
+                        Google Font
+                    </A>
                 </div>
             </section>
         </div>
