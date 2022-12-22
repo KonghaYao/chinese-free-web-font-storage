@@ -1,6 +1,6 @@
 import { Atom, atom, reflect } from '@cn-ui/use';
 import { FontStore } from './page/FontStore';
-import { useNavigate } from '@solidjs/router';
+import { A, useNavigate } from '@solidjs/router';
 import { Notice } from './Notice';
 import { Component, createContext, JSXElement } from 'solid-js';
 export const SearchBoxContext = createContext<{
@@ -32,7 +32,7 @@ export const SearchBox: Component<{ children?: JSXElement }> = (props) => {
                 keyName,
             }}
         >
-            <div class="flex ">
+            <div class="flex w-full justify-between  p-4">
                 <input
                     class=" mx-4 rounded-md p-2 font-medium outline-none ring ring-green-600"
                     placeholder="搜索字体项目"

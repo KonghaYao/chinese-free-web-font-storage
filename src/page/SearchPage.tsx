@@ -33,7 +33,7 @@ const SearchList = () => {
                         <div class="flex  items-center justify-between rounded-lg p-4 hover:bg-neutral-200 ">
                             <header class="text-xl">{item}</header>
                             <A href={'/fonts/' + keyName().get(item)}>
-                                <div class="flex-none cursor-pointer bg-sky-600 p-1 text-xs text-white ">
+                                <div class="flex-none cursor-pointer bg-sky-600 p-1 text-xs text-white">
                                     尝试字体
                                 </div>
                             </A>
