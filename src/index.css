@@ -64,11 +64,6 @@ body::before {
 .special-tags {
     @apply underline underline-offset-2;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
 ::-webkit-scrollbar {
     width: 4px;
     background-color: transparent;

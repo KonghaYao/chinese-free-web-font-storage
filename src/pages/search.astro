@@ -1,0 +1,10 @@
+---
+import Layout from '../Layout/Layout.astro';
+import { SearchPage } from '../page/SearchPage';
+---
+
+<Layout>
+    <main class="relative h-screen w-screen">
+        <SearchPage client:only="solid" />
+    </main>
+</Layout>
