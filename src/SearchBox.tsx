@@ -26,7 +26,7 @@ const SearchList = ({
             <For each={showFont()} fallback={<div>没有数据</div>}>
                 {(item) => {
                     return (
-                        <div class="flex  items-center justify-between rounded-lg p-4 hover:bg-neutral-200 ">
+                        <div class="flex  w-full  items-center justify-between rounded-lg p-4 hover:bg-neutral-200 ">
                             <header class="text-xl">{item}</header>
                             <a href={'/fonts/' + keyName().get(item)}>
                                 <div class="flex-none cursor-pointer bg-sky-600 p-1 text-xs text-white">
