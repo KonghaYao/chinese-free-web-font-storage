@@ -1,6 +1,7 @@
 ---
 import Layout from '../Layout/Layout.astro';
 import { SearchPage } from '../page/SearchPage';
+export const prerender = true;
 const indexes = await fetch(
     'https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@branch/index.json'
 ).then((res) => res.json());

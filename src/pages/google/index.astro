@@ -1,8 +1,12 @@
 ---
 import Layout from '../../Layout/Layout.astro';
 import { AlgoliaSearchBox } from '../../GoogleSupport/searchBox';
+export const prerender = true;
 ---
 
 <Layout>
+    <nav>
+        <a href="/" class="bg-white p-2"> 返回</a>
+    </nav>
     <AlgoliaSearchBox client:load />
 </Layout>

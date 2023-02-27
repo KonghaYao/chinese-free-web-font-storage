@@ -3,25 +3,15 @@ import Layout from '../../../Layout/Layout.astro';
 import type { FontReporter } from '../../../components/fonts/utils';
 import { FontDetails } from '../../../page/FontDetails';
 
-export async function getStaticPaths() {
-    return [
-        {
-            params: {
-                font: 'jxzk',
-                version: '1.1.0',
-                name: '江西拙楷',
-            },
-        },
-    ];
-}
 const { font, version, name } = Astro.params;
 const reporter = await fetch(
     `https://unpkg.com/@chinese-fonts/${font}@${version}/dist/${name}/reporter.json`
 ).then<FontReporter>((res) => res.json());
+const style = `font-family:"${reporter.message.fontFamily}";font-bold:"${reporter.message.fontSubFamily}"`;
 ---
 
 <Layout canonicalURL={`/fonts/${font}`}>
-    <section>
+    <section style={style}>
         <FontDetails
             reporter={reporter}
             packageName={font!}

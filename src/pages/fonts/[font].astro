@@ -1,7 +1,7 @@
 ---
 import Layout from '../../Layout/Layout.astro';
 import { getVersions } from '../../components/fonts/utils';
-
+export const prerender = true;
 export async function getStaticPaths() {
     const { packages } = await fetch(
         'https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@branch/index.json'

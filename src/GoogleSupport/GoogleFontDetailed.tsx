@@ -2,6 +2,7 @@ import { For } from 'solid-js';
 import { selectDefPreviewText } from './defPreviewLanguages';
 import type { FontMetaData } from './useGoogleFontData';
 import copy from 'copy-to-clipboard';
+
 export const GoogleFontDetailed = (props: { packageName: string; meta: FontMetaData }) => {
     const packageName = props.packageName;
     const FontStore = props.meta;
@@ -85,7 +86,7 @@ export const GoogleFontDetailed = (props: { packageName: string; meta: FontMetaD
                     </nav>
                 </div>
             </nav>
-            <a href="/google/search">
+            <a href="/google/">
                 <div class="w-full rounded-2xl bg-sky-400 py-2 text-center text-xl text-white">
                     返回搜索页面
                 </div>
