@@ -1,17 +1,19 @@
 import { atom } from '@cn-ui/use';
-import { For } from 'solid-js';
-import { FontStore } from '../FontStore';
+import { For, useContext } from 'solid-js';
 import copy from 'copy-to-clipboard';
-import { Notice } from '../../Notice';
-
+import { DetailedContext } from '../FontDetails';
 export const CSSSupport = () => {
+    const FontStore = useContext(DetailedContext)!;
     const CSSList = [
-        `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/result.css`,
+        `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.subName}/result.css`,
         // ! JSDelivr 貌似不支持中文路径了
         // `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/result.css`,
         // `https://fastly.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/result.css`,
     ];
     const selectedCSS = atom(CSSList[0]);
+    const code =
+        `import "@chinese-fonts/${FontStore.packageName}/dist/${FontStore.subName}/result.css";\n` +
+        `// 在 CSS 代码中 \nfont-family:'${FontStore.reporter.message.fontFamily}'`;
     return (
         <div class="divide-gry-400 flex flex-1 flex-col gap-1 divide-y-2 sm:gap-4">
             <div class="grid grid-cols-6 py-2">
@@ -36,7 +38,7 @@ export const CSSSupport = () => {
                 <a
                     class="flex-none"
                     href={`https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}${
-                        FontStore.selectedVersion ? '/v/' + FontStore.selectedVersion : ''
+                        '/v/' + FontStore.version
                     }`}
                     target="_blank"
                 >
@@ -52,21 +54,17 @@ export const CSSSupport = () => {
                     <a
                         href={`https://www.npmjs.com/package/@chinese-fonts/${
                             FontStore.packageName
-                        }${FontStore.selectedVersion ? '/v/' + FontStore.selectedVersion : ''}`}
+                        }${'/v/' + FontStore.version}`}
                         target="_blank"
                     >
                         <pre class="mx-2 select-text overflow-auto rounded-lg bg-neutral-100 px-4">
-                            <code>
-                                {` npm install @chinese-fonts/${FontStore.packageName}${FontStore.version}`}
-                            </code>
+                            <code
+                                innerText={` npm install @chinese-fonts/${FontStore.packageName}${FontStore.version}`}
+                            ></code>
                         </pre>
                     </a>
                     <pre class="mx-2 select-text whitespace-pre-wrap rounded-lg bg-neutral-100 px-4">
-                        <code>
-                            {`import "@chinese-fonts/${FontStore.packageName}/dist/${FontStore.fontName}/result.css";\n`}
-
-                            {`// 在 CSS 代码中 \nfont-family:'${FontStore.FontReporter.message.fontFamily}'`}
-                        </code>
+                        <code innerText={code}></code>
                     </pre>
                 </div>
             </div>
@@ -82,7 +80,6 @@ export const CSSSupport = () => {
                     class="mx-4 bg-neutral-100 px-2 "
                     onClick={() => {
                         copy(selectedCSS());
-                        Notice.success('复制成功');
                     }}
                 >
                     复制
@@ -93,13 +90,7 @@ export const CSSSupport = () => {
                         selectedCSS(e.target.value);
                     }}
                 >
-                    <For each={CSSList}>
-                        {(item) => (
-                            <option value={item}>
-                                <pre>{item}</pre>
-                            </option>
-                        )}
-                    </For>
+                    <For each={CSSList}>{(item) => <option value={item}>{item}</option>}</For>
                 </select>
             </div>
         </div>

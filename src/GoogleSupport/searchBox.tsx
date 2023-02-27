@@ -1,11 +1,10 @@
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
-import { searchBox, infiniteHits, refinementList } from 'instantsearch.js/es/widgets';
+import { searchBox, infiniteHits } from 'instantsearch.js/es/widgets';
 import 'instantsearch.css/themes/satellite-min.css';
 import { onCleanup, onMount } from 'solid-js';
 import { PreviewGoogleFont } from './Google';
 import { render } from 'solid-js/web';
-import { useNavigate } from '@solidjs/router';
 const searchClient = algoliasearch('WNFN3NF9AT', '6dc69558ce4d0f209113294678d7d5bf');
 const search = instantsearch({
     indexName: 'prod_FONTS',
@@ -13,7 +12,6 @@ const search = instantsearch({
 });
 
 export const AlgoliaSearchBox = () => {
-    const nav = useNavigate();
     let Container: HTMLDivElement;
     let Hits: HTMLDivElement;
     let RefinementList: HTMLDivElement;
@@ -54,20 +52,19 @@ export const AlgoliaSearchBox = () => {
                     empty: '无结果',
                     item(item, { html }) {
                         return html`
-                            <div
-                                class="flex w-full cursor-pointer flex-col"
-                                ref=${(dom: HTMLDivElement) => {
-                                    if (dom) {
-                                        // 为了避免不同的垃圾回收导致的性能下降
-                                        (cacheItems.get(item.objectID) || (() => {}))();
-                                        const c = createEl(item, dom);
-                                        cacheItems.set(item.objectID, c);
-                                    }
-                                }}
-                                onclick=${() => {
-                                    nav(`/google/${item.fontId}`);
-                                }}
-                            ></div>
+                            <a href="${`/google/${item.fontId}`}">
+                                <div
+                                    class="flex w-full cursor-pointer flex-col"
+                                    ref=${(dom: HTMLDivElement) => {
+                                        if (dom) {
+                                            // 为了避免不同的垃圾回收导致的性能下降
+                                            (cacheItems.get(item.objectID) || (() => {}))();
+                                            const c = createEl(item, dom);
+                                            cacheItems.set(item.objectID, c);
+                                        }
+                                    }}
+                                ></div>
+                            </a>
                         `;
                     },
                 },
@@ -79,9 +76,9 @@ export const AlgoliaSearchBox = () => {
     return (
         <div class="flex h-screen w-screen flex-col gap-2  overflow-hidden rounded-lg px-8 pt-8 shadow-md">
             <header class="text-center text-2xl">Google Font 搜索</header>
-            <div ref={Container}></div>
-            <div ref={RefinementList}></div>
-            <div ref={Hits} class="h-full flex-1 overflow-auto"></div>
+            <div ref={Container!}></div>
+            <div ref={RefinementList!}></div>
+            <div ref={Hits!} class="h-full flex-1 overflow-auto"></div>
         </div>
     );
 };

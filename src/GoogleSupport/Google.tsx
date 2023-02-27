@@ -1,5 +1,6 @@
-import { Component, For, onCleanup, onMount } from 'solid-js';
-import { useEasyFont } from '../App';
+import { atom } from '@cn-ui/use';
+import { Component, For, onCleanup, onMount, Show } from 'solid-js';
+
 import { selectDefPreviewText } from './defPreviewLanguages';
 
 export const GoogleFont = () => {
@@ -7,13 +8,10 @@ export const GoogleFont = () => {
 };
 import { AlgoliaSearchBox } from './searchBox';
 export const PreviewGoogleFont: Component<any> = (prop) => {
+    const show = atom(false);
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                useEasyFont().addFont(
-                    `https://cdn.jsdelivr.net/npm/@fontsource/${prop.fontId}/index.css`
-                );
-            }
+            show(entry.isIntersecting);
         });
     }, {});
     let root: HTMLDivElement;
@@ -21,7 +19,7 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
         observer.observe(root);
     });
     return (
-        <div class="w-full" ref={root}>
+        <div class="w-full" ref={root!}>
             <div
                 style={{
                     'font-family': prop.fontName,
@@ -58,6 +56,12 @@ export const PreviewGoogleFont: Component<any> = (prop) => {
                     </div>
                 </div>
             </div>
+            <Show when={show()}>
+                <link
+                    href={`https://cdn.jsdelivr.net/npm/@fontsource/${prop.fontId}/index.css`}
+                    rel="stylesheet"
+                ></link>
+            </Show>
         </div>
     );
 };

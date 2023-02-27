@@ -6,6 +6,7 @@ export interface Props {
     canonicalURL?: string;
     image?: string;
     keywords?: string;
+    meta?: any;
 }
 const {
     title = '中文网字计划',
@@ -27,7 +28,7 @@ const {
 
         <!-- Canonical URL -->
         <link rel="canonical" href={canonicalURL} />
-
+        <slot name="meta" />
         <!-- Primary Meta Tags -->
         <title>{title}</title>
         <meta name="title" content={title} />

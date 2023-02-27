@@ -1,0 +1,12 @@
+---
+import { GoogleFontDetailed } from '../../GoogleSupport/GoogleFontDetailed';
+import { getMetaData } from '../../GoogleSupport/useGoogleFontData';
+import Layout from '../../Layout/Layout.astro';
+
+const { packageName } = Astro.params;
+const meta = await getMetaData(packageName!);
+---
+
+<Layout>
+    <GoogleFontDetailed packageName={packageName!} meta={meta} />
+</Layout>

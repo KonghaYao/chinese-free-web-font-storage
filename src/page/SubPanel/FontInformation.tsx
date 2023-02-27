@@ -1,9 +1,10 @@
 import { reflect } from '@cn-ui/use';
-import { For } from 'solid-js';
-import { FontStore } from '../FontStore';
+import { For, useContext } from 'solid-js';
+import { DetailedContext } from '../FontDetails';
 
 export const FontInformation = () => {
-    const entries = reflect(() => Object.entries(FontStore.FontReporter.message));
+    const { reporter, cnName } = useContext(DetailedContext)!;
+    const entries = reflect(() => Object.entries(reporter.message));
     return (
         <div class="p-4">
             <For each={entries()}>
@@ -20,7 +21,7 @@ export const FontInformation = () => {
             <div class="flex ">
                 <a
                     class="rounded-md bg-neutral-200 px-2 text-green-600"
-                    href={'https://www.maoken.com/?s=' + FontStore.fontName.split('-')[0]}
+                    href={'https://www.maoken.com/?s=' + cnName}
                     target="_black"
                 >
                     字体授权查询

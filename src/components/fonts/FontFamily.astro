@@ -39,9 +39,9 @@ const fontDirs = await getFontList(packageName, versions[0]);
                     fontDirs.map((item) => {
                         return (
                             <a href={`/fonts/${packageName}@${version}/` + item}>
-                                <div class="flex-none text-xl hover:bg-gray-200">
-                                    {item}
-                                    <span class="float-right  mr-4 cursor-pointer rounded bg-gray-200 py-2 px-4 text-sm transition-colors duration-300 ">
+                                <div class="flex-none text-xl hover:bg-gray-200 flex justify-between transition-colors  items-center pl-2 rounded-md">
+                                    <span>{item}</span>
+                                    <span class="  mr-4 cursor-pointer rounded bg-white py-2 px-4 text-sm transition-colors duration-300 ">
                                         跳转
                                     </span>
                                 </div>

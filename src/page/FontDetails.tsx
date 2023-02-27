@@ -1,87 +1,99 @@
 import { atom } from '@cn-ui/use';
-import { A, useParams } from '@solidjs/router';
-import { batch, Component, createSelector, For, Match, Show, Switch } from 'solid-js';
+import {
+    Component,
+    createContext,
+    createSelector,
+    For,
+    Match,
+    Show,
+    Switch,
+    useContext,
+} from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
-import { setFontStore, initFontStore, FontStore } from './FontStore';
+
 import { Coverage } from './SubPanel/Coverage';
 import { FontUsage, WebSupport } from './SubPanel/FontUsage';
+import type { FontReporter } from '../components/fonts/utils';
+import { isServer } from 'solid-js/web';
 
-export const FontDetails = () => {
-    const { packageName } = useParams();
-    batch(() => {
-        setFontStore('packageName', packageName);
-    });
+interface DetailContextType {
+    reporter: FontReporter;
+    packageName: string;
+    subName: string;
+    cnName: string;
+    version: string;
+}
+export const DetailedContext = createContext<DetailContextType>();
 
-    initFontStore().then(async (api) => {
-        await api.loadFontList();
-        await api.loadSingleFont();
-        await api.ChangeFont();
-    });
-
+export const FontDetails: Component<DetailContextType> = (props) => {
     const ShowingPanel = atom('');
+    const isShowingPanel = createSelector(ShowingPanel);
     const PanelList = [
         { value: 'information', label: '字体详情' },
         { value: 'font-usage', label: '尝试字体' },
         { value: 'web-support', label: 'Web 支持' },
         { value: 'coverage', label: '中文覆盖率' },
     ];
+
     return (
-        <div class="relative flex h-screen w-screen flex-col">
-            <FontHome></FontHome>
-            <div class="flex justify-center gap-4 py-2">
-                <For each={PanelList}>
-                    {(item) => {
-                        return (
-                            <div
-                                class="flex-none cursor-pointer rounded-lg bg-neutral-200 p-2 text-lg transition-colors duration-300"
-                                classList={{
-                                    ['bg-green-600 text-white']: ShowingPanel() === item.value,
-                                }}
-                                onclick={() => ShowingPanel(item.value)}
-                            >
-                                {item.label}
-                            </div>
-                        );
-                    }}
-                </For>
-            </div>
-            <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
-                <nav
-                    class=" absolute top-0 left-0 h-screen w-screen"
-                    classList={{
-                        'pointer-events-auto': !!ShowingPanel(),
-                    }}
-                    onclick={() => {
-                        ShowingPanel('');
-                        console.log('关闭');
-                    }}
-                ></nav>
-                <div
-                    class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg transition-transform duration-700"
-                    classList={{
-                        'scale-100 translate-y-0': !!ShowingPanel(),
-                        'scale-0 translate-y-96': !ShowingPanel(),
-                    }}
-                >
-                    <Show when={FontStore.FontReporter} fallback={<div>加载字体报告中。。。</div>}>
-                        <Switch>
-                            <Match when={ShowingPanel() === 'coverage'}>
-                                <Coverage></Coverage>
-                            </Match>
-                            <Match when={ShowingPanel() === 'font-usage'}>
-                                <FontUsage></FontUsage>
-                            </Match>
-                            <Match when={ShowingPanel() === 'web-support'}>
-                                <WebSupport></WebSupport>
-                            </Match>
-                            <Match when={ShowingPanel() === 'information'}>
-                                <FontInformation></FontInformation>
-                            </Match>
-                        </Switch>
-                    </Show>
+        <DetailedContext.Provider value={{ ...props }}>
+            <main class="relative flex h-screen w-screen flex-col">
+                <FontHome></FontHome>
+                <div class="flex justify-center gap-4 py-2">
+                    <For each={PanelList}>
+                        {(item) => {
+                            return (
+                                <div
+                                    class="flex-none cursor-pointer rounded-lg bg-neutral-200 p-2 text-lg transition-colors duration-300"
+                                    classList={{
+                                        ['bg-green-600 text-white']: isShowingPanel(item.value),
+                                    }}
+                                    onclick={() => ShowingPanel(item.value)}
+                                >
+                                    {item.label}
+                                </div>
+                            );
+                        }}
+                    </For>
                 </div>
-            </nav>
-        </div>
+                <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
+                    <nav
+                        class=" absolute top-0 left-0 h-screen w-screen"
+                        classList={{
+                            'pointer-events-auto': !!ShowingPanel(),
+                        }}
+                        onclick={() => {
+                            ShowingPanel('');
+                            console.log('关闭');
+                        }}
+                    ></nav>
+                    <div
+                        class="blur-background pointer-events-auto w-11/12 rounded-xl bg-white drop-shadow-lg transition-transform duration-700"
+                        classList={{
+                            'scale-100 translate-y-0': !!ShowingPanel(),
+                            'scale-0 translate-y-96': !ShowingPanel(),
+                        }}
+                    >
+                        <Show when={!isServer}>
+                            <Switch>
+                                <Match when={ShowingPanel() === 'coverage'}>
+                                    <Coverage></Coverage>
+                                </Match>
+                                <Match when={ShowingPanel() === 'font-usage'}>
+                                    <FontUsage></FontUsage>
+                                </Match>
+                                <Match when={ShowingPanel() === 'web-support'}>
+                                    <WebSupport></WebSupport>
+                                </Match>
+                                <Match when={ShowingPanel() === 'information'}>
+                                    <FontInformation></FontInformation>
+                                </Match>
+                            </Switch>
+                        </Show>
+                    </div>
+                </nav>
+            </main>
+        </DetailedContext.Provider>
     );
 };
 
@@ -105,23 +117,24 @@ const FontHome = () => {
             comp: Poetry,
         },
     ];
+    const FontStore = useContext(DetailedContext)!;
     return (
         <main class="my-4 flex w-screen  flex-1 flex-col">
             <header class="p-4 ">
                 <header class="text-2xl">
-                    {FontStore.fontName}
+                    {FontStore.cnName}
                     <IconLink></IconLink>
                 </header>
                 <div class="text-xs text-gray-600">
                     由于本站资源较多，故加载稍慢，请稍等。可以尝试刷新页面。
                 </div>
                 <div class="flex gap-4 py-2">
-                    <A
-                        href={'/fonts/' + FontStore.packageName}
+                    <a
+                        href={`/fonts/${FontStore.packageName}@${FontStore.version}`}
                         class="rounded-lg bg-neutral-300 px-2 py-1  transition-colors duration-300"
                     >
                         返回
-                    </A>
+                    </a>
                     <For each={temp}>
                         {(item) => {
                             return (
@@ -148,6 +161,7 @@ const FontHome = () => {
     );
 };
 const IconLink = () => {
+    const FontStore = useContext(DetailedContext)!;
     const temp = [
         {
             // Github
@@ -157,7 +171,7 @@ const IconLink = () => {
         {
             // NPM
             link: `https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}${
-                FontStore.selectedVersion ? '/v/' + FontStore.selectedVersion : ''
+                '/v/' + FontStore.version
             }`,
             icon: 'https://cdn.jsdelivr.net/gh/vscode-icons/vscode-icons/icons/file_type_npm.svg',
         },

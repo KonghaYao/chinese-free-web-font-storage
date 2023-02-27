@@ -1,4 +1,4 @@
-import { Component } from 'solid-js';
+import type { Component } from 'solid-js';
 import { VirtualContainer } from '@minht11/solid-virtual-container';
 
 export const CharShower: Component<{ list: string[]; class: string }> = (props) => {

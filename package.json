@@ -18,14 +18,11 @@
         "@types/md5": "^2.3.2",
         "autoprefixer": "^10.4.8",
         "node-fetch": "^3.2.10",
-        "postcss": "^8.4.16",
         "prettier": "2.6.0",
         "prettier-plugin-tailwindcss": "^0.1.13",
-        "rollup-plugin-visualizer": "^5.8.3",
         "solid-js": "^1.5.7"
     },
     "dependencies": {
-        "@astrojs/mdx": "^0.17.2",
         "@astrojs/rss": "^2.1.1",
         "@astrojs/sitemap": "^1.1.0",
         "@astrojs/solid-js": "^2.0.2",
@@ -43,7 +40,7 @@
         "md5": "^2.3.0",
         "notyf": "^3.10.0",
         "pretty-bytes": "^6.0.0",
-        "solid-js": "^1.6.1",
+        "solid-js": "^1.6.11",
         "tailwindcss": "^3.0.24"
     }
 }

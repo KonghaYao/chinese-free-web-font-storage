@@ -1,10 +1,14 @@
 ---
 import Layout from '../Layout/Layout.astro';
 import { SearchPage } from '../page/SearchPage';
+const indexes = await fetch(
+    'https://cdn.jsdelivr.net/gh/KonghaYao/chinese-free-web-font-storage@branch/index.json'
+).then((res) => res.json());
 ---
 
 <Layout>
-    <main class="relative h-screen w-screen">
-        <SearchPage client:only="solid" />
-    </main>
+    <nav>
+        <a href="/" class="p-2 rounded bg-white"> 返回</a>
+    </nav>
+    <SearchPage info={indexes.packages} client:only="solid" />
 </Layout>
