@@ -55,7 +55,7 @@ for (const iterator of packages) {
             FontPath: `./packages/${iterator}/fonts/${name}`,
             destFold: dest,
             targetType: "woff2",
-            chunkSize: 100 * 1024,
+            chunkSize: 70 * 1024,
             testHTML: false,
         });
     }
@@ -64,7 +64,7 @@ for (const iterator of packages) {
 
     const packageData = fse.readJSONSync(`./packages/${iterator}/package.json`);
     cacheData = {
-        version: semver.inc(cacheData.version || "1.0.0", "minor"),
+        version: semver.inc(cacheData.version || packageData.version, "minor"),
         version_tag: hash,
     };
     fse.writeJSONSync(`./packages/${iterator}/package.json`, {

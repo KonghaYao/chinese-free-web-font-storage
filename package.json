@@ -6,14 +6,14 @@
     "scripts": {
         "new": "plop",
         "build": "node ./scripts/build.mjs",
-        "test":"node ./scripts/build.mjs --mode=check",
+        "test": "node ./scripts/build.mjs --mode=check",
         "dev": "ws --port=2048"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@konghayao/cn-font-split": "^3.0.4",
+        "@konghayao/cn-font-split": "^3.0.5",
         "fs-extra": "^10.1.0",
         "md5": "^2.3.0",
         "plop": "^3.1.1",
