@@ -13,13 +13,13 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@konghayao/cn-font-split": "^3.1.0",
         "fs-extra": "^10.1.0",
         "md5": "^2.3.0",
         "plop": "^3.1.1",
         "semver": "^7.3.8"
     },
     "dependencies": {
+        "@konghayao/cn-font-split": "3.1.2-beta.1",
         "mri": "^1.2.0"
     }
 }
