@@ -16,6 +16,7 @@
 
 -   [x] Github Action 自动打包字体文件
 -   [x] ttf 文件支持，woff2 文件支持
+-   [ ] 使用更好的 CDN 加速字体渲染！
 -   [ ] 联合 FontSource 项目，加载 Google Fonts！
 
 ## 我如何用？

@@ -46,8 +46,8 @@ for (const iterator of packages) {
     }
     console.log(`${iterator} 开始打包`);
 
-    if (input.mode === "rebuild")
-        fse.emptyDirSync(`./packages/${iterator}/dist/`);
+    // ! 清空文件夹，保证是最新版
+    fse.emptyDirSync(`./packages/${iterator}/dist/`);
 
     // 进行打包操作
     for (const name of fontsName) {
