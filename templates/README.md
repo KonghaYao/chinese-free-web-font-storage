@@ -29,4 +29,4 @@ import "@chinese-fonts/{{name}}/dist/{具体的包名}/results.css";
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/#/fonts/{{name}})
+详见 [官网](https://chinese-font.netlify.app/fonts/{{name}})

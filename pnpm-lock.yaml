@@ -9,8 +9,8 @@ importers:
         version: 1.2.0
     devDependencies:
       '@konghayao/cn-font-split':
-        specifier: ^3.0.5
-        version: registry.npmmirror.com/@konghayao/cn-font-split@3.0.5
+        specifier: ^3.1.0
+        version: 3.1.0
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
@@ -59,6 +59,20 @@ importers:
   packages/zqzmxs: {}
 
 packages:
+
+  /@konghayao/cn-font-split@3.1.0:
+    resolution: {integrity: sha512-8ydE7jE9Fx7lUpN7YIqHvpL7zK5bgZU+UceBmuEYqoKpapivzLfG3zTFLwsb3BE0uWovVJR1JK+VR3rc9XyfGg==}
+    dependencies:
+      chalk: 4.1.2
+      fonteditor-core: registry.npmmirror.com/fonteditor-core@2.1.11
+      fs-extra: 10.1.0
+      imagescript: 1.2.16
+      lodash-es: 4.17.21
+      threads: 1.7.0
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -573,7 +587,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: registry.npmmirror.com/uglify-js@3.17.4
+      uglify-js: 3.17.4
     dev: true
 
   /has-flag@4.0.0:
@@ -616,6 +630,11 @@ packages:
   /ignore@5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
+    dev: true
+
+  /imagescript@1.2.16:
+    resolution: {integrity: sha512-hhy8OVNymU+cYYj8IwCbdNlXJRoMr4HRd7+efkH32eBVfybVU/5SbzDYf3ZSiiF9ye/ghfBrI/ujec/nwl+fOQ==}
+    engines: {node: '>=14.0.0'}
     dev: true
 
   /indent-string@4.0.0:
@@ -782,7 +801,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: registry.npmmirror.com/graceful-fs@4.2.10
+      graceful-fs: 4.2.10
     dev: true
 
   /kind-of@6.0.3:
@@ -1288,7 +1307,7 @@ packages:
       is-observable: 2.1.0
       observable-fns: 0.6.1
     optionalDependencies:
-      tiny-worker: registry.npmmirror.com/tiny-worker@2.3.0
+      tiny-worker: 2.3.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1296,6 +1315,14 @@ packages:
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
+
+  /tiny-worker@2.3.0:
+    resolution: {integrity: sha512-pJ70wq5EAqTAEl9IkGzA+fN0836rycEuz2Cn6yeZ6FRzlVS5IDOkFHpIoEsksPRQV34GDqXm65+OlnZqUSyK2g==}
+    requiresBuild: true
+    dependencies:
+      esm: 3.2.25
+    dev: true
+    optional: true
 
   /title-case@3.0.3:
     resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
@@ -1325,6 +1352,14 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
     dev: true
+
+  /uglify-js@3.17.4:
+    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /unc-path-regex@0.1.2:
     resolution: {integrity: sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==}
@@ -1396,66 +1431,23 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
 
-  registry.npmmirror.com/@konghayao/cn-font-split@3.0.5:
-    resolution: {integrity: sha512-BhgYZgYNTFqrbFwBMpQ97W/f0A8PObVrZNvB8X+qwmMlm6qkX3cTKDqrB/d466FDkMoacIpYAoGzTsbQaTG1nQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@konghayao/cn-font-split/-/cn-font-split-3.0.5.tgz}
-    name: '@konghayao/cn-font-split'
-    version: 3.0.5
-    dependencies:
-      chalk: 4.1.2
-      fonteditor-core: registry.npmmirror.com/fonteditor-core@2.1.11
-      fs-extra: 10.1.0
-      lodash-es: 4.17.21
-      threads: 1.7.0
-      uuid: 8.3.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   registry.npmmirror.com/@xmldom/xmldom@0.8.7:
-    resolution: {integrity: sha512-sI1Ly2cODlWStkINzqGrZ8K6n+MTSbAeQnAipGyL+KZCXuHaRlj2gyyy8B/9MvsFFqN7XHryQnB2QwhzvJXovg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@xmldom/xmldom/-/xmldom-0.8.7.tgz}
+    resolution: {integrity: sha512-sI1Ly2cODlWStkINzqGrZ8K6n+MTSbAeQnAipGyL+KZCXuHaRlj2gyyy8B/9MvsFFqN7XHryQnB2QwhzvJXovg==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/@xmldom/xmldom/-/xmldom-0.8.7.tgz}
     name: '@xmldom/xmldom'
     version: 0.8.7
     engines: {node: '>=10.0.0'}
     dev: true
 
   registry.npmmirror.com/fonteditor-core@2.1.11:
-    resolution: {integrity: sha512-zgO5tHw5vzqYqkeb9jthIANbOOGwWqNWovINCMyIDLh9xmujsHPqloWJdk0PMbJHbZmiLG1F/kygfuWS8+TDfA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fonteditor-core/-/fonteditor-core-2.1.11.tgz}
+    resolution: {integrity: sha512-zgO5tHw5vzqYqkeb9jthIANbOOGwWqNWovINCMyIDLh9xmujsHPqloWJdk0PMbJHbZmiLG1F/kygfuWS8+TDfA==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/fonteditor-core/-/fonteditor-core-2.1.11.tgz}
     name: fonteditor-core
     version: 2.1.11
     dependencies:
       '@xmldom/xmldom': registry.npmmirror.com/@xmldom/xmldom@0.8.7
     dev: true
 
-  registry.npmmirror.com/graceful-fs@4.2.10:
-    resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.10.tgz}
-    name: graceful-fs
-    version: 4.2.10
-    requiresBuild: true
-    dev: true
-    optional: true
-
   registry.npmmirror.com/graceful-fs@4.2.11:
-    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.11.tgz}
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.11.tgz}
     name: graceful-fs
     version: 4.2.11
     dev: true
-
-  registry.npmmirror.com/tiny-worker@2.3.0:
-    resolution: {integrity: sha512-pJ70wq5EAqTAEl9IkGzA+fN0836rycEuz2Cn6yeZ6FRzlVS5IDOkFHpIoEsksPRQV34GDqXm65+OlnZqUSyK2g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/tiny-worker/-/tiny-worker-2.3.0.tgz}
-    name: tiny-worker
-    version: 2.3.0
-    requiresBuild: true
-    dependencies:
-      esm: 3.2.25
-    dev: true
-    optional: true
-
-  registry.npmmirror.com/uglify-js@3.17.4:
-    resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/uglify-js/-/uglify-js-3.17.4.tgz}
-    name: uglify-js
-    version: 3.17.4
-    engines: {node: '>=0.8.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true

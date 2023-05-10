@@ -32,20 +32,24 @@ for (const iterator of packages) {
     const fonts = await Promise.all(fontsPath.map((i) => fse.readFile(i)));
 
     // 对比项目 hash 值
-    let cacheData = {};
-    try {
-        cacheData = fse.readJSONSync(`./packages/${iterator}/cache.json`);
-    } catch (e) {}
-    const hash = md5(fonts);
-    if (hash === cacheData.version_tag) {
-        console.log(` 跳过 ${iterator}`);
-        continue;
+    if (input.mode != "rebuild") {
+        let cacheData = {};
+        try {
+            cacheData = fse.readJSONSync(`./packages/${iterator}/cache.json`);
+        } catch (e) {}
+        const hash = md5(fonts);
+        if (hash === cacheData.version_tag) {
+            console.log(` 跳过 ${iterator}`);
+            continue;
+        }
+        console.log("新旧hash", hash, cacheData.version_tag);
     }
-
     console.log(`${iterator} 开始打包`);
-    console.log("新旧hash", hash, cacheData.version_tag);
 
-    // hash 值不等，进行打包操作
+    if (input.mode === "rebuild")
+        fse.emptyDirSync(`./packages/${iterator}/dist/`);
+
+    // 进行打包操作
     for (const name of fontsName) {
         const dest = `./packages/${iterator}/dist/${path
             .basename(name)
@@ -57,28 +61,33 @@ for (const iterator of packages) {
             targetType: "woff2",
             chunkSize: 70 * 1024,
             testHTML: false,
+            previewImage: {},
         });
     }
 
-    // 重写 package.json
-
-    const packageData = fse.readJSONSync(`./packages/${iterator}/package.json`);
-    cacheData = {
-        version: semver.inc(cacheData.version || packageData.version, "minor"),
-        version_tag: hash,
-    };
-    fse.writeJSONSync(`./packages/${iterator}/package.json`, {
-        ...packageData,
-        version: cacheData.version,
-    });
-
-    if (input.mode !== "check")
+    if (input.mode !== "rebuild") {
+        // 重写 package.json
+        const packageData = fse.readJSONSync(
+            `./packages/${iterator}/package.json`
+        );
+        cacheData = {
+            version: semver.inc(
+                cacheData.version || packageData.version,
+                "minor"
+            ),
+            version_tag: hash,
+        };
+        fse.writeJSONSync(`./packages/${iterator}/package.json`, {
+            ...packageData,
+            version: cacheData.version,
+        });
         fse.writeJSONSync(`./packages/${iterator}/cache.json`, cacheData);
+        console.log(`${iterator} 完成`, cacheData.version);
+    }
     fse.writeJSONSync(
         `./packages/${iterator}/dist/index.json`,
         fontsName.map((i) => path.basename(i).replace(/\.\w+$/, ""))
     );
-    console.log(`${iterator} 完成`, cacheData.version);
 }
 
 // 建立 index.json
