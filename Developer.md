@@ -10,3 +10,5 @@
 3. pnpm build 直接打包整个项目
     1. packages/{项目名}/cache.json 是缓存记录文件，若 fonts 文件夹下的字体文件没有变化，则不会进行打包。
     2. packages/{项目名}/fonts 目录下放置字体文件，程序将自动进行打包
+4. node ./scripts/uploader.mjs --target=字体文件夹名称 --deleteFolder=true 更新远程 CDN 文件
+    1. 上传文件时，由于部分文件夹路径较奇怪，所以进行了一些更改，更改方式看源码
