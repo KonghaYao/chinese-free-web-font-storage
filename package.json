@@ -6,6 +6,7 @@
     "scripts": {
         "new": "plop",
         "build": "node ./scripts/build.mjs",
+        "index": "node ./scripts/createIndex.mjs",
         "test": "node ./scripts/build.mjs --mode=check",
         "dev": "ws --port=2048"
     },
