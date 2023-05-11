@@ -6,8 +6,9 @@
     "scripts": {
         "dev": "astro dev",
         "start": "astro dev",
-        "build": "astro build",
+        "build": "pnpm index && astro build",
         "preview": "astro preview",
+        "index": "curl https://raw.githubusercontent.com/KonghaYao/chinese-free-web-font-storage/branch/index.json -o index.json",
         "astro": "astro"
     },
     "license": "MIT",

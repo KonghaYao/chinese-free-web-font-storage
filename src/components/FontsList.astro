@@ -1,0 +1,29 @@
+---
+import Index from '../../index.json'
+const list  = Object.entries(Index).map(([id,value])=>{
+    return {...value,id}
+})
+---
+
+<section class="w-full pb-12" id='font-list'>
+    <ul class="columns-1 md:columns-2 gap-4">{
+list.map(item=>{
+        return <li>
+        <header class="text-2xl text-rose-600 py-4 mt-4 text-center">{item.name}</header>
+          <ul class="flex gap-2 flex-wrap justify-center">
+            {item.remotePath.map(
+                remote=>{
+                    const [_,name]=remote.match(/dist\/(.*?)\/result/)!
+                    return <li class="bg-neutral-200 rounded-md overflow-hidden flex-wrap p-4">
+                        <a href={`/fonts/${item.id}/${name}`}>
+                            <img loading='lazy' class="invert h-24" src={"https://ik.imagekit.io/chinesefonts/"+remote.replace('result.css','preview.png')} alt="">
+                            </a>
+                            </li>
+                }
+            )}
+            </ul>
+        </li>
+})
+        }
+    </ul>
+</section>

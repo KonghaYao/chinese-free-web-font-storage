@@ -1,29 +1,14 @@
 ---
 import Layout from '../Layout/Layout.astro';
+import FontList from '../components/FontsList.astro';
 export const prerender = true;
 ---
 
 <Layout>
     <main class="relative h-full w-screen">
-        <aside class="pointer-events-none">
-            <div class="absolute top-48 -left-16 text-gray-300 opacity-50" style="font-size:50vh">
-                江
-            </div>
-            <div
-                class="absolute top-48 -right-24 text-gray-300 opacity-50"
-                style='font-family:"jiangxizhuokai";font-size:30vh'
-            >
-                夏
-            </div>
-            <div
-                class="absolute top-0 left-8 text-gray-300 opacity-50"
-                style='font-family:"jiangxizhuokai";font-size:20vh'
-            >
-                尧
-            </div>
-        </aside>
 
-        <section class="absolute z-10 flex h-screen w-screen flex-col items-center justify-center">
+
+        <section class="relative z-10 flex h-screen w-screen flex-col items-center justify-center">
             <nav
                 class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
             >
@@ -43,12 +28,11 @@ export const prerender = true;
             </nav>
 
             <div class="absolute bottom-4">
-                <a
-                    href="/search"
+                <button
                     class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2"
+                    onclick="document.querySelector('#font-list').scrollIntoView({behavior:'smooth'})"
                 >
-                    开始搜索</a
-                >
+                    开始搜索</button>
             </div>
             <div class="absolute right-2 top-2 flex gap-2 text-white">
                 <a
@@ -61,5 +45,23 @@ export const prerender = true;
                 <a href="/google" class="rounded-lg bg-blue-600 px-4">Google Font</a>
             </div>
         </section>
+        <aside class="pointer-events-none">
+            <div class="absolute top-48 -left-16 text-gray-300 opacity-50" style="font-size:50vh">
+                江
+            </div>
+            <div
+                class="absolute top-48 -right-24 text-gray-300 opacity-50"
+                style='font-family:"jiangxizhuokai";font-size:30vh'
+            >
+                夏
+            </div>
+            <div
+                class="absolute top-0 left-8 text-gray-300 opacity-50"
+                style='font-family:"jiangxizhuokai";font-size:20vh'
+            >
+                尧
+            </div>
+        </aside>
     </main>
+    <FontList></FontList>
 </Layout>
