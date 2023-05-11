@@ -4,8 +4,11 @@ import type { FontReporter } from '../../../components/fonts/utils';
 import { FontDetails } from '../../../page/FontDetails';
 
 const { font, version, name } = Astro.params;
+const fileName = name!.replaceAll(" ", "_")
+        // 更换文件夹中的 . 为 _
+        .replace(/(?<=\/.*)\.(?=.*\/)/g, "_")
 const reporter = await fetch(
-    `https://unpkg.com/@chinese-fonts/${font}@${version}/dist/${name}/reporter.json`
+    `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/reporter.json`
 ).then<FontReporter>((res) => res.json());
 const style = `font-family:"${reporter.message.fontFamily}";font-bold:"${reporter.message.fontSubFamily}"`;
 ---
@@ -23,6 +26,6 @@ const style = `font-family:"${reporter.message.fontFamily}";font-bold:"${reporte
     </section>
     <link
         rel="stylesheet"
-        href={`https://unpkg.com/@chinese-fonts/${font}@${version}/dist/${name}/result.css`}
+        href={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`}
     />
 </Layout>
