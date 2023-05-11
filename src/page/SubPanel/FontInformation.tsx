@@ -1,6 +1,6 @@
 import { reflect } from '@cn-ui/use';
 import { For, useContext } from 'solid-js';
-import { DetailedContext } from '../FontDetails';
+import { DetailedContext } from '../DetailContext';
 
 export const FontInformation = () => {
     const { reporter, cnName } = useContext(DetailedContext)!;

@@ -1,29 +1,11 @@
 import { atom } from '@cn-ui/use';
-import {
-    Component,
-    createContext,
-    createSelector,
-    For,
-    Match,
-    Show,
-    Switch,
-    useContext,
-} from 'solid-js';
+import { Component, createSelector, For, Match, Show, Switch, useContext } from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
 
 import { Coverage } from './SubPanel/Coverage';
 import { FontUsage, WebSupport } from './SubPanel/FontUsage';
-import type { FontReporter } from '../components/fonts/utils';
 import { isServer } from 'solid-js/web';
-
-interface DetailContextType {
-    reporter: FontReporter;
-    packageName: string;
-    subName: string;
-    cnName: string;
-    version: string;
-}
-export const DetailedContext = createContext<DetailContextType>();
+import { DetailContextType, DetailedContext } from './DetailContext';
 
 export const FontDetails: Component<DetailContextType> = (props) => {
     const ShowingPanel = atom('');
@@ -130,7 +112,7 @@ const FontHome = () => {
                 </div>
                 <div class="flex gap-4 py-2">
                     <a
-                        href={`/fonts/${FontStore.packageName}@${FontStore.version}`}
+                        href="/index.html"
                         class="rounded-lg bg-neutral-300 px-2 py-1  transition-colors duration-300"
                     >
                         返回
@@ -152,11 +134,11 @@ const FontHome = () => {
                     </For>
                 </div>
             </header>
-            <main class=" flex place-content-center overflow-y-auto">
+            <section class=" flex h-full flex-1 place-content-center overflow-y-auto">
                 {isSelected('poetry') && <Poetry></Poetry>}
                 {isSelected('white') && <BG class="bg-white text-black"></BG>}
                 {isSelected('black') && <BG class="bg-black text-white"></BG>}
-            </main>
+            </section>
         </main>
     );
 };
@@ -170,9 +152,7 @@ const IconLink = () => {
         },
         {
             // NPM
-            link: `https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}${
-                '/v/' + FontStore.version
-            }`,
+            link: `https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}`,
             icon: 'https://cdn.jsdelivr.net/gh/vscode-icons/vscode-icons/icons/file_type_npm.svg',
         },
     ];

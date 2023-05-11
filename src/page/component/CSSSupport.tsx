@@ -1,14 +1,12 @@
 import { atom } from '@cn-ui/use';
 import { For, useContext } from 'solid-js';
 import copy from 'copy-to-clipboard';
-import { DetailedContext } from '../FontDetails';
+import { DetailedContext } from '../DetailContext';
 export const CSSSupport = () => {
     const FontStore = useContext(DetailedContext)!;
+    console.log(FontStore);
     const CSSList = [
-        `https://unpkg.com/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.subName}/result.css`,
-        // ! JSDelivr 貌似不支持中文路径了
-        // `https://cdn.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/result.css`,
-        // `https://fastly.jsdelivr.net/npm/@chinese-fonts/${FontStore.packageName}${FontStore.version}/dist/${FontStore.fontName}/result.css`,
+        `https://ik.imagekit.io/chinesefonts/packages/${FontStore.packageName}/dist/${FontStore.subName}/result.css`,
     ];
     const selectedCSS = atom(CSSList[0]);
     const code =
@@ -37,9 +35,7 @@ export const CSSSupport = () => {
             <div class="grid grid-cols-4 py-2">
                 <a
                     class="flex-none"
-                    href={`https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}${
-                        '/v/' + FontStore.version
-                    }`}
+                    href={`https://www.npmjs.com/package/@chinese-fonts/${FontStore.packageName}`}
                     target="_blank"
                 >
                     <img
@@ -59,7 +55,7 @@ export const CSSSupport = () => {
                     >
                         <pre class="mx-2 select-text overflow-auto rounded-lg bg-neutral-100 px-4">
                             <code
-                                innerText={` npm install @chinese-fonts/${FontStore.packageName}${FontStore.version}`}
+                                innerText={` npm install @chinese-fonts/${FontStore.packageName}`}
                             ></code>
                         </pre>
                     </a>

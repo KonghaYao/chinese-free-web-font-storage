@@ -1,7 +1,7 @@
 import { atom, reflect } from '@cn-ui/use';
 import { For, Match, Switch, useContext } from 'solid-js';
 import { CharShower } from '../component/CharShower';
-import { DetailedContext } from '../FontDetails';
+import { DetailedContext } from '../DetailContext';
 
 export const Coverage = () => {
     const { reporter } = useContext(DetailedContext)!;
