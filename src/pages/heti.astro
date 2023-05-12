@@ -1,0 +1,25 @@
+---
+import '../style/heti_change.css'
+import '../style/heti_site_change.css'
+import Layout from '../Layout/Layout.astro';
+import HETI_BODY from '../components/heti.astro'
+const query = Astro.url.searchParams
+const font = query.get('font')
+const fileName = query.get('name')
+const family = query.get('family')
+const subFamily = query.get('subFamily')
+const style = `font-family:"${family}";font-bold:"${subFamily}"`;
+---
+
+<Layout defaultFontCSS={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`}>
+
+    <section class="flex flex-col justify-center pb-16"style={style}>
+        <header class="sticky top-0 left-0 backdrop-blur-sm flex px-8 items-baseline pb-2 z-10  justify-between">
+                <span class="text-2xl">
+                    中文网字计划
+                </span>
+                <span class="h-fit">文章测试：{fileName}</s>
+        </header>
+        <HETI_BODY ></HETI_BODY>
+    </section>
+</Layout>

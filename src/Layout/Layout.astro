@@ -7,6 +7,7 @@ export interface Props {
     image?: string;
     keywords?: string;
     meta?: any;
+    defaultFontCSS?:string
 }
 const {
     title = '中文网字计划',
@@ -14,11 +15,12 @@ const {
     canonicalURL,
     image = '',
     keywords,
+    defaultFontCSS='https://ik.imagekit.io/chinesefonts/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/result.css'
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
     <head>
         <!-- Global Metadata -->
         <meta charset="utf-8" />
@@ -48,6 +50,7 @@ const {
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={new URL(image, Astro.url)} />
+        <link rel="stylesheet" href={defaultFontCSS}>
     </head>
     <body>
         <slot />

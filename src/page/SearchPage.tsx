@@ -1,5 +1,4 @@
-import { onMount } from 'solid-js';
-import { SearchBox } from '../SearchBox';
+import { SearchBox } from './SearchBox';
 
 export const SearchPage = (props: { info: Record<string, string> }) => {
     return (

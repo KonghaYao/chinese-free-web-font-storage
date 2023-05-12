@@ -117,6 +117,12 @@ const FontHome = () => {
                     >
                         返回
                     </a>
+                    <a
+                        href={`/heti.html?font=${FontStore.packageName}&name=${FontStore.subName}&family=${FontStore.reporter.message.fontFamily}&subFamily=${FontStore.reporter.message.fontSubFamily}`}
+                        class="rounded-lg bg-neutral-200 px-2 py-1  transition-colors duration-300"
+                    >
+                        文章测试
+                    </a>
                     <For each={temp}>
                         {(item) => {
                             return (
