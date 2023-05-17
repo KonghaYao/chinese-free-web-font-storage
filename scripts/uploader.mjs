@@ -11,6 +11,7 @@ import mri from "mri";
 const argv = process.argv.slice(2);
 const input = mri(argv);
 
+// chinese-fonts@snapmail.cc
 const imagekit = new ImageKit({
     publicKey: "public_qBVBt6ceitU5sKA6JWgIOZnyqBw=",
     privateKey: process.env.IMAGEKIT_TOKEN,
@@ -23,7 +24,7 @@ if (input.deleteFolder) {
     console.log("清空远程文件夹");
     for (const iterator of folders) {
         await imagekit
-            .deleteFolder(iterator)
+            .deleteFolder(iterator.replace("\\", "/"))
             .then((response) => {
                 console.log("delete", iterator);
             })
@@ -43,8 +44,7 @@ try {
     const data = await fs.promises.readFile("./scripts/.upload_cache", "utf-8");
     cache = new Set(JSON.parse(data));
 } catch (e) {}
-// ysyrxk
-// mksjh
+
 const uploadFolder = async (iterator) => {
     if (cache.has(iterator)) {
         console.log("skip", iterator);

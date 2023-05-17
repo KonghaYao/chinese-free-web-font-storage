@@ -31,13 +31,14 @@ for (const iterator of packages) {
     /** 字体 Buffer 文件 */
     const fonts = await Promise.all(fontsPath.map((i) => fse.readFile(i)));
 
+    let cacheData = {};
+    const hash = md5(fonts);
     // 对比项目 hash 值
     if (input.mode != "rebuild") {
-        let cacheData = {};
         try {
             cacheData = fse.readJSONSync(`./packages/${iterator}/cache.json`);
         } catch (e) {}
-        const hash = md5(fonts);
+
         if (hash === cacheData.version_tag) {
             console.log(` 跳过 ${iterator}`);
             continue;
@@ -60,7 +61,7 @@ for (const iterator of packages) {
             destFold: dest,
             targetType: "woff2",
             chunkSize: 70 * 1024,
-            testHTML: false,
+            testHTML: true,
             previewImage: {},
         });
     }
@@ -72,7 +73,7 @@ for (const iterator of packages) {
         );
         cacheData = {
             version: semver.inc(
-                cacheData.version || packageData.version,
+                (cacheData && cacheData.version) || packageData.version,
                 "minor"
             ),
             version_tag: hash,
