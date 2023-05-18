@@ -1,0 +1,58 @@
+---
+import '../index.css';
+export interface Props {
+    title?: string;
+    description?: string;
+    canonicalURL?: string;
+    image?: string;
+    keywords?: string;
+    meta?: any;
+    defaultFontCSS?:string
+}
+const {
+    title = '中文网字计划',
+    description = '中文网字体计划，致力于提供免费的中文网络 CSS 字体支持',
+    canonicalURL,
+    image = '',
+    keywords,
+    defaultFontCSS='https://ik.imagekit.io/chinesefonts/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/result.css'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <!-- Global Metadata -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+
+        <!-- Canonical URL -->
+        <link rel="canonical" href={canonicalURL} />
+        <slot name="meta" />
+        <!-- Primary Meta Tags -->
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="keywords" content={'中文字体,css,' + keywords} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+        <link rel="stylesheet" href={defaultFontCSS}>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>
