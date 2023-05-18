@@ -20,7 +20,7 @@
         "semver": "^7.3.8"
     },
     "dependencies": {
-        "@konghayao/cn-font-split": "3.3.1",
+        "@konghayao/cn-font-split": "^3.4.0",
         "dotenv": "^16.0.3",
         "glob": "^10.2.3",
         "imagekit": "^4.1.3",

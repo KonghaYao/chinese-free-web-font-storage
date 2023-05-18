@@ -5,8 +5,8 @@ importers:
   .:
     dependencies:
       '@konghayao/cn-font-split':
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: ^3.4.0
+        version: 3.4.0
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
@@ -84,14 +84,13 @@ packages:
       wrap-ansi-cjs: /wrap-ansi@7.0.0
     dev: false
 
-  /@konghayao/cn-font-split@3.3.1:
-    resolution: {integrity: sha512-F50iNQ7EkeiXzb5CznB1WyHK6POWYBt/UVQOkkobOc+HVkMHUGEz0lGXWwdfM9t9vPY2D4BTwYxKlYcuaN4lhQ==}
+  /@konghayao/cn-font-split@3.4.0:
+    resolution: {integrity: sha512-6poTWqLNTHvsog6NOVaJ0fAd7oA2eOGEzBfEDdoNYzAyOUZuJmoIB5TRphp/FD8XO49BhXsZf0lf0kURTTm8pQ==}
     dependencies:
       '@konghayao/image-text': 1.0.4
       chalk: 4.1.2
       fonteditor-core: 2.1.11
       fs-extra: 10.1.0
-      lodash-es: 4.17.21
     dev: false
 
   /@konghayao/image-text@1.0.4:
@@ -1091,10 +1090,6 @@ packages:
       rechoir: 0.8.0
       resolve: 1.22.1
     dev: true
-
-  /lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-    dev: false
 
   /lodash.get@4.4.2:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
