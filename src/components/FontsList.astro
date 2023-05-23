@@ -1,29 +1,86 @@
 ---
-import Index from '../../index.json'
-const list  = Object.entries(Index).map(([id,value])=>{
-    return {...value,id}
-})
+import Index from "../../index.json";
+const list = Object.entries(Index).map(([id, value]) => {
+    return { ...value, id };
+});
 ---
 
-<section class="w-full pb-12" id='font-list'>
-    <ul class="columns-1 md:columns-2 gap-4">{
-list.map(item=>{
-        return <li>
-        <header class="text-2xl text-rose-600 py-4 mt-4 text-center">{item.name}</header>
-          <ul class="flex gap-2 flex-wrap justify-center">
-            {item.remotePath.map(
-                remote=>{
-                    const [_,name]=remote.match(/dist\/(.*?)\/result/)!
-                    return <li class="bg-neutral-200 rounded-md overflow-hidden flex-wrap p-4">
-                        <a href={`/fonts/${item.id}/${name}`}>
-                            <img loading='lazy' class="invert h-24" src={"https://ik.imagekit.io/chinesefonts/"+remote.replace('result.css','preview.png')} alt="">
-                            </a>
-                            </li>
-                }
-            )}
-            </ul>
-        </li>
-})
-        }
-    </ul>
+<section
+    class="w-screen max-w-6xl overflow-hidden h-[90vh] gap-2 flex"
+    id="font-list"
+>
+    <nav class="flex-1 overflow-scroll md:p-4">
+        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">
+            字体列表
+        </h2>
+        <ul
+            id="fonts-index"
+            class="flex flex-wrap flex-1 py-4 text-xs md:text-base"
+        >
+            {
+                list.map((i) => {
+                    return (
+                        <li
+                            class="cursor-pointer px-4 py-2 transition-colors hover:bg-neutral-200  hover:text-rose-700 "
+                            data-name={i.name}
+                        >
+                            {i.name}
+                        </li>
+                    );
+                })
+            }
+        </ul>
+
+        <script>
+            const list = document.getElementById("fonts-index").children;
+            [...list].forEach((li) => {
+                li.onclick = () => {
+                    document
+                        .getElementById("fonts-" + li.dataset.name)
+                        .scrollIntoView({ behavior: "smooth" });
+                };
+            });
+        </script>
+    </nav>
+    <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg">
+        <ul class="flex flex-col gap-4">
+            {
+                list.map((item) => {
+                    return (
+                        <li id={"fonts-" + item.name}>
+                            <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
+                                {item.name}
+                            </header>
+                            <ul class="flex flex-col  justify-center gap-2">
+                                {item.remotePath.map((remote) => {
+                                    const [_, name] =
+                                        remote.match(/dist\/(.*?)\/result/)!;
+                                    return (
+                                        <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-4">
+                                            <a
+                                                href={`/fonts/${item.id}/${name}`}
+                                            >
+                                                <img
+                                                    loading="lazy"
+                                                    class="h-8 invert md:h-12"
+                                                    src={
+                                                        "https://ik.imagekit.io/chinesefonts/" +
+                                                        remote.replace(
+                                                            "result.css",
+                                                            "preview.png"
+                                                        )
+                                                    }
+                                                    alt={name + "字体展示"}
+                                                />
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </li>
+                    );
+                })
+            }
+        </ul>
+    </nav>
 </section>

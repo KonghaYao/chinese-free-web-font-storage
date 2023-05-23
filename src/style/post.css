@@ -1,0 +1,9 @@
+.heti {
+    font-family: 'LXGW WenKai Light';
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.heti > p {
+    text-indent: 2em;
+    word-spacing: 0.3em;
+}

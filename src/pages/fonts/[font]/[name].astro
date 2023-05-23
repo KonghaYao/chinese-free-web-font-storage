@@ -13,7 +13,7 @@ const reporter = await fetch(
 const style = `font-family:"${reporter.message.fontFamily}";font-bold:"${reporter.message.fontSubFamily}"`;
 ---
 
-<Layout canonicalURL={`/fonts/${font}`} defaultFontCSS={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`}>
+<Layout canonicalURL={`/fonts/${font}`} defaultFontCSS={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`} title={name}  image={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/preview.png`}>
     <section style={style}>
         <FontDetails
             reporter={reporter}

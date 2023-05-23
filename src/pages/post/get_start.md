@@ -1,6 +1,16 @@
 ---
-layout: ../../layouts/PostLayout.astro
+layout: ../../Layout/PostLayout.astro
 title: 中文网字计划
+image: ''
+article:
+    authors:
+        - 江夏尧
+    section: 概述
+    tags:
+        - 概述
+        - 文本
+    publishedTime: 2023-5-23
+    modifiedTime: 2023-5-23
 ---
 
 # 中文网字计划
