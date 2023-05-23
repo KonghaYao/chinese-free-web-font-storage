@@ -90,15 +90,3 @@ for (const iterator of packages) {
         fontsName.map((i) => path.basename(i).replace(/\.\w+$/, ""))
     );
 }
-
-// 建立 index.json
-const data = fse.readdirSync("./packages");
-const overrides = fse.readJSONSync("./overrides.json");
-const index = {
-    packages: Object.fromEntries(
-        data.map((key) => {
-            return [key, overrides[key] ?? ""];
-        })
-    ),
-};
-fse.writeJSONSync("index.json", index);
