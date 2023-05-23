@@ -32,14 +32,19 @@ const list = Object.entries(Index).map(([id, value]) => {
         </ul>
 
         <script>
-            const list = document.getElementById("fonts-index").children;
-            [...list].forEach((li) => {
-                li.onclick = () => {
-                    document
-                        .getElementById("fonts-" + li.dataset.name)
-                        .scrollIntoView({ behavior: "smooth" });
-                };
-            });
+            window.onload = () => {
+                const list = document.getElementById("fonts-index").children;
+                [...list].forEach((li) => {
+                    li.onclick = () => {
+                        console.log(li.dataset.name);
+                        document
+                            .getElementById("fonts-" + li.dataset.name)
+                            .scrollIntoView();
+                        // 加上 smooth 会 bug😂
+                        // { behavior: "smooth" }
+                    };
+                });
+            };
         </script>
     </nav>
     <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg">
