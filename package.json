@@ -45,6 +45,6 @@
         "notyf": "^3.10.0",
         "pretty-bytes": "^6.0.0",
         "solid-js": "^1.6.11",
-        "tailwindcss": "^3.0.24"
+        "tailwindcss": "^3.2.7"
     }
 }
