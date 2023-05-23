@@ -6,7 +6,7 @@ const list = Object.entries(Index).map(([id, value]) => {
 ---
 
 <section
-    class="w-screen max-w-6xl overflow-hidden h-[90vh] gap-2 flex"
+    class="w-screen max-w-6xl overflow-hidden h-[90vh] gap-2 flex py-4"
     id="font-list"
 >
     <nav class="flex-1 overflow-scroll md:p-4">
@@ -37,17 +37,16 @@ const list = Object.entries(Index).map(([id, value]) => {
                 [...list].forEach((li) => {
                     li.onclick = () => {
                         console.log(li.dataset.name);
-                        document
-                            .getElementById("fonts-" + li.dataset.name)
-                            .scrollIntoView();
-                        // 加上 smooth 会 bug😂
-                        // { behavior: "smooth" }
+                        const it = document.getElementById(
+                            "fonts-" + li.dataset.name
+                        );
+                        it.scrollIntoView();
                     };
                 });
             };
         </script>
     </nav>
-    <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg">
+    <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg my-4">
         <ul class="flex flex-col gap-4">
             {
                 list.map((item) => {
