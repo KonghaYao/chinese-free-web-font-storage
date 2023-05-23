@@ -1,5 +1,14 @@
 import { atom } from '@cn-ui/use';
-import { Component, createSelector, For, Match, Show, Switch, useContext } from 'solid-js';
+import {
+    Component,
+    createSelector,
+    For,
+    JSXElement,
+    Match,
+    Show,
+    Switch,
+    useContext,
+} from 'solid-js';
 import { FontInformation } from './SubPanel/FontInformation';
 
 import { Coverage } from './SubPanel/Coverage';
@@ -11,33 +20,32 @@ export const FontDetails: Component<DetailContextType> = (props) => {
     const ShowingPanel = atom('');
     const isShowingPanel = createSelector(ShowingPanel);
     const PanelList = [
-        { value: 'information', label: '字体详情' },
-        { value: 'font-usage', label: '尝试字体' },
-        { value: 'web-support', label: 'Web 支持' },
-        { value: 'coverage', label: '中文覆盖率' },
+        { value: 'information', label: '📄 字体详情' },
+        { value: 'font-usage', label: '✒️ 尝试字体' },
+        { value: 'web-support', label: '✨ Web 支持' },
+        { value: 'coverage', label: '📦 中文覆盖率' },
     ];
 
     return (
         <DetailedContext.Provider value={{ ...props }}>
-            <main class="relative flex h-screen w-screen flex-col">
-                <FontHome></FontHome>
-                <div class="flex justify-center gap-4 py-2">
-                    <For each={PanelList}>
-                        {(item) => {
-                            return (
-                                <div
-                                    class="flex-none cursor-pointer rounded-lg bg-neutral-200 p-2 text-lg transition-colors duration-300"
-                                    classList={{
-                                        ['bg-green-600 text-white']: isShowingPanel(item.value),
-                                    }}
-                                    onclick={() => ShowingPanel(item.value)}
-                                >
-                                    {item.label}
-                                </div>
-                            );
-                        }}
-                    </For>
-                </div>
+            <main class="relative flex  w-screen flex-col">
+                <FontHome>
+                    <nav class="flex flex-col justify-center gap-4 py-2 px-8">
+                        <For each={PanelList}>
+                            {(item) => {
+                                return (
+                                    <div
+                                        class="flex-none cursor-pointer rounded-lg bg-white p-2 transition-colors duration-300 hover:bg-neutral-100 "
+                                        onclick={() => ShowingPanel(item.value)}
+                                    >
+                                        {item.label}
+                                    </div>
+                                );
+                            }}
+                        </For>
+                    </nav>
+                </FontHome>
+
                 <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
                     <nav
                         class=" absolute top-0 left-0 h-screen w-screen"
@@ -79,7 +87,7 @@ export const FontDetails: Component<DetailContextType> = (props) => {
     );
 };
 
-const FontHome = () => {
+const FontHome = (props: { children: JSXElement }) => {
     const showingPanel = atom('white');
     const isSelected = createSelector(showingPanel);
     const temp = [
@@ -101,25 +109,22 @@ const FontHome = () => {
     ];
     const FontStore = useContext(DetailedContext)!;
     return (
-        <main class="my-4 flex w-screen  flex-1 flex-col">
-            <header class="p-4 ">
-                <header class="text-2xl">
+        <section class="my-4 flex w-screen  flex-1 flex-col">
+            <header class="mb-8 p-4">
+                <h1 class="text-2xl">
                     {FontStore.cnName}
                     <IconLink></IconLink>
-                </header>
-                <div class="text-xs text-gray-600">
+                </h1>
+                <aside class="text-xs text-gray-600">
                     由于本站资源较多，故加载稍慢，请稍等。可以尝试刷新页面。
-                </div>
-                <div class="flex gap-4 py-2">
-                    <a
-                        href="/index.html"
-                        class="rounded-lg bg-neutral-300 px-2 py-1  transition-colors duration-300"
-                    >
-                        返回
-                    </a>
+                </aside>
+            </header>
+
+            <section class=" flex h-full flex-1 place-content-center overflow-y-auto">
+                <nav class="flex flex-col items-center justify-center gap-4  px-4 py-2">
                     <a
                         href={`/heti.html?font=${FontStore.packageName}&name=${FontStore.subName}&family=${FontStore.reporter.message.fontFamily}&subFamily=${FontStore.reporter.message.fontSubFamily}`}
-                        class="rounded-lg bg-neutral-200 px-2 py-1  transition-colors duration-300"
+                        class="rounded-lg bg-white px-2 py-1 transition-colors  duration-300 hover:bg-neutral-100"
                     >
                         文章测试
                     </a>
@@ -127,9 +132,10 @@ const FontHome = () => {
                         {(item) => {
                             return (
                                 <button
-                                    class="rounded-lg bg-neutral-200 px-2 py-1 transition-colors duration-300"
+                                    class="rounded-lg  px-2 py-1 transition-colors duration-300 hover:bg-neutral-100"
                                     classList={{
                                         'bg-sky-600 text-white': isSelected(item.value),
+                                        'bg-white': !isSelected(item.value),
                                     }}
                                     onclick={() => showingPanel(item.value)}
                                 >
@@ -138,14 +144,16 @@ const FontHome = () => {
                             );
                         }}
                     </For>
-                </div>
-            </header>
-            <section class=" flex h-full flex-1 place-content-center overflow-y-auto">
-                {isSelected('poetry') && <Poetry></Poetry>}
-                {isSelected('white') && <BG class="bg-white text-black"></BG>}
-                {isSelected('black') && <BG class="bg-black text-white"></BG>}
+                </nav>
+                <section class="flex flex-1 items-center justify-center">
+                    {isSelected('poetry') && <Poetry></Poetry>}
+                    {isSelected('white') && <BG class="bg-white text-black"></BG>}
+                    {isSelected('black') && <BG class="bg-black text-white"></BG>}
+                </section>
+
+                {props.children}
             </section>
-        </main>
+        </section>
     );
 };
 const IconLink = () => {
@@ -203,7 +211,7 @@ const BG: Component<{ class: string }> = (props) => {
 
 const Poetry = () => {
     return (
-        <div class="poetry ">
+        <div class="poetry rounded-xl bg-white p-4">
             <header class="px-2 text-2xl">沁园春 雪</header>
             <p>北国风光，千里冰封，万里雪飘。</p>
             <p>望长城内外，惟余莽莽；</p>

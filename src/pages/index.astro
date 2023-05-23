@@ -1,13 +1,14 @@
 ---
 import Layout from "../Layout/Layout.astro";
 import FontList from "../components/FontsList.astro";
+import Picture from "../components/Picture.astro";
 export const prerender = true;
 ---
 
 <Layout>
     <main class="relative h-full w-screen">
         <section
-            class="relative z-10 flex h-[80vh] w-screen flex-col items-center justify-center"
+            class="relative z-10 flex h-[90vh] w-screen flex-col items-center justify-center"
         >
             <nav
                 class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
@@ -26,10 +27,8 @@ export const prerender = true;
                 <b class="px-2 font-bold text-sky-600">网站开发者</b>
                 提供美丽字体的项目。
             </nav>
-        </section>
-        <section class="w-full h-[10vh] items-center flex justify-center">
             <button
-                class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2"
+                class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
                 onclick="document.querySelector('#font-list').scrollIntoView({ behavior: 'smooth' })"
             >
                          开始搜索
@@ -56,7 +55,15 @@ export const prerender = true;
                 尧
             </div>
         </aside>
-        <section class="flex flex-col justify-center items-center py-12">
+        <section
+            class="flex relative flex-col justify-center items-center py-12 overflow-hidden"
+        >
+            <Picture
+                className=" object-cover"
+                src="https://ik.imagekit.io/chinesefonts/tr:w-1200,h-300/image/photo-1551101449-64c570fc93e8_ixlib_rb-4.0.3_q_85_fm_jpg_crop_entropy_cs_srgb_dl_wong-zihoo-3OjwScH356E-unsplash.jpg"
+                author="wong zihoo"
+                link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
+            />
             <FontList />
         </section>
     </main>

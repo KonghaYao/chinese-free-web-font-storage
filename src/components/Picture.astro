@@ -1,0 +1,19 @@
+---
+export type Prop = {
+    src: string;
+    className?: string;
+    author?: string;
+    link?: string;
+};
+const { src, className, author, link } = Astro.props;
+---
+
+<picture class={"w-full relative " + className ?? ""}>
+    <source media="(min-width: 1200px)" srcset={src + "?q=50&"} />
+    <source media="(min-width: 768px)" srcset={src + "?q=30&tr:ar-4-3"} />
+    <source media="(min-width: 576px)" srcset={src + "?q=10&tr:ar-4-3"} />
+    <img src={src + "?q=5&tr:ar-4-3"} class="w-full" alt="A responsive image" />
+    <a href={link} class="absolute bottom-2 left-2" target="_blank">
+        <aside class="text-white text-xs">Captured By {author}</aside>
+    </a>
+</picture>

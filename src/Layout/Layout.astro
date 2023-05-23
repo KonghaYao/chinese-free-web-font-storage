@@ -18,6 +18,7 @@ export interface Props {
     keywords?: string;
     meta?: any;
     defaultFontCSS?: string;
+    style?: string;
 }
 const {
     title = "中文网字计划",
@@ -26,6 +27,7 @@ const {
     image = "",
     type: ogType,
     keywords,
+    style,
     defaultFontCSS = "https://ik.imagekit.io/chinesefonts/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/result.css",
 } = Astro.props;
 ---
@@ -60,7 +62,7 @@ const {
         <meta name="keywords" content={"中文字体,css,webfont" + keywords} />
         <link rel="stylesheet" href={defaultFontCSS} />
     </head>
-    <body>
+    <body style={style}>
         <GlobalHeader />
         <slot />
     </body>
