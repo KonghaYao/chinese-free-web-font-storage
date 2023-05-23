@@ -9,7 +9,7 @@ const argv = process.argv.slice(2);
 
 const input = mri(argv);
 // 重新打包字体文件
-
+globalThis.fetch = null;
 console.log("mode", input.mode);
 
 const packages = fse.readdirSync("./packages");
