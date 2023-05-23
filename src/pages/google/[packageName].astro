@@ -1,8 +1,15 @@
 ---
-import { GoogleFontDetailed } from '../../GoogleSupport/GoogleFontDetailed';
-import { getMetaData } from '../../GoogleSupport/useGoogleFontData';
-import Layout from '../../Layout/Layout.astro';
-
+import { GoogleFontDetailed } from "../../GoogleSupport/GoogleFontDetailed";
+import {
+    getFontList,
+    getMetaData,
+} from "../../GoogleSupport/useGoogleFontData";
+import Layout from "../../Layout/Layout.astro";
+export async function getStaticPaths() {
+    return getFontList().then((list) => {
+        return list.map((name) => ({ params: { packageName: name } }));
+    });
+}
 const { packageName } = Astro.params;
 const meta = await getMetaData(packageName!);
 ---

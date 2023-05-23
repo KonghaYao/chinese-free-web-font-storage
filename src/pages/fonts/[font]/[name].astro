@@ -2,7 +2,15 @@
 import Layout from "../../../Layout/Layout.astro";
 import type { FontReporter } from "../../../components/fonts/utils";
 import { FontDetails } from "../../../page/FontDetails";
-
+import data from "../../../../index.json";
+export function getStaticPaths() {
+    return Object.entries(data).flatMap(([key, val]) => {
+        return val.remotePath.map((remote) => {
+            const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
+            return { params: { font: key, name } };
+        });
+    });
+}
 const { font, version, name } = Astro.params;
 const fileName = name!
     .replaceAll(" ", "_")
