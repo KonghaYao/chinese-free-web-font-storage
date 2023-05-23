@@ -1,9 +1,6 @@
 ---
 import { GoogleFontDetailed } from "../../GoogleSupport/GoogleFontDetailed";
-import {
-    getFontList,
-    getMetaData,
-} from "../../GoogleSupport/useGoogleFontData";
+import { getFontList } from "../../GoogleSupport/useGoogleFontData";
 import Layout from "../../Layout/Layout.astro";
 export async function getStaticPaths() {
     return getFontList().then((list) => {
@@ -11,9 +8,8 @@ export async function getStaticPaths() {
     });
 }
 const { packageName } = Astro.params;
-const meta = await getMetaData(packageName!);
 ---
 
-<Layout>
-    <GoogleFontDetailed packageName={packageName!} meta={meta} client:load />
+<Layout canonicalURL="https://chinese-font.netlify.app">
+    <GoogleFontDetailed packageName={packageName!} client:only="solid-js" />
 </Layout>

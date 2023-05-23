@@ -1,13 +1,21 @@
-import { For } from 'solid-js';
+import { Component, For, Suspense, lazy } from 'solid-js';
 import { selectDefPreviewText } from './defPreviewLanguages';
-import type { FontMetaData } from './useGoogleFontData';
+import { FontMetaData, getMetaData } from './useGoogleFontData';
 import copy from 'copy-to-clipboard';
-
-export const GoogleFontDetailed = (props: { packageName: string; meta: FontMetaData }) => {
-    const packageName = props.packageName;
+export const GoogleFontDetailed = (props: { packageName: string }) => {
+    const A = lazy(async () => {
+        const meta = await getMetaData(props.packageName!);
+        return { default: () => _GoogleFontDetailed({ meta }) };
+    });
+    return (
+        <Suspense>
+            <A></A>
+        </Suspense>
+    );
+};
+const _GoogleFontDetailed = (props: { meta: FontMetaData }) => {
     const FontStore = props.meta;
-    // const { packageName } = useParams();
-    // const [FontStore] = createResource<FontMetaData>(() => getMetaData(packageName));
+
     const transformFontData = (
         item: Record<string, Object>,
         lastName: string[] = []
