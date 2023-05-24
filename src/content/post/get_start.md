@@ -1,16 +1,15 @@
 ---
 layout: ../../Layout/PostLayout.astro
-title: 中文网字计划
-image: ''
+title: 中文网字计划概述
+description: 这是一个概述
 article:
     authors:
         - 江夏尧
-    section: 概述
+    section: 使用教程
     tags:
-        - 概述
-        - 文本
-    publishedTime: 2023-5-23
-    modifiedTime: 2023-5-23
+        - 计划概述
+    pubDate: 2023-5-23
+    image: ''
 ---
 
 # 中文网字计划

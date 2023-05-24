@@ -1,73 +1,82 @@
 ---
 import Picture from "./Picture.astro";
-
 ---
 
-<section class="w-full my-16 py-8 snap-start relative overflow-hidden flex flex-col justify-center h-fit">
+<section
+    class="w-full my-16 py-8 snap-center relative overflow-hidden flex flex-col justify-center h-[80vh]"
+>
     <Picture
         relative={false}
         className="block absolute top-0 left-0 h-full brightness-75"
         src="https://ik.imagekit.io/chinesefonts/tr:w-1200,h-400/image/photo-1551101449-64c570fc93e8_ixlib_rb-4.0.3_q_85_fm_jpg_crop_entropy_cs_srgb_dl_wong-zihoo-3OjwScH356E-unsplash.jpg"
         author="wong zihoo"
         link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
+    />
+    <h2 class="text-white text-4xl w-full text-center brightness-125 relative">
+        ---✨ 优势特点---
+    </h2>
+
+    <ul class="flex justify-evenly items-center my-8 relative text-white">
+        <li>
+            <h2 class="text-xs text-neutral-200">可以覆盖所有的字体</h2>
+            <h1 class="text-xl text-white">🗺️全量级字符</h1>
+        </li>
+        <li>
+            <h2 class="text-xs text-neutral-200">可靠缓存、边缘加载</h2>
+            <h1 class="text-xl text-white">🚀极致渲染速度</h1>
+        </li>
+        <li>
+            <h2 class="text-xs text-neutral-200">自动判断、自动加载</h2>
+            <h1 class="text-xl text-white">🍕字体按需载入</h1>
+        </li>
+        <li>
+            <h2 class="text-xs text-neutral-200">代码简单、替换性强</h2>
+            <h1 class="text-xl text-white">🏞️低侵入性</h1>
+        </li>
+    </ul>
+    <h2
+        class="text-white text-4xl w-full text-center brightness-125 relative mt-16"
     >
-    </Picture>
-    <h2 class="text-white text-4xl w-full text-center brightness-125 relative ">---✨ 优势特点---</h2>
-
+        ---⚙️ 技术开源---
+    </h2>
     <ul class="flex justify-evenly items-center my-8 relative text-white">
         <li>
-          <h2 class="text-xs text-neutral-200">可以覆盖所有的字体</h2>
-          <h1 class="text-xl text-white">🗺️全量级字符</h1>
+            <h2 class="text-xs text-neutral-200">@konghayao/cn-font-split</h2>
+            <h1 class="text-xl">📦字体分包插件</h1>
+            <nav>
+                <a
+                    href="https://www.npmjs.com/package/@konghayao/cn-font-split"
+                    target="_blank"
+                >
+                    <button> 开源 ➡️</button>
+                </a>
+            </nav>
         </li>
         <li>
-          <h2 class="text-xs text-neutral-200">可靠缓存、边缘加载</h2>
-          <h1 class="text-xl text-white">🚀极致渲染速度</h1>
+            <h2 class="text-xs text-neutral-200">font-server</h2>
+            <h1 class="text-xl">🤖字体管理系统</h1>
+            <nav>
+                <a
+                    href="https://github.com/KonghaYao/font-server"
+                    target="_blank"
+                >
+                    <button> 开源 ➡️</button>
+                </a>
+            </nav>
         </li>
         <li>
-          <h2 class="text-xs text-neutral-200">自动判断、自动加载</h2>
-          <h1 class="text-xl text-white">🍕字体按需载入</h1>
-        </li>
-        <li>
-          <h2 class="text-xs text-neutral-200">代码简单、替换性强</h2>
-          <h1 class="text-xl text-white">🏞️低侵入性</h1>
+            <h2 class="text-xs text-neutral-200">
+                chinese-free-web-font-storage
+            </h2>
+            <h1 class="text-xl">🚛中文WebFont收集</h1>
+            <nav>
+                <a
+                    href="https://github.com/KonghaYao/chinese-free-web-font-storage"
+                    target="_blank"
+                >
+                    <button> 开源 ➡️</button>
+                </a>
+            </nav>
         </li>
     </ul>
-    <h2 class="text-white text-4xl w-full text-center brightness-125 relative mt-16">---⚙️ 技术开源---</h2>
-    <ul class="flex justify-evenly items-center my-8 relative text-white">
-        <li>
-          <h2 class="text-xs text-neutral-200">@konghayao/cn-font-split</h2>
-          <h1 class="text-xl">📦字体分包插件</h1>
-          <nav>
-            <a href="https://www.npmjs.com/package/@konghayao/cn-font-split" target="_blank">
-                <button>
-                    开源 ➡️
-                </button>
-            </a>
-          </nav>
-        </li>
-        <li>
-          <h2 class="text-xs text-neutral-200">font-server</h2>
-          <h1 class="text-xl">🤖字体管理系统</h1>
-          <nav>
-            <a href="https://github.com/KonghaYao/font-server" target="_blank">
-                <button>
-                    开源 ➡️
-                </button>
-            </a>
-          </nav>
-        </li>
-        <li>
-          <h2 class="text-xs text-neutral-200">chinese-free-web-font-storage</h2>
-          <h1 class="text-xl">🚛中文WebFont收集</h1>
-          <nav>
-            <a href="https://github.com/KonghaYao/chinese-free-web-font-storage" target="_blank">
-                <button>
-                    开源 ➡️
-                </button>
-            </a>
-          </nav>
-        </li>
-    </ul>
-
-
 </section>

@@ -1,62 +1,67 @@
 ---
 import Layout from "../Layout/Layout.astro";
+import AllFooter from "../components/AllFooter.astro";
 import FontList from "../components/FontsList.astro";
 import TechSupport from "../components/TechSupport.astro";
 export const prerender = true;
 ---
 
-<Layout htmlClass='snap-y snap-mandatory scroll-smooth' class='flex flex-col items-center'>
-        <section
-            class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
+<Layout
+    htmlClass="snap-y snap-mandatory scroll-smooth"
+    class="flex flex-col items-center"
+>
+    <section
+        class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
+    >
+        <nav
+            class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
         >
-            <nav
-                class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
-            >
-                Chinese Web Fonts Plan
-            </nav>
-            <header
-                class="home-title xs:text-[8vh] text-[6vh] leading-[1.1em] sm:text-[11vh] lg:text-[20vh]"
-            >
-                中文网字计划
-            </header>
-            <nav
-                class="max-w-[30em] px-4 pt-4 text-xs font-thin text-gray-600 sm:max-w-[30em] sm:text-lg lg:max-w-none lg:text-2xl"
-            >
-                中文网字计划是收录众多中文字体并通过 Web Font 的形式为
-                <b class="px-2 font-bold text-sky-600">网站开发者</b>
-                提供美丽字体的项目。
-            </nav>
-            <button
-                class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
-                onclick="document.querySelector('#font-list').scrollIntoView({ behavior: 'smooth' })"
-            >
-                         开始搜索
-                     </button>
-                 </section>
+            Chinese Web Fonts Plan
+        </nav>
+        <header
+            class="home-title xs:text-[8vh] text-[6vh] leading-[1.1em] sm:text-[11vh] lg:text-[20vh]"
+        >
+            中文网字计划
+        </header>
+        <nav
+            class="max-w-[30em] px-4 pt-4 text-xs font-thin text-gray-600 sm:max-w-[30em] sm:text-lg lg:max-w-none lg:text-2xl"
+        >
+            中文网字计划是收录众多中文字体并通过 Web Font 的形式为
+            <b class="px-2 font-bold text-sky-600">网站开发者</b>
+            提供美丽字体的项目。
+        </nav>
+        <button
+            class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
+            onclick="document.querySelector('#font-list').scrollIntoView({ behavior: 'smooth' })"
+        >
+                    开始搜索
+                </button>
+            </section>
 
-                 <aside class="pointer-events-none">
-            <div
-                class="absolute top-52 -left-16 text-gray-300 opacity-50"
-                style="font-size:50vh"
-            >
-                江
-            </div>
-            <div
-                class="absolute top-36 -right-24 text-gray-300 opacity-50"
-                style='font-family:"jiangxizhuokai";font-size:30vh'
-            >
-                夏
-            </div>
-            <div
-                class="absolute -top-16 left-8 text-gray-300 opacity-50"
-                style='font-family:"jiangxizhuokai";font-size:20vh'
-            >
-                尧
-            </div>
-        </aside>
+            <aside class="point
+er-events-none">
+        <div
+            class="absolute top-52 -left-16 text-gray-300 opacity-50"
+            style="font-size:50vh"
+        >
+            江
+        </div>
+        <div
+            class="absolute top-36 -right-24 text-gray-300 opacity-50"
+            style='font-family:"jiangxizhuokai";font-size:30vh'
+        >
+            夏
+        </div>
+        <div
+            class="absolute -top-16 left-8 text-gray-300 opacity-50"
+            style='font-family:"jiangxizhuokai";font-size:20vh'
+        >
+            尧
+        </div>
+    </aside>
 
+    <FontList />
 
-        <FontList />
-
-        <TechSupport></TechSupport>
+    <TechSupport />
+    <AllFooter />
 </Layout>

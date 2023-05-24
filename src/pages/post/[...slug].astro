@@ -1,0 +1,33 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import PostLayout from "../../Layout/PostLayout.astro";
+import GlobalHeader from "../../components/GlobalHeader.astro";
+import HeroImage from "../../components/HeroImage.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("post");
+    return posts.map((post) => ({
+        params: { slug: post.slug },
+        props: post,
+    }));
+}
+
+type Props = CollectionEntry<"post">;
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<PostLayout
+    title={post.data.title}
+    description={post.data.description}
+    article={post.data.article}
+>
+    <GlobalHeader />
+    <section class="h-screen">
+        <h1>{post.data.title}</h1>
+        <HeroImage image={post.data.article.image} />
+    </section>
+    <artcile class="heti mt-24 my-24 select-text relative z-10">
+        <Content />
+    </artcile>
+</PostLayout>

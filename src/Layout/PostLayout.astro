@@ -9,7 +9,7 @@ import { SEO } from "astro-seo";
 export interface Props {
     title?: string;
     description?: string;
-    image?: string;
+
     keywords?: string;
     meta?: any;
     defaultFontCSS?: string;
@@ -19,12 +19,13 @@ export interface Props {
         authors?: string[] | undefined;
         section?: string | undefined;
         tags?: string[] | undefined;
+        image?: string;
     };
 }
 const {
     title = "中文网字计划",
     description = "中文网字体计划，致力于提供免费的中文网络 CSS 字体支持",
-    image = "",
+
     keywords,
     defaultFontCSS = "https://ik.imagekit.io/chinesefonts/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css",
     article,
@@ -50,7 +51,7 @@ const {
                 basic: {
                     title: title,
                     type: "article",
-                    image,
+                    image:article?.image??"",
                 },
                 optional: {
                     siteName: "中文网字计划",
@@ -62,13 +63,6 @@ const {
         <link rel="stylesheet" href={defaultFontCSS} />
     </head>
     <body class="flex flex-col justify-center items-center">
-        <GlobalHeader />
-        <section class="h-screen">
-            <h1>{title}</h1>
-            <HeroImage image={image} />
-        </section>
-        <artcile class="heti mt-24 my-24 select-text relative z-10">
-            <slot />
-        </artcile>
+       <slot></slot>
     </body>
 </html>

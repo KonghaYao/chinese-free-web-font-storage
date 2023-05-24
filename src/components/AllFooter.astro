@@ -1,1 +1,41 @@
-<footer class="flex"></footer>
+---
+import { sections } from "../utils/getPostSections";
+---
+
+<footer class="flex flex-col w-full bg-black text-white gap-8 snap-end">
+    <section class="flex gap-4 w-full justify-center text-sm py-12">
+        <nav>
+            <h3 class="text-lg">🛳️资源</h3>
+            <ul>
+                {
+                    [...sections.entries()].map(([sectionName, i]) => {
+                        return (
+                            <li>
+                                <a href={`/article#${sectionName}`}>
+                                    🎉 {sectionName}
+                                    <sup>{i.length}</sup>
+                                </a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
+        <nav>
+            <h3 class="text-lg">🎉帮助</h3>
+            <ul>
+                <li>
+                    <a href="https://github.com/konghayao" target="_blank">
+                        Github</a
+                    >
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <section
+        class="flex justify-between text-xs text-neutral-300 border-t border-neutral-600 p-4"
+    >
+        <div></div>
+        <div>© 2023 Made with ❤ by 江夏尧</div>
+    </section>
+</footer>
