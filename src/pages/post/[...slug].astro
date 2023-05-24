@@ -23,11 +23,10 @@ const { Content } = await post.render();
     article={post.data.article}
 >
     <GlobalHeader />
-    <section class="h-screen">
-        <h1>{post.data.title}</h1>
-        <HeroImage image={post.data.article.image} />
-    </section>
-    <artcile class="heti mt-24 my-24 select-text relative z-10">
+
+    <HeroImage image={post.data.article.image} />
+
+    <artcile class="heti mb-24 select-text relative z-10">
         <Content />
     </artcile>
 </PostLayout>

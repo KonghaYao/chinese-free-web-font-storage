@@ -2,8 +2,6 @@
 import "../index.css";
 import "../style/heti_change.css";
 import "../style/post.css";
-import GlobalHeader from "../components/GlobalHeader.astro";
-import HeroImage from "../components/HeroImage.astro";
 import { SEO } from "astro-seo";
 
 export interface Props {
@@ -51,7 +49,7 @@ const {
                 basic: {
                     title: title,
                     type: "article",
-                    image:article?.image??"",
+                    image: article?.image ?? "",
                 },
                 optional: {
                     siteName: "中文网字计划",
@@ -62,7 +60,7 @@ const {
         <meta name="keywords" content={"中文字体,css,webfont" + keywords} />
         <link rel="stylesheet" href={defaultFontCSS} />
     </head>
-    <body class="flex flex-col justify-center items-center">
-       <slot></slot>
+    <body class="post-body flex flex-col justify-center items-center">
+        <slot />
     </body>
 </html>
