@@ -14,7 +14,6 @@
     "license": "MIT",
     "devDependencies": {
         "@solidjs/router": "^0.5.0",
-        "@tailwindcss/line-clamp": "^0.4.2",
         "@types/fs-extra": "^9.0.13",
         "@types/md5": "^2.3.2",
         "autoprefixer": "^10.4.8",
@@ -45,6 +44,6 @@
         "notyf": "^3.10.0",
         "pretty-bytes": "^6.0.0",
         "solid-js": "^1.6.11",
-        "tailwindcss": "^3.2.7"
+        "tailwindcss": "^3.3.2"
     }
 }

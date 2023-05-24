@@ -6,7 +6,7 @@ const list = Object.entries(Index).map(([id, value]) => {
 ---
 
 <section
-    class="w-screen max-w-6xl overflow-hidden h-[90vh] gap-2 flex py-4 relative z-0"
+    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 flex pt-16 z-0 snap-start "
     id="font-list"
 >
     <nav class="flex-1 overflow-scroll md:p-4">
@@ -33,14 +33,14 @@ const list = Object.entries(Index).map(([id, value]) => {
 
         <script>
             window.onload = () => {
-                const list = document.getElementById("fonts-index").children;
-                [...list].forEach((li) => {
+                const list = document.getElementById("fonts-index")!.children;
+                ([...list] as HTMLLIElement[]).forEach((li) => {
                     li.onclick = () => {
                         console.log(li.dataset.name);
                         const it = document.getElementById(
                             "fonts-" + li.dataset.name
                         );
-                        it.scrollIntoView();
+                        it?.scrollIntoView({block: "nearest", inline: "nearest"});
                     };
                 });
             };
@@ -60,13 +60,13 @@ const list = Object.entries(Index).map(([id, value]) => {
                                     const [_, name] =
                                         remote.match(/dist\/(.*?)\/result/)!;
                                     return (
-                                        <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-4">
+                                        <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
                                             <a
                                                 href={`/fonts/${item.id}/${name}`}
                                             >
                                                 <img
                                                     loading="lazy"
-                                                    class="h-8 invert md:h-12"
+                                                    class="h-8 invert md:h-14"
                                                     src={
                                                         "https://ik.imagekit.io/chinesefonts/" +
                                                         remote.replace(

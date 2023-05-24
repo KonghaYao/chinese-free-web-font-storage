@@ -1,14 +1,13 @@
 ---
 import Layout from "../Layout/Layout.astro";
 import FontList from "../components/FontsList.astro";
-import Picture from "../components/Picture.astro";
+import TechSupport from "../components/TechSupport.astro";
 export const prerender = true;
 ---
 
-<Layout>
-    <main class="relative h-full w-screen">
+<Layout htmlClass='snap-y snap-mandatory scroll-smooth' class='flex flex-col items-center'>
         <section
-            class="relative z-10 flex h-[90vh] w-screen flex-col items-center justify-center"
+            class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
         >
             <nav
                 class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
@@ -55,16 +54,9 @@ export const prerender = true;
                 尧
             </div>
         </aside>
-        <section
-            class="flex relative flex-col justify-center items-center py-12 overflow-hidden"
-        >
-            <Picture
-                className=" object-cover"
-                src="https://ik.imagekit.io/chinesefonts/tr:w-1200,h-300/image/photo-1551101449-64c570fc93e8_ixlib_rb-4.0.3_q_85_fm_jpg_crop_entropy_cs_srgb_dl_wong-zihoo-3OjwScH356E-unsplash.jpg"
-                author="wong zihoo"
-                link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
-            />
-            <FontList />
-        </section>
-    </main>
+
+
+        <FontList />
+
+        <TechSupport></TechSupport>
 </Layout>

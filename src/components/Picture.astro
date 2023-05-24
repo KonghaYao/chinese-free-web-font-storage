@@ -4,16 +4,18 @@ export type Prop = {
     className?: string;
     author?: string;
     link?: string;
+    relative?:boolean
 };
-const { src, className, author, link } = Astro.props;
+const { src, className, author, link,relative } = Astro.props;
 ---
 
-<picture class={"w-full relative " + className ?? ""}>
+<picture class={`w-full${relative?' relative':''} ` + className ?? ""} >
     <source media="(min-width: 1200px)" srcset={src + "?q=50&"} />
     <source media="(min-width: 768px)" srcset={src + "?q=30&tr:ar-4-3"} />
     <source media="(min-width: 576px)" srcset={src + "?q=10&tr:ar-4-3"} />
-    <img src={src + "?q=5&tr:ar-4-3"} class="w-full" alt="A responsive image" />
+    <img src={src + "?q=5&tr:ar-4-3"} class="h-full" alt="A responsive image" />
     <a href={link} class="absolute bottom-2 left-2" target="_blank">
-        <aside class="text-white text-xs">Captured By {author}</aside>
+        <aside class="text-white text-xs">📷 Captured By {author}</aside>
     </a>
+    <slot></slot>
 </picture>
