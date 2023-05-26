@@ -1,21 +1,16 @@
 ---
-import Layout from "../Layout/Layout.astro";
-import AllFooter from "../components/AllFooter.astro";
-import FontList from "../components/FontsList.astro";
-import TechSupport from "../components/TechSupport.astro";
+import Layout from '../Layout/Layout.astro';
+import AllFooter from '../components/AllFooter.astro';
+import FontList from '../components/FontsList.astro';
+import TechSupport from '../components/TechSupport.astro';
 export const prerender = true;
 ---
 
-<Layout
-    htmlClass="snap-y snap-mandatory scroll-smooth"
-    class="flex flex-col items-center"
->
+<Layout htmlClass="snap-y snap-mandatory scroll-smooth" class="flex flex-col items-center">
     <section
         class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
     >
-        <nav
-            class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl"
-        >
+        <nav class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl">
             Chinese Web Fonts Plan
         </nav>
         <header
@@ -34,16 +29,12 @@ export const prerender = true;
             class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
             onclick="document.querySelector('#font-list').scrollIntoView({ behavior: 'smooth' })"
         >
-                    开始搜索
-                </button>
-            </section>
+            开始搜索
+        </button>
+    </section>
 
-            <aside class="point
-er-events-none">
-        <div
-            class="absolute top-52 -left-16 text-gray-300 opacity-50"
-            style="font-size:50vh"
-        >
+    <aside class="pointer-events-none">
+        <div class="absolute top-52 -left-16 text-gray-300 opacity-50" style="font-size:50vh">
             江
         </div>
         <div
@@ -61,7 +52,6 @@ er-events-none">
     </aside>
 
     <FontList />
-
     <TechSupport />
     <AllFooter />
 </Layout>

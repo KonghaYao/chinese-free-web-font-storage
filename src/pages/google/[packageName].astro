@@ -1,7 +1,7 @@
 ---
-import { GoogleFontDetailed } from "../../GoogleSupport/GoogleFontDetailed";
-import { getFontList } from "../../GoogleSupport/useGoogleFontData";
-import Layout from "../../Layout/Layout.astro";
+import { GoogleFontDetailed } from '../../GoogleSupport/GoogleFontDetailed';
+import { getFontList } from '../../GoogleSupport/useGoogleFontData';
+import Layout from '../../Layout/Layout.astro';
 export async function getStaticPaths() {
     return getFontList().then((list) => {
         return list.map((name) => ({ params: { packageName: name } }));

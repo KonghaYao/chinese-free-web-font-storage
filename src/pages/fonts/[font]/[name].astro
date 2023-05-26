@@ -1,8 +1,8 @@
 ---
-import Layout from "../../../Layout/Layout.astro";
-import type { FontReporter } from "../../../components/fonts/utils";
-import { FontDetails } from "../../../page/FontDetails";
-import data from "../../../../index.json";
+import Layout from '../../../Layout/Layout.astro';
+import type { FontReporter } from '../../../components/fonts/utils';
+import { FontDetails } from '../../../page/FontDetails';
+import data from '../../../../index.json';
 export function getStaticPaths() {
     return Object.entries(data).flatMap(([key, val]) => {
         return val.remotePath.map((remote) => {
@@ -13,9 +13,9 @@ export function getStaticPaths() {
 }
 const { font, version, name } = Astro.params;
 const fileName = name!
-    .replaceAll(" ", "_")
+    .replaceAll(' ', '_')
     // 更换文件夹中的 . 为 _
-    .replace(/(?<=\/.*)\.(?=.*\/)/g, "_");
+    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await fetch(
     `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/reporter.json`
 ).then<FontReporter>((res) => res.json());

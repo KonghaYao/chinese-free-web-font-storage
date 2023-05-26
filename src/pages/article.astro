@@ -1,9 +1,9 @@
 ---
-import Layout from "../Layout/Layout.astro";
-import { sections } from "../utils/getPostSections";
+import Layout from '../Layout/Layout.astro';
+import { sections } from '../utils/getPostSections';
 ---
 
-<Layout title={"文章列表"}>
+<Layout title={'文章列表'}>
     <main class="py-4 px-12">
         <h1 class="w-full py-8 text-2xl text-center">文章列表</h1>
 
@@ -17,24 +17,17 @@ import { sections } from "../utils/getPostSections";
                                 {posts.map((post) => {
                                     return (
                                         <li>
-                                            <a
-                                                class=" "
-                                                href={`/post/${post.slug}/`}
-                                            >
+                                            <a class=" " href={`/post/${post.slug}/`}>
                                                 <h2>{post.data.title}</h2>
                                             </a>
                                             <aside class="text-xs">
-                                                <a
-                                                    href={`/authors/${post.data.author}/`}
-                                                >
+                                                <a href={`/authors/${post.data.author}/`}>
                                                     {post.data.article.authors}
                                                 </a>
                                                 {post.data.article.pubDate}
                                                 {post.data.tags}
                                             </aside>
-                                            <p class="text-xs ">
-                                                {post.data.description}
-                                            </p>
+                                            <p class="text-xs ">{post.data.description}</p>
                                         </li>
                                     );
                                 })}

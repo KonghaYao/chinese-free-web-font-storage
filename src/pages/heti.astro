@@ -1,13 +1,13 @@
 ---
-import "../style/heti_change.css";
-import "../style/heti_site_change.css";
-import Layout from "../Layout/Layout.astro";
-import HETI_BODY from "../components/heti.astro";
+import '../style/heti_change.css';
+import '../style/heti_site_change.css';
+import Layout from '../Layout/Layout.astro';
+import HETI_BODY from '../components/heti.astro';
 const query = Astro.url.searchParams;
-const font = query.get("font");
-const fileName = query.get("name");
-const family = query.get("family");
-const subFamily = query.get("subFamily");
+const font = query.get('font');
+const fileName = query.get('name');
+const family = query.get('family');
+const subFamily = query.get('subFamily');
 const style = `font-family:"${family}";font-bold:"${subFamily}"`;
 ---
 
