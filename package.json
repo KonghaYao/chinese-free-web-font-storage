@@ -18,9 +18,10 @@
         "@types/md5": "^2.3.2",
         "autoprefixer": "^10.4.8",
         "node-fetch": "^3.2.10",
-        "prettier": "2.6.0",
         "prettier-plugin-tailwindcss": "^0.1.13",
-        "solid-js": "^1.5.7"
+        "solid-js": "^1.5.7",
+        "prettier": "^2.8.8",
+        "prettier-plugin-astro": "^0.9.0"
     },
     "dependencies": {
         "@astrojs/netlify": "^2.2.3",
