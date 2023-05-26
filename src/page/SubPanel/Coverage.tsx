@@ -70,7 +70,7 @@ export const Coverage = () => {
                                             onclick={() => showDetails(name)}
                                         >
                                             <div
-                                                class="absolute top-0 left-0  h-full  bg-lime-200"
+                                                class="absolute left-0 top-0  h-full  bg-lime-200"
                                                 style={{
                                                     width: coverage,
                                                 }}

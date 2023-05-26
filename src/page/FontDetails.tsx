@@ -30,7 +30,7 @@ export const FontDetails: Component<DetailContextType> = (props) => {
         <DetailedContext.Provider value={{ ...props }}>
             <main class="relative flex  w-screen flex-col">
                 <FontHome>
-                    <nav class="flex flex-col justify-center gap-4 py-2 px-8">
+                    <nav class="flex flex-col justify-center gap-4 px-8 py-2">
                         <For each={PanelList}>
                             {(item) => {
                                 return (
@@ -46,9 +46,9 @@ export const FontDetails: Component<DetailContextType> = (props) => {
                     </nav>
                 </FontHome>
 
-                <nav class="pointer-events-none absolute top-0 left-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
+                <nav class="pointer-events-none absolute left-0 top-0 flex h-screen w-screen flex-col items-center justify-center overflow-hidden border-t border-gray-300 p-2 ">
                     <nav
-                        class=" absolute top-0 left-0 h-screen w-screen"
+                        class=" absolute left-0 top-0 h-screen w-screen"
                         classList={{
                             'pointer-events-auto': !!ShowingPanel(),
                         }}

@@ -74,7 +74,7 @@ const _GoogleFontDetailed = (props: { meta: FontMetaData }) => {
                                             {item.join(' - ')}
 
                                             <span
-                                                class="float-right  mr-4 cursor-pointer rounded bg-gray-200 py-2 px-4 text-sm transition-colors duration-300 hover:bg-lime-200"
+                                                class="float-right  mr-4 cursor-pointer rounded bg-gray-200 px-4 py-2 text-sm transition-colors duration-300 hover:bg-lime-200"
                                                 onclick={() => {
                                                     copy(
                                                         `https://cdn.jsdelivr.net/npm/@fontsource/${FontStore.id}/index.css`

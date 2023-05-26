@@ -22,7 +22,7 @@ const SearchList = ({
         return list().filter((i) => reg.test(i));
     });
     return (
-        <div class="w-full  overflow-auto py-4 px-8">
+        <div class="w-full  overflow-auto px-8 py-4">
             <For each={showFont()} fallback={<div>没有数据</div>}>
                 {(item) => {
                     return (
