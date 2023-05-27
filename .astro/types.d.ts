@@ -196,6 +196,13 @@ declare module 'astro:content' {
   collection: "post";
   data: any
 } & { render(): Render[".md"] };
+"performace_turbo.md": {
+	id: "performace_turbo.md";
+  slug: "performace_turbo";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 };
 
 	};
