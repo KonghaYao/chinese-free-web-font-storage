@@ -52,7 +52,7 @@ export const AlgoliaSearchBox = () => {
                     empty: '无结果',
                     item(item, { html }) {
                         return html`
-                            <a href="${`/google/${item.fontId}`}" class="w-full">
+                            <a href="${`/google/fonts?packageName=${item.fontId}`}" class="w-full">
                                 <div
                                     class="flex w-full cursor-pointer flex-col"
                                     ref=${(dom: HTMLDivElement) => {

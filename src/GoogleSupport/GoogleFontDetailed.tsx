@@ -2,9 +2,10 @@ import { Component, For, Suspense, lazy } from 'solid-js';
 import { selectDefPreviewText } from './defPreviewLanguages';
 import { FontMetaData, getMetaData } from './useGoogleFontData';
 import copy from 'copy-to-clipboard';
-export const GoogleFontDetailed = (props: { packageName: string }) => {
+export const GoogleFontDetailed = () => {
+    const packageName = new URLSearchParams(location.search).get('packageName');
     const A = lazy(async () => {
-        const meta = await getMetaData(props.packageName!);
+        const meta = await getMetaData(packageName!);
         return { default: () => _GoogleFontDetailed({ meta }) };
     });
     return (
