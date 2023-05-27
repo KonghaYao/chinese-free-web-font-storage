@@ -31,16 +31,21 @@ const list = Object.entries(Index).map(([id, value]) => {
                 const list = document.getElementById('fonts-index')!.children;
                 ([...list] as HTMLLIElement[]).forEach((li) => {
                     li.onclick = () => {
-                        console.log(li.dataset.name);
-                        const it = document.getElementById('fonts-' + li.dataset.name);
-                        it?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                        // 更换为代码手动操作，API 不行，一直表现不一致
+                        const item = document.getElementById('fonts-' + li.dataset.name)!;
+
+                        let count = item.offsetTop - item.parentElement!.offsetTop;
+
+                        document
+                            .getElementById('fonts-wrapper')!
+                            .scrollTo({ top: count, left: 0, behavior: 'smooth' });
                     };
                 });
             };
         </script>
     </aside>
-    <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg my-4">
-        <ul class="flex flex-col gap-4">
+    <nav id="fonts-wrapper" class="overflow-scroll bg-white md:mx-8 px-2 md:px-8 rounded-lg my-4">
+        <ul id="font-parent" class="flex flex-col">
             {
                 list.map((item) => {
                     return (
@@ -56,7 +61,7 @@ const list = Object.entries(Index).map(([id, value]) => {
                                             <a href={`/fonts/${item.id}/${name}`}>
                                                 <img
                                                     loading="lazy"
-                                                    class="h-8 w-full invert md:h-14"
+                                                    class="h-8  invert md:h-14"
                                                     src={
                                                         'https://ik.imagekit.io/chinesefonts/' +
                                                         remote.replace('result.css', 'preview.png')

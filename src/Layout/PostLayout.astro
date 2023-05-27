@@ -21,7 +21,7 @@ export interface Props {
     };
 }
 const {
-    title = '✨中文网字计划-提供便捷实用的全字符集中文渲染方案',
+    title = '文章',
     description = '中文网字计划致力于在互联网中提供更加便捷实用的全字符集中文渲染方案。我们通过精巧设计的字体分包方式，将庞大的字体文件切割为多个小型静态分包部署于云端，在全网领域内都可快捷、稳定地进行加载，提高中文字体在网络中的流通体验！',
     keywords,
     defaultFontCSS = 'https://ik.imagekit.io/chinesefonts/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css',
@@ -39,10 +39,8 @@ const {
         <meta name="generator" content={Astro.generator} />
 
         <slot name="meta" />
-        <!-- Primary Meta Tags -->
-        <title>{title}</title>
         <SEO
-            title={title}
+            title={title + '|✨中文网字计划'}
             description={description}
             openGraph={{
                 basic: {
