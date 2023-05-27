@@ -10,30 +10,31 @@ export const prerender = true;
     <section
         class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
     >
-        <nav class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl">
+        <h3 class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl">
             Chinese Web Fonts Plan
-        </nav>
-        <header
+        </h3>
+        <h1
             class="home-title xs:text-[8vh] text-[6vh] leading-[1.1em] sm:text-[11vh] lg:text-[20vh]"
         >
             中文网字计划
-        </header>
-        <nav
+        </h1>
+        <h2
             class="max-w-[30em] px-4 pt-4 text-xs font-thin text-gray-600 sm:max-w-[30em] sm:text-lg lg:max-w-none lg:text-2xl"
         >
             中文网字计划是收录众多中文字体并通过 Web Font 的形式为
             <b class="px-2 font-bold text-sky-600">网站开发者</b>
             提供美丽字体的项目。
-        </nav>
-        <button
-            class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
-            onclick="document.querySelector('#font-list').scrollIntoView({ behavior: 'smooth' })"
-        >
-            开始搜索
-        </button>
+        </h2>
+        <a href="#font-list">
+            <button
+                class="bg-white px-4 py-2 rounded-md text-xl text-rose-600 ring-rose-600 ring-2 mt-12"
+            >
+                开始搜索
+            </button>
+        </a>
     </section>
 
-    <aside class="pointer-events-none">
+    <div class="pointer-events-none">
         <div class="absolute top-52 -left-16 text-gray-300 opacity-50" style="font-size:50vh">
             江
         </div>
@@ -49,7 +50,7 @@ export const prerender = true;
         >
             尧
         </div>
-    </aside>
+    </div>
 
     <FontList />
     <TechSupport />

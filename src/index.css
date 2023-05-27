@@ -16,8 +16,11 @@ body {
     @apply px-1 text-lg text-gray-700 md:px-3;
 }
 
-a > * {
-    @apply text-amber-600;
+a > button {
+    @apply transition-colors;
+}
+a > button:hover {
+    @apply text-amber-400;
 }
 .font-global .en-words {
     font-size: 0.75rem;
@@ -72,4 +75,11 @@ body::before {
 /* 滚动条轨道 */
 ::-webkit-scrollbar-track {
     background-color: transparent;
+}
+
+.hover-cover-btn {
+    @apply rounded-md border border-transparent p-4 transition-all;
+}
+.hover-cover-btn:hover {
+    @apply border-neutral-400  backdrop-blur-sm;
 }

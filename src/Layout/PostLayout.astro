@@ -1,8 +1,8 @@
 ---
-import "../index.css";
-import "../style/heti_change.css";
-import "../style/post.css";
-import { SEO } from "astro-seo";
+import '../index.css';
+import '../style/heti_change.css';
+import '../style/post.css';
+import { SEO } from 'astro-seo';
 
 export interface Props {
     title?: string;
@@ -21,11 +21,10 @@ export interface Props {
     };
 }
 const {
-    title = "中文网字计划",
-    description = "中文网字体计划，致力于提供免费的中文网络 CSS 字体支持",
-
+    title = '中文网字计划',
+    description = '中文网字体计划，致力于提供免费的中文网络 CSS 字体支持',
     keywords,
-    defaultFontCSS = "https://ik.imagekit.io/chinesefonts/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css",
+    defaultFontCSS = 'https://ik.imagekit.io/chinesefonts/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css',
     article,
 } = Astro.props;
 ---
@@ -48,17 +47,18 @@ const {
             openGraph={{
                 basic: {
                     title: title,
-                    type: "article",
-                    image: article?.image ?? "",
+                    type: 'article',
+                    image: article?.image ?? '',
                 },
                 optional: {
-                    siteName: "中文网字计划",
+                    siteName: '中文网字计划',
                 },
                 article,
             }}
         />
-        <meta name="keywords" content={"中文字体,css,webfont" + keywords} />
+        <meta name="keywords" content={'中文字体,css,webfont' + keywords} />
         <link rel="stylesheet" href={defaultFontCSS} />
+        <link rel="preconnect" href="https://ik.imagekit.io/" crossorigin />
     </head>
     <body class="post-body flex flex-col justify-center items-center">
         <slot />

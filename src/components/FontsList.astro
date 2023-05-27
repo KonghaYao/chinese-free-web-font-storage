@@ -1,22 +1,17 @@
 ---
-import Index from "../../index.json";
+import Index from '../../index.json';
 const list = Object.entries(Index).map(([id, value]) => {
     return { ...value, id };
 });
 ---
 
 <section
-    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 flex pt-16 z-0 snap-start "
+    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 flex pt-16 z-0 snap-start"
     id="font-list"
 >
-    <nav class="flex-1 overflow-scroll md:p-4">
-        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">
-            字体列表
-        </h2>
-        <ul
-            id="fonts-index"
-            class="flex flex-wrap flex-1 py-4 text-xs md:text-base"
-        >
+    <aside class="flex-1 overflow-scroll md:p-4">
+        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">字体列表</h2>
+        <ul id="fonts-index" class="flex flex-wrap flex-1 py-4 text-xs md:text-base">
             {
                 list.map((i) => {
                     return (
@@ -33,48 +28,40 @@ const list = Object.entries(Index).map(([id, value]) => {
 
         <script>
             window.onload = () => {
-                const list = document.getElementById("fonts-index")!.children;
+                const list = document.getElementById('fonts-index')!.children;
                 ([...list] as HTMLLIElement[]).forEach((li) => {
                     li.onclick = () => {
                         console.log(li.dataset.name);
-                        const it = document.getElementById(
-                            "fonts-" + li.dataset.name
-                        );
-                        it?.scrollIntoView({block: "nearest", inline: "nearest"});
+                        const it = document.getElementById('fonts-' + li.dataset.name);
+                        it?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
                     };
                 });
             };
         </script>
-    </nav>
+    </aside>
     <nav class="overflow-scroll bg-white md:mx-8 p-2 md:p-8 rounded-lg my-4">
         <ul class="flex flex-col gap-4">
             {
                 list.map((item) => {
                     return (
-                        <li id={"fonts-" + item.name}>
+                        <li id={'fonts-' + item.name}>
                             <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
                                 {item.name}
                             </header>
                             <ul class="flex flex-col  justify-center gap-2">
                                 {item.remotePath.map((remote) => {
-                                    const [_, name] =
-                                        remote.match(/dist\/(.*?)\/result/)!;
+                                    const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
                                     return (
                                         <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
-                                            <a
-                                                href={`/fonts/${item.id}/${name}`}
-                                            >
+                                            <a href={`/fonts/${item.id}/${name}`}>
                                                 <img
                                                     loading="lazy"
                                                     class="h-8 invert md:h-14"
                                                     src={
-                                                        "https://ik.imagekit.io/chinesefonts/" +
-                                                        remote.replace(
-                                                            "result.css",
-                                                            "preview.png"
-                                                        )
+                                                        'https://ik.imagekit.io/chinesefonts/' +
+                                                        remote.replace('result.css', 'preview.png')
                                                     }
-                                                    alt={name + "字体展示"}
+                                                    alt={name + '字体展示'}
                                                 />
                                             </a>
                                         </li>

@@ -5,37 +5,40 @@ import { sections } from '../utils/getPostSections';
 
 <Layout title={'文章列表'}>
     <main class="py-4 px-12">
-        <h1 class="w-full py-8 text-2xl text-center">文章列表</h1>
+        <h1 class="w-full py-8 text-3xl text-center">中文网字计划——文档列表</h1>
 
-        <div class="grid grid-cols-4">
+        <section class="grid grid-cols-4">
             {
                 [...sections.entries()].map(([sectionName, posts]) => {
                     return (
-                        <section id={sectionName}>
-                            <h2 class="py-4 text-xl">{sectionName}</h2>
+                        <nav id={sectionName}>
+                            <h2 class="my-2 border-b border-neutral-400 py-2 text-2xl">
+                                {sectionName}
+                            </h2>
                             <ul>
                                 {posts.map((post) => {
                                     return (
                                         <li>
                                             <a class=" " href={`/post/${post.slug}/`}>
-                                                <h2>{post.data.title}</h2>
+                                                <h3 class="text-xl">{post.data.title}</h3>
                                             </a>
-                                            <aside class="text-xs">
-                                                <a href={`/authors/${post.data.author}/`}>
-                                                    {post.data.article.authors}
-                                                </a>
+                                            <div class="text-xs text-neutral-600">
+                                                {post.data.article.authors}
+
                                                 {post.data.article.pubDate}
                                                 {post.data.tags}
-                                            </aside>
-                                            <p class="text-xs ">{post.data.description}</p>
+                                            </div>
+                                            <p class="text-xs text-neutral-600">
+                                                {post.data.description}
+                                            </p>
                                         </li>
                                     );
                                 })}
                             </ul>
-                        </section>
+                        </nav>
                     );
                 })
             }
-        </div>
+        </section>
     </main>
 </Layout>
