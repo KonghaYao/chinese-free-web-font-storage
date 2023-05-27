@@ -35,7 +35,7 @@ const {
         <!-- Global Metadata -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />
 
         <slot name="meta" />
@@ -46,7 +46,9 @@ const {
                 basic: {
                     title: title,
                     type: 'article',
-                    image: article?.image ?? '',
+                    image:
+                        article?.image ??
+                        'https://ik.imagekit.io/chinesefonts/image/website_description.png?updatedAt=1685230267522&tr=w-1200%2Ch-675%2Cfo-auto',
                 },
                 optional: {
                     siteName: '中文网字计划',
