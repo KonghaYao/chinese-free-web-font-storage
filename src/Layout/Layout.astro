@@ -1,37 +1,31 @@
 ---
-import "../index.css";
-import GlobalHeader from "../components/GlobalHeader.astro";
-import { SEO } from "astro-seo";
+import '../index.css';
+import GlobalHeader from '../components/GlobalHeader.astro';
+import { SEO } from 'astro-seo';
 export interface Props {
     title?: string;
     description?: string;
     canonicalURL?: string;
-    type?:
-        | "website"
-        | "article"
-        | "blog"
-        | "product"
-        | "profile"
-        | "music"
-        | "video";
+    type?: 'website' | 'article' | 'blog' | 'product' | 'profile' | 'music' | 'video';
     image?: string;
     keywords?: string;
     meta?: any;
     defaultFontCSS?: string;
     style?: string;
-    class?:string;
-    htmlClass?:string
+    class?: string;
+    htmlClass?: string;
 }
 const {
-    title = "中文网字计划",
-    description = "中文网字体计划，致力于提供免费的中文网络 CSS 字体支持",
+    title = '中文网字计划',
+    description = '中文网字体计划，致力于提供免费的中文网络 CSS 字体支持',
     canonicalURL,
-    image = "",
+    image = '',
     type: ogType,
     keywords,
     style,
-    defaultFontCSS = "https://ik.imagekit.io/chinesefonts/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/result.css",
-    class:className,htmlClass
+    defaultFontCSS = './fonts/jxzk.css',
+    class: className,
+    htmlClass,
 } = Astro.props;
 ---
 
@@ -53,16 +47,17 @@ const {
             openGraph={{
                 basic: {
                     title: title,
-                    type: ogType ?? "website",
+                    type: ogType ?? 'website',
                     image,
                 },
                 optional: {
-                    siteName: "中文网字计划",
+                    siteName: '中文网字计划',
                 },
             }}
         />
-        <meta name="keywords" content={"中文字体,css,webfont" + keywords} />
+        <meta name="keywords" content={'中文字体,css,webfont' + keywords} />
         <link rel="stylesheet" href={defaultFontCSS} />
+        <link rel="preconnect" href="https://ik.imagekit.io/" crossorigin />
     </head>
     <body style={style} class={className}>
         <GlobalHeader />

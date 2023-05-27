@@ -5,3 +5,4 @@ visualizer/**/*
 **/node_modules/**/*
 **/pkg-dist/**/*
 locales/**/*
+public/**/*
