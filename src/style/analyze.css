@@ -1,0 +1,49 @@
+body {
+    font-family: 'LXGW WenKai Light';
+}
+article {
+    user-select: text;
+}
+/* 表格样式 */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 5px;
+    text-align: left;
+}
+
+table th {
+    cursor: pointer;
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+/* 去除第一列和最后一列的边框 */
+table td:first-child,
+table th:first-child,
+table td:last-child,
+table th:last-child {
+    border: none;
+}
+
+/* 斑马线样式 */
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+/* 基本样式 */
+details {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0 2rem;
+    overflow: hidden;
+}
+
+summary {
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}

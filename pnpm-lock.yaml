@@ -43,6 +43,9 @@ dependencies:
   copy-to-clipboard:
     specifier: ^3.3.2
     version: 3.3.2
+  font-analyze:
+    specifier: ^1.1.1
+    version: 1.1.1
   instantsearch.css:
     specifier: ^7.4.5
     version: registry.npmmirror.com/instantsearch.css@7.4.5
@@ -1091,6 +1094,11 @@ packages:
 
   /@vscode/l10n@0.0.13:
     resolution: {integrity: sha512-A3uY356uOU9nGa+TQIT/i3ziWUgJjVMUrGGXSrtRiTwklyCFjGVWIOHoEIHbJpiyhDkJd9kvIWUOfXK1IkK8XQ==}
+    dev: false
+
+  /@xmldom/xmldom@0.8.7:
+    resolution: {integrity: sha512-sI1Ly2cODlWStkINzqGrZ8K6n+MTSbAeQnAipGyL+KZCXuHaRlj2gyyy8B/9MvsFFqN7XHryQnB2QwhzvJXovg==}
+    engines: {node: '>=10.0.0'}
     dev: false
 
   /acorn@8.8.2:
@@ -2212,6 +2220,18 @@ packages:
     dependencies:
       micromatch: 4.0.5
       pkg-dir: 4.2.0
+    dev: false
+
+  /font-analyze@1.1.1:
+    resolution: {integrity: sha512-V/3zTPu19VRQgT30vtMNKO6KTO3uStQveRw06BXYu5CF0KbkoHP271Rexk0CbbOD2nOa5YQ/QuyIMtsMOmbenw==}
+    dependencies:
+      fonteditor-core: 2.1.11
+    dev: false
+
+  /fonteditor-core@2.1.11:
+    resolution: {integrity: sha512-zgO5tHw5vzqYqkeb9jthIANbOOGwWqNWovINCMyIDLh9xmujsHPqloWJdk0PMbJHbZmiLG1F/kygfuWS8+TDfA==}
+    dependencies:
+      '@xmldom/xmldom': 0.8.7
     dev: false
 
   /formdata-polyfill@4.0.10:
