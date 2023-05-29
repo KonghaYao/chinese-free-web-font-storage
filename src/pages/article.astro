@@ -7,7 +7,7 @@ import { sections } from '../utils/getPostSections';
     <main class="py-4 px-12">
         <h1 class="w-full py-8 text-3xl text-center">中文网字计划——文档列表</h1>
 
-        <section class="grid grid-cols-4">
+        <section class="grid grid-cols-4 gap-8">
             {
                 [...sections.entries()].map(([sectionName, posts]) => {
                     return (
@@ -22,15 +22,16 @@ import { sections } from '../utils/getPostSections';
                                             <a class=" " href={`/post/${post.slug}/`}>
                                                 <h3 class="text-xl">{post.data.title}</h3>
                                             </a>
-                                            <div class="text-xs text-neutral-600">
+
+                                            <p class="my-2 line-clamp-2 text-xs text-neutral-600">
+                                                {post.data.description}
+                                            </p>
+                                            <div class="text-xs text-neutral-600 ">
                                                 {post.data.article.authors}
 
                                                 {post.data.article.pubDate}
                                                 {post.data.tags}
                                             </div>
-                                            <p class="text-xs text-neutral-600">
-                                                {post.data.description}
-                                            </p>
                                         </li>
                                     );
                                 })}

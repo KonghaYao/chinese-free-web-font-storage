@@ -2,11 +2,23 @@
     font-family: 'LXGW WenKai Light';
 }
 .heti {
+    max-width: 52rem;
     font-family: 'LXGW WenKai Light';
-    padding-left: 1rem;
-    padding-right: 1rem;
+    font-size: medium;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    background-color: white;
 }
 .heti > p {
     text-indent: 2em;
     word-spacing: 0.3em;
+}
+.heti h1,
+.heti h2,
+.heti h3 {
+    font-weight: bolder;
+}
+.heti img {
+    margin: auto;
+    max-width: 80%;
 }

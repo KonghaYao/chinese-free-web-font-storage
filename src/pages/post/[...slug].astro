@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import PostLayout from '../../Layout/PostLayout.astro';
 import GlobalHeader from '../../components/GlobalHeader.astro';
 import HeroImage from '../../components/HeroImage.astro';
+import { TOC } from '../../components/post/TOC';
 
 export async function getStaticPaths() {
     const posts = await getCollection('post');
@@ -22,7 +23,8 @@ const { Content } = await post.render();
 
     <HeroImage image={post.data.article.image} />
 
-    <artcile class="heti mb-24 select-text relative z-10">
+    <artcile id="main-article" class="heti mb-24 select-text relative z-10">
         <Content />
     </artcile>
+    <TOC selector="#main-article" />
 </PostLayout>
