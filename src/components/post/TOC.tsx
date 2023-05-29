@@ -18,11 +18,18 @@ export const TOC = (props: { selector: string }) => {
     });
 
     return (
-        <nav class="max-w-lg">
+        <nav class="hidden max-w-md bg-white p-4 text-neutral-600 xl:block">
+            <header class="text-center text-xl font-bold">目录</header>
             <ul>
                 {toc().map((i) => {
                     return (
-                        <li>
+                        <li
+                            class={
+                                'text-xm toc-item rounded-md hover:bg-neutral-200  ' +
+                                ' article-level-' +
+                                i.level
+                            }
+                        >
                             <a href={'#' + i.id} class="line-clamp-1">
                                 {i.title}
                             </a>

@@ -23,8 +23,10 @@ const { Content } = await post.render();
 
     <HeroImage image={post.data.article.image} />
 
-    <artcile id="main-article" class="heti mb-24 select-text relative z-10">
+    <artcile id="main-article" class="heti mb-24 select-text relative z-10 pb-12">
         <Content />
     </artcile>
-    <TOC selector="#main-article" />
+    <aside class="fixed right-4 top-0 z-30">
+        <TOC selector="#main-article" client:load />
+    </aside>
 </PostLayout>

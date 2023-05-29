@@ -13,12 +13,38 @@
     text-indent: 2em;
     word-spacing: 0.3em;
 }
+@font-face {
+    font-family: 'post-header';
+    font-weight: 600;
+    src: local('Noto Serif SC Bold'), local('Noto Serif SC'), local('STZhongsong'), local('STSong');
+}
+
 .heti h1,
 .heti h2,
 .heti h3 {
+    font-family: 'post-header';
     font-weight: bolder;
 }
 .heti img {
     margin: auto;
     max-width: 80%;
+}
+
+.article-level-1 {
+}
+.article-level-2 {
+    margin-left: 1rem;
+}
+.article-level-3 {
+    margin-left: 2rem;
+}
+.article-level-4 {
+    margin-left: 3 rem;
+}
+.toc-item {
+    padding-left: 0.5rem;
+}
+
+header {
+    backdrop-filter: blur(1px);
 }
