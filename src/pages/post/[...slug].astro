@@ -3,7 +3,7 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import PostLayout from '../../Layout/PostLayout.astro';
 import GlobalHeader from '../../components/GlobalHeader.astro';
 import HeroImage from '../../components/HeroImage.astro';
-import { TOC } from '../../components/post/TOC';
+import ArticleAside from '../../components/post/ArticleAside.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('post');
@@ -21,12 +21,17 @@ const { Content } = await post.render();
 <PostLayout title={post.data.title} description={post.data.description} article={post.data.article}>
     <GlobalHeader />
 
-    <HeroImage image={post.data.article.image} />
-
-    <artcile id="main-article" class="heti mb-24 select-text relative z-10 pb-12">
-        <Content />
-    </artcile>
-    <aside class="fixed right-4 top-0 z-30">
-        <TOC selector="#main-article" client:load />
-    </aside>
+    <!-- <HeroImage image={post.data.article.image} /> -->
+    <section class="flex h-full gap-4 flex-1 overflow-hidden pt-4 justify-center">
+        <aside class="flex-col bg-white p-4 hidden md:flex h-full flex-none w-[15rem] z-10">
+            <ArticleAside />
+        </aside>
+        <main
+            class="bg-white max-w-4xl px-8 xs:px-12 lg:px-20 mb-24 select-text relative z-10 py-12 overflow-scroll h-full"
+        >
+            <artcile id="main-article" class="heti">
+                <Content />
+            </artcile>
+        </main>
+    </section>
 </PostLayout>

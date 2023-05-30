@@ -1,6 +1,6 @@
 import { createSignal, onMount } from 'solid-js';
 
-export const TOC = (props: { selector: string }) => {
+export const TOC = (props: { selector: string; class?: string }) => {
     const [toc, setToc] = createSignal<{ level: number; title: string | null; id: string }[]>([]);
     onMount(() => {
         const article = document.querySelector(props.selector)!;
@@ -18,25 +18,23 @@ export const TOC = (props: { selector: string }) => {
     });
 
     return (
-        <nav class="hidden max-w-md bg-white p-4 text-neutral-600 xl:block">
-            <header class="text-center text-xl font-bold">目录</header>
-            <ul>
-                {toc().map((i) => {
-                    return (
-                        <li
-                            class={
-                                'text-xm toc-item rounded-md hover:bg-neutral-200  ' +
-                                ' article-level-' +
-                                i.level
-                            }
-                        >
-                            <a href={'#' + i.id} class="line-clamp-1">
-                                {i.title}
-                            </a>
-                        </li>
-                    );
-                })}
-            </ul>
-        </nav>
+        <ul class={props.class}>
+            {toc().map((i) => {
+                return (
+                    <li
+                        class={
+                            'toc-item rounded-md hover:bg-neutral-200  ' +
+                            ' article-level-' +
+                            i.level
+                        }
+                        title={i.title!}
+                    >
+                        <a href={'#' + i.id} class="line-clamp-1">
+                            {i.title}
+                        </a>
+                    </li>
+                );
+            })}
+        </ul>
     );
 };

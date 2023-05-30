@@ -1,5 +1,4 @@
 ---
-layout: ../../Layout/PostLayout.astro
 title: 网络字体优化
 description: 关于网络字体优化的一些知识
 article:

@@ -1,13 +1,16 @@
+html {
+    height: 100%;
+    overflow: hidden;
+}
 .post-body {
     font-family: 'LXGW WenKai Light';
+    height: 100%;
 }
 .heti {
-    max-width: 52rem;
     font-family: 'LXGW WenKai Light';
     font-size: medium;
     padding-left: 4rem;
     padding-right: 4rem;
-    background-color: white;
 }
 .heti > p {
     text-indent: 2em;
@@ -18,7 +21,10 @@
     font-weight: 600;
     src: local('Noto Serif SC Bold'), local('Noto Serif SC'), local('STZhongsong'), local('STSong');
 }
-
+.header-text {
+    font-family: 'post-header';
+    font-weight: bolder;
+}
 .heti h1,
 .heti h2,
 .heti h3 {
@@ -33,18 +39,21 @@
 .article-level-1 {
 }
 .article-level-2 {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
 }
 .article-level-3 {
-    margin-left: 2rem;
+    margin-left: 1rem;
 }
 .article-level-4 {
-    margin-left: 3 rem;
+    margin-left: 1.5 rem;
 }
 .toc-item {
     padding-left: 0.5rem;
 }
+details > summary {
+    list-style-type: '📘';
+}
 
-header {
-    backdrop-filter: blur(1px);
+details[open] > summary {
+    list-style-type: '📖';
 }

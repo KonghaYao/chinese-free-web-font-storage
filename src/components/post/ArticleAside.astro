@@ -1,0 +1,38 @@
+---
+import { TOC } from './TOC';
+import { sections } from '../../utils/getPostSections';
+---
+
+<header class="header-text text-center text-xl">目录</header>
+<ul class="flex-1 overflow-scroll">
+    {
+        [
+            ...sections.entries(),
+            // 测试用途
+            // ...sections.entries(),
+            // ...sections.entries(),
+            // ...sections.entries(),
+        ].map(([sectionName, posts]) => {
+            return (
+                <li id={sectionName} class="mb-4">
+                    <details open={posts.some((i) => Astro.url.pathname.includes(i.slug))}>
+                        <summary class="header-text mb-3   cursor-pointer font-semibold text-cyan-900">
+                            {sectionName}
+                        </summary>
+                        <ul class="space-y-6 border-l border-neutral-100  lg:space-y-2">
+                            {posts.map((post) => {
+                                return (
+                                    <li class="line-clamp-1 border-l border-blue-800 pl-4 text-neutral-700 transition-all hover:border-blue-600  hover:text-cyan-700">
+                                        <a href={`/post/${post.slug}/`}>{post.data.title}</a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </details>
+                </li>
+            );
+        })
+    }
+</ul>
+
+<TOC selector="#main-article" class="max-h-[50%] overflow-scroll text-sm" client:load />
