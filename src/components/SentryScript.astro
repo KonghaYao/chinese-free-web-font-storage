@@ -1,0 +1,21 @@
+---
+---
+
+<slot />
+<script>
+    import { init, BrowserTracing } from '@sentry/browser';
+    console.log('✨ Sentry 接入监控', import.meta.env.MODE);
+    init({
+        dsn: 'https://31f3c90e38d64f42a0a6540bb797a6b5@o4504944796041216.ingest.sentry.io/4505271673356288',
+
+        integrations: [
+            new BrowserTracing({
+                // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
+                tracePropagationTargets: ['localhost', 'chinese-font.netlify.app'],
+            }),
+        ],
+
+        tracesSampleRate: 0.25,
+        environment: import.meta.env.MODE,
+    });
+</script>

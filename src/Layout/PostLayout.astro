@@ -3,6 +3,7 @@ import '../index.css';
 import '../style/heti_change.css';
 import '../style/post.css';
 import { SEO } from 'astro-seo';
+import Sentry from '../components/SentryScript.astro';
 
 export interface Props {
     title?: string;
@@ -66,5 +67,6 @@ const {
     </head>
     <body class="post-body flex flex-col overflow-hidden">
         <slot />
+        <Sentry />
     </body>
 </html>

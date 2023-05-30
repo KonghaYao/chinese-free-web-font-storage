@@ -2,6 +2,7 @@
 import '../index.css';
 import GlobalHeader from '../components/GlobalHeader.astro';
 import { SEO } from 'astro-seo';
+import Sentry from '../components/SentryScript.astro';
 export interface Props {
     title?: string;
     description?: string;
@@ -68,5 +69,6 @@ const {
     <body style={style} class={className}>
         <GlobalHeader />
         <slot />
+        <Sentry />
     </body>
 </html>
