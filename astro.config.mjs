@@ -12,6 +12,10 @@ export default defineConfig({
     integrations: [sitemap(), solidJs(), tailwind(), robotsTxt(), compress()],
     // output: 'server',
     output: 'static',
-
+    vite: {
+        build: {
+            sourcemap: true, // Source map generation must be turned on
+        },
+    },
     compressHTML: true,
 });
