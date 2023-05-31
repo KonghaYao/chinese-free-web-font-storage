@@ -15,12 +15,12 @@ import { sections } from '../utils/getPostSections';
                             <h2 class="my-2 border-b border-neutral-400 py-2 text-2xl text-cyan-700">
                                 {sectionName}
                             </h2>
-                            <ul>
+                            <ul class="space-y-4">
                                 {posts.map((post) => {
                                     return (
                                         <li>
                                             <a class=" " href={`/post/${post.slug}/`}>
-                                                <h3 >{post.data.title}</h3>
+                                                <h3>{post.data.title}</h3>
 
                                                 <p class="my-2 line-clamp-1 text-xs text-gray-500">
                                                     {post.data.description}
