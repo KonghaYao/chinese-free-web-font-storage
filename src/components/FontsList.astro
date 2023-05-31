@@ -10,13 +10,16 @@ const list = Object.entries(Index).map(([id, value]) => {
     id="font-list"
 >
     <aside class="flex-1 overflow-scroll md:p-4">
-        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">字体列表</h2>
+        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">字体列表
+
+            <sub class="float-right text-sm text-cyan-800">{list.length}份 | 点击字体查看详情</sub>
+        </h2>
         <ul id="fonts-index" class="flex flex-wrap flex-1 py-4 text-xs md:text-base">
             {
-                list.map((i) => {
+                list.reverse().map((i) => {
                     return (
                         <li
-                            class="cursor-pointer px-4 py-2 transition-colors hover:bg-neutral-200  hover:text-rose-700 "
+                            class="cursor-pointer px-4 py-2 transition-colors duration-300 hover:text-white  hover:bg-emerald-600 "
                             data-name={i.name}
                         >
                             {i.name}
@@ -58,16 +61,20 @@ const list = Object.entries(Index).map(([id, value]) => {
                                     const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
                                     return (
                                         <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
-                                            <a href={`/fonts/${item.id}/${name}`}>
+                                            <a href={`/fonts/${item.id}/${name}`} class="flex justify-between items-center">
                                                 <img
                                                     loading="lazy"
-                                                    class="h-8  invert md:h-14"
+                                                    class="h-8 w-fit  invert md:h-14"
                                                     src={
                                                         'https://ik.imagekit.io/chinesefonts/' +
                                                         remote.replace('result.css', 'preview.png')
                                                     }
                                                     alt={name + '字体展示'}
                                                 />
+
+                                                <span>
+                                                    ➡️
+                                                    </span>
                                             </a>
                                         </li>
                                     );
