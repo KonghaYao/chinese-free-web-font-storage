@@ -11,7 +11,7 @@ export const CSSSupport = () => {
     const selectedCSS = atom(CSSList[0]);
     const code =
         `import "@chinese-fonts/${FontStore.packageName}/dist/${FontStore.subName}/result.css";\n` +
-        `// 在 CSS 代码中 \nfont-family:'${FontStore.reporter.message.fontFamily}'`;
+        `// 在 CSS 代码中 \nfont-family:'${FontStore.reporter.message.fontFamily}';font-weight:'${FontStore.reporter.message.fontSubFamily}';`;
     return (
         <div class="divide-gry-400 flex flex-1 flex-col gap-1 divide-y-2 sm:gap-4">
             <div class="grid grid-cols-6 py-2">

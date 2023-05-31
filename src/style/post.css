@@ -57,3 +57,12 @@ details > summary {
 details[open] > summary {
     list-style-type: '📖';
 }
+
+.heti blockquote {
+    margin: 0;
+    border-radius: 4px;
+}
+
+.heti blockquote p {
+    margin-block-end: 12px;
+}
