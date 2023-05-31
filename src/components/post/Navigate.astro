@@ -1,7 +1,6 @@
 ---
 import { getPostSection, sections } from '../../utils/getPostSections';
 const name = Astro.params.slug;
-console.log(name);
 const { prev, next } = getPostSection(name!);
 ---
 
