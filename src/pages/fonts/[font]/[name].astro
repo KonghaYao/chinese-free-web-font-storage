@@ -1,8 +1,10 @@
 ---
 import Layout from '../../../Layout/Layout.astro';
 import type { FontReporter } from '../../../components/fonts/utils';
-import { FontDetails } from '../../../page/FontDetails';
+import { FontDisplay } from '../../../page/FontDetails';
 import data from '../../../../index.json';
+import { TextWriter } from '../../../page/component/TextWriter';
+import { Code } from 'astro/components';
 export function getStaticPaths() {
     return Object.entries(data).flatMap(([key, val]) => {
         return val.remotePath.map((remote) => {
@@ -20,6 +22,7 @@ const reporter = await fetch(
     `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/reporter.json`
 ).then<FontReporter>((res) => res.json());
 const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${reporter.message.fontSubFamily}'`;
+const CDNs = [`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${name}/result.css`];
 ---
 
 <Layout
@@ -29,10 +32,44 @@ const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${repor
     style={style}
     image={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/preview.png`}
 >
-    <section>
+    <section class="grid grid-cols-2 gap-4 p-4">
         <!-- TODO: 尝试静态化 -->
         <!-- TODO: 添加展示徽标 -->
-        <FontDetails
+
+        <header class="p-4 col-span-2 flex justify-between">
+            <h1 class="text-2xl">
+                {name}
+            </h1>
+
+            <nav class="flex gap-2 text-xs">
+                {
+                    [
+                        {
+                            name: '文章测试',
+                            link: `/heti.html?font=${font}&name=${name}&family=${reporter.message.fontFamily}&subFamily=${reporter.message.fontSubFamily}`,
+                        },
+                        {
+                            name: 'Github',
+                            link: `https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch/packages/${font}/fonts`,
+                        },
+                        {
+                            name: 'NPM',
+                            link: `https://npmjs.com/@chinese-fonts/${font}`,
+                        },
+                    ].map((i) => {
+                        return (
+                            <a
+                                href={i.link}
+                                class="rounded-lg bg-purple-600 px-2  py-1 text-white transition-colors  duration-300 "
+                            >
+                                {i.name}
+                            </a>
+                        );
+                    })
+                }
+            </nav>
+        </header>
+        <FontDisplay
             reporter={reporter}
             packageName={font!}
             version={version!}
@@ -40,5 +77,95 @@ const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${repor
             subName={name!}
             client:load
         />
+
+        <section>
+            <header class="p-2 bg-green-600 text-white text-lg">✒️ 尝试字体</header>
+            <TextWriter client:load />
+        </section>
+        <section>
+            <header class="p-2 bg-green-600 text-white text-lg">🌏 Web支持</header>
+            <div class="flex flex-1 flex-col gap-1 sm:gap-4">
+                <div class="flex flex-col py-2 text-white bg-neutral-800 p-4 select-text">
+                    <span
+                        >🔗 通过链接嵌入
+
+                        <select
+                            id="cdn-select"
+                            class="float-right flex-1 my-4 rounded-md py-1 md:my-0 outline-none text-xs bg-neutral-800"
+                            value={new URL(CDNs[0]).host}
+                        >
+                            {
+                                CDNs.map((item) => (
+                                    <option class="text-xs" value={item}>
+                                        {new URL(item).host}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                        <script>
+                            document.getElementById('cdn-select').onchange = (e) => {
+                                const url = e.target.value;
+                                document
+                                    .getElementById('link-code')
+                                    .querySelector(
+                                        '.line span:nth-child(10)'
+                                    ).textContent = `'${url}'`;
+                            };
+                        </script>
+                    </span>
+                    <span id="link-code">
+                        <Code
+                            wrap
+                            lang="html"
+                            code={`<link rel='stylesheet' href='${CDNs[0]}' /> ;`}
+                        />
+                    </span>
+
+                    <span class="py-2">或者</span>
+                    <span> ⌨️ 前端代码嵌入</span>
+                    <Code wrap lang="sh" code={`npm install @chinese-fonts/${font}`} />
+
+                    <Code
+                        wrap
+                        lang="js"
+                        code={`import "@chinese-fonts/${font}/dist/${name}/result.css";`}
+                    />
+
+                    <span class="mt-4">🔔限定字体使用区域</span>
+                    <Code
+                        wrap
+                        lang="css"
+                        code={`article {\n    font-family:'${reporter.message.fontFamily}';\n    font-weight:'${reporter.message.fontSubFamily}'\n};`}
+                    />
+                </div>
+                <section class="p-4 max-w-xl">
+                    <header class="p-2 bg-blue-600 text-white text-lg">📄 字体详情</header>
+                    <table class="my-4">
+                        <tbody>
+                            {
+                                Object.entries(reporter.message).map(([key, val]) => {
+                                    return (
+                                        <tr class=" transition-colors hover:bg-white">
+                                            <td class="px-4 text-sky-600">{key}</td>
+                                            <td class="select-text px-4 py-1 text-sm">{val}</td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="flex">
+                        <a
+                            class="rounded-md bg-neutral-200 px-2 text-green-600"
+                            href={'https://www.maoken.com/?s=' + name}
+                            target="_black"
+                        >
+                            字体授权查询
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </section>
     </section>
 </Layout>

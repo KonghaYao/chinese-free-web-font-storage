@@ -1,10 +1,9 @@
 import { atom } from '@cn-ui/use';
 import { For, useContext } from 'solid-js';
 import copy from 'copy-to-clipboard';
-import { DetailedContext } from '../DetailContext';
-export const CSSSupport = () => {
-    const FontStore = useContext(DetailedContext)!;
-    console.log(FontStore);
+import type { DetailContextType } from '../DetailContext';
+export const CSSSupport = (props:DetailContextType) => {
+    const FontStore = props
     const CSSList = [
         `https://ik.imagekit.io/chinesefonts/packages/${FontStore.packageName}/dist/${FontStore.subName}/result.css`,
     ];

@@ -10,10 +10,9 @@ body {
 .poetry {
     writing-mode: tb;
     white-space: pre-wrap;
-    letter-spacing: 0.4em;
 }
 .poetry p {
-    @apply px-1 text-lg text-gray-700 md:px-3;
+    @apply text-lg text-gray-700;
 }
 
 a > button {
