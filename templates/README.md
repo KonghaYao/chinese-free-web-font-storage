@@ -1,8 +1,8 @@
-# Chinese Fonts 项目
+# 中文网字项目
 
-[官网](https://chinese-font.netlify.app/#/fonts/{{name}})
+[官网](https://chinese-font.netlify.app/fonts/{{name}})
 
-Chinese Fonts 项目是用于将中文字体切割并放置在 NPM 进行快速部署的项目。
+中文网字项目是用于将中文字体切割并放置在 NPM 进行快速部署的项目。
 
 ## 快速使用
 
@@ -13,8 +13,7 @@ Chinese Fonts 项目是用于将中文字体切割并放置在 NPM 进行快速�
 ```html
 <link
     href="https://unpkg.com/@chinese-fonts/{{name}}/dist/{具体的包名}/results.css"
-    rel="stylesheet"
-/>
+    rel="stylesheet" />
 ```
 
 ### 在项目中使用
