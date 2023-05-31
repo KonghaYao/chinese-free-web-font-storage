@@ -19,10 +19,10 @@ import { sections } from '../../utils/getPostSections';
                         <summary class="header-text mb-3   cursor-pointer font-semibold text-cyan-900">
                             {sectionName}
                         </summary>
-                        <ul class="space-y-6 border-l border-neutral-100  lg:space-y-2">
+                        <ul class=" border-l border-neutral-100  ">
                             {posts.map((post) => {
                                 return (
-                                    <li class="line-clamp-1 border-l border-blue-800 pl-4 text-neutral-700 transition-all hover:border-blue-600  hover:text-cyan-700">
+                                    <li class="line-clamp-1 border-l border-blue-200 py-1 pl-4 text-neutral-700 transition-all hover:border-blue-600  hover:text-cyan-700">
                                         <a href={`/post/${post.slug}/`}>{post.data.title}</a>
                                     </li>
                                 );
