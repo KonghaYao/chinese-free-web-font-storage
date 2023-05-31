@@ -12,7 +12,7 @@ import { sections } from '../utils/getPostSections';
                 [...sections.entries()].map(([sectionName, posts]) => {
                     return (
                         <nav id={sectionName}>
-                            <h2 class="my-2 border-b border-neutral-400 py-2 text-2xl">
+                            <h2 class="my-2 border-b border-neutral-400 py-2 text-2xl text-cyan-700">
                                 {sectionName}
                             </h2>
                             <ul>
@@ -20,18 +20,19 @@ import { sections } from '../utils/getPostSections';
                                     return (
                                         <li>
                                             <a class=" " href={`/post/${post.slug}/`}>
-                                                <h3 class="text-xl">{post.data.title}</h3>
+                                                <h3 >{post.data.title}</h3>
+
+                                                <p class="my-2 line-clamp-1 text-xs text-gray-500">
+                                                    {post.data.description}
+                                                </p>
+                                                <aside class="flex gap-2 text-xs text-gray-500">
+                                                    <address>{post.data.article.authors}</address>
+
+                                                    <time datetime={post.data.article.pubDate}>
+                                                        {post.data.article.pubDate}
+                                                    </time>
+                                                </aside>
                                             </a>
-
-                                            <p class="my-2 line-clamp-2 text-xs text-neutral-600">
-                                                {post.data.description}
-                                            </p>
-                                            <div class="text-xs text-neutral-600 ">
-                                                {post.data.article.authors}
-
-                                                {post.data.article.pubDate}
-                                                {post.data.tags}
-                                            </div>
                                         </li>
                                     );
                                 })}
