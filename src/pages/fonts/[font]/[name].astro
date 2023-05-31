@@ -19,7 +19,7 @@ const fileName = name!
 const reporter = await fetch(
     `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/reporter.json`
 ).then<FontReporter>((res) => res.json());
-const style = `font-family:"${reporter.message.fontFamily}";font-bold:"${reporter.message.fontSubFamily}"`;
+const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${reporter.message.fontSubFamily}'`;
 ---
 
 <Layout
