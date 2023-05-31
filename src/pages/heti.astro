@@ -3,21 +3,30 @@ import '../style/heti_change.css';
 import '../style/heti_site_change.css';
 import Layout from '../Layout/Layout.astro';
 import HETI_BODY from '../components/heti.astro';
-const query = Astro.url.searchParams;
-const font = query.get('font');
-const fileName = query.get('name');
-const family = query.get('family');
-const subFamily = query.get('subFamily');
-const style = `font-family:'${family}';font-weight:'${subFamily}''`;
 ---
 
-<Layout
-    defaultFontCSS={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`}
-    style={style}
-    type="article"
->
-    <main class="flex flex-col justify-center pb-16" style={style}>
-        <span class="h-fit">文章测试：{fileName}</span>
-        <HETI_BODY />
+<Layout title="文章测试页面" type="article">
+    <main class="flex flex-col justify-center pb-16">
+        <HETI_BODY>
+            <h3 id="heti-header" class="h-fit"></h3>
+        </HETI_BODY>
     </main>
+
+    <script>
+        window.onload = () => {
+            const query = new URLSearchParams(location.search);
+            const font = query.get('font');
+            const fileName = query.get('name');
+            const family = query.get('family');
+            const subFamily = query.get('subFamily');
+            const style = `font-family:'${family}';font-weight:'${subFamily}''`;
+
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`;
+            document.body.style = style;
+            document.body.appendChild(link);
+            document.querySelector('#heti-header').textContent = `文章测试：${fileName}`;
+        };
+    </script>
 </Layout>
