@@ -1,0 +1,31 @@
+---
+import { getPostSection, sections } from '../../utils/getPostSections';
+const name = Astro.params.slug;
+console.log(name);
+const { prev, next } = getPostSection(name!);
+---
+
+<nav class="w-full pt-8 pb-12 my-4 flex gap-8">
+    {
+        prev && (
+            <a
+                href={`/post/${prev.slug}`}
+                class="flex-1 rounded-md bg-cyan-500 px-4 py-2 text-white"
+            >
+                <span>上一篇</span>
+                <span class="header-text float-right text-lg">{prev.data.title}</span>
+            </a>
+        )
+    }
+    {
+        next && (
+            <a
+                href={`/post/${next.slug}`}
+                class="flex-1 rounded-md bg-cyan-500 px-4 py-2 text-white"
+            >
+                <span class="float-right">下一篇</span>
+                <span class="header-text float-left text-lg">{next.data.title}</span>
+            </a>
+        )
+    }
+</nav>

@@ -4,6 +4,7 @@ import PostLayout from '../../Layout/PostLayout.astro';
 import GlobalHeader from '../../components/GlobalHeader.astro';
 import HeroImage from '../../components/HeroImage.astro';
 import ArticleAside from '../../components/post/ArticleAside.astro';
+import Navigate from '../../components/post/Navigate.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('post');
@@ -31,7 +32,7 @@ const { Content } = await post.render();
             <artcile id="main-article" class="heti">
                 <Content />
             </artcile>
-            <!--  TODO 下一篇和上一篇文章 -->
+            <Navigate />
         </main>
     </section>
 </PostLayout>

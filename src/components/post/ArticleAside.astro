@@ -23,7 +23,7 @@ import { sections } from '../../utils/getPostSections';
                             {posts.map((post) => {
                                 return (
                                     <li class="line-clamp-1 border-l border-blue-200 py-1 pl-4 text-neutral-700 transition-all hover:border-blue-600  hover:text-cyan-700">
-                                        <a href={`/post/${post.slug}/`}>{post.data.title}</a>
+                                        <a href={`/post/${post.slug}`}>{post.data.title}</a>
                                     </li>
                                 );
                             })}
