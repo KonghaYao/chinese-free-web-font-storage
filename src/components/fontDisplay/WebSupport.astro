@@ -1,0 +1,96 @@
+---
+import data from '../../../index.json';
+import { Code } from 'astro/components';
+import { getFontReporter } from '../../utils/getFontReporter';
+
+export type Props = {
+    font: string;
+    name: string;
+};
+const { font, name: font_name } = Astro.props;
+const fileName = font_name!
+    .replaceAll(' ', '_')
+    // 更换文件夹中的 . 为 _
+    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
+const reporter = await getFontReporter(font!, fileName);
+const CDNs = [`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${font_name}/result.css`];
+const theme = 'github-light' as const;
+---
+
+<header class="my-4 text-lg">
+    <span class="bg-orange-600 text-white p-2 rounded-lg"> 🌏 代码支持</span>
+</header>
+<div class="bg-white flex flex-col p-4">
+    <h3>
+        🔗 通过链接嵌入
+        <select
+            id="cdn-select"
+            class="float-right m-0 flex-1 bg-green-600 text-white rounded-md p-1 outline-none text-xs"
+            value={new URL(CDNs[0]).host}
+        >
+            {
+                CDNs.map((item) => (
+                    <option class="text-xs" value={item}>
+                        {new URL(item).host}
+                    </option>
+                ))
+            }
+        </select>
+    </h3>
+
+    <blockquote class="text-xs py-4">
+        🔔链接方式可以被网页、小程序等支持类 CSS 样式载入的平台使用。
+    </blockquote>
+
+    <script>
+        document.getElementById('cdn-select')!.onchange = (e) => {
+            const url = (e.target as HTMLInputElement).value;
+            document
+                .getElementById('link-code')!
+                .querySelector('.line span:nth-child(10)')!.textContent = `'${url}'`;
+        };
+    </script>
+    <span id="link-code" class="select-text">
+        <Code
+            wrap
+            lang="html"
+            theme={theme}
+            code={`<link rel='stylesheet' href='${CDNs[0]}' /> `}
+        />
+    </span>
+</div>
+<div class="flex flex-1 flex-col gap-1 sm:gap-4 bg-white p-4 select-text">
+    <h3>
+        ⌨️ 前端代码嵌入
+
+        <aside class="float-right bg-rose-600 text-white text-sm p-1 rounded-md">
+            <a href={`https://npmjs.com/@chinese-fonts/${font}`}>NPM</a>
+        </aside>
+    </h3>
+    <blockquote class="text-xs py-2">🔔 前端代码需要配合 Vite 或者 Webpack 打包器使用</blockquote>
+    <Code wrap lang="sh" theme={theme} code={`npm install @chinese-fonts/${font}`} />
+
+    <Code
+        wrap
+        lang="js"
+        theme={theme}
+        code={`import "@chinese-fonts/${font}/dist/${font_name}/result.css";`}
+    />
+</div>
+<div class="bg-white p-4 select-text">
+    <h3>🔔限定字体使用区域</h3>
+    <Code
+        wrap
+        lang="css"
+        theme={theme}
+        code={`article {\n    font-family:'${reporter.message.fontFamily}';\n    font-weight:'${reporter.message.fontSubFamily}'\n};`}
+    />
+</div>
+<a
+    href="/post/simple_tutorial"
+    class="bg-green-600 text-white flex cursor-pointer justify-center items-center"
+>
+    <div>
+        详情请查看 <br />📖使用指南
+    </div>
+</a>

@@ -8,11 +8,7 @@ body {
     font-family: var(--defaultFont), 'jiangxizhuokai';
 }
 .poetry {
-    writing-mode: tb;
-    white-space: pre-wrap;
-}
-.poetry p {
-    @apply text-lg text-gray-700;
+    writing-mode: tb-rl;
 }
 
 a > button {

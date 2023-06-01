@@ -24,9 +24,9 @@ const root = `/fonts/${font}/${font_name}/`;
     style={style}
     image={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/preview.png`}
 >
-    <section class="grid grid-cols-6 lg:grid-cols-12 gap-4 p-4">
+    <section class="grid grid-cols-6 lg:grid-cols-12 gap-4 p-4 lg:max-w-6xl lg:m-auto">
         <header class="p-4 col-span-full items-center flex flex-wrap justify-between">
-            <h1 class="text-2xl rounded-lg  overflow-hidden">
+            <h1 class="text-2xl rounded-lg overflow-hidden">
                 <span class="bg-black text-white p-4">
                     {font_name}
                 </span>
@@ -36,14 +36,6 @@ const root = `/fonts/${font}/${font_name}/`;
             <nav class="flex gap-2 text-xs h-fit">
                 {
                     [
-                        {
-                            name: '首页',
-                            link: root,
-                        },
-                        {
-                            name: '代码嵌入',
-                            link: root + `web`,
-                        },
                         {
                             name: '基础信息',
                             link: root + `analyze`,
