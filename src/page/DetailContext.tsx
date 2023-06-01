@@ -6,6 +6,5 @@ export interface DetailContextType {
     packageName: string;
     subName: string;
     cnName: string;
-    version: string;
 }
 export const DetailedContext = createContext<DetailContextType>();

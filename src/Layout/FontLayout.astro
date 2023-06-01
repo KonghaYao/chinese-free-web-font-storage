@@ -1,0 +1,74 @@
+---
+import Layout from './Layout.astro';
+import type { FontReporter } from '../components/fonts/utils';
+import { getFontReporter } from '../utils/getFontReporter';
+
+export interface Props {
+    font: string;
+    font_name: string;
+}
+const { font, font_name } = Astro.props;
+const fileName = font_name!
+    .replaceAll(' ', '_')
+    // 更换文件夹中的 . 为 _
+    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
+const reporter = await getFontReporter(font, fileName);
+const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${reporter.message.fontSubFamily}'`;
+const root = `/fonts/${font}/${font_name}/`;
+---
+
+<Layout
+    canonicalURL={`/fonts/${font}`}
+    defaultFontCSS={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`}
+    title={font_name}
+    style={style}
+    image={`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/preview.png`}
+>
+    <section class="grid grid-cols-6 lg:grid-cols-12 gap-4 p-4">
+        <header class="p-4 col-span-full items-center flex flex-wrap justify-between">
+            <h1 class="text-2xl rounded-lg  overflow-hidden">
+                <span class="bg-black text-white p-4">
+                    {font_name}
+                </span>
+                <span class="text-white bg-cyan-600 p-4"> {font}</span>
+            </h1>
+
+            <nav class="flex gap-2 text-xs h-fit">
+                {
+                    [
+                        {
+                            name: '首页',
+                            link: root,
+                        },
+                        {
+                            name: '代码嵌入',
+                            link: root + `web`,
+                        },
+                        {
+                            name: '基础信息',
+                            link: root + `analyze`,
+                        },
+                        {
+                            name: '文章测试',
+                            link: `/heti.html?font=${font}&name=${font_name}&family=${reporter.message.fontFamily}&subFamily=${reporter.message.fontSubFamily}`,
+                        },
+                        {
+                            name: 'Github',
+                            link: `https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch/packages/${font}/fonts`,
+                        },
+                    ].map((i) => {
+                        return (
+                            <a
+                                href={i.link}
+                                class="rounded-lg px-2  py-1    transition-colors  duration-300 "
+                            >
+                                {i.name}
+                            </a>
+                        );
+                    })
+                }
+            </nav>
+        </header>
+        <slot />
+    </section>
+</Layout>

@@ -1,0 +1,59 @@
+---
+import data from '../../../../../index.json';
+import { Code } from 'astro/components';
+import FontLayout from '../../../../Layout/FontLayout.astro';
+import { getFontReporter } from '../../../../utils/getFontReporter';
+import FontCoverage from '../../../../components/fontDisplay/FontCoverage.astro';
+export function getStaticPaths() {
+    return Object.entries(data).flatMap(([key, val]) => {
+        return val.remotePath.map((remote) => {
+            const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
+            return { params: { font: key, name } };
+        });
+    });
+}
+const { font, name: font_name } = Astro.params;
+const fileName = font_name!
+    .replaceAll(' ', '_')
+    // 更换文件夹中的 . 为 _
+    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
+const reporter = await getFontReporter(font!, fileName);
+---
+
+<FontLayout font={font!} font_name={font_name!}>
+    <section class="col-span-6">
+        <header>
+            <span class="rounded-md p-2 bg-blue-600 text-white text-lg"> 📄 字体详情</span>
+        </header>
+        <table class="my-4">
+            <tbody>
+                {
+                    Object.entries(reporter.message).map(([key, val]) => {
+                        return (
+                            <tr class=" transition-colors hover:bg-white">
+                                <td class="px-4 text-sky-600">{key}</td>
+                                <td class="select-text px-4 py-1 text-sm">{val}</td>
+                            </tr>
+                        );
+                    })
+                }
+            </tbody>
+        </table>
+
+        <div class="flex">
+            <a
+                class="rounded-md bg-neutral-200 px-2 text-green-600"
+                href={'https://www.maoken.com/?s=' + font_name}
+                target="_black"
+            >
+                字体授权查询
+            </a>
+        </div>
+    </section>
+    <section class="col-span-6">
+        <header class="pb-4">
+            <span class="rounded-md p-2 bg-purple-600 text-white text-lg"> 🤖 中文完整度分析</span>
+        </header>
+        <FontCoverage reporter={reporter} />
+    </section>
+</FontLayout>

@@ -67,6 +67,7 @@ export const FontAnalyzeUI = () => {
     );
 };
 import '../../style/analyze.css';
+import { ColoredNumber } from '../../utils/ColoredNumber';
 function StringObjectToTable(props: { data: Record<string, string> }) {
     const { data } = props;
 
@@ -86,17 +87,6 @@ function StringObjectToTable(props: { data: Record<string, string> }) {
         </table>
     );
 }
-const ColoredNumber = (percent: number) => {
-    return percent >= 80
-        ? 'text-green-700'
-        : percent >= 60
-        ? 'text-yellow-700'
-        : percent >= 40
-        ? 'text-blue-700'
-        : percent >= 20
-        ? 'text-purple-700'
-        : 'text-rose-700';
-};
 const StandardAnalyzeTable = (props: { data: Result['standard'] }) => {
     return (
         <table>

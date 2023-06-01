@@ -1,17 +1,8 @@
 import { atom } from '@cn-ui/use';
-import {
-    Component,
-    createSelector,
-    For,
-    JSXElement,
-    Match,
-    Show,
-    Switch,
-    useContext,
-} from 'solid-js';
+import { Component, createSelector, For } from 'solid-js';
 import type { DetailContextType } from './DetailContext';
 
-export const FontDisplay = (props: DetailContextType) => {
+export const FontDisplay = () => {
     const showingPanel = atom('white');
     const isSelected = createSelector(showingPanel);
     const temp = [
@@ -32,13 +23,13 @@ export const FontDisplay = (props: DetailContextType) => {
         },
     ];
     return (
-        <section class="flex-1 place-content-center overflow-y-auto">
-            <div class="flex  items-center gap-4 px-4  py-2 text-center">
+        <section class="col-span-6  flex-1 place-content-center overflow-y-auto pb-4">
+            <div class="flex   items-center gap-4 px-4  py-2 text-center">
                 <For each={temp}>
                     {(item) => {
                         return (
                             <button
-                                class="rounded-lg  px-2 py-1 transition-colors duration-300 hover:bg-neutral-100"
+                                class="rounded-lg  px-2 py-1 transition-colors duration-300 hover:bg-sky-700 hover:text-white"
                                 classList={{
                                     'bg-sky-600 text-white': isSelected(item.value),
                                     'bg-white': !isSelected(item.value),

@@ -24,9 +24,10 @@ import HETI_BODY from '../components/heti.astro';
             const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.href = `https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${fileName}/result.css`;
+            /** @ts-ignore */
             document.body.style = style;
             document.body.appendChild(link);
-            document.querySelector('#heti-header').textContent = `文章测试：${fileName}`;
+            document.querySelector('#heti-header')!.textContent = `文章测试：${fileName}`;
         };
     </script>
 </Layout>

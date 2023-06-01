@@ -21,6 +21,7 @@ export const TextWriter = () => {
                 class="mt-4 h-64 w-full rounded-md p-2 outline-none ring-2 ring-green-600"
                 style={{
                     'font-size': fontSize() + 'px',
+                    resize: 'none',
                 }}
             ></textarea>
         </aside>
