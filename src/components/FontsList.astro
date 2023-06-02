@@ -64,11 +64,8 @@ const list = Object.entries(Index).map(([id, value]) => {
                                 {item.remotePath.map((remote) => {
                                     const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
                                     return (
-                                        <li class="flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
-                                            <a
-                                                href={`/fonts/${item.id}/${name}`}
-                                                class="flex items-center justify-between"
-                                            >
+                                        <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
+                                            <a href={`/fonts/${item.id}/${name}`}>
                                                 <img
                                                     loading="lazy"
                                                     class="h-8   invert md:h-14"
@@ -78,9 +75,8 @@ const list = Object.entries(Index).map(([id, value]) => {
                                                     }
                                                     alt={name + '字体展示'}
                                                 />
-
-                                                <span>➡️</span>
                                             </a>
+                                            <span class="absolute right-2 top-2">➡️</span>
                                         </li>
                                     );
                                 })}

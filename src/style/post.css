@@ -1,3 +1,10 @@
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.0.2/700.min.css');
+
+@font-face {
+    font-family: 'post-header';
+    font-weight: 600;
+    src: local('Noto Serif SC Bold'), local('Noto Serif SC');
+}
 html {
     height: 100%;
     overflow: hidden;
@@ -16,13 +23,9 @@ html {
     text-indent: 2em;
     word-spacing: 0.3em;
 }
-@font-face {
-    font-family: 'post-header';
-    font-weight: 600;
-    src: local('Noto Serif SC Bold'), local('Noto Serif SC'), local('STZhongsong'), local('STSong');
-}
+
 .header-text {
-    font-family: 'post-header';
+    font-family: 'post-header', 'Noto Serif SC';
     font-weight: bolder;
 }
 .heti h1,
