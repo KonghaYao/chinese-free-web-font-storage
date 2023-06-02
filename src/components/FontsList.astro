@@ -6,21 +6,21 @@ const list = Object.entries(Index).map(([id, value]) => {
 ---
 
 <section
-    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 flex pt-16 z-0 snap-start"
+    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 grid grid-cols-6 pt-16 z-0 snap-start"
     id="font-list"
 >
-    <aside class="flex-1 overflow-scroll md:p-4">
+    <aside class="flex-1 col-span-3 lg:col-span-4 overflow-scroll md:p-4">
         <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">
             字体列表
 
             <sub class="float-right text-sm text-cyan-800">{list.length}份 | 点击字体查看详情</sub>
         </h2>
-        <ul id="fonts-index" class="flex flex-wrap flex-1 py-4 text-xs md:text-base">
+        <ul id="fonts-index" class="w-full flex flex-wrap flex-1 py-4 text-xs md:text-base">
             {
                 list.reverse().map((i) => {
                     return (
                         <li
-                            class="cursor-pointer px-4 py-2 transition-colors duration-300 hover:bg-emerald-600  hover:text-white "
+                            class="flex-none cursor-pointer px-4 py-2 transition-colors duration-300  hover:bg-emerald-600 hover:text-white"
                             data-name={i.name}
                         >
                             {i.name}
@@ -50,7 +50,7 @@ const list = Object.entries(Index).map(([id, value]) => {
     </aside>
     <nav
         id="fonts-wrapper"
-        class="overflow-scroll bg-white md:mx-8 p-2 md:px-8 rounded-lg my-4 shrink"
+        class="overflow-scroll bg-white md:mx-8 p-2 md:px-8 rounded-lg my-4 col-span-3 lg:col-span-2"
     >
         <ul id="font-parent" class="flex flex-col gap-4">
             {

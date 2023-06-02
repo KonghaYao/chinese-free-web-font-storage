@@ -3,8 +3,8 @@ import Picture from './Picture.astro';
 ---
 
 <section
-    id='open-source'
-    class="w-full my-16 py-8 snap-center relative overflow-hidden flex flex-col justify-center h-[80vh]"
+    id="open-source"
+    class="w-full my-16 gap-8 py-8 snap-center relative overflow-hidden grid grid-cols-2 xl:grid-cols-1 justify-center h-fit min-h-[80vh]"
 >
     <Picture
         relative={false}
@@ -13,11 +13,13 @@ import Picture from './Picture.astro';
         author="wong zihoo"
         link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
     />
-    <h2 class="text-white text-4xl w-full text-center brightness-125 relative">
+    <h2 class="text-white text-xl md:text-4xl w-full text-center brightness-125 relative">
         ---✨ 优势特点---
     </h2>
 
-    <ul class="flex justify-evenly items-center my-8 relative text-white">
+    <ul
+        class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative text-white"
+    >
         <li class="hover-cover-btn">
             <div class="text-xs text-neutral-200">可以覆盖所有的字体</div>
             <h3 class="text-xl text-white">🗺️全量级字符</h3>
@@ -35,10 +37,12 @@ import Picture from './Picture.astro';
             <h3 class="text-xl text-white">🏞️低侵入性</h3>
         </li>
     </ul>
-    <h2 class="text-white text-4xl w-full text-center brightness-125 relative mt-16">
+    <h2 class="text-white text-xl md:text-4xl w-full text-center brightness-125 relative">
         ---⚙️ 技术开源---
     </h2>
-    <ul class="flex justify-evenly items-center my-8 relative text-white">
+    <ul
+        class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative text-white"
+    >
         <li class="hover-cover-btn">
             <a href="https://www.npmjs.com/package/@konghayao/cn-font-split" target="_blank">
                 <div class="text-xs text-neutral-200">@konghayao/cn-font-split</div>
