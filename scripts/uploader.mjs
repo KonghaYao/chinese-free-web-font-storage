@@ -46,7 +46,7 @@ try {
 } catch (e) {}
 
 const uploadFolder = async (iterator) => {
-    if (cache.has(iterator)) {
+    if (!input.deleteFolder && cache.has(iterator)) {
         console.log("skip", iterator);
         return;
     }

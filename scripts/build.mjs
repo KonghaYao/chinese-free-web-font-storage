@@ -63,6 +63,7 @@ for (const iterator of packages) {
             chunkSize: 70 * 1024,
             testHTML: true,
             previewImage: {},
+            threads: {},
         });
     }
 
