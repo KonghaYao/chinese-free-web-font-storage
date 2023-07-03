@@ -5,19 +5,29 @@ import tailwind from '@astrojs/tailwind';
 import robotsTxt from 'astro-robots-txt';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import compress from 'astro-compress';
+import topLevelAwait from 'vite-plugin-top-level-await';
 import { loadEnv } from 'vite';
 const env = loadEnv(import.meta.env.MODE, process.cwd(), '');
 // https://astro.build/config
 export default defineConfig({
     site: 'https://chinese-font.netlify.app',
+
     integrations: [sitemap(), solidJs(), tailwind(), robotsTxt(), compress()],
     // output: 'server',
     output: 'static',
     vite: {
         build: {
+            target: 'esnext',
             sourcemap: true, // Source map generation must be turned on
         },
+
         plugins: [
+            topLevelAwait({
+                // The export name of top-level await promise for each chunk module
+                promiseExportName: '__tla',
+                // The function to generate import names of top-level await promise in each chunk module
+                promiseImportName: (i) => `__tla_${i}`,
+            }),
             import.meta.env.MODE === 'production' &&
                 sentryVitePlugin({
                     org: 'chinese-font',
@@ -35,6 +45,18 @@ export default defineConfig({
                     debug: true,
                 }),
         ],
+
+        worker: {
+            format: 'es',
+            plugins: [
+                topLevelAwait({
+                    // The export name of top-level await promise for each chunk module
+                    promiseExportName: '__tla',
+                    // The function to generate import names of top-level await promise in each chunk module
+                    promiseImportName: (i) => `__tla_${i}`,
+                }),
+            ],
+        },
     },
     markdown: {
         shikiConfig: {

@@ -1,6 +1,7 @@
 {
     "extends": "astro/tsconfigs/strict",
     "compilerOptions": {
+        "target": "ESNext",
         "strictNullChecks": true,
         "jsx": "preserve",
         "jsxImportSource": "solid-js"

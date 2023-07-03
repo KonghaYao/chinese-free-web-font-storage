@@ -1,4 +1,4 @@
-import type { FontReporter } from '../components/fonts/utils';
+import type { FontReporter } from '../components/fonts/FontReporter';
 
 const cache = new Map<string, FontReporter>();
 export const getFontReporter = (font: string, fileName: string) => {

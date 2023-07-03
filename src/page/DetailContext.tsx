@@ -1,5 +1,5 @@
 import { createContext } from 'solid-js';
-import type { FontReporter } from '../components/fonts/utils';
+import type { FontReporter } from '../components/fonts/FontReporter';
 
 export interface DetailContextType {
     reporter: FontReporter;
