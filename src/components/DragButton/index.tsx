@@ -1,8 +1,12 @@
 import { JSXElement, createSignal } from 'solid-js';
 
+interface UDragDropType {
+    accept?: string;
+    children?: JSXElement;
+}
 interface IDragDropButton {
-    (props: { onGetFile: (file: File) => void; multiple?: false; accept?: string }): JSXElement;
-    (props: { onGetFile: (file: File[]) => void; multiple?: true; accept?: string }): JSXElement;
+    (props: { onGetFile: (file: File) => void; multiple?: false } & UDragDropType): JSXElement;
+    (props: { onGetFile: (file: File[]) => void; multiple?: true } & UDragDropType): JSXElement;
 }
 
 export const DragDropButton: IDragDropButton = (props) => {
@@ -40,6 +44,7 @@ export const DragDropButton: IDragDropButton = (props) => {
             onDrop={handleDrop}
             onclick={() => input.click()}
         >
+            {props.children}
             {isDragging() ? '松开鼠标确认文件' : '拖拽文件到此处进行确认 or 点击上传'}
             <input
                 class="hidden"
