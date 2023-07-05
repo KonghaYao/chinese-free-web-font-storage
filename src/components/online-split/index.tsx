@@ -29,7 +29,7 @@ export const OnlineSplit = () => {
             if (!file()) throw new Error('请添加文件');
             const zip = new JSZip();
             const name = file()!.name.replace(/\..*/, '');
-            const folder = zip.folder(name);
+            const folder = zip.folder(name)!;
             resultList().forEach((i) => {
                 folder.file(i.name, i.buffer);
             });

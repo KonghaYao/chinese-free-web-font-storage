@@ -3,8 +3,6 @@ import Layout from '../Layout/Layout.astro';
 import { OnlineSplit as Split } from '../components/online-split/index';
 ---
 
-<Layout
-    title="在线字体分包器"
->
-    <Split client:only />
+<Layout title="在线字体分包器">
+    <Split client:only="solid" />
 </Layout>
