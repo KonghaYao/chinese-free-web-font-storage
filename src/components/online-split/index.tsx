@@ -18,6 +18,14 @@ const preload = import(
     return fontSplit;
 });
 
+const getTestingFile = () => {
+    return fetch(
+        'https://cdn.jsdelivr.net/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
+    )
+        .then((res) => res.blob())
+        .then((res) => new File([res], 'SmileySans-Oblique.ttf'));
+};
+
 export const OnlineSplit = () => {
     const [file, setFile] = createSignal<File | null>(null);
     const [logMessage, setLog] = createSignal<string[]>([]);
@@ -71,6 +79,16 @@ export const OnlineSplit = () => {
     return (
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
             <div class="">
+                <button
+                    class="w-full hover:bg-neutral-300"
+                    onclick={() => {
+                        getTestingFile().then((f) => {
+                            setFile(() => f);
+                        });
+                    }}
+                >
+                    尝试使用测试文件（下载时间稍长，请耐心等待）
+                </button>
                 <Show
                     when={file()}
                     fallback={
@@ -106,9 +124,9 @@ export const OnlineSplit = () => {
                 </Show>
             </div>
 
-            <section class="flex flex-col gap-4">
+            <section class="flex h-full flex-col gap-4 overflow-hidden">
                 <header class="text-xl">Logger 日志</header>
-                <ul class="h-full  select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-xs">
+                <ul class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-xs">
                     <For each={logMessage()}>
                         {(item) => {
                             return <li>{item}</li>;
@@ -116,12 +134,12 @@ export const OnlineSplit = () => {
                     </For>
                 </ul>
                 <header class="text-xl">Output 输出文件</header>
-                <ul class="h-full  select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-sm">
+                <ul class="h-full max-h-[100%]  select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-sm">
                     <For each={resultList()}>
                         {(item) => {
                             return (
                                 <li>
-                                    {prettyBytes(item.buffer.byteLength)}|{item.name}{' '}
+                                    {prettyBytes(item.buffer.byteLength)} | {item.name}
                                 </li>
                             );
                         }}
