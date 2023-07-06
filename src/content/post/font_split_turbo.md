@@ -13,9 +13,9 @@ article:
 
 # 字体分包性能优化
 
-在 4.0 版本中，我们采用了多线程和基于 WebAssembly 的插件，使得我们的分包时间从原先的 19s 缩减到了 5s，这可以说是一个巨大的性能优化了，那么我们是如何实现这一点的呢？
+在 4.0 版本中，我们采用了多线程和基于 WebAssembly 的插件，使得我们的分包时间从原先的 19s 缩减到了 5s，并且通过一些特殊操作实现了跨平台通用。那么我们是如何实现这一些功能的呢？
 
-## 使用 Harfbuzz（WASM） 替换 Javascript 字体打包库
+## Harfbuzz（WASM） 进行字体分包
 
 在 3.0 版本中，我们使用 Javascript 插件 fonteditor-core 进行字体文件的解析，这是一个缓慢的过程，解析过程中遇到特殊的字体情况还会导致某些 BUG。于是我们在 Github 社区中搜寻一个兼顾性能、专业性和兼容性的解决方案。
 
@@ -45,9 +45,73 @@ JS 多线程由多个 Worker 构成，由主线程的一个线程池进行生成
 
 代码中有些小细节，我们使用 transferable 的方式**转移二进制**，而非默认的**拷贝二进制**。因为主线程中，这个 ttf 文件的数据不再需要了，可以转移；同时，线程中产生的结果二进制也是不被内部需要的，也可以进行转移。二进制数据直接通过转移的手法可以节省一部分的内存，避免极端情况下内存不足的尴尬。
 
+```ts
+const transferred: Uint8Array = await service.pool.exec('convert', [buffer, targetType], {
+    transfer: [buffer.buffer], // 传递 buffer
+});
+```
+
 ### 多线程有趣的点
 
 1. 多线程不一定比单线程快：我曾经对那个 5ms 的函数进行了多线程封装，结果发现创建线程和线程数据传输总时间达到了 1.5s 一次 😂。
 2. 多线程数据传回主线程会阻塞：多线程运行不会阻塞，返回的数据会阻塞。你的主线程只有一个，一旦在极短时间内返回大量数据，还是并发，主线程仍然没法快速处理，需要一个一个串行解决，这样就导致了多线程比单线程还耗时。
-3. Javascript 在浏览器中的内存共享方案 SharedArrayBuffer 需要特殊的 CORS 设置，所以出于兼容性考虑，我们并没有使用它。
+3. Javascript 在浏览器中的内存共享方案 SharedArrayBuffer 需要特殊的跨域设置，所以出于兼容性考虑，我们并没有使用它。
 4. 浏览器中创建 worker 需要严格的同源策略，不允许 worker 脚本本身是跨域的；但是 worker 的 `importScripts`、`import ` 却可以导入跨域脚本，所以我们在浏览器的兼容上多封装了一层。
+
+## 强大的兼容性
+
+cn-font-split 实现了 Nodejs、Deno、Browser 的平台兼容，并且在性能上未见特大衰减！
+
+### 各个平台的考量
+
+因为考虑到前端工程化的重心是在 Nodejs 端的，开发者手中也自然是可以通过 npm 快速安装 cn-font-split。浏览器端可以让开发者随处可用，当你只需要分包一个字体文件的时候，肯定不想再写一串代码啦。而 Deno 端则是新兴的后端，可以认为是遵循浏览器标准的服务器版本，我们也特别地进行了兼容。
+
+### 文件系统的兼容
+
+文件系统在各个平台的使用方式都是不同的，node 使用 fs、Deno 使用 Deno fileSystem API，而浏览器只有 fetch 请求远端文件。同时请求文件还有一些特殊，WebAssembly 的项目一般都是自动生成的加载文件，里面需要动用文件系统获取 wasm 文件，这个也需要兼容。
+
+1. 判断运行环境
+
+判断运行环境是做兼容性的基础，通过判断运行环境区别 Nodejs 和 Deno 然后进行各自文件系统的调用可以节省很多不必要开销。而且可以判断浏览器环境执行文件路径到 URL 路径的转换，避免错误。
+
+2. 使用 AssetsMap 统一文件获取方式
+
+AssetsMap 通过代理名称获取实际路径 结合兼容性 API 实现文件获取。同时对外暴露修改映射关系的方式，使得程序在浏览器端可以将文件替换为 HTTP 协议的网络路径，从而实现兼容浏览器端的文件系统。
+
+```ts
+/** 异步地导入本地数据 */
+class AssetsMap {
+    //...
+    async loadFileAsync(token: K | string): Promise<Uint8Array> {
+        const targetPath = this.ensureGet(token);
+        if (isNode) {
+            const {
+                promises: { readFile },
+            } = await import('fs');
+            return readFile(await resolveNodeModule(targetPath)).then((res) => {
+                return new Uint8Array(res.buffer);
+            });
+        } else if (
+            isBrowser ||
+            isInWorker ||
+            ['https://', 'http://'].some((i) => targetPath.startsWith(i))
+        ) {
+            return this.loadFileResponse(token)
+                .then((res) => res.arrayBuffer())
+                .then((res) => new Uint8Array(res));
+        } else if (isDeno) {
+            return Deno.readFile(targetPath);
+        }
+        throw new Error('loadFileAsync 适配环境失败');
+    }
+    //...
+}
+```
+
+### 兼容适配特殊 API
+
+Nodejs 端缺失一大堆如 fetch、location 等的 Web API，而 Deno 缺失 XHR 和 classic worker 的支持，浏览器端虽然比较全面，但是没有 crypto 加密手段。
+
+众多的不同点需要一个个特殊的 polyfill 去进行解决。对于 worker 的不一致，cn-font-split 使用了 workerpool 插件，并且在打包时做了 classic worker 到 module worker 的转换。而 fetch、XHR 等 API 缺失则使用 NPM 中的一些库导出到 globalThis 解决。 crypto 缺失则使用一些算法实现库替代。
+
+总体而言，兼容是一件麻烦事，需要做很多的操作才能实现较好的效果，这个过程中对于环境、对于库的运用都需要娴熟的意识，才能避免其导致整个程序 BUG。
