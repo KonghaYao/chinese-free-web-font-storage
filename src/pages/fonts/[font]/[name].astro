@@ -15,6 +15,17 @@ const { font, name: font_name } = Astro.params;
 ---
 
 <FontLayout font_name={font_name!} font={font!}>
+    <script>
+        const check = () => {
+            const el = document.querySelector('.poetry');
+            if (el.clientHeight <= 100) {
+                console.log('发现字体陷落');
+                el.classList.add('fix');
+            }
+        };
+        setTimeout(check, 2000);
+        window.addEventListener('load', check);
+    </script>
     <section class="col-span-7 flex justify-center items-center bg-white rounded-2xl">
         <div class="poetry col-span-5 p-8 leading-6">
             <header class="text-2xl">沁园春 雪</header>
@@ -57,7 +68,7 @@ const { font, name: font_name } = Astro.params;
     <section class="col-span-7 flex justify-center items-center bg-white rounded-2xl">
         <p class="text-2xl capitalize py-4">To be, or not to be, that is the question</p>
     </section>
-    <section class="col-span-6 row-span-2 flex flex-col gap-2">
+    <section class="col-span-6 row-span-2 flex flex-col gap-4">
         <WebSupport name={font_name!} font={font!} />
     </section>
     <section class="col-span-6">
@@ -67,7 +78,7 @@ const { font, name: font_name } = Astro.params;
         <TextWriter client:load />
     </section>
     <section class="col-span-6 text-center">
-        <span class="text-4xl"> 中文网字计划</span>
+        <span class="text-4xl pr-4"> 中文网字计划</span>
         <span>Design By 江夏尧</span>
     </section>
 </FontLayout>

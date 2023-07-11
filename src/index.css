@@ -10,6 +10,9 @@ body {
 .poetry {
     writing-mode: tb-rl;
 }
+.poetry.fix > * {
+    letter-spacing: 1.1em;
+}
 
 a > button {
     @apply transition-colors;
