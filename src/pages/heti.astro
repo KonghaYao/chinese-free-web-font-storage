@@ -19,7 +19,7 @@ import HETI_BODY from '../components/heti.astro';
             const fileName = query.get('name');
             const family = query.get('family');
             const subFamily = query.get('subFamily');
-            const style = `font-family:'${family}';font-weight:'${subFamily}''`;
+            const style = `font-family:'${family}','${family} Web';font-weight:'${subFamily}''`;
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
