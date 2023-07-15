@@ -3,6 +3,9 @@ import Layout from '../Layout/Layout.astro';
 import { FontAnalyzeUI } from '../components/analyze/index';
 ---
 
-<Layout title="在线字体分析器" defaultFontCSS={'https://ik.imagekit.io/chinesefonts/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css'}>
+<Layout
+    title="在线字体分析器"
+    defaultFontCSS={'https://ik.imagekit.io/chinesefonts1/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css'}
+>
     <FontAnalyzeUI client:only />
 </Layout>

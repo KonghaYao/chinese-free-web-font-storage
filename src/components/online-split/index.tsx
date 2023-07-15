@@ -6,10 +6,10 @@ import { resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 // 转为异步加载，防止文件发生阻塞
 const preload = import(
-    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@4.3.3/dist/browser/index.js'
+    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@4.4.0/dist/browser/index.js'
 ).then((res) => {
     const { fontSplit, Assets } = res;
-    const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@4.3.3';
+    const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@4.4.0';
     Assets.redefine({
         'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
         'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
@@ -58,7 +58,7 @@ export const OnlineSplit = () => {
                 FontPath: url,
                 targetType: 'woff2',
                 // subsets: JSON.parse(await fs.readFile("./subsets/misans.json", "utf-8")),
-                previewImage: {},
+                // previewImage: {},
                 threads: {},
                 log(...args) {
                     setLog((i) => [...i, args.join(' ')]);

@@ -15,6 +15,9 @@ export default defineConfig({
     // output: 'server',
     output: 'static',
     vite: {
+        optimizeDeps: {
+            exclude: ['@konghayao/cn-font-split'],
+        },
         plugins: [
             import.meta.env.MODE === 'production' &&
                 sentryVitePlugin({

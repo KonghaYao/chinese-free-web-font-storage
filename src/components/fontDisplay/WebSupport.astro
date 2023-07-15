@@ -1,5 +1,4 @@
 ---
-import data from '../../../index.json';
 import { Code } from 'astro/components';
 import { getFontReporter } from '../../utils/getFontReporter';
 
@@ -13,70 +12,46 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font!, fileName);
-const CDNs = [`https://ik.imagekit.io/chinesefonts/packages/${font}/dist/${font_name}/result.css`];
 const theme = 'github-light' as const;
 ---
 
 <header class="my-4 text-lg">
-    <span class="bg-orange-600 text-white p-2 rounded-lg"> 🌏 代码支持</span>
+    <span class="bg-orange-600 text-white p-2 rounded-lg"> 🌏 技术支持</span>
 </header>
 <div class="bg-white flex flex-col p-4 rounded-2xl">
     <h3>
-        🔗 通过链接嵌入
-        <select
-            id="cdn-select"
-            class="float-right m-0 flex-1 bg-green-600 text-white rounded-md p-1 outline-none text-xs"
-            value={new URL(CDNs[0]).host}
-        >
-            {
-                CDNs.map((item) => (
-                    <option class="text-xs" value={item}>
-                        {new URL(item).host}
-                    </option>
-                ))
-            }
-        </select>
+        📦手动在线分包
+        <a href="/online-split">在线分包页面</a>
     </h3>
+    <blockquote class="text-xs py-4 text-rose-600">
+        ❌ 因多个平台盗用 CDN，造成严重影响，故停止公共 CDN 服务，如需使用请自行部署！
+    </blockquote>
+    <ol class="list-decimal px-8">
+        <li>进入<a href="/online-split">在线分包页面</a>，上传字体，并点击分包</li>
+        <li>分包完成后，下载 zip 文件包</li>
+        <li>解压，将整个文件夹连同所有文件上传至您的 CDN 即可！</li>
+    </ol>
+</div>
+<div class="bg-white flex flex-col p-4 rounded-2xl">
+    <h3>🔗 通过链接嵌入</h3>
 
     <blockquote class="text-xs py-4">
         🔔链接方式可以被网页、小程序等支持类 CSS 样式载入的平台使用。
     </blockquote>
 
-    <script>
-        document.getElementById('cdn-select')!.onchange = (e) => {
-            const url = (e.target as HTMLInputElement).value;
-            document
-                .getElementById('link-code')!
-                .querySelector('.line span:nth-child(10)')!.textContent = `'${url}'`;
-        };
-    </script>
-    <span id="link-code" class="select-text">
+    <span class="select-text my-2">
         <Code
             wrap
             lang="html"
             theme={theme}
-            code={`<link rel='stylesheet' href='${CDNs[0]}' /> `}
+            code={`<link rel='stylesheet' href='/${font_name}/results.css' /> `}
         />
     </span>
+    <span class="select-text my-2">
+        <Code wrap lang="css" theme={theme} code={`@import("/${font_name}/results.css") `} />
+    </span>
 </div>
-<div class="flex flex-1 flex-col gap-1 sm:gap-4 bg-white p-4 select-text rounded-2xl">
-    <h3>
-        ⌨️ 前端代码嵌入
 
-        <aside class="float-right bg-rose-600 text-white text-sm p-1 rounded-md">
-            <a href={`https://npmjs.com/@chinese-fonts/${font}`}>NPM</a>
-        </aside>
-    </h3>
-    <blockquote class="text-xs py-2">🔔 前端代码需要配合 Vite 或者 Webpack 打包器使用</blockquote>
-    <Code wrap lang="sh" theme={theme} code={`npm install @chinese-fonts/${font}`} />
-
-    <Code
-        wrap
-        lang="js"
-        theme={theme}
-        code={`import "@chinese-fonts/${font}/dist/${font_name}/result.css";`}
-    />
-</div>
 <div class="bg-white p-4 select-text rounded-2xl">
     <h3>🔔限定字体使用区域</h3>
     <Code
