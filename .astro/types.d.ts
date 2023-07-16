@@ -189,6 +189,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"post": {
+"deploy_to_cdn.md": {
+	id: "deploy_to_cdn.md";
+  slug: "deploy_to_cdn";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 "font_split_turbo.md": {
 	id: "font_split_turbo.md";
   slug: "font_split_turbo";

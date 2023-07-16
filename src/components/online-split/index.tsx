@@ -78,7 +78,7 @@ export const OnlineSplit = () => {
     );
     return (
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
-            <div class="">
+            <div class="flex flex-col">
                 <button
                     class="w-full hover:bg-neutral-300"
                     onclick={() => {
@@ -122,6 +122,11 @@ export const OnlineSplit = () => {
                         </Show>
                     </div>
                 </Show>
+                <div class="px-4 text-xs text-rose-600">
+                    <a href="https://github.com/KonghaYao/cn-font-split">
+                        在线分包由于特殊原因不支持某些字体特性，如需支持可使用代码分包➡️。
+                    </a>
+                </div>
             </div>
 
             <section class="flex h-full flex-col gap-4 overflow-hidden">

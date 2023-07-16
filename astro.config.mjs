@@ -14,6 +14,9 @@ export default defineConfig({
     integrations: [sitemap(), solidJs(), tailwind(), robotsTxt(), compress()],
     // output: 'server',
     output: 'static',
+    experimental: {
+        assets: true,
+    },
     vite: {
         optimizeDeps: {
             exclude: ['@konghayao/cn-font-split'],

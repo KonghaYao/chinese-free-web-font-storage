@@ -31,6 +31,9 @@ const theme = 'github-light' as const;
         <li>分包完成后，下载 zip 文件包</li>
         <li>解压，将整个文件夹连同所有文件上传至您的 CDN 即可！</li>
     </ol>
+    <div>
+        <a href="/post/deploy_to_cdn"> 详细教程</a>
+    </div>
 </div>
 <div class="bg-white flex flex-col p-4 rounded-2xl">
     <h3>🔗 通过链接嵌入</h3>
@@ -58,7 +61,7 @@ const theme = 'github-light' as const;
         wrap
         lang="css"
         theme={theme}
-        code={`article {\n    font-family:'${reporter.message.fontFamily}','${reporter.message.fontFamily} Web';\n    font-weight:'${reporter.message.fontSubFamily}'\n};`}
+        code={`article {\n    font-family:'${reporter.message.fontFamily}';\n    font-weight:'${reporter.message.fontSubFamily}'\n};`}
     />
 </div>
 <a
