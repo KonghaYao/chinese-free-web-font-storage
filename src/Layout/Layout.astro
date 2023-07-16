@@ -3,6 +3,7 @@ import '../index.css';
 import GlobalHeader from '../components/GlobalHeader.astro';
 import { SEO } from 'astro-seo';
 import Sentry from '../components/SentryScript.astro';
+import { __CDN__ } from '../global';
 export interface Props {
     title?: string;
     description?: string;
@@ -24,7 +25,7 @@ const {
     type: ogType,
     keywords,
     style,
-    defaultFontCSS = '/fonts/jxzk.css',
+    defaultFontCSS = __CDN__ + '/packages/jxzk/dist/江西拙楷/result.css',
     class: className,
     htmlClass,
 } = Astro.props;

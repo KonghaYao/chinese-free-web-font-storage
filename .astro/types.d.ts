@@ -210,6 +210,13 @@ declare module 'astro:content' {
   collection: "post";
   data: any
 } & { render(): Render[".md"] };
+"how_to_support_font_feature.md": {
+	id: "how_to_support_font_feature.md";
+  slug: "how_to_support_font_feature";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 "performace_turbo.md": {
 	id: "performace_turbo.md";
   slug: "performace_turbo";

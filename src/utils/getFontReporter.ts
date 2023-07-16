@@ -1,5 +1,5 @@
 import type { FontReporter } from '../components/fonts/FontReporter';
-
+import { __CDN__ } from '../global';
 const cache = new Map<string, FontReporter>();
 export const getFontReporter = (font: string, fileName: string) => {
     const tag = `${font}_${fileName}`;
@@ -7,7 +7,7 @@ export const getFontReporter = (font: string, fileName: string) => {
         return cache.get(tag)!;
     } else {
         return fetch(
-            `https://ik.imagekit.io/chinesefonts1/packages/${font}/dist/${fileName}/reporter.json`
+            __CDN__ + `/packages/${font}/dist/${fileName}/reporter.json`
         )
             .then<FontReporter>((res) => res.json())
             .then((res) => {
