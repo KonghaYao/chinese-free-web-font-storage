@@ -12,6 +12,10 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font!, fileName);
+const CDNs = [`https://192960944.r.cdn36.com`].map(
+    (i) => i + `/chinesefonts1/packages/${font}/dist/${font_name}`
+);
+
 const theme = 'github-light' as const;
 ---
 
@@ -23,36 +27,50 @@ const theme = 'github-light' as const;
         📦手动在线分包
         <a href="/online-split">在线分包页面</a>
     </h3>
-    <blockquote class="text-xs py-4 text-rose-600">
-        ❌ 因多个平台盗用 CDN，造成严重影响，故停止公共 CDN 服务，如需使用请自行部署！
-    </blockquote>
+
     <ol class="list-decimal px-8">
         <li>进入<a href="/online-split">在线分包页面</a>，上传字体，并点击分包</li>
         <li>分包完成后，下载 zip 文件包</li>
         <li>解压，将整个文件夹连同所有文件上传至您的 CDN 即可！</li>
     </ol>
-    <div>
+    <div class='text-red-600'>
         <a href="/post/deploy_to_cdn"> 详细教程</a>
     </div>
 </div>
 <div class="bg-white flex flex-col p-4 rounded-2xl">
-    <h3>🔗 通过链接嵌入</h3>
-
+    <h3>
+        🔗 通过链接嵌入
+        <select
+            id="cdn-select"
+            class="float-right m-0 flex-1 bg-green-600 text-white rounded-md p-1 outline-none text-xs"
+            value={new URL(CDNs[0]).host}
+        >
+            {
+                CDNs.map((item) => (
+                    <option class="text-xs" value={item}>
+                        {new URL(item).host}
+                    </option>
+                ))
+            }
+        </select>
+    </h3>
     <blockquote class="text-xs py-4">
         🔔链接方式可以被网页、小程序等支持类 CSS 样式载入的平台使用。
     </blockquote>
 
-    <span class="select-text my-2">
+    <span class="select-text my-2 p-2 text-sm border border-neutral-200 rounded-md">
         <Code
             wrap
             lang="html"
             theme={theme}
-            code={`<link rel='stylesheet' href='/${font_name}/results.css' /> `}
+            code={`<link rel='stylesheet' href='${CDNs[0]}/result.css' /> `}
         />
+
+        <Code wrap lang="css" theme={theme} code={`@import("${CDNs}/result.css") `} />
     </span>
-    <span class="select-text my-2">
-        <Code wrap lang="css" theme={theme} code={`@import("/${font_name}/results.css") `} />
-    </span>
+    <blockquote class="text-xs py-4 text-rose-600">
+        🔒 公共 CDN 每月只提供有限流量的字体服务，不保证稳定性，建议自行部署。使用字体前请遵守相关授权信息，使用字体的项目必须标注字体名称、来源信息！
+    </blockquote>
 </div>
 
 <div class="bg-white p-4 select-text rounded-2xl">

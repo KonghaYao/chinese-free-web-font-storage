@@ -1,6 +1,5 @@
 ---
 import Layout from './Layout.astro';
-import type { FontReporter } from '../components/fonts/FontReporter';
 import { getFontReporter } from '../utils/getFontReporter';
 import { __CDN__ } from '../global';
 export interface Props {
@@ -13,7 +12,7 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font, fileName);
-const style = `font-family:'${reporter.message.fontFamily}','${reporter.message.fontFamily} Web';font-weight:'${reporter.message.fontSubFamily}'`;
+const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${reporter.message.fontSubFamily}'`;
 const root = `/fonts/${font}/${font_name}/`;
 ---
 

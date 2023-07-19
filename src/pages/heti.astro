@@ -3,6 +3,7 @@ import '../style/heti_change.css';
 import '../style/heti_site_change.css';
 import Layout from '../Layout/Layout.astro';
 import HETI_BODY from '../components/heti.astro';
+import { __CDN__ } from '../global';
 ---
 
 <Layout title="文章测试页面" type="article">
@@ -23,7 +24,7 @@ import HETI_BODY from '../components/heti.astro';
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = `https://ik.imagekit.io/chinesefonts1/packages/${font}/dist/${fileName}/result.css`;
+            link.href = __CDN__ + `/packages/${font}/dist/${fileName}/result.css`;
             /** @ts-ignore */
             document.body.style = style;
             document.body.appendChild(link);

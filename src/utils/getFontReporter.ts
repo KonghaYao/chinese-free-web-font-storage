@@ -6,9 +6,9 @@ export const getFontReporter = (font: string, fileName: string) => {
     if (cache.has(tag)) {
         return cache.get(tag)!;
     } else {
-        return fetch(
-            __CDN__ + `/packages/${font}/dist/${fileName}/reporter.json`
-        )
+        // const item = __CDN__ + `/packages/${font}/dist/${fileName}/reporter.json`
+        const item = `https://ik.imagekit.io/chinesefonts1/packages/${font}/dist/${fileName}/reporter.json`
+        return fetch(item)
             .then<FontReporter>((res) => res.json())
             .then((res) => {
                 cache.set(tag, res);
