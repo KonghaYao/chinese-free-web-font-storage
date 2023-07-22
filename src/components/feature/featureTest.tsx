@@ -1,31 +1,162 @@
-import { atom } from '@cn-ui/reactive';
+import { Atom, atom } from '@cn-ui/reactive';
+import { onCleanup, onMount } from 'solid-js';
 
 export const FeatureTest = () => {
+    let root: HTMLDivElement;
+    const TOC = atom<string[]>([]);
+    onMount(() => {
+        TOC([...root.querySelectorAll('h3')].map((i) => i.id));
+    });
     return (
-        <div class="m-auto max-w-3xl select-text py-8">
+        <div class="m-auto max-w-3xl select-text py-8" ref={root!}>
             <header class="pb-8">
                 <h1 class="py-4 text-center text-4xl">字体特性渲染</h1>
                 <p class="text-gray-700">
                     下列为 Web 字体的特性渲染测试，展示部分字体的特性渲染效果。
                     本网页期望呈现较为完整的各种 opentype 特性在 cn-font-split
-                    字体分包方案下的渲染效果，故部分重复特性将省略。由于 Web 浏览器未实现全部的
-                    opentype 特性和原始文件 ttf 格式和 otf 格式的特性保存情况，故部分特性无法实现。
+                    字体分包方案下的渲染效果，故部分重复特性将省略。 由于 Web 浏览器未实现全部的
+                    opentype 特性和原始文件 ttf 格式和 otf
+                    格式的特性保存情况，故部分特性无法实现。部分未出现的字体特性也可实现。
                 </p>
+                <div class="flex flex-wrap gap-2 py-2">
+                    {TOC().map((i) => {
+                        return (
+                            <a href={'#' + i} class="rounded-lg bg-green-600 px-1 text-white">
+                                {i}
+                            </a>
+                        );
+                    })}
+                </div>
             </header>
             <Part1></Part1>
             <Part2></Part2>
-
+            <Part3></Part3>
+            <Part4></Part4>
             <p class="py-4 text-center text-3xl"> To Be Continue ...</p>
         </div>
     );
 };
-const Part2 = () => {
+
+const useIntoViewTrigger = (root: Atom<HTMLDivElement | null>, trigger: Atom<boolean>) => {
+    // 创建一个 Intersection Observer 实例
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            // 当目标元素进入或离开窗口时触发的回调函数
+            if (entry.isIntersecting) {
+                trigger(true);
+                console.log('进入视野');
+            }
+        });
+    });
+    onMount(() => {
+        observer.observe(root()!);
+    });
+    onCleanup(() => {
+        observer.disconnect();
+    });
+};
+const Part4 = () => {
+    const link = atom(false);
+    const root = atom<HTMLDivElement | null>(null);
+    useIntoViewTrigger(root, link);
     return (
-        <div style="font-family: 'MaokenAssortedSans';">
-            <link
-                rel="stylesheet"
-                href="https://192960944.r.cdn36.com/chinesefonts1/packages/mksjh/dist/MaokenAssortedSans1_30/result.css"
-            />
+        <div style="font-family: 'LogoSC LongZhuTi';" ref={root!}>
+            {link() && (
+                <link
+                    rel="stylesheet"
+                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/bxzlzt/dist/标小智龙珠体/result.css"
+                />
+            )}
+            <h2 class="pt-8 text-center text-3xl">标小智龙珠体</h2>
+
+            <SampleDisplay
+                title="半宽字形"
+                tag="expt"
+                fullTag="Expert Forms Currently Japanese only"
+                desc="这个特性将比例宽度或半个字符宽度以外的固定宽度的字形替换为半字符宽度的字形。许多CJKV字体中的字形设置在多个宽度上，这个特性选择了半字符宽度的版本。有许多情况下会优先选择这种行为，包括与旧版桌面文件的兼容性。"
+                sample={
+                    ' 唖 嘘 焔 鴎 噛 澗 侠 鹸 柵 屡 繍 醤 靭 蝉 掻 騨 箪 掴 填 顛 涜 嚢 剥 溌 醗 媛 頬 麺 莱 埬 蓮 蝋 僊 兔 寃 屏 廏 攅 曁 龝 箙 舮 麪'
+                }
+            ></SampleDisplay>
+        </div>
+    );
+};
+const Part3 = () => {
+    const link = atom(false);
+    const root = atom<HTMLDivElement | null>(null);
+    useIntoViewTrigger(root, link);
+    const wght = atom(100);
+    return (
+        <div style="font-family: 'Source Han Serif CN VF';" ref={root}>
+            {link() && (
+                <link
+                    rel="stylesheet"
+                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/syst/dist/SourceHanSerifCN/result.css"
+                />
+            )}
+            <h2 class="pt-8 text-center text-3xl">思源宋体</h2>
+            <section>
+                <h3 class="py-4 text-2xl text-green-600" id="wght">
+                    <span>可变字重</span>
+                </h3>
+                <h4 class="py-2 text-xs text-gray-600">
+                    可变字重只需要改变数值即可实现不同字重的和谐渲染。
+                </h4>
+                <p>
+                    <input
+                        type="range"
+                        min="100"
+                        value={100}
+                        max="1000"
+                        step={100}
+                        oninput={(e) => wght(parseInt(e.target.value))}
+                    />
+                </p>
+                <div
+                    class="rounded-xl  bg-white p-4 text-2xl"
+                    style={`font-variation-settings: "wght" ${wght()};`}
+                >
+                    中文网字计划 The Chinese Web Font Project
+                </div>
+            </section>
+            <SampleDisplay
+                title="半宽字形"
+                tag="hwid"
+                fullTag="Half Widths"
+                desc="这个特性将比例宽度或半个字符宽度以外的固定宽度的字形替换为半字符宽度的字形。许多CJKV字体中的字形设置在多个宽度上，这个特性选择了半字符宽度的版本。有许多情况下会优先选择这种行为，包括与旧版桌面文件的兼容性。"
+                sample={
+                    ' Ｗ Ｘ Ｙ Ｚ ［ ＼ ］ ＾ ＿ ‵ ａ ｂ ｃ ｄ ｅ ｆ ｇ ｈ ｉ ｊ ｋ ｌ ｍ ｎ ｏ ｐ ｑ ｒ ｓ ｔ ｕ ｖ ｗ ｘ ｙ ｚ ｛ ｜ ｝ ￥ ￦'
+                }
+            ></SampleDisplay>
+            <SampleDisplay
+                title="等宽备用垂直度量"
+                tag="vpal"
+                fullTag="Proportional Alternate Vertical Metrics"
+                desc="使用等宽备用垂直度量可以确保字符在垂直方向上具有统一的视觉效果，尤其是在某些特定排版需求下，如表格、列表、数学公式等情况下特别有用。这样做有助于提高文本的可读性和外观的一致性。"
+                sample={' ︵ ︶ ︷ ︸ ︽ ︾ ﹀ ﹂ ＾'}
+            ></SampleDisplay>
+            <SampleDisplay
+                title="等宽备用垂直度量"
+                tag="smcp"
+                fullTag="Proportional Alternate Vertical Metrics"
+                desc="使用等宽备用垂直度量可以确保字符在垂直方向上具有统一的视觉效果，尤其是在某些特定排版需求下，如表格、列表、数学公式等情况下特别有用。这样做有助于提高文本的可读性和外观的一致性。"
+                sample={'Changing case to Small Caps.'}
+            ></SampleDisplay>
+        </div>
+    );
+};
+const Part2 = () => {
+    const link = atom(false);
+    const root = atom<HTMLDivElement | null>(null);
+    useIntoViewTrigger(root, link);
+    return (
+        <div style="font-family: 'MaokenAssortedSans';" ref={root}>
+            {link() && (
+                <link
+                    rel="stylesheet"
+                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/mksjh/dist/MaokenAssortedSans1_30/result.css"
+                />
+            )}
             <h2 class="pt-8 text-center text-3xl">猫啃什锦黑</h2>
             <SampleDisplay
                 title="连体数字"
