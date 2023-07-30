@@ -1,5 +1,7 @@
 import { Atom, atom } from '@cn-ui/reactive';
 import { onCleanup, onMount } from 'solid-js';
+import { __CDN__ } from '../../global';
+import { SampleDisplay } from './SampleDisplay';
 
 export const FeatureTest = () => {
     let root: HTMLDivElement;
@@ -64,7 +66,7 @@ const Part4 = () => {
             {link() && (
                 <link
                     rel="stylesheet"
-                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/bxzlzt/dist/标小智龙珠体/result.css"
+                    href={__CDN__ + '/packages/bxzlzt/dist/标小智龙珠体/result.css'}
                 />
             )}
             <h2 class="pt-8 text-center text-3xl">标小智龙珠体</h2>
@@ -91,7 +93,7 @@ const Part3 = () => {
             {link() && (
                 <link
                     rel="stylesheet"
-                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/syst/dist/SourceHanSerifCN/result.css"
+                    href={__CDN__ + '/packages/syst/dist/SourceHanSerifCN/result.css'}
                 />
             )}
             <h2 class="pt-8 text-center text-3xl">思源宋体</h2>
@@ -154,7 +156,7 @@ const Part2 = () => {
             {link() && (
                 <link
                     rel="stylesheet"
-                    href="https://192960944.r.cdn36.com/chinesefonts1/packages/mksjh/dist/MaokenAssortedSans1_30/result.css"
+                    href={__CDN__ + '/packages/mksjh/dist/MaokenAssortedSans1_30/result.css'}
                 />
             )}
             <h2 class="pt-8 text-center text-3xl">猫啃什锦黑</h2>
@@ -212,7 +214,7 @@ const Part1 = () => {
         <div style="font-family: 'Smiley Sans Oblique';">
             <link
                 rel="stylesheet"
-                href="https://192960944.r.cdn36.com/chinesefonts1/packages/dyh/dist/SmileySans-Oblique/result.css"
+                href={__CDN__ + '/packages/dyh/dist/SmileySans-Oblique/result.css'}
             />
             <h2 class="pt-8 text-center text-3xl">得意黑</h2>
             <SampleDisplay
@@ -285,41 +287,5 @@ const Part1 = () => {
                 sample={'This is Chinese Web Font Project'}
             ></SampleDisplay>
         </div>
-    );
-};
-const SampleDisplay = (props: {
-    title: string;
-    tag: string;
-    fullTag: string;
-    desc: string;
-    sample: string;
-    style?: string;
-}) => {
-    const featureTrigger = atom(true);
-    return (
-        <section>
-            <h3 class="py-4 text-2xl text-green-600" id={props.tag}>
-                <span class="" title={props.fullTag}>
-                    {props.tag}
-                </span>
-                <span> {props.title}</span>
-                <span
-                    class="text-md float-right cursor-pointer select-none rounded-md bg-green-600 p-1 text-white"
-                    onclick={() => featureTrigger((i) => !i)}
-                >
-                    {featureTrigger() ? 'on' : 'off'}
-                </span>
-            </h3>
-            <h4 class="py-2 text-xs text-gray-600">{props.desc}</h4>
-            <div
-                class="rounded-xl  bg-white p-4 text-lg"
-                style={
-                    `font-feature-settings:'${props.tag}' ${featureTrigger() ? 'on' : 'off'};` +
-                    (props.style ?? '')
-                }
-            >
-                {props.sample}
-            </div>
-        </section>
     );
 };
