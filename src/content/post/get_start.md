@@ -21,7 +21,7 @@ article:
 
 前端领域是信息呈现最为丰富、风格最为灵活的一个技术领域。它不仅包括了各种以文本为主的新闻、博客、论坛网站，还涵盖了各类生动灵活的数据可视化网站，以及风格别致的网页小游戏。在许多注重表现细节网站中，中文字体的作用不容小觑。例如在像素游戏使用像素字体来符合整个游戏世界观，数据可视化网站中运用特殊装饰字体来呈现主题所表达的情感，在个人博客中也有运用飘逸轻盈的字体来展现个人的艺术追求的例子。可以说，选择适合的字体是使得网页呈现独特风格的关键要素之一。
 
-![漆黑的魅影](https://ik.imagekit.io/chinesefonts/tr:w-480/image/addab69f15c3ce6918f8abb0c5f11504_720w.webp_source_1940ef5c?updatedAt=1685320110200)
+![漆黑的魅影](/assets/pokemon_example.png)
 
 对于我们这些码农来说，代码是最为基础的原料，而我们想去构筑的、生产的、让人记住的，却会是上面这些更为情感化的产物。
 
@@ -31,11 +31,11 @@ article:
 
 举例来说，米哈游开发的原神中采用 [汉仪文黑字体](https://www.hanyi.com.cn/productdetail?id=986)，它在中、日、韩、英四种语言环境下表现出一致的艺术风格和文字表现力。即使在同一图片中呈现也没有违和感，这对于不同语言玩家在游戏中的视觉效果和用户体验来说具有非常强烈的提升。
 
-![原神四种语言的一致性](https://ik.imagekit.io/chinesefonts/image/Snipaste_2023-05-29_08-59-46.png?updatedAt=1685322007904)
+![原神四种语言的一致性](/assets/genshin_example.png)
 
 对于中国的古籍文本而言，美感完整地呈现在文字中。如果运用一款风格优美的古文字体，可以使得诗词歌赋的意境尽显。例如，在网站 “中华诗词大典” 中，采用了汇文明朝体作为主题文字。这种文字体采用古体写法配合以 “拓片” 的 UI 风格，可以让文本以更为独特的方式呈现出来，从而更好地展现古代文学的精髓。
 
-![汇文明朝体在中华诗词大典中的应用](https://ik.imagekit.io/chinesefonts/image/Snipaste_2023-05-29_09-05-58.png?updatedAt=1685322374886)
+![汇文明朝体在中华诗词大典中的应用](/assets/chinese_poetry_example.png)
 
 ## 🚀 如何实现网络字体加速？
 
@@ -43,7 +43,7 @@ article:
 
 目前一种在网页中使用中文字体的方法是分析网页所包含的中文字符，将字体切割出来，单独分包存储在服务器中。这种切割方式可以极大地减小字体大小对带宽的影响，适用于个人博客等类型的网站。然而，随着一个项目越来越大，所需要进行的切割文本越来越多，采用这种非全量级的加载方式，可能会导致不同的文章涉及的文字不同，从而造成打包字符区间不同，影响服务器的缓存和资源利用率。
 
-![Google Fonts](https://ik.imagekit.io/chinesefonts/image/Snipaste_2023-05-26_09-53-34.png)
+![Google Fonts](/assets/google_fonts_example.png)
 
 在 Google Fonts 网站中，Google 采用最新的 CSS 特性 `unicode-range` 来实现按需加载 CJK （中日韩） 字体，并成功地实现了中文字体在网页端的全量级按需加载。同时提供了如站酷系列、Noto 系列等字体的效果展示。从技术上看，所有加载文件为静态文件，可以通过 CDN 一次发布，随处加载，且具有可靠的速度和稳定性。即使如博客论坛等专注文本类型的网站，也可使用。
 
@@ -63,7 +63,7 @@ article:
 
 ## ⌨️ 相关技术资源
 
-![中文网字计划——相关技术资源](https://ik.imagekit.io/chinesefonts/image/Snipaste_2023-05-26_09-10-31.png)
+![中文网字计划——相关技术资源](/assets/how_we_deploy_font.png)
 
 ### 📦 [@konghayao/cn-font-split](https://www.npmjs.com/package/@konghayao/cn-font-split)
 

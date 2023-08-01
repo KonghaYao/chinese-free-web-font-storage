@@ -5,6 +5,8 @@ import tailwind from '@astrojs/tailwind';
 import robotsTxt from 'astro-robots-txt';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import compress from 'astro-compress';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+
 import { loadEnv } from 'vite';
 const env = loadEnv(import.meta.env.MODE, process.cwd(), '');
 // https://astro.build/config
@@ -22,6 +24,14 @@ export default defineConfig({
             exclude: ['@konghayao/cn-font-split'],
         },
         plugins: [
+            viteStaticCopy({
+                targets: [
+                    {
+                        src: 'assets',
+                        dest: 'assets',
+                    },
+                ],
+            }),
             import.meta.env.MODE === 'production' &&
                 sentryVitePlugin({
                     org: 'chinese-font',

@@ -24,7 +24,8 @@
         "prettier-plugin-tailwindcss": "^0.1.13",
         "shiki": "^0.14.3",
         "solid-js": "^1.5.7",
-        "vite": "^4.3.9"
+        "vite": "^4.3.9",
+        "vite-plugin-static-copy": "^0.17.0"
     },
     "dependencies": {
         "@astrojs/netlify": "^2.3.0",
