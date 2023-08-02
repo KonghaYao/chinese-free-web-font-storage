@@ -31,6 +31,7 @@ await fontSplit({
     targetType: 'woff2', // 配置 woff2
     chunkSize: 70 * 1024,
     testHTML: true,
+    threads: {},
     previewImage: {},
 });
 ```
