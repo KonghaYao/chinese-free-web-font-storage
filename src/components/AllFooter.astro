@@ -1,9 +1,10 @@
 ---
+import { URLLinkHelp } from '../configs';
 import { sections } from '../utils/getPostSections';
 ---
 
 <footer class="flex flex-col w-full bg-black text-white gap-8 snap-end">
-    <div class="flex gap-8 w-full justify-center text-sm py-12">
+    <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 w-full text-sm px-4 py-12">
         <div>
             <header class="text-lg">🛳️文档</header>
             <ul>
@@ -27,6 +28,20 @@ import { sections } from '../utils/getPostSections';
                 <li>
                     <a href="https://github.com/konghayao" target="_blank"> Github</a>
                 </li>
+            </ul>
+        </div>
+        <div>
+            <header class="text-lg">🎉 友链</header>
+            <ul>
+                {
+                    [...Object.values(URLLinkHelp)].map((item) => {
+                        return (
+                            <li>
+                                <a href={item.url}>🎊 {item.desc}</a>
+                            </li>
+                        );
+                    })
+                }
             </ul>
         </div>
     </div>

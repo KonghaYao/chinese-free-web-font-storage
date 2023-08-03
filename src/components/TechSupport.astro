@@ -6,46 +6,47 @@ import Picture from './Picture.astro';
     id="open-source"
     class="w-full my-16 gap-8 py-8 snap-center relative overflow-hidden grid grid-cols-2 xl:grid-cols-1 justify-center h-fit min-h-[80vh]"
 >
-    <Picture
+    <!-- <Picture
         relative={false}
-        className="block absolute top-0 left-0 h-full brightness-75"
         src="/bg_palace.jpg"
         author="wong zihoo"
         link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
-    />
-    <h2 class="text-white text-xl md:text-4xl w-full text-center brightness-125 relative">
+    /> -->
+    <h2 class="text-xl md:text-4xl w-full text-center brightness-125 relative">
         ---✨ 优势特点---
     </h2>
 
-    <ul
-        class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative text-white"
-    >
-        <li class="hover-cover-btn">
-            <div class="text-xs text-neutral-200">可以覆盖所有的字体</div>
-            <h3 class="text-xl text-white">🗺️全量级字符</h3>
+    <ul class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center">
+        <li class="">
+            <span class="icon text-4xl">🗺️</span>
+            <h3 class="text-xl">全量级字符</h3>
+            <div class="text-sm text-neutral-500 py-2">Web 字体可以覆盖所有的字型和字体特性</div>
         </li>
-        <li class="hover-cover-btn">
-            <div class="text-xs text-neutral-200">可靠缓存、边缘加载</div>
-            <h3 class="text-xl text-white">🚀极致渲染速度</h3>
+        <li class="">
+            <span class="icon text-4xl">🚀</span>
+            <h3 class="text-xl">极致渲染速度</h3>
+            <div class="text-sm text-neutral-500 py-2">可靠缓存、边缘加载</div>
         </li>
-        <li class="hover-cover-btn">
-            <div class="text-xs text-neutral-200">自动判断、自动加载</div>
-            <h3 class="text-xl text-white">🍕字体按需载入</h3>
+        <li class="">
+            <span class="icon text-4xl">🍕</span>
+            <h3 class="text-xl">字体按需载入</h3>
+            <div class="text-sm text-neutral-500 py-2">自动判断、自动加载</div>
         </li>
-        <li class="hover-cover-btn">
-            <div class="text-xs text-neutral-200">代码简单、替换性强</div>
-            <h3 class="text-xl text-white">🏞️低侵入性</h3>
+        <li class="">
+            <span class="icon text-4xl">🏞️</span>
+            <h3 class="text-xl">低侵入性</h3>
+            <div class="text-sm text-neutral-500 py-2">代码简单、替换性强</div>
         </li>
     </ul>
-    <h2 class="text-white text-xl md:text-4xl w-full text-center brightness-125 relative">
+    <h2 class="text-xl md:text-4xl w-full text-center brightness-125 relative">
         ---⚙️ 技术开源---
     </h2>
     <ul
-        class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative text-white"
+        class="flex border-2 border-neutral-400 rounded-md flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative md:mx-12"
     >
         <li class="hover-cover-btn">
             <a href="https://www.npmjs.com/package/@konghayao/cn-font-split" target="_blank">
-                <div class="text-xs text-neutral-200">@konghayao/cn-font-split</div>
+                <div class="text-sm text-neutral-500">@konghayao/cn-font-split</div>
                 <h3 class="text-xl">📦字体分包插件</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
@@ -54,7 +55,7 @@ import Picture from './Picture.astro';
         </li>
         <li class="hover-cover-btn">
             <a href="https://github.com/KonghaYao/font-server" target="_blank">
-                <div class="text-xs text-neutral-200">font-server</div>
+                <div class="text-sm text-neutral-500">font-server</div>
                 <h3 class="text-xl">🤖字体管理系统</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
@@ -63,7 +64,7 @@ import Picture from './Picture.astro';
         </li>
         <li class="hover-cover-btn">
             <a href="https://github.com/KonghaYao/chinese-free-web-font-storage" target="_blank">
-                <div class="text-xs text-neutral-200">chinese-free-web-font-storage</div>
+                <div class="text-sm text-neutral-500">chinese-free-web-font-storage</div>
                 <h3 class="text-xl">🏪中文WebFont收集</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
@@ -72,7 +73,7 @@ import Picture from './Picture.astro';
         </li>
         <li class="hover-cover-btn">
             <a href="https://github.com/chinese-font/online-font-split" target="_blank">
-                <div class="text-xs text-neutral-200">online-font-split</div>
+                <div class="text-sm text-neutral-500">online-font-split</div>
                 <h3 class="text-xl">🍕 在线字体分包器</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
@@ -85,7 +86,7 @@ import Picture from './Picture.astro';
         </li>
         <li class="hover-cover-btn">
             <a href="https://www.npmjs.com/package/font-analyze" target="_blank">
-                <div class="text-xs text-neutral-200">font-analyze</div>
+                <div class="text-sm text-neutral-500">font-analyze</div>
                 <h3 class="text-xl">📊 字体检查报告</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
