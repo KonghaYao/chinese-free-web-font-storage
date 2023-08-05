@@ -7,17 +7,19 @@ import prettyBytes from 'pretty-bytes';
 // 转为异步加载，防止文件发生阻塞
 const preload = import(
     'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
-).then((res) => {
-    const { fontSplit, Assets } = res;
-    const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
-    Assets.redefine({
-        'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
-        'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
-        'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
-    });
-    return fontSplit;
-});
+)
+    .then((res) => {
+        const { fontSplit, Assets } = res;
+        const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
+        Assets.redefine({
+            'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
+            'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
+            'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
+        });
+        return fontSplit;
+    })
 
+    .catch((e) => e as Error);
 const getTestingFile = () => {
     return fetch(
         'https://cdn.jsdelivr.net/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
@@ -30,7 +32,11 @@ export const OnlineSplit = () => {
     const [file, setFile] = createSignal<File | null>(null);
     const [logMessage, setLog] = createSignal<string[]>([]);
     const [resultList, result] = createSignal<{ name: string; buffer: Uint8Array }[]>([]);
-
+    const fontSplitStatus = resource(async () => {
+        const info = await preload;
+        if (info instanceof Error) throw info;
+        return info;
+    });
     /** 监控 zip 压缩 */
     const createZip = resource<void>(
         async () => {
@@ -50,10 +56,11 @@ export const OnlineSplit = () => {
     );
     const startSplit = resource<void>(
         async () => {
-            if (!file()) return;
-            const fontSplit = await preload;
+            const fn = fontSplitStatus();
+            if (!file()) throw new Error('请添加文件');
+            if (!fn) throw new Error('请等待 cn-font-split 加载完成');
             const url = URL.createObjectURL(file()!);
-            return fontSplit({
+            return fn({
                 destFold: '',
                 FontPath: url,
                 targetType: 'woff2',
@@ -101,7 +108,7 @@ export const OnlineSplit = () => {
                     }
                 >
                     <div class="flex h-full flex-col items-center justify-center gap-4">
-                        <div class="pb-2 text-xl">在线字体分包器</div>
+                        <h1 class="pb-2 text-xl">在线字体分包器</h1>
                         <div>
                             {file()!.name} | {prettyBytes(file()!.size)}
                         </div>
@@ -123,14 +130,25 @@ export const OnlineSplit = () => {
                     </div>
                 </Show>
                 <div class="px-4 text-xs text-rose-600">
-                    <a href="https://github.com/KonghaYao/cn-font-split">
-                        在线分包由于特殊原因不支持某些字体特性，如需支持可使用代码分包➡️。
-                    </a>
+                    <Show when={fontSplitStatus.isReady()}>
+                        <a href="https://github.com/KonghaYao/cn-font-split">
+                            在线分包由于特殊原因不支持某些特性，如需支持可使用代码分包➡️。
+                        </a>
+                    </Show>
+                    <Show when={fontSplitStatus.error()}>
+                        加载 cn-font-split 失败：{fontSplitStatus.error().message}
+                        <br />
+                        可能是您的浏览器版本过低，试试更新版本的浏览器吧
+                    </Show>
+                    <Show when={fontSplitStatus.loading()}>加载 cn-font-split 中</Show>
                 </div>
             </div>
 
             <section class="flex h-full flex-col gap-4 overflow-hidden">
                 <header class="text-xl">Logger 日志</header>
+                <Show when={startSplit.error()}>
+                    <div class="text-red-600 ">发生错误：{startSplit.error().message}</div>
+                </Show>
                 <ul class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-xs">
                     <For each={logMessage()}>
                         {(item) => {
