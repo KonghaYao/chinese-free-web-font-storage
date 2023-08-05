@@ -4,77 +4,93 @@ import Picture from './Picture.astro';
 
 <section
     id="open-source"
-    class="w-full my-16 gap-8 py-8 snap-center relative overflow-hidden grid grid-cols-2 xl:grid-cols-1 justify-center h-fit min-h-[80vh]"
+    class="w-full my-16 grid grid-cols-1 justify-items-center lg:grid-cols-2 gap-8 py-8 snap-center relative overflow-hidden justify-center h-fit min-h-[80vh]"
 >
-    <!-- <Picture
+    <Picture
         relative={false}
         src="/bg_palace.jpg"
+        className="block absolute top-0 left-0 h-full brightness-75"
         author="wong zihoo"
         link="https://unsplash.dogedoge.com/photos/3OjwScH356E"
-    /> -->
-    <h2 class="text-xl md:text-4xl w-full text-center brightness-125 relative">
-        ---✨ 优势特点---
+    />
+    <h2 class="text-xl md:text-4xl w-full text-center brightness-125 relative text-white">
+        ✨ 我们的优势与特点
     </h2>
-
-    <ul class="flex flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center">
-        <li class="">
-            <span class="icon text-4xl">🗺️</span>
-            <h3 class="text-xl">全量级字符</h3>
-            <div class="text-sm text-neutral-500 py-2">Web 字体可以覆盖所有的字型和字体特性</div>
+    <h2
+        class="text-xl row-start-3 lg:col-start-2 lg:row-start-1 md:text-4xl w-full text-center brightness-125 relative text-white"
+    >
+        ⚙️ 我们热衷开源
+    </h2>
+    <ul class="gap-8 grid grid-cols-2 p-12 w-fit relative">
+        <li class="bg-white rounded-lg p-4">
+            <span class="text-8xl">🗺️</span>
+            <h3 class="text-2xl">全量级字符渲染</h3>
+            <div class="text-sm text-neutral-500 py-2">
+                我们的 Web 字体覆盖了所有的字型
+                <br />甚至支持大部分 OpenType 字体特性
+            </div>
         </li>
-        <li class="">
-            <span class="icon text-4xl">🚀</span>
-            <h3 class="text-xl">极致渲染速度</h3>
-            <div class="text-sm text-neutral-500 py-2">可靠缓存、边缘加载</div>
+        <li class="bg-white rounded-lg p-4">
+            <span class="text-8xl">🚀</span>
+            <h3 class="text-2xl">极致渲染速度</h3>
+            <div class="text-sm text-neutral-500 py-2">
+                我们的 Web 字体部署在边缘 CDN
+                <br />以极快的速度下载到网页中
+            </div>
         </li>
-        <li class="">
-            <span class="icon text-4xl">🍕</span>
-            <h3 class="text-xl">字体按需载入</h3>
-            <div class="text-sm text-neutral-500 py-2">自动判断、自动加载</div>
+        <li class="bg-white rounded-lg p-4">
+            <span class="text-8xl">🍕</span>
+            <h3 class="text-2xl">字体按需载入</h3>
+            <div class="text-sm text-neutral-500 py-2">
+                Web 字体能够自动识别页面中的文字<br /> 自动下载对应字体分包，无需多虑
+            </div>
         </li>
-        <li class="">
-            <span class="icon text-4xl">🏞️</span>
-            <h3 class="text-xl">低侵入性</h3>
-            <div class="text-sm text-neutral-500 py-2">代码简单、替换性强</div>
+        <li class="bg-white rounded-lg p-4">
+            <span class="text-8xl">🏞️</span>
+            <h3 class="text-2xl">简单易用安全</h3>
+            <div class="text-sm text-neutral-500 py-2">
+                仅仅需要几行代码即可实现网页字体的应用<br />让开发与维护无比简单
+            </div>
         </li>
     </ul>
-    <h2 class="text-xl md:text-4xl w-full text-center brightness-125 relative">
-        ---⚙️ 技术开源---
-    </h2>
+
     <ul
-        class="flex border-2 border-neutral-400 rounded-md flex-col xl:flex-row row-start-2 xl:row-start-auto justify-evenly items-center relative md:mx-12"
+        class="flex flex-wrap gap-4 p-4 border-neutral-400 rounded-md justify-evenly items-center relative md:mx-12"
     >
-        <li class="hover-cover-btn">
+        <li class="bg-white rounded-lg p-4">
             <a href="https://www.npmjs.com/package/@konghayao/cn-font-split" target="_blank">
                 <div class="text-sm text-neutral-500">@konghayao/cn-font-split</div>
-                <h3 class="text-xl">📦字体分包插件</h3>
+                <h3 class="text-2xl">📦字体分包插件</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
+                    <button> 进入 ➡️</button>
                 </nav>
             </a>
         </li>
-        <li class="hover-cover-btn">
+        <li class="bg-white rounded-lg p-4">
             <a href="https://github.com/KonghaYao/font-server" target="_blank">
                 <div class="text-sm text-neutral-500">font-server</div>
-                <h3 class="text-xl">🤖字体管理系统</h3>
+                <h3 class="text-2xl">🤖字体管理系统</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
+                    <button> 进入 ➡️</button>
                 </nav>
             </a>
         </li>
-        <li class="hover-cover-btn">
+        <li class="bg-white rounded-lg p-4">
             <a href="https://github.com/KonghaYao/chinese-free-web-font-storage" target="_blank">
                 <div class="text-sm text-neutral-500">chinese-free-web-font-storage</div>
-                <h3 class="text-xl">🏪中文WebFont收集</h3>
+                <h3 class="text-2xl">🏪中文WebFont收集</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
+                    <button> 进入 ➡️</button>
                 </nav>
             </a>
         </li>
-        <li class="hover-cover-btn">
+        <li class="bg-white rounded-lg p-4">
             <a href="https://github.com/chinese-font/online-font-split" target="_blank">
                 <div class="text-sm text-neutral-500">online-font-split</div>
-                <h3 class="text-xl">🍕 在线字体分包器</h3>
+                <h3 class="text-2xl">🍕 在线字体分包器</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
 
@@ -84,10 +100,10 @@ import Picture from './Picture.astro';
                 </nav>
             </a>
         </li>
-        <li class="hover-cover-btn">
+        <li class="bg-white rounded-lg p-4">
             <a href="https://www.npmjs.com/package/font-analyze" target="_blank">
                 <div class="text-sm text-neutral-500">font-analyze</div>
-                <h3 class="text-xl">📊 字体检查报告</h3>
+                <h3 class="text-2xl">📊 字体检查报告</h3>
                 <nav>
                     <button> 开源仓库 ✨</button>
 
