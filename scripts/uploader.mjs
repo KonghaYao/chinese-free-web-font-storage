@@ -32,7 +32,7 @@ if (input.deleteFolder) {
     }
 }
 const files = await glob(
-    `./packages/${input.target || "*"}/dist/**/*.{woff,woff2,ttf,json,png,css}`,
+    `./packages/${input.target || "*"}/dist/**/*.{woff,woff2,ttf,json,svg,css}`,
     {
         ignore: "node_modules/**",
     }
@@ -71,7 +71,7 @@ const uploadFolder = async (iterator) => {
         });
 };
 
-const limit = pLimit(2);
+const limit = pLimit(3);
 
 const inputs = files.map((i) => limit(() => uploadFolder(i)));
 await Promise.all(inputs).catch((e) => {

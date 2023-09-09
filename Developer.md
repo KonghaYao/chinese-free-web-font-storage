@@ -12,4 +12,4 @@
     2. packages/{项目名}/fonts 目录下放置字体文件，程序将自动进行打包
 4. node ./scripts/uploader.mjs --target=字体文件夹名称 --deleteFolder=true 更新远程 CDN 文件
     1. 上传文件时，由于部分文件夹路径较奇怪，所以进行了一些更改，更改方式看源码
-5. node ./scripts/createIndex.mjs 将会创建索引文件 index.json
+5. 先写 override.json 然后 node ./scripts/createIndex.mjs 将会创建索引文件 index.json
