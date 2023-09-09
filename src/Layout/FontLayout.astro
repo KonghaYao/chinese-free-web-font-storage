@@ -2,6 +2,7 @@
 import Layout from './Layout.astro';
 import { getFontReporter } from '../utils/getFontReporter';
 import { __CDN__ } from '../global';
+import { ensureFontMessageString } from '../utils/ensureFontMessageString';
 export interface Props {
     font: string;
     font_name: string;
@@ -12,7 +13,9 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font, fileName);
-const style = `font-family:'${reporter.message.fontFamily}';font-weight:'${reporter.message.fontSubFamily}'`;
+const style = `font-family:'${ensureFontMessageString(
+    reporter.message.fontFamily
+)}';font-weight:'${ensureFontMessageString(reporter.message.fontSubFamily)}'`;
 const root = `/fonts/${font}/${font_name}/`;
 ---
 
@@ -41,7 +44,11 @@ const root = `/fonts/${font}/${font_name}/`;
                         },
                         {
                             name: '文章测试',
-                            link: `/heti.html?font=${font}&name=${font_name}&family=${reporter.message.fontFamily}&subFamily=${reporter.message.fontSubFamily}`,
+                            link: `/heti.html?font=${font}&name=${font_name}&family=${ensureFontMessageString(
+                                reporter.message.fontFamily
+                            )}&subFamily=${ensureFontMessageString(
+                                reporter.message.fontSubFamily
+                            )}`,
                         },
                         {
                             name: 'Github',

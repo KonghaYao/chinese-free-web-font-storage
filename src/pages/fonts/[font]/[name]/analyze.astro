@@ -32,7 +32,14 @@ const reporter = await getFontReporter(font!, fileName);
                         return (
                             <tr class=" transition-colors hover:bg-white">
                                 <td class="px-4 text-sky-600">{key}</td>
-                                <td class="select-text px-4 py-1 text-sm">{val}</td>
+                                {typeof val === 'string' ? (
+                                    <td class="select-text px-4 py-1 text-sm">{val}</td>
+                                ) : (
+                                    <>
+                                        <td class="select-text px-4 py-1 text-sm">{val.en}</td>
+                                        <td class="select-text px-4 py-1 text-sm">{val.cn}</td>
+                                    </>
+                                )}
                             </tr>
                         );
                     })
