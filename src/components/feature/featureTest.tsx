@@ -2,6 +2,7 @@ import { Atom, atom } from '@cn-ui/reactive';
 import { onCleanup, onMount } from 'solid-js';
 import { __CDN__ } from '../../global';
 import { SampleDisplay } from './SampleDisplay';
+import { isServer } from 'solid-js/web';
 
 export const FeatureTest = () => {
     let root: HTMLDivElement;
@@ -40,6 +41,7 @@ export const FeatureTest = () => {
 };
 
 const useIntoViewTrigger = (root: Atom<HTMLDivElement | null>, trigger: Atom<boolean>) => {
+    if (isServer) return;
     // 创建一个 Intersection Observer 实例
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
