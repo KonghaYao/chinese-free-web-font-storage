@@ -5,12 +5,12 @@ import { DragDropButton } from '../DragButton';
 import { resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 // 转为异步加载，防止文件发生阻塞
+const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
 const preload = import(
     'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
 )
     .then((res) => {
         const { fontSplit, Assets } = res;
-        const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
         Assets.redefine({
             'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
             'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
@@ -18,8 +18,16 @@ const preload = import(
         });
         return fontSplit;
     })
-
     .catch((e) => e as Error);
+
+// 为给用户提供良好的体验，直接开始下载需要的依赖包
+Promise.all([
+    fetch(root + '/dist/browser/hb-subset.wasm', { priority: 'low' }),
+    fetch(root + '/dist/browser/cn_char_rank.dat', { priority: 'low' }),
+    fetch(root + '/dist/browser/unicodes_contours.dat', { priority: 'low' }),
+]).then((res) => console.log('资源预加载完成'));
+
+/** 加载测试文件 */
 const getTestingFile = () => {
     return fetch(
         'https://cdn.jsdelivr.net/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
@@ -64,7 +72,6 @@ export const OnlineSplit = () => {
                 destFold: '',
                 FontPath: url,
                 targetType: 'woff2',
-                // subsets: JSON.parse(await fs.readFile("./subsets/misans.json", "utf-8")),
                 previewImage: {},
                 threads: {},
                 log(...args) {
@@ -77,9 +84,7 @@ export const OnlineSplit = () => {
                             : new Uint8Array(await new Blob([file]).arrayBuffer());
                     result((i) => [...i, { name: path, buffer }]);
                 },
-            }).then((res) => {
-                URL.revokeObjectURL(url);
-            });
+            }).then((res) => URL.revokeObjectURL(url));
         },
         { immediately: false }
     );
@@ -157,17 +162,22 @@ export const OnlineSplit = () => {
                     </For>
                 </ul>
                 <header class="text-xl">Output 输出文件</header>
-                <ul class="h-full max-h-[100%]  select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-sm">
-                    <For each={resultList()}>
-                        {(item) => {
-                            return (
-                                <li>
-                                    {prettyBytes(item.buffer.byteLength)} | {item.name}
-                                </li>
-                            );
-                        }}
-                    </For>
-                </ul>
+                <div class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-sm">
+                    <div class="grid   grid-cols-8  ">
+                        <For each={resultList()}>
+                            {(item) => {
+                                return (
+                                    <>
+                                        <span class="col-span-2">
+                                            {prettyBytes(item.buffer.byteLength)}
+                                        </span>
+                                        <span class="col-span-6">{item.name}</span>
+                                    </>
+                                );
+                            }}
+                        </For>
+                    </div>
+                </div>
                 <span class="flex justify-end gap-4 text-xs">
                     <span>{resultList().length}</span>
                     <span>
