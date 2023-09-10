@@ -3,6 +3,8 @@ import data from '../../../../index.json';
 import { TextWriter } from '../../../page/component/TextWriter';
 import FontLayout from '../../../Layout/FontLayout.astro';
 import WebSupport from '../../../components/fontDisplay/WebSupport.astro';
+import { ReporterAnalyze } from '../../../components/fontDisplay/ReporterAnalyze';
+import { getFontReporter } from '../../../utils/getFontReporter';
 export function getStaticPaths() {
     return Object.entries(data).flatMap(([key, val]) => {
         return val.remotePath.map((remote) => {
@@ -12,12 +14,17 @@ export function getStaticPaths() {
     });
 }
 const { font, name: font_name } = Astro.params;
+const fileName = font_name!
+    .replaceAll(' ', '_')
+    // 更换文件夹中的 . 为 _
+    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
+const reporter = await getFontReporter(font!, fileName);
 ---
 
 <FontLayout font_name={font_name!} font={font!}>
     <script>
         const check = () => {
-            const el = document.querySelector('.poetry');
+            const el = document.querySelector('.poetry')!;
             if (el.clientHeight <= 100) {
                 console.log('发现字体陷落');
                 el.classList.add('fix');
@@ -76,6 +83,12 @@ const { font, name: font_name } = Astro.params;
             <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ 尝试字体</span>
         </header>
         <TextWriter client:load />
+    </section>
+    <section class="col-span-6">
+        <header class="p-2 text-lg text-right">
+            <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
+        </header>
+        <ReporterAnalyze client:load reporter={reporter} />
     </section>
     <section class="col-span-6 text-center">
         <span class="text-4xl pr-4"> 中文网字计划</span>
