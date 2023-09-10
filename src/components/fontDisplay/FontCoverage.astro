@@ -1,5 +1,6 @@
 ---
 import type { FontReporter } from '../fonts/FontReporter';
+import { UnicodeRange } from '@japont/unicode-range';
 export type Props = {
     reporter: FontReporter;
 };
@@ -27,8 +28,9 @@ const range = [
     ['注音扩展', 0x31a0, 0x31ba],
 ] as [string, number, number][];
 const total = reporter.data.reduce((col, cur) => {
-    return col + cur.chars;
+    return col + String.fromCharCode(...UnicodeRange.parse(cur.chars.split(',')));
 }, '');
+
 const result = range.map(([name, min, max]) => {
     let exist: string[] = [];
     let voids: string[] = [];

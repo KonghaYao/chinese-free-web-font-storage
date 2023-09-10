@@ -34,6 +34,7 @@
         "@astrojs/tailwind": "^5.0.0",
         "@cn-ui/reactive": "^2.2.1",
         "@cn-ui/use": "^2.0.4",
+        "@japont/unicode-range": "^1.0.0",
         "@konghayao/cn-font-split": "^4.6.0",
         "@minht11/solid-virtual-container": "^0.2.1",
         "@sentry/browser": "^7.68.0",

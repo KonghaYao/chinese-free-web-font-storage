@@ -23,6 +23,9 @@ dependencies:
   '@cn-ui/use':
     specifier: ^2.0.4
     version: 2.0.4
+  '@japont/unicode-range':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@konghayao/cn-font-split':
     specifier: ^4.6.0
     version: 4.6.0
