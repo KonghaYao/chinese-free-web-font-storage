@@ -3,7 +3,8 @@ import data from '../../../../index.json';
 import { TextWriter } from '../../../page/component/TextWriter';
 import FontLayout from '../../../Layout/FontLayout.astro';
 import WebSupport from '../../../components/fontDisplay/WebSupport.astro';
-import { ReporterAnalyze } from '../../../components/fontDisplay/ReporterAnalyze';
+import { TimeAnalyze } from '../../../components/fontDisplay/TimeAnalyze';
+import { BundleSizeAnalyze } from '../../../components/fontDisplay/BundleSizeAnalyze';
 import { getFontReporter } from '../../../utils/getFontReporter';
 export function getStaticPaths() {
     return Object.entries(data).flatMap(([key, val]) => {
@@ -84,11 +85,17 @@ const reporter = await getFontReporter(font!, fileName);
         </header>
         <TextWriter client:load />
     </section>
-    <section class="col-span-6">
+    <section class="col-span-6 flex flex-col gap-4">
         <header class="p-2 text-lg text-right">
             <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
         </header>
-        <ReporterAnalyze client:load reporter={reporter} />
+        <TimeAnalyze
+            client:only
+            data={reporter.data}
+            message={reporter.message}
+            record={reporter.record}
+        />
+        <BundleSizeAnalyze client:only data={reporter.data} message={reporter.message} />
     </section>
     <section class="col-span-6 text-center">
         <span class="text-4xl pr-4"> 中文网字计划</span>

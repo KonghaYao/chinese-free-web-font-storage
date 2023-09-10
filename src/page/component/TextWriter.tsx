@@ -5,7 +5,7 @@ export const TextWriter = () => {
     return (
         <aside class="flex flex-1 flex-col p-4">
             <div class="flex justify-between">
-                <div>{fontSize}px</div>
+                <div>{fontSize()}px</div>
                 <input
                     class="ml-8 flex-1"
                     type="range"
