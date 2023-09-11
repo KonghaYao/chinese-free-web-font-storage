@@ -23,15 +23,20 @@ export const TOC = (props: { selector: string; class?: string }) => {
                 return (
                     <li
                         class={
-                            'toc-item rounded-md hover:bg-neutral-200  ' +
+                            'toc-item line-clamp-1 cursor-pointer rounded-md hover:bg-neutral-200 ' +
                             ' article-level-' +
                             i.level
                         }
                         title={i.title!}
+                        onclick={(e) => {
+                            // 使用 js 控制可以避免布局导致滚动条非 body 而移动 section
+                            const dom = document.getElementById(i.id);
+                            dom?.scrollIntoView({
+                                block: 'nearest',
+                            });
+                        }}
                     >
-                        <a href={'#' + i.id} class="line-clamp-1">
-                            {i.title}
-                        </a>
+                        {i.title}
                     </li>
                 );
             })}
