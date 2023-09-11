@@ -19,12 +19,12 @@ export const BundleSizeAnalyze = ({
                     data: data.map((i) => i.name.slice(0, 7)),
                 },
                 grid: {
-                    top: '20%',
+                    top: '25%',
                 },
                 legend: {
                     top: '5%',
                     data: ['分包大小', '分包字符数'],
-                    left: 10,
+                    right: '5%',
                 },
                 yAxis: [
                     {
@@ -40,19 +40,15 @@ export const BundleSizeAnalyze = ({
                 ],
                 tooltip: {
                     trigger: 'axis',
-                    axisPointer: {
-                        type: 'cross',
-                        animation: false,
-                        label: {
-                            backgroundColor: '#505765',
-                        },
-                    },
+                },
+                textStyle: {
+                    fontFamily: ensureFontMessageString(message.fontFamily),
                 },
                 title: {
-                    top: '2%',
+                    top: '5%',
+                    left: '5%',
                     text: ensureFontMessageString(message.fontFamily),
                     subtext: `总共 ${data.length} 分包; `,
-                    left: 'center',
                 },
                 series: [
                     {

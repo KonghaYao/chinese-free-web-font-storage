@@ -33,7 +33,7 @@ export const TimeAnalyze = ({
                     text: '打包时间分布图',
                     subtext: `时间单位 ms; 总时间 ${total.toFixed(
                         2
-                    )} ms; 包大小 (分包后) ${prettyBytes(
+                    )} ms; \n包大小 (分包后) ${prettyBytes(
                         data.reduce((col, cur) => col + cur.size, 0)
                     )}；字体名称 ${ensureFontMessageString(message.fontFamily)}`,
                 },

@@ -85,20 +85,22 @@ const reporter = await getFontReporter(font!, fileName);
         </header>
         <TextWriter client:load />
     </section>
-    <section class="col-span-6 flex flex-col gap-4">
-        <header class="p-2 text-lg text-right">
-            <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
-        </header>
+    <section class="col-span-6 text-center">
+        <span class="text-4xl pr-4"> 中文网字计划</span>
+        <span>Page Design By 江夏尧</span>
+    </section>
+    <header class="p-2 text-lg col-span-6 lg:col-span-12">
+        <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
+    </header>
+    <section class="col-span-6">
         <TimeAnalyze
             client:only
             data={reporter.data}
             message={reporter.message}
             record={reporter.record}
         />
-        <BundleSizeAnalyze client:only data={reporter.data} message={reporter.message} />
     </section>
-    <section class="col-span-6 text-center">
-        <span class="text-4xl pr-4"> 中文网字计划</span>
-        <span>Page Design By 江夏尧</span>
+    <section class="col-span-6">
+        <BundleSizeAnalyze client:only data={reporter.data} message={reporter.message} />
     </section>
 </FontLayout>
