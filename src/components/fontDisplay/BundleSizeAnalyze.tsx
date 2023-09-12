@@ -72,6 +72,21 @@ export const BundleSizeAnalyze = AsyncReporterLoader((props) => {
                     },
                 ],
             }}
+            onReady={(chart) => {
+                chart.on('click', (value) => {
+                    const hash = value.name;
+
+                    console.log(
+                        String.fromCharCode(
+                            ...UnicodeRange.parse(
+                                props.reporter.data
+                                    .find((i) => i.name.startsWith(hash))
+                                    ?.chars.split(',') || []
+                            )
+                        )
+                    );
+                });
+            }}
         ></ECharts>
     );
 });

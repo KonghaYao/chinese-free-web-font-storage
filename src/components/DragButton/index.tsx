@@ -1,8 +1,9 @@
-import { JSXElement, createSignal } from 'solid-js';
+import { type JSXElement, createSignal } from 'solid-js';
 
 interface UDragDropType {
     accept?: string;
     children?: JSXElement;
+    class?: string;
 }
 interface IDragDropButton {
     (props: { onGetFile: (file: File) => void; multiple?: false } & UDragDropType): JSXElement;
@@ -37,7 +38,7 @@ export const DragDropButton: IDragDropButton = (props) => {
         <button
             class={`h-full w-full rounded-lg transition-colors hover:bg-neutral-50 ${
                 isDragging() ? 'bg-neutral-50' : ''
-            }`}
+            } ${props.class || ''}`}
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             onDragOver={handleDragOver}

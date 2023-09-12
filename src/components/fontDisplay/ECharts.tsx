@@ -9,6 +9,7 @@ import {
     GridComponent,
     LegendComponent,
     DataZoomComponent,
+    MarkLineComponent,
 } from 'echarts/components';
 import { LineChart, BarChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
@@ -22,6 +23,7 @@ echarts.use([
     LineChart,
     LegendComponent,
     BarChart,
+    MarkLineComponent,
     SVGRenderer,
     UniversalTransition,
 ]);
@@ -37,7 +39,10 @@ const renderSVGChart = (reporter: echarts.EChartsCoreOption, dom: HTMLElement | 
 
     return myChart;
 };
-export const ECharts = (props: { options: any }) => {
+export const ECharts = (props: {
+    options: echarts.EChartsCoreOption;
+    onReady?: (chart: echarts.ECharts) => void;
+}) => {
     const dom = atom<HTMLElement | null>(null);
     const info = {} as { innerHTML?: string };
     let myChart: echarts.ECharts;
@@ -54,6 +59,7 @@ export const ECharts = (props: { options: any }) => {
                     width: 'auto',
                 });
             }, 0);
+            props.onReady && props.onReady(myChart);
         });
     }
     onCleanup(() => {

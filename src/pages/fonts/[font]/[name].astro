@@ -92,10 +92,10 @@ const reporter = await getFontReporter(font!, fileName);
     <header class="p-2 text-lg col-span-6 lg:col-span-12">
         <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
     </header>
-    <section class="col-span-6">
+    <section class="col-span-6" style="height:400px">
         <TimeAnalyze client:only fontName={font_name!} font={font!} />
     </section>
-    <section class="col-span-6">
+    <section class="col-span-6" style="height:400px">
         <BundleSizeAnalyze client:only fontName={font_name!} font={font!} />
     </section>
 </FontLayout>
