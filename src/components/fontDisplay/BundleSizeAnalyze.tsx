@@ -1,15 +1,10 @@
-import type { FontReporter } from '../fonts/FontReporter';
 import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 import { UnicodeRange } from '@japont/unicode-range';
 import { ECharts } from './ECharts';
+import { AsyncReporterLoader } from './AsyncReporterLoader';
 /** 打包分片分析*/
-export const BundleSizeAnalyze = ({
-    message,
-    data,
-}: {
-    data: FontReporter['data'];
-    message: FontReporter['message'];
-}) => {
+export const BundleSizeAnalyze = AsyncReporterLoader((props) => {
+    const { message, data } = props.reporter;
     return (
         <ECharts
             options={{
@@ -79,4 +74,4 @@ export const BundleSizeAnalyze = ({
             }}
         ></ECharts>
     );
-};
+});

@@ -2,17 +2,11 @@ import type { FontReporter } from '../fonts/FontReporter';
 import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 import prettyBytes from 'pretty-bytes';
 import { ECharts } from './ECharts';
+import { AsyncReporterLoader } from './AsyncReporterLoader';
 
 /** 打包时间分析 */
-export const TimeAnalyze = ({
-    message,
-    record,
-    data,
-}: {
-    message: FontReporter['message'];
-    record: FontReporter['record'];
-    data: FontReporter['data'];
-}) => {
+export const TimeAnalyze = AsyncReporterLoader((props) => {
+    const { message, record, data } = props.reporter;
     const total = record.reduce((col, cur) => col + cur.end - cur.start, 0);
     return (
         <ECharts
@@ -70,4 +64,4 @@ export const TimeAnalyze = ({
             }}
         ></ECharts>
     );
-};
+});
