@@ -1,4 +1,4 @@
-import { Atom, atom } from '@cn-ui/reactive';
+import { type Atom, atom } from '@cn-ui/reactive';
 import { onCleanup, onMount } from 'solid-js';
 import { __CDN__ } from '../../global';
 import { SampleDisplay } from './SampleDisplay';

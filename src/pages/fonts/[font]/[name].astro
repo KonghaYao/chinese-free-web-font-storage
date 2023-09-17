@@ -1,11 +1,10 @@
 ---
 import data from '../../../../index.json';
-import { TextWriter } from '../../../page/component/TextWriter';
+import { TextWriter } from '../../../components/fontDisplay/TextWriter';
 import FontLayout from '../../../Layout/FontLayout.astro';
 import WebSupport from '../../../components/fontDisplay/WebSupport.astro';
 import { TimeAnalyze } from '../../../components/fontDisplay/TimeAnalyze';
 import { BundleSizeAnalyze } from '../../../components/fontDisplay/BundleSizeAnalyze';
-import { getFontReporter } from '../../../utils/getFontReporter';
 export function getStaticPaths() {
     return Object.entries(data).flatMap(([key, val]) => {
         return val.remotePath.map((remote) => {
@@ -15,11 +14,6 @@ export function getStaticPaths() {
     });
 }
 const { font, name: font_name } = Astro.params;
-const fileName = font_name!
-    .replaceAll(' ', '_')
-    // 更换文件夹中的 . 为 _
-    .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
-const reporter = await getFontReporter(font!, fileName);
 ---
 
 <FontLayout font_name={font_name!} font={font!}>
@@ -38,15 +32,11 @@ const reporter = await getFontReporter(font!, fileName);
         <div class="poetry col-span-5 p-8 leading-6">
             <header class="text-2xl">沁园春 雪</header>
             <p class="text-start">
-                北国风光，千里冰封，万里雪飘。<br />
-                望长城内外，惟余莽莽；<br />
-                大河上下，顿失滔滔。<br />
-                山舞银蛇，原驰蜡象，<br />
-                欲与天公试比高。 须晴日，<br />
-                看红装素裹，分外妖娆。<br />江山如此多娇，引无数英雄竞折腰。<br />
-                惜秦皇汉武，略输文采；<br />唐宗宋祖，稍逊风骚。<br />
-                一代天骄，成吉思汗，<br />
-                只识弯弓射大雕。<br />俱往矣，数风流人物，还看今朝。
+                北国风光，千里冰封，万里雪飘。<br />望长城内外，惟余莽莽；<br
+                />大河上下，顿失滔滔。<br />山舞银蛇，原驰蜡象，<br />欲与天公试比高。 须晴日，<br
+                />看红装素裹，分外妖娆。<br />江山如此多娇，引无数英雄竞折腰。<br
+                />惜秦皇汉武，略输文采；<br />唐宗宋祖，稍逊风骚。<br />一代天骄，成吉思汗，<br
+                />只识弯弓射大雕。<br />俱往矣，数风流人物，还看今朝。
             </p>
             <span class="float-right mr-4 rounded-md bg-red-600 p-1 text-sm text-white">
                 毛泽东</span
@@ -67,10 +57,10 @@ const reporter = await getFontReporter(font!, fileName);
 
     <section class="col-span-5 flex justify-center items-center bg-white rounded-2xl">
         <p class="p-8 capitalize">
-            In wilds beyond they speak your name with reverence and regret,<br />
-            For none could tame our savage souls yet you the challenge met,<br />
-            Under palest watch, you taught, you changed. Base instincts were redeemed,<br />
-            A world you gave to bug and beast as they had never dreamed. <br />
+            In wilds beyond they speak your name with reverence and regret,<br />For none could tame
+            our savage souls yet you the challenge met,<br />Under palest watch, you taught, you
+            changed. Base instincts were redeemed,<br />A world you gave to bug and beast as they
+            had never dreamed.<br />
         </p>
     </section>
     <section class="col-span-7 flex justify-center items-center bg-white rounded-2xl">
@@ -83,12 +73,13 @@ const reporter = await getFontReporter(font!, fileName);
         <header class="p-2 text-lg text-right">
             <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ 尝试字体</span>
         </header>
-        <TextWriter client:load />
+        <TextWriter fontName={font_name!} font={font!} client:only />
     </section>
     <section class="col-span-6 text-center">
         <span class="text-4xl pr-4"> 中文网字计划</span>
         <span>Page Design By 江夏尧</span>
     </section>
+
     <header class="p-2 text-lg col-span-6 lg:col-span-12">
         <span class="bg-blue-500 text-white p-2 rounded-md"> ✒️ cn-font-split 打包信息</span>
     </header>
@@ -98,4 +89,4 @@ const reporter = await getFontReporter(font!, fileName);
     <section class="col-span-6" style="height:400px">
         <BundleSizeAnalyze client:only fontName={font_name!} font={font!} />
     </section>
-</FontLayout>
+</FontLayout>../../../components/fontDisplay/WebSupport.tsx
