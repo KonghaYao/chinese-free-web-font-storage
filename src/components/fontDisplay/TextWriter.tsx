@@ -1,16 +1,9 @@
-import { atom, reflect, type Atom, resource } from '@cn-ui/use';
+import { atom, reflect, resource } from '@cn-ui/use';
 import { AsyncReporterLoader } from './AsyncReporterLoader';
 import { UnicodeRange } from '@japont/unicode-range';
 import prettyBytes from 'pretty-bytes';
+import { VModel } from '@cn-ui/reactive';
 
-const VModel = (atom: Atom<any>) => {
-    return {
-        value: atom(),
-        'on:input': (e: any) => {
-            atom(() => e.target.value);
-        },
-    };
-};
 export const TextWriter = AsyncReporterLoader((props) => {
     const data = props.reporter;
     const packages = data.data.map((i) => {

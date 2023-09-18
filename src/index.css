@@ -84,3 +84,6 @@ body::before {
 .hover-cover-btn:hover {
     @apply border-neutral-400  backdrop-blur-sm;
 }
+.text-input {
+    @apply block w-full appearance-none rounded-md border border-transparent bg-white p-2 leading-5 text-slate-900 shadow ring-1 ring-slate-900/5 transition-colors placeholder:text-slate-400 focus:outline-none focus:ring-2  dark:bg-slate-700/20 dark:text-white dark:ring-slate-200/20  sm:text-sm;
+}

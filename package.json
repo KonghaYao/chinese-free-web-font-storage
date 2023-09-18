@@ -23,7 +23,7 @@
         "prettier-plugin-astro": "^0.9.1",
         "prettier-plugin-tailwindcss": "^0.1.13",
         "shiki": "^0.14.4",
-        "solid-js": "^1.5.7",
+        "solid-js": "^1.7.11",
         "vite": "^4.4.9",
         "vite-plugin-static-copy": "^0.17.0"
     },
@@ -32,7 +32,7 @@
         "@astrojs/sitemap": "^3.0.0",
         "@astrojs/solid-js": "^3.0.1",
         "@astrojs/tailwind": "^5.0.0",
-        "@cn-ui/reactive": "^2.2.1",
+        "@cn-ui/reactive": "^2.2.4",
         "@cn-ui/use": "^2.0.4",
         "@japont/unicode-range": "^1.0.0",
         "@konghayao/cn-font-split": "^4.6.0",

@@ -1,5 +1,6 @@
 ---
 import Index from '../../index.json';
+import { AddFont } from '../components/Feedback/AddFont';
 import { __CDN__ } from '../global';
 const list = Object.entries(Index).map(([id, value]) => {
     return { ...value, id };
@@ -88,7 +89,9 @@ const list = Object.entries(Index).map(([id, value]) => {
                 })
             }
         </ul>
-
     </nav>
-    <a href="/feature/test" class="text-md text-rose-600 col-span-6 text-center">字体特性渲染页面</a>
+    <nav class="flex gap-4 w-full col-span-6 text-emerald-600">
+        <a href="/feature/test" class="text-md col-span-6 text-center"> 字体特性渲染页面</a>
+        <AddFont client:load />
+    </nav>
 </section>
