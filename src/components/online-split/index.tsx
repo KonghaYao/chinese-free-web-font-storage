@@ -2,8 +2,10 @@ import { For, Show, createSignal } from 'solid-js';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';
-import { resource } from '@cn-ui/reactive';
+import { ArrayAtom, atom, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
+
+const PluginVersion = atom('4.6.0');
 // 转为异步加载，防止文件发生阻塞
 const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
 const preload = import(
@@ -15,6 +17,11 @@ const preload = import(
             'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
             'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
             'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
+        });
+        fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js', {
+            cache: 'force-cache',
+        }).then((res) => {
+            PluginVersion(res.headers.get('X-Jsd-Version')!);
         });
         return fontSplit;
     })
@@ -37,9 +44,9 @@ const getTestingFile = () => {
 };
 
 export const OnlineSplit = () => {
-    const [file, setFile] = createSignal<File | null>(null);
-    const [logMessage, setLog] = createSignal<string[]>([]);
-    const [resultList, result] = createSignal<{ name: string; buffer: Uint8Array }[]>([]);
+    const file = atom<File | null>(null);
+    const logMessage = ArrayAtom<string[]>([]);
+    const resultList = atom<{ name: string; buffer: Uint8Array }[]>([]);
     const fontSplitStatus = resource(async () => {
         const info = await preload;
         if (info instanceof Error) throw info;
@@ -75,14 +82,14 @@ export const OnlineSplit = () => {
                 previewImage: {},
                 threads: {},
                 log(...args) {
-                    setLog((i) => [...i, args.join(' ')]);
+                    logMessage((i) => [...i, args.join(' ')]);
                 },
                 async outputFile(path, file) {
                     const buffer =
                         file instanceof Uint8Array
                             ? file
                             : new Uint8Array(await new Blob([file]).arrayBuffer());
-                    result((i) => [...i, { name: path, buffer }]);
+                    resultList((i) => [...i, { name: path, buffer }]);
                 },
             }).then((res) => URL.revokeObjectURL(url));
         },
@@ -95,7 +102,7 @@ export const OnlineSplit = () => {
                     class="w-full hover:bg-neutral-300"
                     onclick={() => {
                         getTestingFile().then((f) => {
-                            setFile(() => f);
+                            file(() => f);
                         });
                     }}
                 >
@@ -104,16 +111,13 @@ export const OnlineSplit = () => {
                 <Show
                     when={file()}
                     fallback={
-                        <DragDropButton
-                            accept=".ttf,.otf"
-                            onGetFile={(file) => setFile(() => file)}
-                        >
-                            <div class="pb-2 text-xl">在线字体分包器</div>
+                        <DragDropButton accept=".ttf,.otf" onGetFile={(f) => file(() => f)}>
+                            <div class="pb-2 text-xl">在线字体分包器 {PluginVersion()}</div>
                         </DragDropButton>
                     }
                 >
                     <div class="flex h-full flex-col items-center justify-center gap-4">
-                        <h1 class="pb-2 text-xl">在线字体分包器</h1>
+                        <h1 class="pb-2 text-xl">在线字体分包器 {PluginVersion()}</h1>
                         <div>
                             {file()!.name} | {prettyBytes(file()!.size)}
                         </div>
