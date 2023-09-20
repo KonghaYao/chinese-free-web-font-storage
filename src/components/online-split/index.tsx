@@ -98,16 +98,24 @@ export const OnlineSplit = () => {
     return (
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
             <div class="flex flex-col">
-                <button
-                    class="w-full hover:bg-neutral-300"
-                    onclick={() => {
-                        getTestingFile().then((f) => {
-                            file(() => f);
-                        });
-                    }}
-                >
-                    尝试使用测试文件（下载时间稍长，请耐心等待）
-                </button>
+                <header class="flex items-center gap-8">
+                    <a href="https://github.com/KonghaYao/cn-font-split">
+                        <img
+                            src="https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split/badge"
+                            alt="JSDeliver Badge"
+                        />
+                    </a>
+                    <button
+                        class="w-full cursor-pointer transition-colors hover:bg-neutral-200"
+                        onclick={() => {
+                            getTestingFile().then((f) => {
+                                file(() => f);
+                            });
+                        }}
+                    >
+                        尝试使用测试字体文件
+                    </button>
+                </header>
                 <Show
                     when={file()}
                     fallback={
@@ -154,14 +162,19 @@ export const OnlineSplit = () => {
             </div>
 
             <section class="flex h-full flex-col gap-4 overflow-hidden">
-                <header class="text-xl">Logger 日志</header>
+                <header class="flex justify-between ">
+                    <span class="text-xl">Logger 日志</span>
+                    <a href="https://github.com/KonghaYao/cn-font-split/issues" target="_blank">
+                        反馈
+                    </a>
+                </header>
                 <Show when={startSplit.error()}>
                     <div class="text-red-600 ">发生错误：{startSplit.error().message}</div>
                 </Show>
                 <ul class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-xs">
                     <For each={logMessage()}>
                         {(item) => {
-                            return <li>{item}</li>;
+                            return <li innerHTML={ConsolePrint(item)}></li>;
                         }}
                     </For>
                 </ul>
@@ -198,4 +211,16 @@ export const OnlineSplit = () => {
             </section>
         </section>
     );
+};
+
+export const ConsolePrint = (item: string) => {
+    return item
+        .replace(
+            /\[97m\[1m(.*?)\[22m\[39m\[0m\[0m/g,
+            '<span  style="color: green;font-weight: bold;" >$1</span>'
+        )
+        .replace(
+            /\[34m\[1m(.*?)\[22m\[39m\[0m\[0m/g,
+            '<span style="color: blue;font-weight: bold;" >$1</span>'
+        );
 };
