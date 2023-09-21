@@ -1,11 +1,12 @@
 ![](./assets/title.png)
 
-# 中文网字计划 v4
+# 中文网字计划 v5
 
 [Netlify 网页](https://chinese-font.netlify.app/)
 
 ## 简介
 
+中文网字计划期望在网络中为实现中文字体的繁荣而努力。为此，我们进行了大规模中文字体网络化的研究和实践，实现了众多的
 这是一个收集免费可商用的 **Web 字体文件** 的 GitHub 项目！在网页中，由于中文字符庞大的特性，能够被兼容和使用的中文字体非常有限。所以我们的项目使用了特殊的中文字体切割方式，使得任何网站都可以全站全文本字体覆盖！
 
 [中文字体切割插件 @konghayao/cn-font-split](https://github.com/KonghaYao/cn-font-split)
@@ -13,11 +14,12 @@
 开发者只需要将字体源文件放置在 packages 文件夹下，项目将自动打包和分组。已发布到 NPM，欢迎广大开发者使用！
 
 ## 项目目标
-
--   [x] Github Action 自动打包字体文件
+-   [x] 提供在线分包功能
+-   [x] 网站对打包后的字体进行数据分析展示
+-   [x] 网站免费对外提供 CDN 链接
+-   [x] 使用更好的 CDN 加速字体渲染！(使用 LightCDN ，速度飞快)
 -   [x] ttf 文件支持，woff2 文件支持
--   [ ] 使用更好的 CDN 加速字体渲染！
--   [ ] 联合 FontSource 项目，加载 Google Fonts！
+-   [x] 联合 FontSource 项目，加载 Google Fonts！
 
 ## 我如何用？
 
