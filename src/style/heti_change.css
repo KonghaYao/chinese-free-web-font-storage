@@ -403,6 +403,7 @@
 }
 .heti li {
     list-style-type: unset;
+    padding-bottom: 0.4em;
 }
 .heti table {
     box-sizing: border-box;
