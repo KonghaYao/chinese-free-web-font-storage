@@ -39,6 +39,7 @@ const renderSVGChart = (reporter: echarts.EChartsCoreOption, dom: HTMLElement | 
 
     return myChart;
 };
+
 export const ECharts = (props: {
     options: echarts.EChartsCoreOption;
     onReady?: (chart: echarts.ECharts) => void;
