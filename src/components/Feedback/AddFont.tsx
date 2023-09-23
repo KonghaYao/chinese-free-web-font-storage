@@ -56,12 +56,12 @@ export const AddFont = () => {
                 onSubmit={() => {
                     if (a.fontName() && a.nickName() && a.detail() && a.url()) {
                         panelVisible(false);
-                        Notice.success('您的请求已记录');
+                        Notice.success('您的请求已记录, 我们将会在一周内处理');
                         addFontRequest(a()).then((res) => {
                             console.log(res);
                         });
                     } else {
-                        Notice.error('请填写完整');
+                        Notice.error('请填写完整信息');
                     }
                 }}
                 visible={panelVisible}

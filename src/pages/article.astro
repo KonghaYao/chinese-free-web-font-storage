@@ -16,26 +16,35 @@ import { sections } from '../utils/getPostSections';
                                 {sectionName}
                             </h2>
                             <ul class="space-y-4">
-                                {posts.map((post) => {
-                                    return (
-                                        <li>
-                                            <a class=" " href={`/post/${post.slug}/`}>
-                                                <h3>{post.data.title}</h3>
+                                {posts
+                                    .sort((a, b) => {
+                                        return (
+                                            new Date(a.data.article.pubDate).getTime() -
+                                            new Date(b.data.article.pubDate).getTime()
+                                        );
+                                    })
+                                    .map((post) => {
+                                        return (
+                                            <li>
+                                                <a class=" " href={`/post/${post.slug}/`}>
+                                                    <h3>{post.data.title}</h3>
 
-                                                <p class="my-2 line-clamp-1 text-xs text-gray-500">
-                                                    {post.data.description}
-                                                </p>
-                                                <aside class="flex gap-2 text-xs text-gray-500">
-                                                    <address>{post.data.article.authors}</address>
+                                                    <p class="my-2 line-clamp-1 text-xs text-gray-500">
+                                                        {post.data.description}
+                                                    </p>
+                                                    <aside class="flex gap-2 text-xs text-gray-500">
+                                                        <address>
+                                                            {post.data.article.authors}
+                                                        </address>
 
-                                                    <time datetime={post.data.article.pubDate}>
-                                                        {post.data.article.pubDate}
-                                                    </time>
-                                                </aside>
-                                            </a>
-                                        </li>
-                                    );
-                                })}
+                                                        <time datetime={post.data.article.pubDate}>
+                                                            {post.data.article.pubDate}
+                                                        </time>
+                                                    </aside>
+                                                </a>
+                                            </li>
+                                        );
+                                    })}
                             </ul>
                         </nav>
                     );
