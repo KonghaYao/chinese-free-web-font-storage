@@ -1,7 +1,7 @@
 import { atom } from '@cn-ui/reactive';
 import { Show } from 'solid-js';
 import { DragDropButton } from '../DragButton';
-import type { FontReporter } from '../fonts/FontReporter';
+import type { FontReporter } from '@konghayao/cn-font-split';
 import { TimeAnalyze } from '../fontDisplay/TimeAnalyze';
 import { BundleSizeAnalyze } from '../fontDisplay/BundleSizeAnalyze';
 import { TextWriter } from '../fontDisplay/TextWriter';

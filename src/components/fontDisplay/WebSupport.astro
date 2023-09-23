@@ -2,6 +2,7 @@
 import { Code } from 'astro/components';
 import { getFontReporter } from '../../utils/getFontReporter';
 import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
+import { AllCDN } from '../../global';
 
 export type Props = {
     font: string;
@@ -13,10 +14,7 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font!, fileName);
-const CDNs = [`https://192960944.r.cdn36.com`].map(
-    (i) => i + `/chinesefonts1/packages/${font}/dist/${font_name}`
-);
-
+const CDNs = AllCDN.map((i) => i + `/chinesefonts1/packages/${font}/dist/${font_name}`);
 const theme = 'github-light' as const;
 ---
 

@@ -1,4 +1,3 @@
-import type { FontReporter } from '../fonts/FontReporter';
 import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 import prettyBytes from 'pretty-bytes';
 import { ECharts } from './ECharts';

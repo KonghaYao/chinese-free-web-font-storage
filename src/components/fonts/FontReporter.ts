@@ -1,3 +1,4 @@
+
 export interface FontReporter {
     config: { FontPath: string; destFold: string; chunkSize: number };
     data: { name: string; size: number; chars: string }[];

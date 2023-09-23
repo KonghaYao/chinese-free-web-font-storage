@@ -13,6 +13,7 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@konghayao/cn-font-split": "^4.7.2",
         "@solidjs/router": "^0.5.1",
         "@types/file-saver": "^2.0.5",
         "@types/fs-extra": "^9.0.13",
@@ -35,7 +36,6 @@
         "@cn-ui/reactive": "^2.2.4",
         "@cn-ui/use": "^2.0.4",
         "@japont/unicode-range": "^1.0.0",
-        "@konghayao/cn-font-split": "^4.6.0",
         "@minht11/solid-virtual-container": "^0.2.1",
         "@sentry/browser": "^7.68.0",
         "@sentry/vite-plugin": "^2.7.1",
