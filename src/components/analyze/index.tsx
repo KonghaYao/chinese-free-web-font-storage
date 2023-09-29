@@ -1,10 +1,11 @@
+import { atom } from '@cn-ui/reactive';
 import { FontAnalyze } from 'font-analyze';
 import { Match, Show, Switch, batch, createSignal } from 'solid-js';
 type Result = Awaited<ReturnType<typeof FontAnalyze>>;
 export const FontAnalyzeUI = () => {
-    const [loading, setLoading] = createSignal(false);
-    const [result, setResult] = createSignal<Result | null>();
-    const [filename, setFilename] = createSignal('');
+    const loading = atom(false);
+    const result = atom<Result | null>(null);
+    const filename = atom('');
     return (
         <Switch
             fallback={
@@ -34,24 +35,24 @@ export const FontAnalyzeUI = () => {
                             const input = e.target as HTMLInputElement;
                             const file = input.files?.[0];
                             if (file) {
-                                setLoading(true);
+                                loading(true);
                                 const buffer = await file.arrayBuffer();
-                                const part = file.name.split('.');
-                                await FontAnalyze(buffer, part[part.length - 1] as any, (name) => {
-                                    return fetch(
-                                        `https://cdn.jsdelivr.net/npm/font-analyze@1.1.1/data/${name}`
-                                    ).then((res) => res.json());
+                                await FontAnalyze(buffer, {
+                                    charsetLoader: (name) => {
+                                        return fetch(
+                                            `https://cdn.jsdelivr.net/npm/font-analyze@1.2.0/data/${name}`
+                                        ).then((res) => res.json());
+                                    },
                                 })
                                     .then((res) => {
                                         batch(() => {
-                                            setFilename(file.name);
-                                            setResult(res);
-                                            setLoading(false);
+                                            filename(file.name);
+                                            result(res);
+                                            loading(false);
                                         });
-                                        console.log(res);
                                     })
                                     .catch(() => {
-                                        setLoading(false);
+                                        loading(false);
                                     });
                             }
                         }}
@@ -61,13 +62,14 @@ export const FontAnalyzeUI = () => {
         >
             <Match when={loading()}>🔔正在积极导入数据中，请稍等。。。</Match>
             <Match when={result()}>
-                <AnalyzeResult result={result()!}></AnalyzeResult>
+                <AnalyzeResult filename={filename()} result={result()!}></AnalyzeResult>
             </Match>
         </Switch>
     );
 };
 import '../../style/analyze.css';
 import { ColoredNumber } from '../../utils/ColoredNumber';
+import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 function StringObjectToTable(props: { data: Record<string, string> }) {
     const { data } = props;
 
@@ -79,8 +81,8 @@ function StringObjectToTable(props: { data: Record<string, string> }) {
             <tbody>
                 {rows.map((row, index) => (
                     <tr>
-                        <td>{row[0]}</td>
-                        <td>{row[1]}</td>
+                        <td>{ensureFontMessageString(row[0])}</td>
+                        <td>{ensureFontMessageString(row[1])}</td>
                     </tr>
                 ))}
             </tbody>
