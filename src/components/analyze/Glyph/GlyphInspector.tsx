@@ -1,14 +1,11 @@
 import { parse, type Font } from 'opentype.js';
 import { VirtualContainer } from '@minht11/solid-virtual-container';
-import { atom, reflect } from '@cn-ui/reactive';
+import { atom, reflect, resource, type Atom } from '@cn-ui/reactive';
 import { RenderGlyph } from './RenderGlyph';
 import { Show } from 'solid-js';
 import { RenderGlyphDetail } from './RenderGlyphDetail';
-const _font = parse(
-    await fetch(
-        'https://cdn.jsdelivr.net/gh/harfbuzz/harfbuzzjs@0.3.3/examples/Roboto-Black.ttf'
-    ).then((res) => res.arrayBuffer())
-);
+import { convert } from 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js';
+
 export interface GlyphConfig {
     fontScale: number;
     fontSize: number;
@@ -41,10 +38,25 @@ const calcConfigBySize = (size: number, font: Font) => {
         cellMarkSize: 4,
     };
 };
-export const GlyphInspector = () => {
+export const GlyphInspector = (props: { file: File }) => {
+    const font = resource(async () => {
+        if (['.woff2', '.woff'].some((i) => props.file.name.endsWith(i))) {
+            const buffer = await props.file.arrayBuffer();
+            const otfBuffer = await convert(new Uint8Array(buffer), 'otf'); // wawoff2 is globaly loaded as 'Module'
+            return parse(otfBuffer);
+        }
+
+        const buffer = await props.file.arrayBuffer();
+        return parse(buffer);
+    });
+    return (
+        <Show when={font.isReady() && font()}>
+            <GlyphInspectorUI font={font}></GlyphInspectorUI>
+        </Show>
+    );
+};
+const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
     let scrollTargetElement!: HTMLDivElement;
-    const font = atom<Font>(_font);
-    console.log(font());
     const glyphIndexList = reflect(() =>
         [...Array(font()?.numGlyphs ?? 0).keys()].map((i) => ({ index: i }))
     );

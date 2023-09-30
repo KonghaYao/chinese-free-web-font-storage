@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from 'solid-js';
+import { For, Show } from 'solid-js';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';

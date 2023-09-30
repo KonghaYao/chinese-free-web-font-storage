@@ -12,9 +12,9 @@ export const RenderGlyph = (props: {
     const canvas = atom<HTMLCanvasElement | null>(null);
 
     onMount(() => {
-        createMemo(() => {
-            renderGlyphItem(canvas()!, props.index, props.font, props.rect, props.config);
-        });
+        createMemo(() =>
+            renderGlyphItem(canvas()!, props.index, props.font, props.rect, props.config)
+        );
     });
     return (
         <canvas
