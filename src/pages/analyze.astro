@@ -1,5 +1,6 @@
 ---
 import Layout from '../Layout/Layout.astro';
+import { GlyphInspector } from '../components/analyze/GlyphInspector';
 import { FontAnalyzeUI } from '../components/analyze/index';
 import { __CDN__ } from '../global';
 ---
@@ -8,5 +9,6 @@ import { __CDN__ } from '../global';
     title="在线字体分析器"
     defaultFontCSS={__CDN__ + '/packages/lxgwwenkai/dist/LXGWWenKai-Light/result.css'}
 >
+    <GlyphInspector client:only />
     <FontAnalyzeUI client:only />
 </Layout>
