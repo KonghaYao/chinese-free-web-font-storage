@@ -4,6 +4,7 @@ import AllFooter from '../components/AllFooter.astro';
 import FontList from '../components/FontsList.astro';
 import TechSupport from '../components/TechSupport.astro';
 import PerformanceOfTool from '../components/PerformanceOfTool.astro';
+import HomeGlyphInspector from '../components/analyze/Glyph/HomeGlyphInspector';
 export const prerender = true;
 ---
 
@@ -50,6 +51,7 @@ export const prerender = true;
     <FontList />
     <TechSupport />
     <PerformanceOfTool />
+    <!-- <HomeGlyphInspector client:only></HomeGlyphInspector> -->
     <!-- TimeLine 一个开发时间线 -->
     <AllFooter />
     <script>

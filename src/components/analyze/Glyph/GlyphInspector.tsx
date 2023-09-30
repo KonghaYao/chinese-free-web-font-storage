@@ -1,10 +1,9 @@
 import { parse, type Font } from 'opentype.js';
 import { VirtualContainer } from '@minht11/solid-virtual-container';
-import { atom, reflect, resource, type Atom } from '@cn-ui/reactive';
+import { atom, reflect, resource, type Atom, ArrayAtom, VModel, ObjectAtom } from '@cn-ui/reactive';
 import { RenderGlyph } from './RenderGlyph';
-import { Show } from 'solid-js';
+import { For, Show } from 'solid-js';
 import { RenderGlyphDetail } from './RenderGlyphDetail';
-import { convert } from 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js';
 
 export interface GlyphConfig {
     fontScale: number;
@@ -42,8 +41,12 @@ export const GlyphInspector = (props: { file: File }) => {
     const font = resource(async () => {
         if (['.woff2', '.woff'].some((i) => props.file.name.endsWith(i))) {
             const buffer = await props.file.arrayBuffer();
-            const otfBuffer = await convert(new Uint8Array(buffer), 'otf'); // wawoff2 is globaly loaded as 'Module'
-            return parse(otfBuffer);
+            const { convert } = await import(
+                'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
+            );
+            const otfBuffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
+            console.log(otfBuffer);
+            return parse(otfBuffer.buffer);
         }
 
         const buffer = await props.file.arrayBuffer();
@@ -65,18 +68,47 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
         height: size(),
         width: size(),
     }));
-    const detailRect = reflect(() => ({
-        height: 500,
-        width: 500,
-    }));
     const config = reflect<GlyphConfig>(() => calcConfigBySize(size(), font()));
-    const detailConfig = reflect(() => calcConfigBySize(500, font()));
-    const displayingGlyphIndex = atom(0);
-    const displayingGlyph = reflect(() => font().glyphs.get(displayingGlyphIndex()));
-
+    const detailConfig = reflect(() => calcConfigBySize(120, font()));
+    const displayingGlyphIndex = ArrayAtom([5, 7, 3]);
+    const setting = ObjectAtom({
+        opacity: 5000,
+        multiSelect: true,
+    });
     return (
-        <section class="flex h-[80vh]">
-            <div class="h-full flex-1 overflow-auto " ref={scrollTargetElement}>
+        <section class="grid h-[80vh]  grid-cols-2 rounded-2xl  p-8">
+            <div class="col-span-2 flex gap-4">
+                <button class="cursor-pointer" onclick={() => displayingGlyphIndex((i) => [i[0]])}>
+                    归一
+                </button>
+                <button
+                    class="cursor-pointer"
+                    onclick={() => displayingGlyphIndex(() => glyphIndexList().map((i) => i.index))}
+                >
+                    全选
+                </button>
+                <label class="cursor-pointer">
+                    <input
+                        type="checkbox"
+                        oninput={(e) => {
+                            setting.multiSelect(e.target.checked);
+                            if (!e.target.checked) displayingGlyphIndex((i) => [i[0]]);
+                        }}
+                        checked={setting.multiSelect()}
+                    />
+                    多选字符
+                </label>
+                <label>
+                    <input type="range" max={10000} min={0} {...VModel(setting.opacity)} />
+                    透明度：{setting.opacity() / 100}
+                </label>
+                <div class="flex-1"></div>
+                <div class="text-xl">字符查看器</div>
+            </div>
+            <div
+                class="h-full overflow-auto rounded-l-2xl border-2  bg-gray-100"
+                ref={scrollTargetElement}
+            >
                 <VirtualContainer
                     items={glyphIndexList()}
                     class="flex"
@@ -94,13 +126,26 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
                 >
                     {(props: any) => (
                         <div
-                            class="flex items-center justify-center"
+                            class="flex cursor-pointer items-center justify-center transition-colors"
+                            classList={{
+                                'bg-gray-400': displayingGlyphIndex().includes(props.item.index),
+                            }}
                             // Required for items to switch places.
                             style={props.style}
                             // Used for keyboard navigation and accessibility.
                             tabIndex={props.tabIndex}
                             role="listitem"
-                            onclick={() => displayingGlyphIndex(props.item.index)}
+                            onclick={() => {
+                                if (setting.multiSelect()) {
+                                    if (displayingGlyphIndex().includes(props.item.index)) {
+                                        displayingGlyphIndex.remove(props.item.index);
+                                    } else {
+                                        displayingGlyphIndex((i) => [...i, props.item.index]);
+                                    }
+                                } else {
+                                    displayingGlyphIndex(() => [props.item.index]);
+                                }
+                            }}
                         >
                             <RenderGlyph
                                 font={font()}
@@ -112,56 +157,27 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
                     )}
                 </VirtualContainer>
             </div>
-            <div class="flex flex-1 ">
+            <div class="flex items-center justify-center  rounded-r-2xl border-2 bg-gray-100 p-4">
                 <Show when={font()}>
-                    <RenderGlyphDetail
-                        font={font()}
-                        index={displayingGlyphIndex()}
-                        config={detailConfig()}
-                        rect={detailRect()}
-                    ></RenderGlyphDetail>
-                </Show>
-                <div class="flex-1">
-                    <ul>
-                        {(
-                            [
-                                'index',
-                                'name',
-                                'xMin',
-                                'xMax',
-                                'yMin',
-                                'yMax',
-                                'advanceWidth',
-                                'leftSideBearing',
-                            ] as const
-                        ).map((i) => {
-                            return (
-                                <li class="flex justify-between">
-                                    <div>{i}</div>
-                                    <div>{displayingGlyph()[i]}</div>
-                                </li>
-                            );
-                        })}
-                        <li class="flex justify-between">
-                            <div>unicode</div>
-                            <div>
-                                {(displayingGlyph().unicodes ?? [displayingGlyph().unicode])
-                                    .filter((i) => i)
-                                    .map((i) => formatUnicode(i!))
-                                    .join(',')}
-                            </div>
-                        </li>
+                    <ul class="relative aspect-square h-full">
+                        <For each={displayingGlyphIndex()}>
+                            {(index, listIndex) => {
+                                return (
+                                    <li class="absolute left-0 top-0 h-full w-full">
+                                        <RenderGlyphDetail
+                                            markMode={listIndex() > 0}
+                                            font={font()}
+                                            index={index}
+                                            opacity={setting.opacity() / 10000}
+                                            config={detailConfig()}
+                                        ></RenderGlyphDetail>
+                                    </li>
+                                );
+                            }}
+                        </For>
                     </ul>
-                </div>
+                </Show>
             </div>
         </section>
     );
 };
-function formatUnicode(unicode_num: number) {
-    const unicode = unicode_num.toString(16);
-    if (unicode.length > 4) {
-        return ('000000' + unicode.toUpperCase()).substr(-6);
-    } else {
-        return ('0000' + unicode.toUpperCase()).substr(-4);
-    }
-}
