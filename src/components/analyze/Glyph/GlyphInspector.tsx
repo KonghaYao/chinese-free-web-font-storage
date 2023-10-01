@@ -1,4 +1,4 @@
-import { parse, type Font } from 'opentype.js';
+import { parse, type Font } from '@konghayao/opentype.js';
 import { VirtualContainer } from '@minht11/solid-virtual-container';
 import { atom, reflect, resource, type Atom, ArrayAtom, VModel, ObjectAtom } from '@cn-ui/reactive';
 import { RenderGlyph } from './RenderGlyph';
@@ -46,7 +46,7 @@ export const GlyphInspector = (props: { file: File }) => {
             );
             const otfBuffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
             console.log(otfBuffer);
-            return parse(otfBuffer.buffer);
+            return parse(otfBuffer);
         }
 
         const buffer = await props.file.arrayBuffer();
@@ -70,13 +70,13 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
     }));
     const config = reflect<GlyphConfig>(() => calcConfigBySize(size(), font()));
     const detailConfig = reflect(() => calcConfigBySize(120, font()));
-    const displayingGlyphIndex = ArrayAtom([5, 7, 3]);
+    const displayingGlyphIndex = ArrayAtom([1]);
     const setting = ObjectAtom({
         opacity: 5000,
-        multiSelect: true,
+        multiSelect: false,
     });
     return (
-        <section class="grid h-[80vh]  grid-cols-2 rounded-2xl  p-8">
+        <section class="grid h-[90vh] w-full  grid-cols-2 rounded-2xl  p-8">
             <div class="col-span-2 flex gap-4">
                 <button class="cursor-pointer" onclick={() => displayingGlyphIndex((i) => [i[0]])}>
                     归一

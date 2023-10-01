@@ -26,6 +26,9 @@ dependencies:
   '@japont/unicode-range':
     specifier: ^1.0.0
     version: 1.0.0
+  '@konghayao/opentype.js':
+    specifier: ^2023.10.1
+    version: 2023.10.1
   '@minht11/solid-virtual-container':
     specifier: ^0.2.1
     version: 0.2.1(solid-js@1.7.11)
@@ -83,9 +86,6 @@ dependencies:
   notyf:
     specifier: ^3.10.0
     version: 3.10.0
-  opentype.js:
-    specifier: ^1.3.4
-    version: 1.3.4
   pretty-bytes:
     specifier: ^6.1.1
     version: 6.1.1
@@ -1170,6 +1170,13 @@ packages:
   /@konghayao/harfbuzzjs@1.1.0:
     resolution: {integrity: sha512-lQhWrFUF3osFdLn+0rSXtlS2h5pcaCPnaW1rzHghLdZKeY0wnc+b2SGEmseD59sIazTgjVQf/quJL/zck6leFA==}
     dev: true
+
+  /@konghayao/opentype.js@2023.10.1:
+    resolution: {integrity: sha512-v9m1Vi8/wIo0Fy1mkGBlqoocLv0/uI1m5TiuPzQGmiLktPt6sGjtkepxUiaOqJVLe+bREzOJBbHXHp6g96/Arw==}
+    hasBin: true
+    dependencies:
+      eslint-plugin-local-rules: 1.3.2
+    dev: false
 
   /@minht11/solid-virtual-container@0.2.1(solid-js@1.7.11):
     resolution: {integrity: sha512-HvQWx1uE5NWwx9WsN4waFtmyOjhZKMA/3vBf+j3zGsRfi556LCUk4oOmqZcOvIB5nEpHezvuZ8oUlwxigdO3Xg==}
@@ -2379,6 +2386,10 @@ packages:
   /escape-string-regexp@5.0.0:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
+    dev: false
+
+  /eslint-plugin-local-rules@1.3.2:
+    resolution: {integrity: sha512-X4ziX+cjlCYnZa+GB1ly3mmj44v2PeIld3tQVAxelY6AMrhHSjz6zsgsT6nt0+X5b7eZnvL/O7Q3pSSK2kF/+Q==}
     dev: false
 
   /esprima@4.0.1:

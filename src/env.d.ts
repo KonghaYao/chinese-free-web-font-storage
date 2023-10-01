@@ -4,3 +4,6 @@
 declare module "https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split*" {
     export * from "@konghayao/cn-font-split/dist/browser/index.d.ts";
 }
+declare module "@konghayao/opentype.js" {
+    export * from "@types/opentype.js";
+}
