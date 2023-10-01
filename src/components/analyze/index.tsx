@@ -6,7 +6,6 @@ import { DragDropButton } from '../DragButton';
 import { StringObjectToTable } from './Coverage/StringObjectToTable';
 import { UnicodeTable } from './Coverage/UnicodeTable';
 import { StandardAnalyzeTable } from './Coverage/StandardAnalyzeTable';
-import { GlyphInspector } from './Glyph/GlyphInspector';
 
 export type Result = Awaited<ReturnType<typeof FontAnalyze>>;
 export const FontAnalyzeUI = () => {
@@ -18,15 +17,21 @@ export const FontAnalyzeUI = () => {
             fetch(url())
                 .then((res) => res.blob())
                 .then((res) => new File([res], new URL(url()).pathname)),
-        { deps: [url] }
+        { deps: [url], immediately: false }
     );
     const analyzeResult = resource(
         async () => {
-            const buffer = await f()!.arrayBuffer();
+            let buffer = await f()!.arrayBuffer();
+            if (f().name.endsWith('.woff2')) {
+                const { convert } = await import(
+                    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
+                );
+                buffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
+            }
             return FontAnalyze(buffer, {
                 charsetLoader(name) {
                     return fetch(
-                        `https://cdn.jsdelivr.net/npm/font-analyze@1.2.0/data/${name}`
+                        `https://cdn.jsdelivr.net/npm/font-analyze@1.3.0/data/${name}`
                     ).then((res) => res.json());
                 },
             }).then((result) => {
@@ -79,7 +84,9 @@ const AnalyzeResult = ({ result, filename }: { result: Result; filename: string 
             </h2>
             <details>
                 <summary>字体首部信息表</summary>
-                <StringObjectToTable data={result.headers}></StringObjectToTable>
+                <StringObjectToTable
+                    data={result.headers.windows ?? result.headers}
+                ></StringObjectToTable>
             </details>
             <details open>
                 <summary>字体字符标准检测</summary>

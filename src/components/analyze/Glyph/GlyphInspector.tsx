@@ -45,7 +45,6 @@ export const GlyphInspector = (props: { file: File }) => {
                 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
             );
             const otfBuffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
-            console.log(otfBuffer);
             return parse(otfBuffer);
         }
 
@@ -76,7 +75,7 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
         multiSelect: false,
     });
     return (
-        <section class="grid h-[90vh] w-full  grid-cols-2 rounded-2xl  p-8">
+        <section class="m-auto grid h-[90vh] w-[90%]  grid-cols-2 rounded-2xl  p-8">
             <div class="col-span-2 flex gap-4">
                 <button class="cursor-pointer" onclick={() => displayingGlyphIndex((i) => [i[0]])}>
                     归一
