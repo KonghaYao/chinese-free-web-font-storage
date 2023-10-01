@@ -14,7 +14,7 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font!, fileName);
-const CDNs = AllCDN.map((i) => i + `/chinesefonts1/packages/${font}/dist/${font_name}`);
+const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
 const theme = 'github-light' as const;
 ---
 
