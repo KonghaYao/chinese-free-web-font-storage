@@ -18,8 +18,8 @@ dependencies:
     specifier: ^5.0.0
     version: 5.0.0(astro@3.0.12)(tailwindcss@3.3.3)
   '@cn-ui/reactive':
-    specifier: ^2.2.4
-    version: 2.2.4
+    specifier: ^2.3.0
+    version: 2.3.0
   '@cn-ui/use':
     specifier: ^2.0.4
     version: 2.0.4
@@ -720,8 +720,8 @@ packages:
       argparse: 2.0.1
     dev: true
 
-  /@cn-ui/reactive@2.2.4:
-    resolution: {integrity: sha512-llj4iHw84Q2xOQdj1HRWIT67sgMhzQCCZj4ykNNVrGc74sP22DWLYR/xq3XrolVLGoaAgapa1/yra3j06z754Q==}
+  /@cn-ui/reactive@2.3.0:
+    resolution: {integrity: sha512-62q7U2afLDp9T/x7XlF2dLOtxURr7JEqVct6bHwOGlZA0cdIjsD03XyXQKATLwtVrSXU2fuDHUPzI98kI9pUDg==}
     dependencies:
       lodash-es: 4.17.21
       mitt: 3.0.1
@@ -731,7 +731,7 @@ packages:
   /@cn-ui/use@2.0.4:
     resolution: {integrity: sha512-59m45uExbdkjVTaf/92SpvZ2LSONIqwXfr5veb7Pkp2ap6dMqKutf/Zj32/VW/KBAXLLKiQAhdeeZmCR7JUaRg==}
     dependencies:
-      '@cn-ui/reactive': 2.2.4
+      '@cn-ui/reactive': 2.3.0
       '@types/lodash-es': 4.17.9
       lodash-es: 4.17.21
       solid-js: 1.7.11
