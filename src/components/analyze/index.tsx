@@ -6,6 +6,7 @@ import { DragDropButton } from '../DragButton';
 import { StringObjectToTable } from './Coverage/StringObjectToTable';
 import { UnicodeTable } from './Coverage/UnicodeTable';
 import { StandardAnalyzeTable } from './Coverage/StandardAnalyzeTable';
+import { GlyphInspector } from './Glyph/GlyphInspector';
 
 export type Result = Awaited<ReturnType<typeof FontAnalyze>>;
 export const FontAnalyzeUI = () => {
@@ -70,6 +71,7 @@ export const FontAnalyzeUI = () => {
                     filename={analyzeResult().filename}
                     result={analyzeResult().result}
                 ></AnalyzeResult>
+                <GlyphInspector file={f()}></GlyphInspector>
             </Match>
         </Switch>
     );

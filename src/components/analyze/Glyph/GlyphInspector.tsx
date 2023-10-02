@@ -102,7 +102,10 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
                     透明度：{setting.opacity() / 100}
                 </label>
                 <div class="flex-1"></div>
-                <div class="text-xl">字符查看器</div>
+
+                <a href="/analyze" class="text-xl">
+                    字符查看器
+                </a>
             </div>
             <div
                 class="h-full overflow-auto rounded-l-2xl border-2  bg-gray-100"
