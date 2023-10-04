@@ -1,4 +1,4 @@
-import { parse, type Font } from '@konghayao/opentype.js';
+import { type Font } from '@konghayao/opentype.js';
 import { VirtualContainer } from '@minht11/solid-virtual-container';
 import { atom, reflect, resource, type Atom, ArrayAtom, VModel, ObjectAtom } from '@cn-ui/reactive';
 import { RenderGlyph } from './RenderGlyph';
@@ -39,17 +39,18 @@ const calcConfigBySize = (size: number, font: Font) => {
 };
 export const GlyphInspector = (props: { file: File }) => {
     const font = resource(async () => {
+        const opentype = await import('@konghayao/opentype.js');
         if (['.woff2', '.woff'].some((i) => props.file.name.endsWith(i))) {
             const buffer = await props.file.arrayBuffer();
             const { convert } = await import(
                 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
             );
             const otfBuffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
-            return parse(otfBuffer);
+            return opentype.parse(otfBuffer);
         }
 
         const buffer = await props.file.arrayBuffer();
-        return parse(buffer);
+        return opentype.parse(buffer);
     });
     return (
         <Show when={font.isReady() && font()}>
