@@ -75,8 +75,22 @@ const limit = pLimit(3);
 
 const inputs = files.map((i) => limit(() => uploadFolder(i)));
 await Promise.all(inputs).catch((e) => {
-    fs.promises.writeFile(
-        "./scripts/.upload_cache",
-        JSON.stringify([...cache.values()])
-    );
+    fs.promises
+        .writeFile(
+            "./scripts/.upload_cache",
+            JSON.stringify([...cache.values()])
+        )
+        .then((res) => {
+            return [...cache.values()]
+                .map(
+                    (i) =>
+                        "https://ik.imagekit.io/chinesefonts1/" +
+                        i.replace(/\\/g, "/")
+                )
+                .join("\n");
+        })
+        .then((cache) => {
+            console.log("清除缓存");
+            console.log(cache);
+        });
 });

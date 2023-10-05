@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@konghayao/cn-font-split':
-        specifier: ^4.7.2
-        version: 4.7.2
+        specifier: ^4.8.1
+        version: 4.8.1
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
@@ -55,6 +55,8 @@ importers:
   packages/hwmct: {}
 
   packages/jhlst: {}
+
+  packages/jpdzt: {}
 
   packages/jxzk: {}
 
@@ -117,24 +119,31 @@ packages:
     resolution: {integrity: sha512-BckHvA2XdjRBVAWe2uceNuRf78lBeI28kyWEbfr/Q2pE17POkwuZ6WWY/UMv8FL9iBxhW4xfDoNLM9UVZaTeUQ==}
     dev: false
 
-  /@konghayao/cn-font-split@4.7.2:
-    resolution: {integrity: sha512-L0pAJrvG2yYe+wylcSlaPyTh2gtjjTpTj2iIjihraUbozldML9SMCK+8/OJ3qLJuiTBTcoXTuNRYmNCSBJJ+OQ==}
+  /@konghayao/cn-font-split@4.8.1:
+    resolution: {integrity: sha512-U069Jwz+uGayvs4NbwmwfRMSHqR+54GvNdh84qVHFmAirQmQSAx7kYR5acOrmr0mIAoq9IGlXemAkmeINuRukw==}
     dependencies:
       '@chinese-fonts/font-contours': 1.0.0
       '@chinese-fonts/wawoff2': 2.0.3
       '@japont/unicode-range': 1.0.0
-      '@konghayao/harfbuzzjs': 1.1.0
+      '@konghayao/harfbuzzjs': 8.2.1-beta.1
+      '@konghayao/opentype.js': 2023.10.1
       byte-size: 8.1.1
       fs-extra: 10.1.0
       md5: 2.3.0
-      opentype.js: 1.3.4
       os-locale: 6.0.2
       tslog: 4.9.2
       workerpool: 6.5.0
     dev: false
 
-  /@konghayao/harfbuzzjs@1.1.0:
-    resolution: {integrity: sha512-lQhWrFUF3osFdLn+0rSXtlS2h5pcaCPnaW1rzHghLdZKeY0wnc+b2SGEmseD59sIazTgjVQf/quJL/zck6leFA==}
+  /@konghayao/harfbuzzjs@8.2.1-beta.1:
+    resolution: {integrity: sha512-ecDi753M0fbQzwtjrQ+xhdfrRWLw4i+fwzEzFzZGVuTZt/n+J/jrSDqsnEVryIzBAKhn5OHzNvy4ZgaX22RdBA==}
+    dev: false
+
+  /@konghayao/opentype.js@2023.10.1:
+    resolution: {integrity: sha512-v9m1Vi8/wIo0Fy1mkGBlqoocLv0/uI1m5TiuPzQGmiLktPt6sGjtkepxUiaOqJVLe+bREzOJBbHXHp6g96/Arw==}
+    hasBin: true
+    dependencies:
+      eslint-plugin-local-rules: 1.3.2
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -511,6 +520,10 @@ packages:
     engines: {node: '>=0.8.0'}
     dev: true
 
+  /eslint-plugin-local-rules@1.3.2:
+    resolution: {integrity: sha512-X4ziX+cjlCYnZa+GB1ly3mmj44v2PeIld3tQVAxelY6AMrhHSjz6zsgsT6nt0+X5b7eZnvL/O7Q3pSSK2kF/+Q==}
+    dev: false
+
   /expand-tilde@2.0.2:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
@@ -718,6 +731,11 @@ packages:
 
   /graceful-fs@4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+
+  /graceful-fs@4.2.11:
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+    requiresBuild: true
+    optional: true
 
   /hamming-distance@1.0.0:
     resolution: {integrity: sha512-hYz2IIKtyuZGfOqCs7skNiFEATf+v9IUNSOaQSr6Ll4JOxxWhOvXvc3mIdCW82Z3xW+zUoto7N/ssD4bDxAWoA==}
@@ -962,7 +980,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.11
 
   /kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
@@ -1184,15 +1202,6 @@ packages:
     dependencies:
       mimic-fn: 2.1.0
     dev: true
-
-  /opentype.js@1.3.4:
-    resolution: {integrity: sha512-d2JE9RP/6uagpQAVtJoF0pJJA/fgai89Cc50Yp0EJHk+eLp6QQ7gBoblsnubRULNY132I0J1QKMJ+JTbMqz4sw==}
-    engines: {node: '>= 8.0.0'}
-    hasBin: true
-    dependencies:
-      string.prototype.codepointat: 0.2.1
-      tiny-inflate: 1.0.3
-    dev: false
 
   /ora@5.4.1:
     resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==}
@@ -1510,10 +1519,6 @@ packages:
       strip-ansi: 7.0.1
     dev: false
 
-  /string.prototype.codepointat@0.2.1:
-    resolution: {integrity: sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==}
-    dev: false
-
   /string_decoder@1.3.0:
     resolution: {integrity: sha512-hkRX8U1WjJFd8LsDJ2yQ/wWWxaopEsABU1XfkM8A+j0+85JAGppt16cr1Whg6KIbb4okU6Mql6BOj+uup/wKeA==}
     dependencies:
@@ -1547,10 +1552,6 @@ packages:
   /through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
     dev: true
-
-  /tiny-inflate@1.0.3:
-    resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
-    dev: false
 
   /title-case@3.0.3:
     resolution: {integrity: sha512-e1zGYRvbffpcHIrnuqT0Dh+gEJtDaxDSoG4JAIpq4oDFyooziLBIiYQv0GBT4FUAnUop5uZ1hiIAj7oAF6sOCA==}
