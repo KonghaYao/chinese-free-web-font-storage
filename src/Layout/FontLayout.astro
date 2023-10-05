@@ -14,8 +14,8 @@ const fileName = font_name!
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font, fileName);
 const style = `font-family:'${ensureFontMessageString(
-    reporter.message.fontFamily
-)}';font-weight:'${ensureFontMessageString(reporter.message.fontSubFamily)}'`;
+    reporter.message.windows.fontFamily
+)}';font-weight:'${ensureFontMessageString(reporter.message.windows.fontSubFamily)}'`;
 const root = `/fonts/${font}/${font_name}/`;
 ---
 
@@ -45,9 +45,9 @@ const root = `/fonts/${font}/${font_name}/`;
                         {
                             name: '文章测试',
                             link: `/heti.html?font=${font}&name=${font_name}&family=${ensureFontMessageString(
-                                reporter.message.fontFamily
+                                reporter.message.windows.fontFamily
                             )}&subFamily=${ensureFontMessageString(
-                                reporter.message.fontSubFamily
+                                reporter.message.windows.fontSubFamily
                             )}`,
                         },
                         {

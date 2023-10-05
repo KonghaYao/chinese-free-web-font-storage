@@ -13,7 +13,7 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@konghayao/cn-font-split": "^4.8.1",
+        "@konghayao/cn-font-split": "^4.8.2",
         "@solidjs/router": "^0.5.1",
         "@types/file-saver": "^2.0.5",
         "@types/fs-extra": "^9.0.13",
@@ -34,7 +34,7 @@
         "@astrojs/sitemap": "^3.0.0",
         "@astrojs/solid-js": "^3.0.1",
         "@astrojs/tailwind": "^5.0.0",
-        "@cn-ui/reactive": "^2.3.0",
+        "@cn-ui/reactive": "2.2.4",
         "@cn-ui/use": "^2.0.4",
         "@japont/unicode-range": "^1.0.0",
         "@minht11/solid-virtual-container": "^0.2.1",
@@ -56,7 +56,7 @@
         "lodash-es": "^4.17.21",
         "md5": "^2.3.0",
         "notyf": "^3.10.0",
-        "@konghayao/opentype.js": "^2023.10.1",
+        "@konghayao/opentype.js": "^2023.10.5",
         "pretty-bytes": "^6.1.1",
         "solid-js": "^1.7.11",
         "tailwindcss": "^3.3.3"

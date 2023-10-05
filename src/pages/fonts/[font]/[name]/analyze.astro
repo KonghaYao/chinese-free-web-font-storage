@@ -27,7 +27,7 @@ const reporter = await getFontReporter(font!, fileName);
         <table class="my-4">
             <tbody>
                 {
-                    Object.entries(reporter.message).map(([key, val]) => {
+                    Object.entries(reporter.message.windows).map(([key, val]) => {
                         return (
                             <tr class=" transition-colors hover:bg-white">
                                 <td class="px-4 text-sky-600">{key}</td>
