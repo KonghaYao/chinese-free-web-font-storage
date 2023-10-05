@@ -13,9 +13,10 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font, fileName);
+const message = reporter.message.windows ?? reporter.message
 const style = `font-family:'${ensureFontMessageString(
-    reporter.message.windows.fontFamily
-)}';font-weight:'${ensureFontMessageString(reporter.message.windows.fontSubFamily)}'`;
+    message.fontFamily
+)}';font-weight:'${ensureFontMessageString(message.fontSubFamily)}'`;
 const root = `/fonts/${font}/${font_name}/`;
 ---
 
@@ -45,9 +46,9 @@ const root = `/fonts/${font}/${font_name}/`;
                         {
                             name: '文章测试',
                             link: `/heti.html?font=${font}&name=${font_name}&family=${ensureFontMessageString(
-                                reporter.message.windows.fontFamily
+                                message.fontFamily
                             )}&subFamily=${ensureFontMessageString(
-                                reporter.message.windows.fontSubFamily
+                                message.fontSubFamily
                             )}`,
                         },
                         {

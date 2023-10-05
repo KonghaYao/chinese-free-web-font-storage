@@ -16,6 +16,7 @@ const fileName = font_name!
 const reporter = await getFontReporter(font!, fileName);
 const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
 const theme = 'github-light' as const;
+const message = reporter.message.windows ?? reporter.message
 ---
 
 <header class="my-4 text-lg">
@@ -84,9 +85,9 @@ const theme = 'github-light' as const;
         lang="css"
         theme={theme}
         code={`article {\n    font-family:'${ensureFontMessageString(
-            reporter.message.fontFamily
+            message.fontFamily
         )}';\n    font-weight:'${
-            ensureFontMessageString(reporter.message.fontSubFamily) ?? '400'
+            ensureFontMessageString(message.fontSubFamily) ?? '400'
         }'\n};`}
     />
 </div>
