@@ -1,9 +1,10 @@
-import { For, Show } from 'solid-js';
-import JSZip from 'jszip';
+import { For, Show, createEffect } from 'solid-js';
+
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';
-import { ArrayAtom, atom, resource } from '@cn-ui/reactive';
+import { ArrayAtom, atom, resource, useEffectWithoutFirst } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
+import { Notice } from '../../Notice';
 
 const PluginVersion = atom('4.6.0');
 // 转为异步加载，防止文件发生阻塞
@@ -18,14 +19,16 @@ const preload = import(
             'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
             'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
         });
-        fetch('https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js', {
+        fetch(root + '/dist/browser/index.js', {
             cache: 'force-cache',
         }).then((res) => {
             PluginVersion(res.headers.get('X-Jsd-Version')!);
         });
         return fontSplit;
     })
-    .catch((e) => e as Error);
+    .catch((e) => {
+        Notice.error(e as Error);
+    });
 
 // 为给用户提供良好的体验，直接开始下载需要的依赖包
 Promise.all([
@@ -53,9 +56,10 @@ export const OnlineSplit = () => {
         return info;
     });
     /** 监控 zip 压缩 */
-    const createZip = resource<void>(
+    const createZip = resource(
         async () => {
             if (!file()) throw new Error('请添加文件');
+            const { default: JSZip } = await import('jszip');
             const zip = new JSZip();
             const name = file()!.name.replace(/\..*/, '');
             const folder = zip.folder(name)!;
@@ -69,7 +73,8 @@ export const OnlineSplit = () => {
         },
         { immediately: false }
     );
-    const startSplit = resource<void>(
+
+    const startSplit = resource(
         async () => {
             const fn = fontSplitStatus();
             if (!file()) throw new Error('请添加文件');
@@ -78,9 +83,7 @@ export const OnlineSplit = () => {
             return fn({
                 destFold: '',
                 FontPath: url,
-                targetType: 'woff2',
                 previewImage: {},
-                threads: {},
                 log(...args) {
                     logMessage((i) => [...i, args.join(' ')]);
                 },
@@ -95,6 +98,8 @@ export const OnlineSplit = () => {
         },
         { immediately: false }
     );
+    useResourceErrorWatch(createZip);
+    useResourceErrorWatch(startSplit);
     return (
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
             <div class="flex flex-col">
@@ -224,3 +229,6 @@ export const ConsolePrint = (item: string) => {
             '<span style="color: blue;font-weight: bold;" >$1</span>'
         );
 };
+function useResourceErrorWatch(createZip) {
+    useEffectWithoutFirst(() => Notice.error(createZip.error().message), [createZip.error]);
+}
