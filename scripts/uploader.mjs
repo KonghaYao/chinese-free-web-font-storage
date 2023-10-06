@@ -13,9 +13,9 @@ const input = mri(argv);
 
 // chinese-fonts@snapmail.cc
 const imagekit = new ImageKit({
-    publicKey: "public_qBVBt6ceitU5sKA6JWgIOZnyqBw=",
+    publicKey: process.env.IMAGEKIT_PUBLIC,
     privateKey: process.env.IMAGEKIT_TOKEN,
-    urlEndpoint: "https://ik.imagekit.io/chinesefonts/",
+    urlEndpoint: process.env.IMAGEKIT_ENDPOINT,
 });
 
 const folders = await glob("./packages/" + (input.target || "*"));
@@ -71,7 +71,7 @@ const uploadFolder = async (iterator) => {
         });
 };
 
-const limit = pLimit(3);
+const limit = pLimit(6);
 
 const inputs = files.map((i) => limit(() => uploadFolder(i)));
 await Promise.all(inputs).catch((e) => {
