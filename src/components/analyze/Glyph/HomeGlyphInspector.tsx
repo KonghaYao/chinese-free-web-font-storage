@@ -9,7 +9,7 @@ export default () => {
     const f = resource<File>(() =>
         fetch(
             __CDN__ +
-                '/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/b786513754f541ac613d2ab0f155a633.woff2'
+                '/packages/jxzk/dist/%E6%B1%9F%E8%A5%BF%E6%8B%99%E6%A5%B7/32b2a5e282dbf19fd927176ea93724da.woff2'
         )
             .then((res) => res.arrayBuffer())
             .then((res) => new File([res], 'test.woff2'))
