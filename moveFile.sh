@@ -1,0 +1,1 @@
+find ./packages -type d -name "dist" -exec sh -c 'mkdir -p  $(echo "$0" | sed "s/packages/dist/") &&cp -r "$0" "$(echo "$0" | sed "s/packages/dist/")"' {} \;
