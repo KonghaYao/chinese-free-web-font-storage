@@ -16,7 +16,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Access-Control-Allow-Origin = "https://chinese-font.netlify.app"
+    Access-Control-Allow-Origin = "*"
     Vary = "Origin"
 
 [dev]
