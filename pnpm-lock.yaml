@@ -1,16 +1,12 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
     dependencies:
       '@konghayao/cn-font-split':
-        specifier: ^4.8.2
-        version: 4.8.2
+        specifier: ^4.9.0
+        version: 4.9.0
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
@@ -119,8 +115,8 @@ packages:
     resolution: {integrity: sha512-BckHvA2XdjRBVAWe2uceNuRf78lBeI28kyWEbfr/Q2pE17POkwuZ6WWY/UMv8FL9iBxhW4xfDoNLM9UVZaTeUQ==}
     dev: false
 
-  /@konghayao/cn-font-split@4.8.2:
-    resolution: {integrity: sha512-xbivbHGQ6U0asCkVZd0B/qXbybTGaBySMUFZHa/9VM0nxt7S/EuXOOIQ/mlVg4aq6o/ZfioVIHcVLDLIoS3NTw==}
+  /@konghayao/cn-font-split@4.9.0:
+    resolution: {integrity: sha512-o0wi2amkmkl2JkYv9TpchL8Jfuntbg9aFrkKLs5K0XDVO4U2nun3nTpWTArtA9OplrBue/ftnGoygczJKTfSVw==}
     dependencies:
       '@chinese-fonts/font-contours': 1.0.0
       '@chinese-fonts/wawoff2': 2.0.3
@@ -1689,7 +1685,11 @@ packages:
     dev: false
 
   registry.npmmirror.com/graceful-fs@4.2.11:
-    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, registry: https://registry.npmjs.org/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.11.tgz}
+    resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==, registry: https://mirrors.tencent.com/npm/, tarball: https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.11.tgz}
     name: graceful-fs
     version: 4.2.11
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

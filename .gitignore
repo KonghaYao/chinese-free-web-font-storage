@@ -3,3 +3,5 @@ dist
 packages/test
 .env
 .npmrc
+# Local Netlify folder
+.netlify
