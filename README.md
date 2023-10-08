@@ -14,3 +14,10 @@
 ## 备注
 
 1. Astro 官方的格式化居然有 BUG 会断行错误，所以采用了 prettier 的一个插件格式化
+2. npm 包安装失败，需要先设置一下路径： 
+```sh
+pnpm config set sharp_binary_host "https://npmmirror.com/mirrors/sharp"
+pnpm config set sharp_libvips_binary_host "https://npmmirror.com/mirrors/sharp-libvips"
+pnpm set ENTRYCLI_CDNURL=https://cdn.npm.taobao.org/dist/sentry-cli
+pnpm set sentrycli_cdnurl=https://cdn.npm.taobao.org/dist/sentry-cli
+```

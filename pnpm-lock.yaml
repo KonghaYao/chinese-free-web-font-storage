@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@astrojs/netlify':
     specifier: ^3.0.1
@@ -101,8 +97,8 @@ dependencies:
 
 devDependencies:
   '@konghayao/cn-font-split':
-    specifier: ^4.8.2
-    version: 4.8.2
+    specifier: ^4.9.0
+    version: 4.9.0
   '@solidjs/router':
     specifier: ^0.5.1
     version: 0.5.1(solid-js@1.7.11)
@@ -1151,8 +1147,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: false
 
-  /@konghayao/cn-font-split@4.8.2:
-    resolution: {integrity: sha512-xbivbHGQ6U0asCkVZd0B/qXbybTGaBySMUFZHa/9VM0nxt7S/EuXOOIQ/mlVg4aq6o/ZfioVIHcVLDLIoS3NTw==}
+  /@konghayao/cn-font-split@4.9.0:
+    resolution: {integrity: sha512-o0wi2amkmkl2JkYv9TpchL8Jfuntbg9aFrkKLs5K0XDVO4U2nun3nTpWTArtA9OplrBue/ftnGoygczJKTfSVw==}
     dependencies:
       '@chinese-fonts/font-contours': 1.0.0
       '@chinese-fonts/wawoff2': 2.0.3
@@ -5224,3 +5220,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

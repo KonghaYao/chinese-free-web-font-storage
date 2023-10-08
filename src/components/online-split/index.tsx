@@ -1,4 +1,4 @@
-import { For, Show, createEffect } from 'solid-js';
+import { For, Show } from 'solid-js';
 
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';
@@ -9,16 +9,21 @@ import { Notice } from '../../Notice';
 const PluginVersion = atom('4.6.0');
 // 转为异步加载，防止文件发生阻塞
 const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
+const scriptLink = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js?t=' + (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0)
 const preload = import(
-    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
+    scriptLink
 )
     .then((res) => {
         const { fontSplit, Assets } = res;
+        // 兼容代码
         Assets.redefine({
             'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
             'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
             'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
+            'template.html': root + '/dist/browser/template.html',
         });
+        Assets.pathTransform = (innerPath) =>
+            innerPath.replace('./', root + '/dist/browser/');
         fetch(root + '/dist/browser/index.js', {
             cache: 'force-cache',
         }).then((res) => {

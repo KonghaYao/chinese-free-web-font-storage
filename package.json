@@ -13,7 +13,7 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@konghayao/cn-font-split": "^4.8.2",
+        "@konghayao/cn-font-split": "^4.9.0",
         "@solidjs/router": "^0.5.1",
         "@types/file-saver": "^2.0.5",
         "@types/fs-extra": "^9.0.13",
