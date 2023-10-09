@@ -13,7 +13,7 @@ article:
 
 # 🧭 中文字体使用指南
 
-> 下面的使用方法默认您已经学习了基础的 HTML 和 CSS 基础，对于网站开发有一定的了解。
+> 下面的使用方法默认您已经学习了基础的 HTML 和 CSS 基础，对于网站开发有一定的了解。这样在使用网络字体的过程中会方便很多。
 
 ## CDN 使用方式（推荐）
 
@@ -25,7 +25,9 @@ article:
 
 ![use-url-link](/assets/use-url-link.png)
 
-> 🔔 很多情况下，我们需要自己部署字体分包到 CDN 中，这样可以使用更好的服务。在这里推荐您使用 [在线字体分包器](https://chinese-font.netlify.app/online-split) 分包并下载成果文件，最后手动上传到 CDN 中获取链接，[推荐查看教程](https://chinese-font.netlify.app/post/deploy_to_cdn/)。
+> 🔔 很多情况下，我们需要自己部署字体分包到 CDN 中，这样可以使用更好的服务。
+>
+> 在这里推荐您使用 [在线字体分包器](https://chinese-font.netlify.app/online-split) 分包并下载成果文件，最后手动上传到 CDN 中获取链接，[推荐查看教程](https://chinese-font.netlify.app/post/deploy_to_cdn/)。
 
 ### 在网页中加入样式
 
@@ -52,6 +54,8 @@ article {
 
 ## 前端项目嵌入中文字体
 
+> ❗ 注意，中文网字计划已不再推荐这种方式了，既不便捷，也会导致前端打包问题。
+> 
 > ❗ 注意，你可以使用 NPM 直接使用字体，但是我并不推荐你这样使用。中文字体需要大并发和高效缓存，不适合与前端项目写在一块。如果你的网站是纯静态网页，并且将整个项目覆盖在 CDN 之下，那么可以使用这种方式部署。
 
 ### 从 NPM 中导入字体
