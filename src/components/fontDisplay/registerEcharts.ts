@@ -24,4 +24,4 @@ echarts.use([
     SVGRenderer,
     UniversalTransition,
 ]);
-export { echarts }
+export { echarts };

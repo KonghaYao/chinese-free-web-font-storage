@@ -2,9 +2,12 @@ import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 import { UnicodeRange } from '@japont/unicode-range';
 import { ECharts } from './ECharts';
 import { AsyncReporterLoader } from './AsyncReporterLoader';
+import type { NameTable } from '@konghayao/cn-font-split/dist/templates/reporter';
 /** 打包分片分析*/
 export const BundleSizeAnalyze = AsyncReporterLoader((props) => {
-    const { message, data } = props.reporter;
+    const { data } = props.reporter;
+
+    const message = (props.reporter.message.windows as NameTable) ?? props.reporter.message;
     return (
         <ECharts
             options={{

@@ -5,8 +5,8 @@ import prettyBytes from 'pretty-bytes';
 import { VModel } from '@cn-ui/reactive';
 
 export const TextWriter = AsyncReporterLoader((props) => {
-    const data = props.reporter;
-    const packages = data.data.map((i) => {
+    const reporter = props.reporter;
+    const packages = reporter.data.map((i) => {
         return { ...i, chars: new Set(UnicodeRange.parse(i.chars.split(','))) };
     });
     const fontSize = atom(48);

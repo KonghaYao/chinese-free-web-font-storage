@@ -3,6 +3,7 @@ import { Code } from 'astro/components';
 import { getFontReporter } from '../../utils/getFontReporter';
 import { ensureFontMessageString } from '../../utils/ensureFontMessageString';
 import { AllCDN } from '../../global';
+import type { NameTable } from '@konghayao/cn-font-split/dist/templates/reporter';
 
 export type Props = {
     font: string;
@@ -16,7 +17,7 @@ const fileName = font_name!
 const reporter = await getFontReporter(font!, fileName);
 const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
 const theme = 'github-light' as const;
-const message = reporter.message.windows ?? reporter.message
+const message = reporter.message.windows as NameTable ?? reporter.message
 ---
 
 <header class="my-4 text-lg">
@@ -67,7 +68,7 @@ const message = reporter.message.windows ?? reporter.message
         />
     </span>
     <span class="select-text my-2 p-2 text-sm border border-neutral-200 rounded-md">
-        <Code wrap lang="css" theme={theme} code={`@import("${CDNs}/result.css") `} />
+        <Code wrap lang="css" theme={theme} code={`@import("${CDNs[0]}/result.css") `} />
     </span>
     <blockquote class="text-xs py-4 text-rose-600">
         🔒 公共 CDN每月只提供有限流量的字体服务，不保证稳定性，建议自行部署。
