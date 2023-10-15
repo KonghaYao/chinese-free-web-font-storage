@@ -18,7 +18,7 @@ const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
 const scriptLink =
     'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js?t=' +
     (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
-const preload = import(scriptLink)
+const preload = import(/* @vite-ignore */ scriptLink)
     .then((res) => {
         const { fontSplit, Assets } = res as Awaited<typeof import('@konghayao/cn-font-split')>;
         // 注册在线地址
