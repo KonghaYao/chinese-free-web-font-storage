@@ -1,32 +1,31 @@
 import { For, Show } from 'solid-js';
-
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';
-import { ArrayAtom, atom, resource, useEffectWithoutFirst } from '@cn-ui/reactive';
+import {
+    ArrayAtom,
+    atom,
+    resource,
+    useEffectWithoutFirst,
+    type ResourceAtom,
+} from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '../../Notice';
 
 const PluginVersion = atom('4.6.0');
 // 转为异步加载，防止文件发生阻塞
 const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
-const scriptLink = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js?t=' + (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0)
-const preload = import(
-    scriptLink
-)
+/** 24h 小时更新一次的链接，保证版本更新正确 */
+const scriptLink =
+    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js?t=' +
+    (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
+const preload = import(scriptLink)
     .then((res) => {
-        const { fontSplit, Assets } = res;
-        // 兼容代码
-        Assets.redefine({
-            'hb-subset.wasm': root + '/dist/browser/hb-subset.wasm',
-            'cn_char_rank.dat': root + '/dist/browser/cn_char_rank.dat',
-            'unicodes_contours.dat': root + '/dist/browser/unicodes_contours.dat',
-            'template.html': root + '/dist/browser/template.html',
-        });
-        Assets.pathTransform = (innerPath) =>
+        const { fontSplit, Assets } = res as Awaited<typeof import('@konghayao/cn-font-split')>;
+        // 注册在线地址
+        Assets.pathTransform = (innerPath: string) =>
             innerPath.replace('./', root + '/dist/browser/');
-        fetch(root + '/dist/browser/index.js', {
-            cache: 'force-cache',
-        }).then((res) => {
+        // 获取版本号信息
+        fetch(scriptLink, { cache: 'force-cache' }).then((res) => {
             PluginVersion(res.headers.get('X-Jsd-Version')!);
         });
         return fontSplit;
@@ -55,6 +54,7 @@ export const OnlineSplit = () => {
     const file = atom<File | null>(null);
     const logMessage = ArrayAtom<string[]>([]);
     const resultList = atom<{ name: string; buffer: Uint8Array }[]>([]);
+    /** 监控 cn-font-split 的加载状态并给予提示 */
     const fontSplitStatus = resource(async () => {
         const info = await preload;
         if (info instanceof Error) throw info;
@@ -78,20 +78,21 @@ export const OnlineSplit = () => {
         },
         { immediately: false }
     );
-
+    /** 启动字体分包进程 */
     const startSplit = resource(
         async () => {
-            const fn = fontSplitStatus();
+            const cnFontSplit = fontSplitStatus();
             if (!file()) throw new Error('请添加文件');
-            if (!fn) throw new Error('请等待 cn-font-split 加载完成');
+            if (!cnFontSplit) throw new Error('请等待 cn-font-split 加载完成');
             const url = URL.createObjectURL(file()!);
-            return fn({
+            return cnFontSplit({
                 destFold: '',
                 FontPath: url,
                 previewImage: {},
                 log(...args) {
                     logMessage((i) => [...i, args.join(' ')]);
                 },
+                // 生产的文件转存另一个分包
                 async outputFile(path, file) {
                     const buffer =
                         file instanceof Uint8Array
@@ -109,18 +110,10 @@ export const OnlineSplit = () => {
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
             <div class="flex flex-col">
                 <header class="flex items-center gap-8">
-                    <a href="https://github.com/KonghaYao/cn-font-split">
-                        <img
-                            src="https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split/badge"
-                            alt="JSDeliver Badge"
-                        />
-                    </a>
                     <button
                         class="w-full cursor-pointer transition-colors hover:bg-neutral-200"
                         onclick={() => {
-                            getTestingFile().then((f) => {
-                                file(() => f);
-                            });
+                            getTestingFile().then((f) => file(() => f));
                         }}
                     >
                         尝试使用测试字体文件
@@ -129,8 +122,25 @@ export const OnlineSplit = () => {
                 <Show
                     when={file()}
                     fallback={
-                        <DragDropButton accept=".ttf,.otf" onGetFile={(f) => file(() => f)}>
-                            <div class="pb-2 text-xl">在线字体分包器 {PluginVersion()}</div>
+                        <DragDropButton
+                            class="text-gray-600"
+                            accept=".ttf,.otf"
+                            onGetFile={(f) => file(() => f)}
+                        >
+                            <header class="pb-2 text-xl text-black">
+                                在线字体分包器 <br></br>
+                                <aside class="flex justify-center gap-4 py-4">
+                                    <span class="rounded-md bg-green-600 px-2 text-sm text-white">
+                                        cn-font-split v{PluginVersion()}
+                                    </span>
+                                    <a href="https://github.com/KonghaYao/cn-font-split">
+                                        <img
+                                            src="https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split/badge"
+                                            alt="JSDeliver Badge"
+                                        />
+                                    </a>
+                                </aside>
+                            </header>
                         </DragDropButton>
                     }
                 >
@@ -234,6 +244,7 @@ export const ConsolePrint = (item: string) => {
             '<span style="color: blue;font-weight: bold;" >$1</span>'
         );
 };
-function useResourceErrorWatch(createZip) {
-    useEffectWithoutFirst(() => Notice.error(createZip.error().message), [createZip.error]);
+
+function useResourceErrorWatch<T>(resource: ResourceAtom<T>) {
+    useEffectWithoutFirst(() => Notice.error(resource.error().message), [resource.error]);
 }
