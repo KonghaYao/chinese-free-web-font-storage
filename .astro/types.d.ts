@@ -169,6 +169,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"post": {
+"cdn_analyze.md": {
+	id: "cdn_analyze.md";
+  slug: "cdn_analyze";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 "cn_font_split_design.md": {
 	id: "cn_font_split_design.md";
   slug: "cn_font_split_design";
