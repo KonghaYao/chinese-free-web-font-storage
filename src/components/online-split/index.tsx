@@ -1,4 +1,4 @@
-import { For, Show } from 'solid-js';
+import { For, Show, createEffect } from 'solid-js';
 import { saveAs } from 'file-saver';
 import { DragDropButton } from '../DragButton';
 import {
@@ -64,6 +64,11 @@ export const OnlineSplit = () => {
     const versions = resource(getVersions, { initValue: [] });
     /** 监控 cn-font-split 的加载状态并给予提示 */
     const fontSplitStatus = resource(preload);
+
+    createEffect(() => {
+        fontSplitStatus() && logMessage((i) => [...i, 'cn-font-split 准备完毕']);
+    });
+
     /** 监控 zip 压缩 */
     const createZip = resource(
         async () => {
@@ -90,6 +95,8 @@ export const OnlineSplit = () => {
             if (!file()) throw new Error('请添加文件');
             if (!cnFontSplit) throw new Error('请等待 cn-font-split 加载完成');
             const url = URL.createObjectURL(file()!);
+            logMessage([]);
+            resultList([]);
             return cnFontSplit({
                 destFold: '',
                 FontPath: url,
@@ -117,22 +124,23 @@ export const OnlineSplit = () => {
     useResourceErrorWatch(createZip);
     useResourceErrorWatch(startSplit);
     return (
-        <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
-            <div class="flex flex-col">
-                <select
-                    oninput={(e) => {
-                        root =
-                            'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@' +
-                            e.target.value;
-                        fontSplitStatus.refetch();
-                        Notice.success('正在更换版本中，请稍等');
-                    }}
-                >
-                    {versions().map((version) => {
-                        return <option value={version}>{version}</option>;
-                    })}
-                </select>
+        <section class="mx-auto my-8 grid aspect-video h-[80vh] w-full max-w-[96rem] grid-cols-2 gap-4 overflow-hidden rounded-xl bg-white ">
+            <div class="flex flex-col p-4">
                 <header class="flex items-center gap-8">
+                    <label class="flex-none">版本号</label>
+                    <select
+                        oninput={(e) => {
+                            root =
+                                'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@' +
+                                e.target.value;
+                            fontSplitStatus.refetch();
+                            Notice.success('正在更换版本中，请稍等');
+                        }}
+                    >
+                        {versions().map((version) => {
+                            return <option value={version}>{version}</option>;
+                        })}
+                    </select>
                     <button
                         class="w-full cursor-pointer transition-colors hover:bg-neutral-200"
                         onclick={() => {
@@ -147,8 +155,11 @@ export const OnlineSplit = () => {
                     fallback={
                         <DragDropButton
                             class="text-gray-600"
-                            accept=".ttf,.otf"
-                            onGetFile={(f) => file(() => f)}
+                            accept=".ttf,.otf,.woff2"
+                            onGetFile={(f) => {
+                                file(() => f);
+                                logMessage((i) => [...i, '请点击开始按钮']);
+                            }}
                         >
                             <header class="pb-2 text-xl text-black">
                                 在线字体分包器 <br></br>
@@ -204,7 +215,7 @@ export const OnlineSplit = () => {
                 </div>
             </div>
 
-            <section class="flex h-full flex-col gap-4 overflow-hidden">
+            <section class="flex h-full flex-col gap-4 overflow-hidden bg-gray-200 p-4">
                 <header class="flex justify-between ">
                     <span class="text-xl">Logger 日志</span>
                     <a href="https://github.com/KonghaYao/cn-font-split/issues" target="_blank">
@@ -214,30 +225,28 @@ export const OnlineSplit = () => {
                 <Show when={startSplit.error()}>
                     <div class="text-red-600 ">发生错误：{startSplit.error().message}</div>
                 </Show>
-                <ul class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-xs">
-                    <For each={logMessage()}>
+                <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800  p-4 font-sans text-xs text-white">
+                    <For each={logMessage().reverse()}>
                         {(item) => {
                             return <li innerHTML={ConsolePrint(item)}></li>;
                         }}
                     </For>
                 </ul>
                 <header class="text-xl">Output 输出文件</header>
-                <div class="h-full max-h-[100%] select-text overflow-scroll rounded-xl bg-neutral-100 p-4 font-sans text-sm">
-                    <div class="grid   grid-cols-8  ">
-                        <For each={resultList()}>
-                            {(item) => {
-                                return (
-                                    <>
-                                        <span class="col-span-2">
-                                            {prettyBytes(item.buffer.byteLength)}
-                                        </span>
-                                        <span class="col-span-6">{item.name}</span>
-                                    </>
-                                );
-                            }}
-                        </For>
-                    </div>
-                </div>
+                <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800 p-4 font-sans text-sm text-gray-100">
+                    <For each={resultList().reverse()}>
+                        {(item) => {
+                            return (
+                                <li>
+                                    <span class="col-span-2 inline-block min-w-[8rem]">
+                                        {prettyBytes(item.buffer.byteLength)}
+                                    </span>
+                                    <span class="col-span-6">{item.name}</span>
+                                </li>
+                            );
+                        }}
+                    </For>
+                </ul>
                 <span class="flex justify-end gap-4 text-xs">
                     <span>{resultList().length}</span>
                     <span>
@@ -245,7 +254,7 @@ export const OnlineSplit = () => {
                     </span>
 
                     <button
-                        class="rounded-lg bg-green-600 p-1 text-center  text-white"
+                        class="rounded-lg bg-green-600 p-1 text-center  text-gray-100"
                         onclick={() => createZip.refetch()}
                     >
                         压缩下载 zip
