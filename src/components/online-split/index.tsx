@@ -13,33 +13,40 @@ import { Notice } from '../../Notice';
 
 const PluginVersion = atom('4.6.0');
 // 转为异步加载，防止文件发生阻塞
-const root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
-/** 24h 小时更新一次的链接，保证版本更新正确 */
-const scriptLink =
-    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js?t=' +
-    (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
-const preload = import(/* @vite-ignore */ scriptLink)
-    .then((res) => {
-        const { fontSplit, Assets } = res as Awaited<typeof import('@konghayao/cn-font-split')>;
-        // 注册在线地址
-        Assets.pathTransform = (innerPath: string) =>
-            innerPath.replace('./', root + '/dist/browser/');
-        // 获取版本号信息
-        fetch(scriptLink, { cache: 'force-cache' }).then((res) => {
-            PluginVersion(res.headers.get('X-Jsd-Version')!);
-        });
-        return fontSplit;
-    })
-    .catch((e) => {
-        Notice.error(e as Error);
-    });
+let root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
 
+const preload = () => {
+    /** 24h 小时更新一次的链接，保证版本更新正确 */
+    const scriptLink =
+        root + '/dist/browser/index.js?t=' + (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
+    return import(/* @vite-ignore */ scriptLink)
+        .then((res) => {
+            const { fontSplit, Assets } = res as Awaited<typeof import('@konghayao/cn-font-split')>;
+            // 注册在线地址
+            Assets.pathTransform = (innerPath: string) =>
+                innerPath.replace('./', root + '/dist/browser/');
+            // 获取版本号信息
+            fetch(scriptLink, { cache: 'force-cache' }).then((res) => {
+                PluginVersion(res.headers.get('X-Jsd-Version')!);
+            });
+            return fontSplit;
+        })
+        .catch((e) => {
+            Notice.error(e as Error);
+        });
+};
 // 为给用户提供良好的体验，直接开始下载需要的依赖包
 Promise.all([
     fetch(root + '/dist/browser/hb-subset.wasm', { priority: 'low' }),
     fetch(root + '/dist/browser/cn_char_rank.dat', { priority: 'low' }),
     fetch(root + '/dist/browser/unicodes_contours.dat', { priority: 'low' }),
 ]).then((res) => console.log('资源预加载完成'));
+
+const getVersions = () => {
+    return fetch('https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split')
+        .then((res) => res.json())
+        .then((res) => res.versions.slice(0, 10) as string[]);
+};
 
 /** 加载测试文件 */
 const getTestingFile = () => {
@@ -54,12 +61,9 @@ export const OnlineSplit = () => {
     const file = atom<File | null>(null);
     const logMessage = ArrayAtom<string[]>([]);
     const resultList = atom<{ name: string; buffer: Uint8Array }[]>([]);
+    const versions = resource(getVersions, { initValue: [] });
     /** 监控 cn-font-split 的加载状态并给予提示 */
-    const fontSplitStatus = resource(async () => {
-        const info = await preload;
-        if (info instanceof Error) throw info;
-        return info;
-    });
+    const fontSplitStatus = resource(preload);
     /** 监控 zip 压缩 */
     const createZip = resource(
         async () => {
@@ -73,6 +77,7 @@ export const OnlineSplit = () => {
             });
 
             return zip.generateAsync({ type: 'blob' }).then(function (content: Blob) {
+                Notice.success('压缩文件下载中');
                 saveAs(content, name + '.zip');
             });
         },
@@ -100,7 +105,12 @@ export const OnlineSplit = () => {
                             : new Uint8Array(await new Blob([file]).arrayBuffer());
                     resultList((i) => [...i, { name: path, buffer }]);
                 },
-            }).then((res) => URL.revokeObjectURL(url));
+            })
+                .then((res) => URL.revokeObjectURL(url))
+                .then((res) => {
+                    Notice.success('全部打包任务完成');
+                    return res;
+                });
         },
         { immediately: false }
     );
@@ -109,6 +119,19 @@ export const OnlineSplit = () => {
     return (
         <section class="mx-auto my-8 grid aspect-video h-[80vh] grid-cols-2 gap-4 rounded-xl bg-white p-4">
             <div class="flex flex-col">
+                <select
+                    oninput={(e) => {
+                        root =
+                            'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@' +
+                            e.target.value;
+                        fontSplitStatus.refetch();
+                        Notice.success('正在更换版本中，请稍等');
+                    }}
+                >
+                    {versions().map((version) => {
+                        return <option value={version}>{version}</option>;
+                    })}
+                </select>
                 <header class="flex items-center gap-8">
                     <button
                         class="w-full cursor-pointer transition-colors hover:bg-neutral-200"
