@@ -2,96 +2,135 @@
 import Index from '../../index.json';
 import { AddFont } from '../components/Feedback/AddFont';
 import { __CDN__ } from '../global';
-const list = Object.entries(Index).map(([id, value]) => {
-    return { ...value, id };
-});
+type DefineItem = (typeof Index)[keyof typeof Index];
+const list = Object.entries(Index)
+    .map(([id, value]) => {
+        return { ...value, id };
+    })
+    .reduce(
+        (col, item, index) => {
+            col[index % 2].push(item);
+            return col;
+        },
+        [[], []] as [DefineItem[], DefineItem[]]
+    );
 ---
 
 <section
-    class="w-screen max-w-6xl my-6 overflow-hidden h-[90vh] gap-2 grid grid-cols-6 pt-16 z-0 snap-start"
+    class="w-screen max-w-6xl flex flex-col my-6 overflow-hidden h-[90vh] gap-2 pt-16 z-0 snap-start relative"
     id="font-list"
 >
-    <aside class="flex-1 col-span-3 lg:col-span-4 overflow-scroll md:p-4">
-        <h2 class="text-xl md:text-2xl text-rose-700 border-b border-rose-700">
-            字体列表
+    <h2
+        class="px-8 pb-4 text-xl flex justify-between md:text-2xl text-rose-700 border-b border-rose-700"
+    >
+        字体列表
 
-            <sub class="float-right text-sm text-cyan-800">{list.length}份 | 点击字体查看详情</sub>
-        </h2>
-        <ul id="fonts-index" class="w-full flex flex-wrap flex-1 py-4 text-xs md:text-base">
-            {
-                list.reverse().map((i) => {
-                    return (
-                        <li
-                            class="flex-none cursor-pointer px-4 py-2 transition-colors duration-300  hover:bg-emerald-600 hover:text-white"
-                            data-name={i.name}
-                        >
-                            {i.name}
-                        </li>
-                    );
-                })
-            }
-        </ul>
+        <nav class="float-right flex gap-4 text-sm text-emerald-600">
+            <button id="open-font-list">字体列表</button>
+            <button>
+                <a href="/feature/test" class="text-center"> 字体特性渲染页面</a>
+            </button>
+            <AddFont client:load />
+            <button class="text-cyan-800">{list.flat().length}份 | 点击字体查看详情</button>
+        </nav>
+    </h2>
+    <ul
+        id="fonts-index"
+        class="p-4 font-list-hidden opacity-100 translate-y-0 transition-all absolute top-24 backdrop-blur-sm border border-solid border-gray-400 rounded-b-md z-10 bg-gray-100/40 left-0 w-full flex flex-wrap flex-1 text-xs md:text-base"
+    >
+        {
+            list.flat().map((i) => {
+                return (
+                    <li
+                        class="flex-none cursor-pointer px-4 py-2 transition-colors duration-300  hover:bg-emerald-600 hover:text-white"
+                        data-name={i.name}
+                    >
+                        {i.name}
+                    </li>
+                );
+            })
+        }
+    </ul>
 
-        <script>
-            window.onload = () => {
-                const list = document.getElementById('fonts-index')!.children;
-                ([...list] as HTMLLIElement[]).forEach((li) => {
-                    li.onclick = () => {
-                        // 更换为代码手动操作，API 不行，一直表现不一致
-                        const item = document.getElementById('fonts-' + li.dataset.name)!;
+    <script>
+        window.onload = () => {
+            const list = document.getElementById('fonts-index')!.children;
+            ([...list] as HTMLLIElement[]).forEach((li) => {
+                li.onclick = () => {
+                    // 更换为代码手动操作，API 不行，一直表现不一致
+                    const item = document.getElementById('fonts-' + li.dataset.name)!;
 
-                        let count = item.offsetTop - item.parentElement!.offsetTop;
-
-                        document
-                            .getElementById('fonts-wrapper')!
-                            .scrollTo({ top: count, left: 0, behavior: 'smooth' });
-                    };
-                });
-            };
-        </script>
-    </aside>
+                    let count = item.offsetTop - item.parentElement!.offsetTop;
+                    console.log(item.parentElement);
+                    item.parentElement?.parentElement!.scrollTo({
+                        top: count,
+                        left: 0,
+                        behavior: 'smooth',
+                    });
+                };
+            });
+            document.getElementById('open-font-list')?.addEventListener('click', () => {
+                document.getElementById('fonts-index')?.classList.toggle('font-list-hidden');
+            });
+        };
+    </script>
+    <style>
+        .font-list-hidden {
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(0, -30%);
+        }
+    </style>
     <nav
         id="fonts-wrapper"
-        class="overflow-scroll bg-white md:mx-8 p-2 md:px-8 rounded-lg my-4 col-span-3 lg:col-span-2"
+        class="overflow-hidden flex-1 flex justify-between md:mx-8 p-2 md:px-8 my-4"
     >
-        <ul id="font-parent" class="flex flex-col gap-4">
-            {
-                list.map((item) => {
-                    return (
-                        <li id={'fonts-' + item.name}>
-                            <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
-                                {item.name}
-                            </header>
-                            <ul class="flex flex-col  justify-center gap-2">
-                                {item.remotePath.map((remote) => {
-                                    const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
-                                    return (
-                                        <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
-                                            <a href={`/fonts/${item.id}/${name}`}>
-                                                <img
-                                                    loading="lazy"
-                                                    class="h-8   md:h-14"
-                                                    src={
-                                                        __CDN__ +
-                                                        '/' +
-                                                        remote.replace('result.css', 'preview.svg')
-                                                    }
-                                                    alt={name + '字体展示'}
-                                                />
-                                            </a>
-                                            <span class="absolute right-2 top-2">➡️</span>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </li>
-                    );
-                })
-            }
-        </ul>
-    </nav>
-    <nav class="flex gap-4 w-full col-span-6 text-emerald-600">
-        <a href="/feature/test" class="text-md col-span-6 text-center"> 字体特性渲染页面</a>
-        <AddFont client:load />
+        {
+            list.map((subList) => {
+                return (
+                    <nav class="h-full w-fit overflow-scroll rounded-lg bg-white px-12">
+                        <ul class="font-parent" class="flex flex-col gap-4">
+                            {subList.map((item) => {
+                                return (
+                                    <li id={'fonts-' + item.name}>
+                                        <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
+                                            {item.name}
+                                        </header>
+                                        <ul class="flex flex-col  justify-center gap-2">
+                                            {item.remotePath.map((remote) => {
+                                                const [_, name] =
+                                                    remote.match(/dist\/(.*?)\/result/)!;
+                                                return (
+                                                    <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
+                                                        <a href={`/fonts/${item.id}/${name}`}>
+                                                            <img
+                                                                loading="lazy"
+                                                                class="h-12 lg:h-16 xl:h-20"
+                                                                src={
+                                                                    __CDN__ +
+                                                                    '/' +
+                                                                    remote.replace(
+                                                                        'result.css',
+                                                                        'preview.svg'
+                                                                    )
+                                                                }
+                                                                alt={name + '字体展示'}
+                                                            />
+                                                        </a>
+                                                        <span class="absolute right-2 top-2 text-xl">
+                                                            ➡️
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </nav>
+                );
+            })
+        }
     </nav>
 </section>
