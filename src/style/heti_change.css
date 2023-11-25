@@ -221,7 +221,7 @@
     padding-block-end: 12px;
     padding-inline-start: 16px;
     padding-inline-end: 16px;
-    background-color: hsla(0deg, 0%, 0%, 0.054);
+    background-color: #8b842d26;
 }
 [data-darkmode='dark'] .heti blockquote {
     background-color: hsla(0deg, 0%, 100%, 0.054);

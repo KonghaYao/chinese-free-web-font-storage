@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<'post'>;
 const post = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 ---
 
 <PostLayout title={post.data.title} description={post.data.description} article={post.data.article}>
@@ -27,16 +27,16 @@ const { Content } = await post.render();
             <ArticleAside />
         </aside>
         <main
-            class="bg-white flex-1 px-8 xs:px-12 lg:px-20 mb-24 select-text relative z-10 py-12 overflow-scroll h-full w-full scroll-smooth"
+            class="flex-1 px-8 xs:px-12 lg:px-20 select-text relative z-10 overflow-scroll h-full w-full scroll-smooth"
         >
-            <artcile id="main-article" class="heti m-auto block max-w-4xl">
+            <artcile id="main-article" class="heti m-auto block bg-white max-w-6xl py-12">
                 <Content />
             </artcile>
             <Navigate />
         </main>
-        <nav class="flex-none w-48 bg-white p-4 hidden lg:block">
+        <nav class="flex-none w64 bg-white p-4 hidden lg:block">
             <div class="font-bold text-lg">概要</div>
-            <TOC selector="#main-article" class="max-h-[50%] overflow-scroll text-sm" client:load />
+            <TOC heading={headings} />
         </nav>
     </section>
 </PostLayout>

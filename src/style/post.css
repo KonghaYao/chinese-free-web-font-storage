@@ -1,9 +1,13 @@
-@import url('https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5.0.2/700.min.css');
-
 @font-face {
     font-family: 'post-header';
     font-weight: 600;
     src: local('Noto Serif SC Bold'), local('Noto Serif SC');
+}
+@font-face {
+    font-family: CodeFont;
+    src: url('/fonts/MonaspaceRadon-Regular.woff2') format('woff2');
+    font-display: swap;
+    font-weight: 200 800;
 }
 html {
     height: 100%;
@@ -14,14 +18,14 @@ html {
     height: 100%;
 }
 .heti {
-    font-family: 'LXGW WenKai Light';
+    font-family: CodeFont, 'LXGW WenKai Light';
     font-size: medium;
     padding-left: 4rem;
     padding-right: 4rem;
 }
 .heti > p {
     text-indent: 2em;
-    word-spacing: 0.3em;
+    color: #747474;
 }
 
 .header-text {
@@ -31,8 +35,13 @@ html {
 .heti h1,
 .heti h2,
 .heti h3 {
-    font-family: 'post-header';
+    font-family: CodeFont, 'post-header', serif;
     font-weight: bolder;
+    margin-top: 1.6em;
+}
+.astro-code code {
+    font-family: CodeFont, 'SFMono-Regular', consolas, 'Liberation Mono', menlo, courier, monospace,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 .heti img {
     margin: auto;

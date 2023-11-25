@@ -14,8 +14,8 @@ import { sections } from '../../utils/getPostSections';
             return (
                 <li id={sectionName} class="mb-4">
                     <details open={true || posts.some((i) => Astro.url.pathname.includes(i.slug))}>
-                        <summary class="header-text mb-3   cursor-pointer font-semibold text-cyan-900">
-                            {sectionName}
+                        <summary class="mb-3 cursor-pointer font-semibold text-cyan-900">
+                            {'  ' + sectionName}
                         </summary>
                         <ul class=" border-l border-neutral-100  ">
                             {posts.map((post) => {
