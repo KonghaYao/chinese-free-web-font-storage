@@ -1,19 +1,35 @@
 ---
 import Index from '../../index.json';
 import { AddFont } from '../components/Feedback/AddFont';
+import { FontShow } from '../components/Home/FontShow';
 import { __CDN__ } from '../global';
-type DefineItem = (typeof Index)[keyof typeof Index];
-const list = Object.entries(Index)
-    .map(([id, value]) => {
-        return { ...value, id };
-    })
-    .reduce(
-        (col, item, index) => {
-            col[index % 2].push(item);
-            return col;
-        },
-        [[], []] as [DefineItem[], DefineItem[]]
-    );
+import { ensureFontMessageString } from '../utils/ensureFontMessageString';
+import { getFontReporter } from '../utils/getFontReporter';
+const list = await Promise.all(
+    Object.entries(Index)
+        .map(([id, value]) => {
+            return { ...value, id };
+        })
+        .reverse()
+        .map(async (i) => {
+            const remotePath = await Promise.all(
+                i.remotePath.map(async (remote) => {
+                    const font_name = remote.match(/dist\/(.*?)\/result/)![1];
+                    const fileName = font_name!
+                        .replaceAll(' ', '_')
+                        // 更换文件夹中的 . 为 _
+                        .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
+                    const reporter = await getFontReporter(i.id, fileName);
+                    const message = reporter.message.windows ?? reporter.message;
+                    const style = `font-family:'${ensureFontMessageString(
+                        message.fontFamily
+                    )}';font-weight:'${ensureFontMessageString(message.fontSubFamily)}'`;
+                    return { url: remote, style };
+                })
+            );
+            return { ...i, remotePath };
+        })
+);
 ---
 
 <section
@@ -24,14 +40,13 @@ const list = Object.entries(Index)
         class="px-8 pb-4 text-xl flex justify-between md:text-2xl text-rose-700 border-b border-rose-700"
     >
         字体列表
-
         <nav class="float-right flex gap-4 text-sm text-emerald-600">
             <button id="open-font-list">字体列表</button>
             <button>
                 <a href="/feature/test" class="text-center"> 字体特性渲染页面</a>
             </button>
             <AddFont client:load />
-            <button class="text-cyan-800">{list.flat().length}份 | 点击字体查看详情</button>
+            <button class="text-cyan-800">{list.length}份 | 点击字体查看详情</button>
         </nav>
     </h2>
     <ul
@@ -39,7 +54,7 @@ const list = Object.entries(Index)
         class="p-4 font-list-hidden opacity-100 translate-y-0 transition-all absolute top-24 backdrop-blur-sm border border-solid border-gray-400 rounded-b-md z-10 bg-gray-100/40 left-0 w-full flex flex-wrap flex-1 text-xs md:text-base"
     >
         {
-            list.flat().map((i) => {
+            list.map((i) => {
                 return (
                     <li
                         class="flex-none cursor-pointer px-4 py-2 transition-colors duration-300  hover:bg-emerald-600 hover:text-white"
@@ -85,52 +100,54 @@ const list = Object.entries(Index)
         id="fonts-wrapper"
         class="overflow-hidden flex-1 flex justify-between md:mx-8 p-2 md:px-8 my-4"
     >
-        {
-            list.map((subList) => {
-                return (
-                    <nav class="h-full w-fit overflow-scroll rounded-lg bg-white px-12">
-                        <ul class="font-parent" class="flex flex-col gap-4">
-                            {subList.map((item) => {
-                                return (
-                                    <li id={'fonts-' + item.name}>
-                                        <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
-                                            {item.name}
-                                        </header>
-                                        <ul class="flex flex-col  justify-center gap-2">
-                                            {item.remotePath.map((remote) => {
-                                                const [_, name] =
-                                                    remote.match(/dist\/(.*?)\/result/)!;
-                                                return (
-                                                    <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-200 p-2">
-                                                        <a href={`/fonts/${item.id}/${name}`}>
-                                                            <img
-                                                                loading="lazy"
-                                                                class="h-12 lg:h-16 xl:h-20"
-                                                                src={
-                                                                    __CDN__ +
-                                                                    '/' +
-                                                                    remote.replace(
-                                                                        'result.css',
-                                                                        'preview.svg'
-                                                                    )
-                                                                }
-                                                                alt={name + '字体展示'}
-                                                            />
-                                                        </a>
-                                                        <span class="absolute right-2 top-2 text-xl">
-                                                            ➡️
-                                                        </span>
-                                                    </li>
-                                                );
-                                            })}
-                                        </ul>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </nav>
-                );
-            })
-        }
+        <FontShow client:load />
+        <!-- 不要将下面这段写进 solidjs astro 的处理会将 json 传过去 -->
+        <nav class="h-full w-fit overflow-scroll rounded-lg bg-white px-12">
+            <ul class="font-parent" class="flex flex-col gap-4">
+                {
+                    list.map((item) => {
+                        return (
+                            <li id={'fonts-' + item.name}>
+                                <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
+                                    {item.name}
+                                </header>
+                                <ul class="flex flex-col  justify-center gap-2">
+                                    {item.remotePath.map(({ url: remote, style }) => {
+                                        const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
+                                        return (
+                                            <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-100 p-2 transition-colors hover:bg-neutral-200">
+                                                <a
+                                                    class="display-font-show-hover"
+                                                    href={`/fonts/${item.id}/${name}`}
+                                                    data-src={__CDN__ + '/' + remote}
+                                                    data-style={style}
+                                                >
+                                                    <img
+                                                        loading="lazy"
+                                                        class="h-12 lg:h-16 xl:h-20"
+                                                        src={
+                                                            __CDN__ +
+                                                            '/' +
+                                                            remote.replace(
+                                                                'result.css',
+                                                                'preview.svg'
+                                                            )
+                                                        }
+                                                        alt={name + '字体展示'}
+                                                    />
+                                                </a>
+                                                <span class="absolute right-2 top-2 text-xl">
+                                                    ➡️
+                                                </span>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
     </nav>
 </section>
