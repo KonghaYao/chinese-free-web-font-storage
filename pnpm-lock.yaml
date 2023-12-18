@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@astrojs/netlify':
     specifier: ^3.0.1
@@ -44,6 +40,9 @@ dependencies:
   algoliasearch:
     specifier: ^4.19.1
     version: 4.19.1
+  animejs:
+    specifier: ^3.2.2
+    version: 3.2.2
   astro:
     specifier: ^3.0.12
     version: 3.0.12
@@ -115,6 +114,9 @@ devDependencies:
   '@solidjs/router':
     specifier: ^0.5.1
     version: 0.5.1(solid-js@1.7.11)
+  '@types/animejs':
+    specifier: ^3.1.12
+    version: 3.1.12
   '@types/file-saver':
     specifier: ^2.0.5
     version: 2.0.5
@@ -1376,6 +1378,10 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: false
 
+  /@types/animejs@3.1.12:
+    resolution: {integrity: sha512-fpdH+ZtlO0kqjTOqRaBdsEmvpRNOayI8k4EVkEtitL5l6wducDOXk0rgQgfZqWf/ZX9DzXrHf257S5i9xTcISQ==}
+    dev: true
+
   /@types/babel__core@7.20.1:
     resolution: {integrity: sha512-aACu/U/omhdk15O4Nfb+fHgH/z3QsfQzpnvRZhYhThms83ZnAOZz7zZAWO7mn2yyNQaA4xTO8GLK3uqFU4bYYw==}
     dependencies:
@@ -1587,6 +1593,10 @@ packages:
       '@algolia/requester-common': 4.19.1
       '@algolia/requester-node-http': 4.19.1
       '@algolia/transporter': 4.19.1
+    dev: false
+
+  /animejs@3.2.2:
+    resolution: {integrity: sha512-Ao95qWLpDPXXM+WrmwcKbl6uNlC5tjnowlaRYtuVDHHoygjtIPfDUoK9NthrlZsQSKjZXlmji2TrBUAVbiH0LQ==}
     dev: false
 
   /ansi-align@3.0.1:
@@ -5400,3 +5410,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
