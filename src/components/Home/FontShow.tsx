@@ -1,7 +1,7 @@
 import { ThrottleAtom, atom } from '@cn-ui/reactive';
 import { createEffect, onMount } from 'solid-js';
 import { __CDN__ } from '../../global';
-import anime from 'animejs'
+import anime from 'animejs';
 const showAnime = () => {
     return anime({
         targets: '.showing-text span',
@@ -9,10 +9,10 @@ const showAnime = () => {
         opacity: [0, 1],
         easing: 'spring(1, 80, 10, 0)',
         duration: 300,
-        delay: anime.stagger(100) // increase delay by 100ms for each elements.
-    })
-}
-console.log(anime)
+        delay: anime.stagger(100), // increase delay by 100ms for each elements.
+    });
+};
+console.log(anime);
 export const FontShow = () => {
     const originFont = atom({
         url: __CDN__ + '/packages/jxzk/dist/江西拙楷/result.css',
@@ -20,9 +20,9 @@ export const FontShow = () => {
     });
     const font = ThrottleAtom(originFont, 2000);
     createEffect(() => {
-        font()
-        showAnime()
-    })
+        font();
+        showAnime();
+    });
     const text = '中文网字计划\n带来网络\n中文的爱与和谐';
     onMount(() => {
         [...document.querySelectorAll<HTMLAnchorElement>('.display-font-show-hover')].forEach(
@@ -35,11 +35,11 @@ export const FontShow = () => {
     });
     return (
         <div class="flex select-text flex-col justify-center " style={font().style}>
-            <div class="text-sky-500">鼠标移动到左侧按钮，即可预览字体样式</div>
-            <div class="my-6 text-6xl showing-text" style={'line-height:1.3;'} contentEditable>
+            <div class="text-sky-500">鼠标移动到右侧字体，即可预览字体样式</div>
+            <div class="showing-text my-6 text-6xl" style={'line-height:1.3;'} contentEditable>
                 {text.split('').map((i) => {
                     if (i === '\n') return <br />;
-                    return <span class='inline-block'>{i}</span>;
+                    return <span class="inline-block">{i}</span>;
                 })}
             </div>
             <div class="text-purple-600">如果你喜欢这款字体，可以点击进入详情页</div>
