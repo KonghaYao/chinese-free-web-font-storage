@@ -12,7 +12,6 @@ const showAnime = () => {
         delay: anime.stagger(100), // increase delay by 100ms for each elements.
     });
 };
-console.log(anime);
 export const FontShow = () => {
     const originFont = atom({
         url: __CDN__ + '/packages/jxzk/dist/江西拙楷/result.css',

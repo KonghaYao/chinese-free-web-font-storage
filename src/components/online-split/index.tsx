@@ -10,21 +10,28 @@ import {
 } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '../../Notice';
+import { RaceFetch } from './RaceFetch';
 
-const PluginVersion = atom('4.6.0');
+const PluginVersion = atom('');
 // 转为异步加载，防止文件发生阻塞
-let root = 'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split';
+let roots = [
+    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split',
+    'https://jsdelivr.deno.dev/npm/@konghayao/cn-font-split',
+];
 
 const preload = () => {
     /** 24h 小时更新一次的链接，保证版本更新正确 */
     const scriptLink =
-        root + '/dist/browser/index.js?t=' + (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
+        roots[1] +
+        (PluginVersion() ? '@' + PluginVersion() : '') +
+        '/dist/browser/index.js?t=' +
+        (Date.now() / (24 * 60 * 60 * 1000)).toFixed(0);
     return import(/* @vite-ignore */ scriptLink)
         .then((res) => {
             const { fontSplit, Assets } = res as Awaited<typeof import('@konghayao/cn-font-split')>;
             // 注册在线地址
             Assets.pathTransform = (innerPath: string) =>
-                innerPath.replace('./', root + '/dist/browser/');
+                innerPath.replace('./', roots[0] + '/dist/browser/');
             // 获取版本号信息
             fetch(scriptLink, { cache: 'force-cache' }).then((res) => {
                 PluginVersion(res.headers.get('X-Jsd-Version')!);
@@ -37,9 +44,10 @@ const preload = () => {
 };
 // 为给用户提供良好的体验，直接开始下载需要的依赖包
 Promise.all([
-    fetch(root + '/dist/browser/hb-subset.wasm', { priority: 'low' }),
-    fetch(root + '/dist/browser/cn_char_rank.dat', { priority: 'low' }),
-    fetch(root + '/dist/browser/unicodes_contours.dat', { priority: 'low' }),
+    RaceFetch('/dist/browser/hb-subset.wasm', { priority: 'low' }, roots),
+    RaceFetch('/dist/browser/cn_char_rank.dat', { priority: 'low' }, roots),
+    RaceFetch('/dist/browser/unicodes_contours.dat', { priority: 'low' }, roots),
+    RaceFetch('/dist/browser/compress_binding.wasm', { priority: 'low' }, roots),
 ]).then((res) => console.log('资源预加载完成'));
 
 const getVersions = () => {
@@ -51,7 +59,7 @@ const getVersions = () => {
 /** 加载测试文件 */
 const getTestingFile = () => {
     return fetch(
-        'https://cdn.jsdelivr.net/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
+        'https://jsdelivr.deno.dev/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
     )
         .then((res) => res.blob())
         .then((res) => new File([res], 'SmileySans-Oblique.ttf'));
@@ -66,7 +74,8 @@ export const OnlineSplit = () => {
     const fontSplitStatus = resource(preload);
 
     createEffect(() => {
-        fontSplitStatus() && logMessage((i) => [...i, 'cn-font-split 准备完毕']);
+        fontSplitStatus() &&
+            logMessage((i) => [...i, `cn-font-split ${PluginVersion()} 准备完毕 `]);
     });
 
     /** 监控 zip 压缩 */
@@ -130,9 +139,7 @@ export const OnlineSplit = () => {
                     <label class="flex-none">版本号</label>
                     <select
                         oninput={(e) => {
-                            root =
-                                'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split@' +
-                                e.target.value;
+                            PluginVersion(e.target.value);
                             fontSplitStatus.refetch();
                             Notice.success('正在更换版本中，请稍等');
                         }}
@@ -223,7 +230,10 @@ export const OnlineSplit = () => {
                     </a>
                 </header>
                 <Show when={startSplit.error()}>
-                    <div class="text-red-600 ">发生错误：{startSplit.error().message}</div>
+                    <div class="text-red-600">
+                        发生错误：{startSplit.error().message}{' '}
+                        <button onclick={() => startSplit.refetch()}>点击此处刷新</button>
+                    </div>
                 </Show>
                 <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800  p-4 font-sans text-xs text-white">
                     <For each={logMessage().reverse()}>
