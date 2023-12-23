@@ -11,7 +11,6 @@ import mri from "mri";
 const argv = process.argv.slice(2);
 const input = mri(argv);
 
-// chinese-fonts@snapmail.cc
 const imagekit = new ImageKit({
     publicKey: process.env.IMAGEKIT_PUBLIC,
     privateKey: process.env.IMAGEKIT_TOKEN,
@@ -43,7 +42,7 @@ let cache = new Set();
 try {
     const data = await fs.promises.readFile("./scripts/.upload_cache", "utf-8");
     cache = new Set(JSON.parse(data));
-} catch (e) {}
+} catch (e) { }
 
 const uploadFolder = async (iterator) => {
     if (!input.deleteFolder && cache.has(iterator)) {
@@ -75,6 +74,7 @@ const limit = pLimit(6);
 
 const inputs = files.map((i) => limit(() => uploadFolder(i)));
 await Promise.all(inputs).catch((e) => {
+    console.error(e)
     fs.promises
         .writeFile(
             "./scripts/.upload_cache",
