@@ -76,7 +76,7 @@ const GlyphInspectorUI = ({ font }: { font: Atom<Font> }) => {
         multiSelect: false,
     });
     return (
-        <section class="m-auto grid h-[90vh] w-[90%]  grid-cols-2 rounded-2xl  p-8">
+        <section class="m-auto grid h-[60vh] w-[90%] grid-cols-2  rounded-2xl p-8  xl:w-[80%]">
             <div class="col-span-2 flex gap-4">
                 <button class="cursor-pointer" onclick={() => displayingGlyphIndex((i) => [i[0]])}>
                     归一

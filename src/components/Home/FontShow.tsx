@@ -33,7 +33,10 @@ export const FontShow = () => {
         );
     });
     return (
-        <div class="flex select-text flex-col justify-center " style={font().style}>
+        <div
+            class="flex flex-1 select-text flex-col justify-center xl:flex-[2] "
+            style={font().style}
+        >
             <div class="text-sky-500">鼠标移动到右侧字体，即可预览字体样式</div>
             <div class="showing-text my-6 text-6xl" style={'line-height:1.3;'} contentEditable>
                 {text.split('').map((i) => {

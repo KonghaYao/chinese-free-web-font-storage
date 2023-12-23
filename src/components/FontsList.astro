@@ -33,7 +33,7 @@ const list = await Promise.all(
 ---
 
 <section
-    class="w-screen max-w-6xl flex flex-col my-6 overflow-hidden h-[90vh] gap-2 pt-16 z-0 snap-start relative"
+    class="w-screen max-w-7xl flex flex-col my-6 overflow-hidden h-[90vh] gap-2 pt-16 z-0 snap-start relative"
     id="font-list"
 >
     <h2
@@ -98,11 +98,11 @@ const list = await Promise.all(
     </style>
     <nav
         id="fonts-wrapper"
-        class="overflow-hidden flex-1 flex justify-between md:mx-8 p-2 md:px-8 my-4"
+        class="overflow-hidden flex-1 flex justify-between md:mx-4 p-2 md:px-8 my-4"
     >
         <FontShow client:load />
         <!-- 不要将下面这段写进 solidjs astro 的处理会将 json 传过去 -->
-        <nav class="h-full w-fit overflow-scroll rounded-lg bg-white px-12">
+        <nav class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12">
             <ul class="font-parent" class="flex flex-col gap-4">
                 {
                     list.map((item) => {
