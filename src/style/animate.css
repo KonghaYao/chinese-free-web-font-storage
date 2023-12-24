@@ -1,0 +1,23 @@
+.an-scroll-list > * {
+    animation: vertical-list ease both;
+    animation-timeline: view();
+}
+
+@keyframes vertical-list {
+    0% {
+        transform: translateX(50px) scale(0.88);
+        opacity: 0;
+    }
+    15% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    85% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(50px) scale(0.88);
+        opacity: 0;
+    }
+}

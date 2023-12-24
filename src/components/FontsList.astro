@@ -102,16 +102,18 @@ const list = await Promise.all(
     >
         <FontShow client:load />
         <!-- 不要将下面这段写进 solidjs astro 的处理会将 json 传过去 -->
-        <nav class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12">
-            <ul class="font-parent" class="flex flex-col gap-4">
+        <nav
+            class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12 overflow-x-hidden py-12"
+        >
+            <ul class="font-parent flex flex-col gap-4 an-scroll-list">
                 {
                     list.map((item) => {
                         return (
                             <li id={'fonts-' + item.name}>
-                                <header class="p-1  text-center text-2xl text-rose-600 md:mt-4 md:py-4">
+                                <header class="  p-1 text-center text-2xl text-rose-600 md:mt-4 md:py-4">
                                     {item.name}
                                 </header>
-                                <ul class="flex flex-col  justify-center gap-2">
+                                <ul class=" flex  flex-col justify-center gap-2">
                                     {item.remotePath.map(({ url: remote, style }) => {
                                         const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
                                         return (

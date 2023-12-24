@@ -5,12 +5,13 @@ import FontList from '../components/FontsList.astro';
 import TechSupport from '../components/TechSupport.astro';
 import PerformanceOfTool from '../components/PerformanceOfTool.astro';
 import HomeGlyphInspector from '../components/analyze/Glyph/HomeGlyphInspector';
+import '../style/animate.css';
 export const prerender = true;
 ---
 
 <Layout class="flex flex-col items-center">
     <section
-        class="relative z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
+        class="relative an-scroll-list z-10 flex h-[90vh] snap-start w-screen flex-col items-center justify-center scroll-mt-16"
     >
         <div class="xs:text-xl text-xs font-thin italic leading-[1.1em] text-gray-600 sm:text-4xl">
             Chinese Web Fonts Plan
