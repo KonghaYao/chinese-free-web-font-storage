@@ -17,7 +17,7 @@ const fileName = font_name!
 const reporter = await getFontReporter(font!, fileName);
 const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
 const theme = 'github-light' as const;
-const message = reporter.message.windows as NameTable ?? reporter.message
+const message = (reporter.message.windows as NameTable) ?? reporter.message;
 ---
 
 <header class="my-4 text-lg">
@@ -75,7 +75,7 @@ const message = reporter.message.windows as NameTable ?? reporter.message
         <br />
         ⏺️ 使用字体前请遵守相关授权信息，使用字体的项目必须标注字体名称、来源信息！
         <br />
-        <a href="/font-list.json">🥪 提供所有字体CSS的接口在这里</a>
+        <a href="/font-list.json" class="text-green-600">🥪 这里是提供所有字体CSS的接口</a>
     </blockquote>
 </div>
 
@@ -87,9 +87,7 @@ const message = reporter.message.windows as NameTable ?? reporter.message
         theme={theme}
         code={`article {\n    font-family:'${ensureFontMessageString(
             message.fontFamily
-        )}';\n    font-weight:'${
-            ensureFontMessageString(message.fontSubFamily) ?? '400'
-        }'\n};`}
+        )}';\n    font-weight:'${ensureFontMessageString(message.fontSubFamily) ?? '400'}'\n};`}
     />
 </div>
 <a

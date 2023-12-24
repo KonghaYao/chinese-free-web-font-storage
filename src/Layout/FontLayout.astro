@@ -13,7 +13,7 @@ const fileName = font_name!
     // 更换文件夹中的 . 为 _
     .replace(/(?<=\/.*)\.(?=.*\/)/g, '_');
 const reporter = await getFontReporter(font, fileName);
-const message = reporter.message.windows ?? reporter.message
+const message = reporter.message.windows ?? reporter.message;
 const style = `font-family:'${ensureFontMessageString(
     message.fontFamily
 )}';font-weight:'${ensureFontMessageString(message.fontSubFamily)}'`;
@@ -23,7 +23,7 @@ const root = `/fonts/${font}/${font_name}/`;
 <Layout
     canonicalURL={`/fonts/${font}`}
     defaultFontCSS={__CDN__ + `/packages/${font}/dist/${fileName}/result.css`}
-    title={font_name}
+    title={font_name + ' - 中文网字计划'}
     style={style}
     image={__CDN__ + `/packages/${font}/dist/${fileName}/preview.svg`}
 >
@@ -47,9 +47,7 @@ const root = `/fonts/${font}/${font_name}/`;
                             name: '文章测试',
                             link: `/heti.html?font=${font}&name=${font_name}&family=${ensureFontMessageString(
                                 message.fontFamily
-                            )}&subFamily=${ensureFontMessageString(
-                                message.fontSubFamily
-                            )}`,
+                            )}&subFamily=${ensureFontMessageString(message.fontSubFamily)}`,
                         },
                         {
                             name: 'Github',
