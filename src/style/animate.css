@@ -1,23 +1,40 @@
 .an-scroll-list > * {
-    animation: vertical-list ease both;
+    animation: vertical-list linear both;
     animation-timeline: view();
+    animation-range: contain contain;
 }
 
 @keyframes vertical-list {
     0% {
-        transform: translateX(50px) scale(0.88);
-        opacity: 0;
+        transform: scale(0.75);
+        opacity: 0.1;
     }
     15% {
-        transform: translateX(0) scale(1);
+        transform: scale(1);
         opacity: 1;
     }
+
     85% {
-        transform: translateX(0) scale(1);
+        transform: scale(1);
         opacity: 1;
     }
     100% {
-        transform: translateX(50px) scale(0.88);
+        transform: scale(0.75);
         opacity: 0;
+    }
+}
+
+.an-scroll-article > * {
+    animation: fade both;
+    animation-timeline: view();
+    animation-range: entry 50% cover 50%;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }

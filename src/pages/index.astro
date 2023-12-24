@@ -55,16 +55,4 @@ export const prerender = true;
     <PerformanceOfTool />
     <!-- TimeLine 一个开发时间线 -->
     <AllFooter />
-    <script>
-        window.addEventListener('load', () => {
-            if (navigator.maxTouchPoints) {
-                console.log('清除自动定位');
-                document.body.parentElement.classList.remove(
-                    'snap-y',
-                    'snap-mandatory',
-                    'scroll-smooth'
-                );
-            }
-        });
-    </script>
 </Layout>

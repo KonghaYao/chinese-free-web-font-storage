@@ -5,7 +5,7 @@ import GlobalHeader from '../../components/GlobalHeader.astro';
 import ArticleAside from '../../components/post/ArticleAside.astro';
 import Navigate from '../../components/post/Navigate.astro';
 import { TOC } from '../../components/post/TOC';
-
+import '../../style/animate.css';
 export async function getStaticPaths() {
     const posts = await getCollection('post');
     return posts.map((post) => ({
@@ -29,7 +29,10 @@ const { Content, headings } = await post.render();
         <main
             class="flex-1 px-8 xs:px-12 lg:px-20 select-text relative z-10 overflow-scroll h-full w-full scroll-smooth"
         >
-            <artcile id="main-article" class="heti m-auto block bg-white max-w-6xl py-12">
+            <artcile
+                id="main-article"
+                class="heti m-auto block bg-white max-w-6xl py-12 an-scroll-article"
+            >
                 <Content />
             </artcile>
             <Navigate />

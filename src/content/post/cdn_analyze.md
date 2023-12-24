@@ -11,20 +11,19 @@ article:
     image: 'https://ik.imagekit.io/chinesefonts/tr:w-1200/image/photo-1508804185872-d7badad00f7d.jfif'
 ---
 
-
 # 【数据分析】CDN 性能概况
 
-## LightCDN 
+## LightCDN
 
 中文网字计划使用 LightCDN 的免费服务的数据统计如下：
 
-|  Visitor Country | Total traffic | Avg latency | Avg transfer rate |
-|  --- | --- | --- | --- |
-|  China | 7.59 GB | 192 ms | 68.39 KB |
-|  Hong Kong-China | 1.42 GB | 30 ms | 271.65 KB |
-|  United States | 1.38 GB | 60 ms | 289.81 KB |
-|  Japan | 850.52 MB | 20 ms | 436.83 KB |
-|  Taiwan-China | 487.91 MB | 70 ms | 211.49 KB |
+| Visitor Country | Total traffic | Avg latency | Avg transfer rate |
+| --------------- | ------------- | ----------- | ----------------- |
+| China           | 7.59 GB       | 192 ms      | 68.39 KB          |
+| Hong Kong-China | 1.42 GB       | 30 ms       | 271.65 KB         |
+| United States   | 1.38 GB       | 60 ms       | 289.81 KB         |
+| Japan           | 850.52 MB     | 20 ms       | 436.83 KB         |
+| Taiwan-China    | 487.91 MB     | 70 ms       | 211.49 KB         |
 
 根据给出的列表格，我们可以看出该 CDN 的使用情况主要分布在东亚地区和美国。
 

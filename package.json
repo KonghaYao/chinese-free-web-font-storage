@@ -13,7 +13,7 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@konghayao/cn-font-split": "^4.9.0",
+        "@konghayao/cn-font-split": "^4.11.0",
         "@solidjs/router": "^0.5.1",
         "@types/animejs": "^3.1.12",
         "@types/file-saver": "^2.0.5",

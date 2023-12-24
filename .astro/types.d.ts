@@ -225,6 +225,13 @@ declare module 'astro:content' {
   collection: "post";
   data: any
 } & { render(): Render[".md"] };
+"transport_imagekit.md": {
+	id: "transport_imagekit.md";
+  slug: "transport_imagekit";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 };
 
 	};

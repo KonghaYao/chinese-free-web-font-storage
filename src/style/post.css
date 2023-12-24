@@ -43,6 +43,9 @@ html {
     font-family: CodeFont, 'SFMono-Regular', consolas, 'Liberation Mono', menlo, courier, monospace,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
+.heti pre {
+    background-color: #f6f6f6 !important;
+}
 .heti img {
     margin: auto;
     max-width: 80%;

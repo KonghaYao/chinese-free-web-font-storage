@@ -105,11 +105,11 @@ const list = await Promise.all(
         <nav
             class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12 overflow-x-hidden py-12"
         >
-            <ul class="font-parent flex flex-col gap-4 an-scroll-list">
+            <ul class="font-parent flex flex-col gap-4">
                 {
                     list.map((item) => {
                         return (
-                            <li id={'fonts-' + item.name}>
+                            <li id={'fonts-' + item.name} class="an-scroll-list">
                                 <header class="  p-1 text-center text-2xl text-rose-600 md:mt-4 md:py-4">
                                     {item.name}
                                 </header>
