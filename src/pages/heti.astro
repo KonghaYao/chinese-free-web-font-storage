@@ -3,17 +3,18 @@ import '../style/heti_change.css';
 import '../style/heti_site_change.css';
 import Layout from '../Layout/Layout.astro';
 import HETI_BODY from '../components/heti.astro';
-import { __CDN__ } from '../global';
 ---
 
-<Layout title="文章测试页面" type="article">
+<Layout title="文章测试页面 - 中文网字计划" type="article">
     <main class="flex flex-col justify-center pb-16">
         <HETI_BODY>
             <h3 id="heti-header" class="h-fit"></h3>
         </HETI_BODY>
     </main>
 
-    <script>
+    <script type="module">
+        import { __CDN__ } from '../global';
+
         window.onload = () => {
             const query = new URLSearchParams(location.search);
             const font = query.get('font');
@@ -24,11 +25,13 @@ import { __CDN__ } from '../global';
 
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = `https://192960944.r.cdn36.com/chinesefonts1/packages/${font}/dist/${fileName}/result.css`;
+            link.href = __CDN__ + `/packages/${font}/dist/${fileName}/result.css`;
             /** @ts-ignore */
             document.body.style = style;
             document.body.appendChild(link);
-            document.querySelector('#heti-header')!.textContent = `文章测试：${fileName}`;
+            document.querySelector(
+                '#heti-header'
+            ).textContent = `文章测试：${fileName} - 中文网字计划`;
         };
     </script>
 </Layout>
