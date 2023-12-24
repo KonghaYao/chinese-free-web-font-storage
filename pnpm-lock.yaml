@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@astrojs/netlify':
     specifier: ^3.0.1
@@ -19,6 +23,9 @@ dependencies:
   '@cn-ui/use':
     specifier: ^2.0.4
     version: 2.0.4
+  '@formkit/auto-animate':
+    specifier: ^0.8.1
+    version: 0.8.1
   '@japont/unicode-range':
     specifier: ^1.0.0
     version: 1.0.0
@@ -100,6 +107,9 @@ dependencies:
   rehype-toc:
     specifier: ^3.0.2
     version: 3.0.2
+  solid:
+    specifier: link:@formkit/auto-animate/solid
+    version: link:@formkit/auto-animate/solid
   solid-js:
     specifier: ^1.7.11
     version: 1.7.11
@@ -1121,6 +1131,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@formkit/auto-animate@0.8.1:
+    resolution: {integrity: sha512-0/Z2cuNXWVVIG/l0SpcHAWFhGdvLJ8DRvEfRWvmojtmRWfEy+LWNwgDazbZqY0qQYtkHcoEK3jBLkhiZaB/4Ig==}
+    dev: false
 
   /@japont/unicode-range@1.0.0:
     resolution: {integrity: sha512-BckHvA2XdjRBVAWe2uceNuRf78lBeI28kyWEbfr/Q2pE17POkwuZ6WWY/UMv8FL9iBxhW4xfDoNLM9UVZaTeUQ==}
@@ -5410,7 +5424,3 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

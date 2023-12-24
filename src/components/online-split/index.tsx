@@ -50,6 +50,7 @@ Promise.all([
     RaceFetch('/dist/browser/compress_binding.wasm', { priority: 'low' }, roots),
 ]).then((res) => console.log('资源预加载完成'));
 
+/** 获取 cn-font-split 的版本号 */
 const getVersions = () => {
     return fetch('https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split')
         .then((res) => res.json())
@@ -235,28 +236,9 @@ export const OnlineSplit = () => {
                         <button onclick={() => startSplit.refetch()}>点击此处刷新</button>
                     </div>
                 </Show>
-                <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800  p-4 font-sans text-xs text-white">
-                    <For each={logMessage().reverse()}>
-                        {(item) => {
-                            return <li innerHTML={ConsolePrint(item)}></li>;
-                        }}
-                    </For>
-                </ul>
+                <LogMessage logMessage={logMessage()}></LogMessage>
                 <header class="text-xl">Output 输出文件</header>
-                <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800 p-4 font-sans text-sm text-gray-100">
-                    <For each={resultList().reverse()}>
-                        {(item) => {
-                            return (
-                                <li>
-                                    <span class="col-span-2 inline-block min-w-[8rem]">
-                                        {prettyBytes(item.buffer.byteLength)}
-                                    </span>
-                                    <span class="col-span-6">{item.name}</span>
-                                </li>
-                            );
-                        }}
-                    </For>
-                </ul>
+                <FileList resultList={resultList()}></FileList>
                 <span class="flex justify-end gap-4 text-xs">
                     <span>{resultList().length}</span>
                     <span>
@@ -274,12 +256,55 @@ export const OnlineSplit = () => {
         </section>
     );
 };
+import { createAutoAnimate } from '@formkit/auto-animate/solid';
 
+/** 右下角的文件列表 */
+function FileList(props: {
+    resultList: {
+        name: string;
+        buffer: Uint8Array;
+    }[];
+}) {
+    return (
+        <ul class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800 p-4 font-sans text-sm text-gray-100">
+            <For each={[...props.resultList].reverse()}>
+                {(item) => {
+                    return (
+                        <li>
+                            <span class="col-span-2 inline-block min-w-[8rem]">
+                                {prettyBytes(item.buffer.byteLength)}
+                            </span>
+                            <span class="col-span-6">{item.name}</span>
+                        </li>
+                    );
+                }}
+            </For>
+        </ul>
+    );
+}
+
+/** 右上角的文件列表 */
+function LogMessage(props: { logMessage: string[] }) {
+    const [parent] = createAutoAnimate();
+    return (
+        <ul
+            ref={parent}
+            class="flex h-full max-h-[100%] select-text flex-col-reverse overflow-scroll rounded-xl bg-gray-800  p-4 font-sans text-xs text-white"
+        >
+            <For each={[...props.logMessage].reverse()}>
+                {(item) => {
+                    return <li innerHTML={ConsolePrint(item)}></li>;
+                }}
+            </For>
+        </ul>
+    );
+}
+/** 修饰文本为可见的颜色 */
 export const ConsolePrint = (item: string) => {
     return item
         .replace(
             /\[97m\[1m(.*?)\[22m\[39m\[0m\[0m/g,
-            '<span  style="color: green;font-weight: bold;" >$1</span>'
+            '<span style="color: green;font-weight: bold;" >$1</span>'
         )
         .replace(
             /\[34m\[1m(.*?)\[22m\[39m\[0m\[0m/g,
