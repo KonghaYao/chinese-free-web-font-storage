@@ -17,7 +17,7 @@ article:
 
 ## Harfbuzz（WASM） 进行字体分包
 
-在 3.0 版本中，我们使用 Javascript 插件 fonteditor-core 进行字体文件的解析，这是一个缓慢的过程，解析过程中遇到特殊的字体情况还会导致某些 BUG。于是我们在 Github 社区中搜寻一个兼顾性能、专业性和兼容性的解决方案。
+在 3.0 版本中，我们使用 Javascript 插件 fonteditor-core 进行字体文件的解析，这是一个缓慢的过程，解析过程中遇到特殊的字体情况还会导致某些 BUG。于是我们在 Github 社区中搜寻一个同时具有性能、专业性和兼容性的解决方案。
 
 经过许久的大海捞针，我们找到了 Harfbuzz 项目，一个使用 C++ 编写、用于在各个平台中解析字体文件并进行渲染的开源仓库。Harfbuzz 的 Wasm 版本在 cn-font-split 中起到了解析字体文件、获取字体中 unicode 覆盖范围、直接生成分包文件的作用，是 cn-font-split 最核心的一个插件。
 

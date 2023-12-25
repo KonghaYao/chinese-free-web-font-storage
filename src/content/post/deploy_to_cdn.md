@@ -63,7 +63,7 @@ CDN 的作用是在全球的多个服务器上设置文件缓存，保证离用�
 
 在这里，我们也使用有免费额度的 [LightCDN](https://www.lightcdn.com/) 进行演示。
 
-首先注册一个 LightCDN 账号，然后设置你的 CDN 配置项，如下图填写。
+首先注册一个 LightCDN 账号，然后设置你的 CDN 配置项，如下图填写。(如果转接了服务，那么填写你的服务器的域名)
 
 ![lightCDN_init](/assets/lightCDN_init.png)
 
