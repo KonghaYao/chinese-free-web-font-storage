@@ -1,4 +1,5 @@
 ---
+index: 20
 title: 中文字体使用指南
 description: 如何在你的项目中使用中文网字计划提供的字体。
 article:

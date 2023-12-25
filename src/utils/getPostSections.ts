@@ -13,6 +13,12 @@ posts.forEach((i) => {
     }
 });
 
+sections.forEach((value) => {
+    value.sort((a, b) => {
+        return (a.data.index ?? Infinity) - (b.data.index ?? Infinity)
+    })
+})
+
 /** 获取当篇的上下篇的函数 */
 export const getPostSection = (slug: string) => {
     let prev: CollectionEntry<'post'> | null = null;

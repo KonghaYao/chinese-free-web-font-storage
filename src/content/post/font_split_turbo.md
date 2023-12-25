@@ -1,4 +1,5 @@
 ---
+index: 20
 title: 字体分包性能优化
 description: 这篇文章将介绍 cn-font-split 在 4.0 版本中的各项性能优化
 article:

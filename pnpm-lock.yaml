@@ -107,9 +107,6 @@ dependencies:
   rehype-toc:
     specifier: ^3.0.2
     version: 3.0.2
-  solid:
-    specifier: link:@formkit/auto-animate/solid
-    version: link:@formkit/auto-animate/solid
   solid-js:
     specifier: ^1.7.11
     version: 1.7.11

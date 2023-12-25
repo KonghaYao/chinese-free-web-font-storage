@@ -1,4 +1,5 @@
 ---
+index: 30
 title: 字体分包部署与使用
 description: 如何部署使用分包完成的字体。
 article:
