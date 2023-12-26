@@ -37,8 +37,8 @@ import { sections } from '../utils/getPostSections';
                                                             {post.data.article.authors}
                                                         </address>
 
-                                                        <time datetime={post.data.article.pubDate}>
-                                                            {post.data.article.pubDate}
+                                                        <time datetime={new Date(post.data.article.pubDate)}>
+                                                            {new Date(post.data.article.pubDate).toLocaleDateString()}
                                                         </time>
                                                     </aside>
                                                 </a>
