@@ -176,6 +176,13 @@ declare module 'astro:content' {
   collection: "post";
   data: any
 } & { render(): Render[".md"] };
+"cn-font-split.md": {
+	id: "cn-font-split.md";
+  slug: "cn-font-split";
+  body: string;
+  collection: "post";
+  data: any
+} & { render(): Render[".md"] };
 "cn_font_split_design.md": {
 	id: "cn_font_split_design.md";
   slug: "cn_font_split_design";
