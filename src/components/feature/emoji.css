@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'noto-color-emoji';
+    src: url('https://jsdelivr.deno.dev/gh/googlefonts/noto-emoji/fonts/NotoColorEmoji_WindowsCompatible.ttf');
+    font-weight: 400;
+    font-display: swap;
+}
+.noto-color-emoji {
+    font-family: 'noto-color-emoji', 'Noto Color Emoji';
+}
