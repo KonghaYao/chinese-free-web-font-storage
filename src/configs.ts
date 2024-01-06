@@ -18,16 +18,16 @@ export const URLLinkHelp: Record<string, { url: string; desc: string }> = {
 export const ShowCaseLinks = () => {
     return [
         {
-            title: "中华诗词大典",
-            image: "https://ik.imagekit.io/chinesefonts1/showcase/chinese_poetry.png?updatedAt=1695542815437",
+            title: '中华诗词大典',
+            image: 'https://ik.imagekit.io/chinesefonts1/showcase/chinese_poetry.png?updatedAt=1704519777120&tr=w-1200%2Ch-630%2Cfo-auto',
             url: 'https://chinese-poetry.netlify.app/',
-            categories: ['诗词']
+            categories: ['诗词'],
         },
         {
-            title: "魔导绪论",
-            image: "https://ik.imagekit.io/chinesefonts1/showcase/magic_tag.png?updatedAt=1695554686260",
+            title: '魔导绪论',
+            image: 'https://ik.imagekit.io/chinesefonts1/showcase/magic_tag.png?updatedAt=1704519777120&tr=w-1200%2Ch-630%2Cfo-auto',
             url: 'https://magic-tag.netlify.app/',
-            categories: ['AI绘画']
+            categories: ['AI绘画'],
         },
-    ]
-}
+    ];
+};
