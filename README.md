@@ -30,6 +30,12 @@
 
 ![](./assets/web_support.png)
 
+## 代码贡献者
+
+<a href="https://github.com/KonghaYao/chinese-free-web-font-storage/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=KonghaYao/chinese-free-web-font-storage" />
+</a>
+
 ## 技术相关
 
 1. 字体部署方案由 cn-font-split 项目提供。从项目初始， cn-font-split 就作为中文网字计划的功能提供，帮助我们实现了网络字体的合理部署。
