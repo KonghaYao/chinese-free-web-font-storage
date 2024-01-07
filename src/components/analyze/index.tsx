@@ -101,7 +101,7 @@ const AnalyzeResult = ({
                     ✨中文网字计划提供
                 </span>
             </h2>
-            <details>
+            <details open>
                 <summary>字体首部信息表</summary>
                 <StringObjectToTable
                     data={result.headers.windows ?? result.headers}
@@ -115,7 +115,7 @@ const AnalyzeResult = ({
                 <summary>Unicode 统一码全字符检测</summary>
                 <UnicodeTable data={result.unicode}></UnicodeTable>
             </details>
-            <details>
+            <details open>
                 <summary>OpenType Features</summary>
                 <FeatureTable
                     data={result.features}
