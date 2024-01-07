@@ -72,8 +72,8 @@ dependencies:
     specifier: ^2.0.5
     version: 2.0.5
   font-analyze:
-    specifier: ^1.3.0
-    version: 1.3.0
+    specifier: ^1.3.4
+    version: 1.3.4
   instantsearch.css:
     specifier: ^7.4.5
     version: 7.4.5
@@ -116,8 +116,8 @@ dependencies:
 
 devDependencies:
   '@konghayao/cn-font-split':
-    specifier: ^4.11.0
-    version: 4.11.0
+    specifier: ^4.11.1
+    version: 4.11.1
   '@solidjs/router':
     specifier: ^0.5.1
     version: 0.5.1(solid-js@1.7.11)
@@ -1178,8 +1178,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /@konghayao/cn-font-split@4.11.0:
-    resolution: {integrity: sha512-liRJKYYgyxmpV1wxArb1yGiPZ9ck9DOd0ml4fHmUaHgs00MBYu7N2fWidQU/XVktB7oEQ2DYgiYqyYy4zPfC3Q==}
+  /@konghayao/cn-font-split@4.11.1:
+    resolution: {integrity: sha512-SBmOZ7wDTglO0Lt3pP+ZoGrvQbxigPsZFqhbQEEgF+oN3szHuk0jph5xCBSp/Coj2RYnSqdIGhz4ygMj6sLhyQ==}
     hasBin: true
     dependencies:
       '@chinese-fonts/font-contours': 1.0.0
@@ -1215,7 +1215,6 @@ packages:
     hasBin: true
     dependencies:
       eslint-plugin-local-rules: 2.0.1
-    dev: true
 
   /@minht11/solid-virtual-container@0.2.1(solid-js@1.7.11):
     resolution: {integrity: sha512-HvQWx1uE5NWwx9WsN4waFtmyOjhZKMA/3vBf+j3zGsRfi556LCUk4oOmqZcOvIB5nEpHezvuZ8oUlwxigdO3Xg==}
@@ -2792,7 +2791,6 @@ packages:
 
   /eslint-plugin-local-rules@2.0.1:
     resolution: {integrity: sha512-AJhGd+GcI5r2dbjiGPixM8jnBl0XFxqoVbqzwKbYz+nTk+Cj5dNE3+OlhC176bl5r25KsGsIthLi1VqIW5Ga+A==}
-    dev: true
 
   /esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
@@ -2964,10 +2962,10 @@ packages:
       pkg-dir: 4.2.0
     dev: false
 
-  /font-analyze@1.3.0:
-    resolution: {integrity: sha512-71lKn5jVm41f537NXFAJt+gtkd1BpGwN6ySaa/AdQ8lLJdFm0BT00vK5T9Iyyx+AfNsxBO6WLv9Z6HoONgtM9w==}
+  /font-analyze@1.3.4:
+    resolution: {integrity: sha512-+x5XEM7JsWM2fa9olyRbYzosQ5N7uYUp9cr8OSgkpetZrpqYCjIvvtYRTAFKkhof2gl89u84ZjquVgXG9iPGEQ==}
     dependencies:
-      '@konghayao/opentype.js': 2023.10.5
+      '@konghayao/opentype.js': 2023.11.20
       '@types/opentype.js': 1.3.6
     dev: false
 

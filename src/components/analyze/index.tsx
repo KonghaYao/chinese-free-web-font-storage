@@ -7,6 +7,7 @@ import { StringObjectToTable } from './Coverage/StringObjectToTable';
 import { UnicodeTable } from './Coverage/UnicodeTable';
 import { StandardAnalyzeTable } from './Coverage/StandardAnalyzeTable';
 import { GlyphInspector } from './Glyph/GlyphInspector';
+import { FeatureTable } from './Feature/FeatureTable';
 
 export type Result = Awaited<ReturnType<typeof FontAnalyze>>;
 export const FontAnalyzeUI = () => {
@@ -20,19 +21,21 @@ export const FontAnalyzeUI = () => {
                 .then((res) => new File([res], new URL(url()).pathname)),
         { deps: [url], immediately: false }
     );
+    const fontURL = atom('');
     const analyzeResult = resource(
         async () => {
             let buffer = await f()!.arrayBuffer();
             if (f().name.endsWith('.woff2')) {
                 const { convert } = await import(
-                    'https://cdn.jsdelivr.net/npm/@konghayao/cn-font-split/dist/browser/index.js'
+                    'https://jsdelivr.deno.dev/npm/@konghayao/cn-font-split/dist/browser/index.js'
                 );
                 buffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
             }
+            fontURL(URL.createObjectURL(new Blob([buffer])));
             return FontAnalyze(buffer, {
                 charsetLoader(name) {
                     return fetch(
-                        `https://cdn.jsdelivr.net/npm/font-analyze@1.3.0/data/${name}`
+                        `https://jsdelivr.deno.dev/npm/font-analyze@1.3.3/data/${name}`
                     ).then((res) => res.json());
                 },
             }).then((result) => {
@@ -70,19 +73,33 @@ export const FontAnalyzeUI = () => {
                 <AnalyzeResult
                     filename={analyzeResult().filename}
                     result={analyzeResult().result}
+                    fontURL={fontURL()}
                 ></AnalyzeResult>
-                <GlyphInspector file={f()}></GlyphInspector>
+                {/* <GlyphInspector file={f()}></GlyphInspector> */}
             </Match>
         </Switch>
     );
 };
-const AnalyzeResult = ({ result, filename }: { result: Result; filename: string }) => {
+const AnalyzeResult = ({
+    result,
+    filename,
+    fontURL,
+}: {
+    result: Result;
+    filename: string;
+    fontURL: string;
+}) => {
     return (
-        <article class="mx-auto my-8 min-h-[80vh] max-w-3xl bg-white p-8">
+        <article class="mx-auto my-8 min-h-[80vh]  max-w-3xl bg-white p-8 lg:max-w-6xl">
             <h1 class="py-2 text-center text-2xl">字体检测报告</h1>
             <h2 class="flex justify-between py-2 text-center">
                 <span>📖{filename}</span>
-                <span>✨中文网字计划提供</span>
+                <span>
+                    <button class="px-2 text-blue-500 print:hidden " onclick={() => window.print()}>
+                        打印
+                    </button>
+                    ✨中文网字计划提供
+                </span>
             </h2>
             <details>
                 <summary>字体首部信息表</summary>
@@ -94,9 +111,17 @@ const AnalyzeResult = ({ result, filename }: { result: Result; filename: string 
                 <summary>字体字符标准检测</summary>
                 <StandardAnalyzeTable data={result.standard}></StandardAnalyzeTable>
             </details>
-            <details>
+            <details open>
                 <summary>Unicode 统一码全字符检测</summary>
                 <UnicodeTable data={result.unicode}></UnicodeTable>
+            </details>
+            <details>
+                <summary>OpenType Features</summary>
+                <FeatureTable
+                    data={result.features}
+                    getSVG={result.drawTextToSVG}
+                    fontURL={fontURL}
+                ></FeatureTable>
             </details>
         </article>
     );
