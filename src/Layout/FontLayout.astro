@@ -3,6 +3,7 @@ import Layout from './Layout.astro';
 import { getFontReporter } from '../utils/getFontReporter';
 import { __CDN__ } from '../global';
 import { ensureFontMessageString } from '../utils/ensureFontMessageString';
+import Index from '../../index.json';
 export interface Props {
     font: string;
     font_name: string;
@@ -17,7 +18,9 @@ const message = reporter.message.windows ?? reporter.message;
 const style = `font-family:'${ensureFontMessageString(
     message.fontFamily
 )}';font-weight:'${ensureFontMessageString(message.fontSubFamily)}'`;
+
 const root = `/fonts/${font}/${font_name}/`;
+const font_name_cn = (Index as Record<string, { name: string }>)[font]?.name;
 ---
 
 <Layout
@@ -31,7 +34,7 @@ const root = `/fonts/${font}/${font_name}/`;
         <header class="p-4 col-span-full items-center flex flex-wrap justify-between">
             <h1 class="text-2xl rounded-lg overflow-hidden">
                 <span class="bg-black text-white p-4">
-                    {font_name}
+                    {font_name_cn}
                 </span>
                 <span class="text-white bg-cyan-600 p-4"> {font}</span>
             </h1>
