@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 importers:
 
   .:
@@ -75,6 +71,10 @@ importers:
   packages/syst: {}
 
   packages/tjl: {}
+
+  packages/xuandongkaishu: {}
+
+  packages/yidianyan: {}
 
   packages/ysbth: {}
 
@@ -2430,3 +2430,7 @@ packages:
     name: graceful-fs
     version: 4.2.11
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
