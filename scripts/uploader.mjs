@@ -16,7 +16,6 @@ const imagekit = new ImageKit({
     privateKey: process.env.IMAGEKIT_TOKEN,
     urlEndpoint: process.env.IMAGEKIT_ENDPOINT,
 });
-
 const folders = await glob("./packages/" + (input.target || "*"));
 
 if (input.deleteFolder) {
@@ -67,14 +66,14 @@ const uploadFolder = async (iterator) => {
         .then((response) => {
             cache.add(iterator);
             console.log("done", iterator);
-        });
+        })
 };
 
-const limit = pLimit(6);
-
+const limit = pLimit(3);
+console.log(files.length)
 const inputs = files.map((i) => limit(() => uploadFolder(i)));
 await Promise.all(inputs).catch((e) => {
-    console.error(e)
+    console.error('报错', e)
     fs.promises
         .writeFile(
             "./scripts/.upload_cache",
@@ -84,7 +83,7 @@ await Promise.all(inputs).catch((e) => {
             return [...cache.values()]
                 .map(
                     (i) =>
-                        "https://ik.imagekit.io/chinesefonts1/" +
+                        "https://ik.imagekit.io/chinesefonts3/" +
                         i.replace(/\\/g, "/")
                 )
                 .join("\n");

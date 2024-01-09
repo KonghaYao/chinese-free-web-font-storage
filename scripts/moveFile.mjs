@@ -17,5 +17,5 @@ files.forEach((i) => {
             // 更换文件夹中的 . 为 _
             .replace(/(?<=\/.*)\.(?=.*\/)/g, "_");
 
-    fs.move(i, newPath);
+    fs.copy(i, newPath);
 });
