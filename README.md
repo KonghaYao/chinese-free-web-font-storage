@@ -2,7 +2,9 @@
 
 # 中文网字计划 v5
 
-[Netlify 网页](https://chinese-font.netlify.app/)
+[Netlify 网页](https://chinese-font.netlify.app/)   
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4ab47951-5755-4360-9fe6-236bb5ee95db/deploy-status)](https://app.netlify.com/sites/chinese-font/deploys)
 
 ## 简介
 
