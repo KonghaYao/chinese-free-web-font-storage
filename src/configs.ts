@@ -12,6 +12,10 @@ export const URLLinkHelp: Record<string, { url: string; desc: string }> = {
         url: 'https://wakamaifondue.com/',
         desc: '在线检测字体信息网站',
     },
+    Netlify: {
+        url: 'https://www.netlify.com/',
+        desc: 'Netlify - 部署服务提供商',
+    },
 };
 
 /** 灵感页面的展示窗口 */
