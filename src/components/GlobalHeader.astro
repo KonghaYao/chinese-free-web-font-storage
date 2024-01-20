@@ -1,3 +1,6 @@
+---
+---
+
 <header
     class="print:hidden sticky z-20 w-full top-0 left-0 flex items-center gap-2 py-2 bg-white border-b border-neutral-300 px-12 text-white flex-wrap"
 >
@@ -9,7 +12,87 @@
         <a href="/online-split" class="hidden sm:block">在线分包</a>
         <a href="/article">文章</a>
         <a href="/showcase">灵感</a>
-        <a href="/analyze">字体分析</a>
-        <a href="/google" class="hidden sm:block">Google Fonts</a>
+        <span>
+            <span class="relative overflow-visible more-button">
+                <button>更多</button>
+                <ul
+                    class="w-64 absolute right-0 hidden bg-gray-50 border border-gray-300 rounded-md"
+                >
+                    <li class="p-2 hover:bg-gray-100"><a href="/analyze">字体分析</a></li>
+                    <li class="p-2 hover:bg-gray-100">
+                        <a href="/google" class="hidden sm:block">Google Fonts</a>
+                    </li>
+                </ul>
+            </span>
+        </span>
+
+        <!-- Github 相关地址 -->
+        <span class="relative overflow-visible more-button">
+            <button>Github</button>
+
+            <!-- popover -->
+            <ul class="w-64 absolute right-0 hidden bg-gray-50 border border-gray-300 rounded-md">
+                <li class="p-2 hover:bg-gray-100">
+                    <a
+                        href="https://github.com/KonghaYao/chinese-free-web-font-storage"
+                        target="_blank"
+                    >
+                        <div class="text-sm text-neutral-500">chinese-free-web-font-storage</div>
+                        <h3 class="text-xl">🏪中文WebFont收集</h3>
+                        <div>
+                            <img
+                                alt="GitHub Repo stars"
+                                loading="lazy"
+                                src="https://img.shields.io/github/stars/KonghaYao/chinese-free-web-font-storage?style=flat"
+                            />
+                        </div>
+                    </a>
+                </li>
+                <li class="p-2 hover:bg-gray-100">
+                    <a href="https://github.com/KonghaYao/cn-font-split" target="_blank">
+                        <div class="text-sm text-neutral-500">@konghayao/cn-font-split</div>
+                        <h3 class="text-xl">📦字体分包插件</h3>
+                        <div class="flex gap-2">
+                            <img
+                                alt="GitHub Repo stars"
+                                loading="lazy"
+                                src="https://img.shields.io/github/stars/KonghaYao/cn-font-split?style=flat"
+                            />
+                            <img
+                                alt="GitHub Repo stars"
+                                loading="lazy"
+                                src="https://data.jsdelivr.com/v1/package/npm/@konghayao/cn-font-split/badge?style=rounded"
+                            />
+                        </div>
+                    </a>
+                </li>
+                <li class="p-2 hover:bg-gray-100">
+                    <a href="https://github.com/KonghaYao/font-server" target="_blank">
+                        <div class="text-sm text-neutral-500">font-server</div>
+                        <h3 class="text-xl">🤖字体管理系统</h3>
+                        <div>
+                            <img
+                                alt="GitHub Repo stars"
+                                loading="lazy"
+                                src="https://img.shields.io/github/stars/KonghaYao/font-server?style=flat"
+                            />
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </span>
+        <script>
+            window.addEventListener('load', () => {
+                const items = document.querySelectorAll('.more-button');
+                [...items].map((item) => {
+                    item.addEventListener('mouseenter', () => {
+                        item.children[1]!.classList.remove('hidden');
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        item.children[1]!.classList.add('hidden');
+                    });
+                });
+            });
+        </script>
     </nav>
 </header>

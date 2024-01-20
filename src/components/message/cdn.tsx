@@ -80,9 +80,7 @@ export const CDNAnalyze = () => {
                         <CacheRatoModels trafficCacheModels={trafficCacheModels}></CacheRatoModels>
                     </Show>
                 </div>
-                <div class=" col-span-1">
-                    <Show when={trafficCacheModels()}></Show>
-                </div>
+                <div class=" col-span-1"></div>
                 <div class=" col-span-2">
                     <Show when={trafficCacheModels()}>
                         <TrafficAreaList trafficAreaList={trafficAreaList}></TrafficAreaList>
@@ -105,9 +103,19 @@ const TrafficAreaList = ({ trafficAreaList }: { trafficAreaList: Atom<CDNData['l
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter(p) {
+                    formatter(p: {
+                        data: {
+                            name: string;
+                            request: number;
+                            bandwidth: number;
+                            avgTransferRate: number;
+                            avgLatency: number;
+                        };
+                    }) {
                         if (p.data)
-                            return `${p.data.name}<br> ${p.data.request}次 ${prettyBytes(
+                            return `${
+                                p.data.name
+                            }<br> ${p.data.request.toLocaleString()}次 ${prettyBytes(
                                 p.data.bandwidth
                             )}<br> 均请求 ${prettyBytes(
                                 p.data.avgTransferRate
@@ -129,13 +137,30 @@ const TrafficAreaList = ({ trafficAreaList }: { trafficAreaList: Atom<CDNData['l
                             borderColor: '#fff',
                             borderWidth: 2,
                         },
-                        data: trafficAreaList().map((i) => {
-                            return {
-                                value: i.request,
-                                ...i,
-                                name: i.country,
-                            };
-                        }),
+                        data: trafficAreaList()
+                            .sort((a, b) => b.request - a.request)
+                            .reduce((col, cur, index) => {
+                                if (index < 6) {
+                                    col.push(cur);
+                                } else if (index === 7) {
+                                    col.push({
+                                        ...cur,
+                                        country: 'Other',
+                                    });
+                                } else {
+                                    const last = col.at(-1)!;
+                                    last.request += cur.request;
+                                    last.bandwidth += cur.bandwidth;
+                                }
+                                return col;
+                            }, [] as ReturnType<typeof trafficAreaList>)
+                            .map((i) => {
+                                return {
+                                    value: i.request,
+                                    ...i,
+                                    name: i.country,
+                                };
+                            }),
                     },
                 ],
             }}
@@ -159,7 +184,7 @@ const CacheRatoModels = ({
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter(p) {
+                    formatter(p: { name: string; seriesName: string; value: number }) {
                         return [`${p.name}`, p.seriesName + ' ' + prettyBytes(p.value)].join(
                             '<br>'
                         );
@@ -178,7 +203,7 @@ const CacheRatoModels = ({
                     {
                         type: 'value',
                         axisLabel: {
-                            formatter(p) {
+                            formatter(p: number) {
                                 return prettyBytes(p);
                             },
                         },
@@ -200,7 +225,7 @@ const CacheRatoModels = ({
                                     type: 'average',
                                     name: '平均缓存',
                                     label: {
-                                        formatter(b) {
+                                        formatter(b: { value: number }) {
                                             return prettyBytes(b.value);
                                         },
                                     },
@@ -238,7 +263,7 @@ const CacheRato = ({
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter(p) {
+                    formatter(p: { value: number }) {
                         return prettyBytes(p.value);
                     },
                 },
