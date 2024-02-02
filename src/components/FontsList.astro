@@ -33,7 +33,7 @@ const list = await Promise.all(
 ---
 
 <section
-    class="w-screen max-w-7xl flex flex-col my-6 overflow-hidden h-[90vh] gap-2 pt-16 z-0 snap-start relative"
+    class="w-screen max-w-7xl flex flex-col my-6 overflow-hidden h-screen gap-2 pt-16 z-0 snap-start relative"
     id="font-list"
 >
     <h2
@@ -98,26 +98,26 @@ const list = await Promise.all(
     </style>
     <nav
         id="fonts-wrapper"
-        class="overflow-hidden flex-1 flex justify-between md:mx-4 p-2 md:px-8 my-4"
+        class="overflow-hidden flex-1 flex justify-between md:mx-4 p-2 px-4 2xl:px-8 my-4"
     >
         <FontShow client:load />
         <!-- 不要将下面这段写进 solidjs astro 的处理会将 json 传过去 -->
         <nav
-            class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12 overflow-x-hidden py-12"
+            class="flex-1 h-full overflow-scroll rounded-lg bg-white px-12 overflow-x-hidden py-4 2xl:py-12"
         >
-            <ul class="font-parent flex flex-col gap-4">
+            <ul class="font-parent flex flex-col gap-4 an-scroll-list">
                 {
                     list.map((item) => {
                         return (
-                            <li id={'fonts-' + item.name} class="an-scroll-list">
-                                <header class="  p-1 text-center text-2xl text-rose-600 md:mt-4 md:py-4">
+                            <li id={'fonts-' + item.name} class="">
+                                <header class="an-scroll-item p-1 text-center text-2xl text-rose-600 md:mt-4 md:py-4">
                                     {item.name}
                                 </header>
                                 <ul class=" flex  flex-col justify-center gap-2">
                                     {item.remotePath.map(({ url: remote, style }) => {
                                         const [_, name] = remote.match(/dist\/(.*?)\/result/)!;
                                         return (
-                                            <li class="relative flex-wrap overflow-hidden rounded-md bg-neutral-100 p-2 transition-colors hover:bg-neutral-200">
+                                            <li class="an-scroll-item relative flex-wrap overflow-hidden rounded-md bg-neutral-100 p-2 transition-colors hover:bg-neutral-200">
                                                 <a
                                                     class="display-font-show-hover"
                                                     href={`/fonts/${item.id}/${name}`}
@@ -126,7 +126,7 @@ const list = await Promise.all(
                                                 >
                                                     <img
                                                         loading="lazy"
-                                                        class="h-12 w-full lg:h-16 xl:h-20"
+                                                        class="h-8 w-full lg:h-12 xl:h-16 2xl:h-20"
                                                         src={
                                                             __CDN__ +
                                                             '/' +

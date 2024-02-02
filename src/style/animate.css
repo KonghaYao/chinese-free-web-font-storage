@@ -1,20 +1,19 @@
-.an-scroll-list > * {
+.an-scroll-list .an-scroll-item {
     animation: vertical-list linear both;
     animation-timeline: view();
     animation-range: contain contain;
 }
-
 @keyframes vertical-list {
     0% {
         transform: scale(0.75);
         opacity: 0.1;
     }
-    15% {
+    10% {
         transform: scale(1);
         opacity: 1;
     }
 
-    85% {
+    90% {
         transform: scale(1);
         opacity: 1;
     }
