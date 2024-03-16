@@ -11,7 +11,8 @@ const input = mri(argv);
 // 重新打包字体文件
 globalThis.fetch = null;
 console.log("mode", input.mode);
-console.log("version", input.mode);
+console.log("version", input.version);
+console.log("time", input.time);
 
 const packages = fse.readdirSync("./packages");
 for (const iterator of packages) {
@@ -68,7 +69,7 @@ for (const iterator of packages) {
         });
     }
 
-    if (input.mode !== "rebuild") {
+    if (input.mode !== "rebuild" || input.mode === 'rebuild' && input.version) {
         // 重写 package.json
         const packageData = fse.readJSONSync(
             `./packages/${iterator}/package.json`
@@ -76,10 +77,19 @@ for (const iterator of packages) {
         cacheData = {
             version: semver.inc(
                 (cacheData && cacheData.version) || packageData.version,
-                input.version ?? "minor"
+                input.version ?? "patch"
             ),
             version_tag: hash,
         };
+        if (input.time) {
+            const time = parseInt(input.time)
+            if (time > 0) {
+                cacheData.version = semver.inc(packageData.version, input.version ?? "patch")
+            }
+        }
+
+
+        console.log(cacheData.version)
         fse.writeJSONSync(`./packages/${iterator}/package.json`, {
             ...packageData,
             version: cacheData.version,
