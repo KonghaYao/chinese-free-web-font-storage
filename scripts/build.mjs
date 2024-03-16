@@ -11,6 +11,7 @@ const input = mri(argv);
 // 重新打包字体文件
 globalThis.fetch = null;
 console.log("mode", input.mode);
+console.log("version", input.mode);
 
 const packages = fse.readdirSync("./packages");
 for (const iterator of packages) {
@@ -37,7 +38,7 @@ for (const iterator of packages) {
     if (input.mode != "rebuild") {
         try {
             cacheData = fse.readJSONSync(`./packages/${iterator}/cache.json`);
-        } catch (e) {}
+        } catch (e) { }
 
         if (hash === cacheData.version_tag) {
             console.log(` 跳过 ${iterator}`);
@@ -75,7 +76,7 @@ for (const iterator of packages) {
         cacheData = {
             version: semver.inc(
                 (cacheData && cacheData.version) || packageData.version,
-                "minor"
+                input.version ?? "minor"
             ),
             version_tag: hash,
         };

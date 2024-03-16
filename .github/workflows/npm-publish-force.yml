@@ -1,0 +1,30 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Force Publish to NPM
+
+on: workflow_dispatch
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  ref: branch
+            - uses: actions/setup-node@v3
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+              with:
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+            - run: npm install
+            - run: npm install pnpm -g
+            - run: pnpm build --mode=rebuild --version=major
+            - run: pnpm --filter @chinese-fonts/* publish --access public  --no-git-checks
+            - run: |
+                  git config user.name github-actions
+                  git config user.email github-actions@github.com
+                  git add .
+                  git commit -m "自动打包完成"
+                  git push
