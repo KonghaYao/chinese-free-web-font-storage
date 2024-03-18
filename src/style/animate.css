@@ -1,8 +1,10 @@
+/* safari 上不支持，导致白屏 */
+/*
 .an-scroll-list .an-scroll-item {
     animation: vertical-list linear both;
     animation-timeline: view();
     animation-range: contain contain;
-}
+} */
 @keyframes vertical-list {
     0% {
         transform: scale(0.75);
