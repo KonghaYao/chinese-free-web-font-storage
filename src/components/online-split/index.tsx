@@ -187,7 +187,7 @@ export const OnlineSplit = () => {
                     }
                 >
                     <div class="flex h-full flex-col items-center justify-center gap-4">
-                        <h1 class="pb-2 text-xl">在线字体分包器 {PluginVersion()}</h1>
+                        <h2 class="pb-2 text-xl">在线字体分包器 {PluginVersion()}</h2>
                         <div>
                             {file()!.name} | {prettyBytes(file()!.size)}
                         </div>

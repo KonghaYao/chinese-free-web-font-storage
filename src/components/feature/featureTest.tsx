@@ -13,7 +13,7 @@ export const FeatureTest = () => {
     return (
         <div class="m-auto max-w-3xl select-text py-8" ref={root!}>
             <header class="pb-8">
-                <h1 class="py-4 text-center text-4xl">字体特性渲染</h1>
+                <h2 class="py-4 text-center text-4xl">字体特性渲染</h2>
                 <p class="text-gray-700">
                     下列为 Web 字体的特性渲染测试，展示部分字体的特性渲染效果。
                     本网页期望呈现较为完整的各种 opentype 特性在 cn-font-split

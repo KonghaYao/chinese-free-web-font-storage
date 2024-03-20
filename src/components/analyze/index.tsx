@@ -49,7 +49,7 @@ export const FontAnalyzeUI = () => {
             fallback={
                 <main>
                     <section class="flex w-full flex-col items-center justify-center p-12">
-                        <h1 class="text-xl">在线字体分析器</h1>
+                        <h2 class="text-xl">在线字体分析器</h2>
                         <DragDropButton
                             accept=".ttf,.otf,.woff2"
                             onGetFile={(file) => {
@@ -91,8 +91,8 @@ const AnalyzeResult = ({
 }) => {
     return (
         <article class="mx-auto my-8 min-h-[80vh]  max-w-3xl bg-white p-8 lg:max-w-6xl">
-            <h1 class="py-2 text-center text-2xl">字体检测报告</h1>
-            <h2 class="flex justify-between py-2 text-center">
+            <h2 class="py-2 text-center text-2xl">字体检测报告</h2>
+            <h3 class="flex justify-between py-2 text-center">
                 <span>📖{filename}</span>
                 <span>
                     <button class="px-2 text-blue-500 print:hidden " onclick={() => window.print()}>
@@ -100,7 +100,7 @@ const AnalyzeResult = ({
                     </button>
                     ✨中文网字计划提供
                 </span>
-            </h2>
+            </h3>
             <details open>
                 <summary>字体首部信息表</summary>
                 <StringObjectToTable

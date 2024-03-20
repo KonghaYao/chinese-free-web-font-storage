@@ -66,9 +66,9 @@ export const CDNAnalyze = () => {
     const trafficAreaList = reflect(() => data()?.list);
     return (
         <>
-            <h1 class=" my-12 text-center text-3xl leading-9">
+            <h2 class=" my-12 text-center text-3xl leading-9">
                 中文网字计划 CDN 分析 -- 近 30 天使用情况
-            </h1>
+            </h2>
             <section class="m-auto grid max-w-7xl grid-cols-3 gap-4">
                 <div>
                     <Show when={trafficCache()}>
