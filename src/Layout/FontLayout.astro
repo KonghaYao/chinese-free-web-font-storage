@@ -24,9 +24,9 @@ const font_name_cn = (Index as Record<string, { name: string }>)[font]?.name;
 ---
 
 <Layout
-    canonicalURL={`/fonts/${font}`}
     defaultFontCSS={__CDN__ + `/packages/${font}/dist/${fileName}/result.css`}
-    title={font_name + ' - 中文网字计划'}
+    title={font_name_cn + ' - 中文网字计划'}
+    description={font_name_cn + '是一款精美的在线字体，可通过CSS Web引用直接使用。提供多种字体样式和设计，让您的网站更加独特和吸引人。快来体验AAA在线字体，为您的网站增添无限魅力。'}
     style={style}
     keywords={font_name_cn}
     image={__CDN__ + `/packages/${font}/dist/${fileName}/preview.svg`}
