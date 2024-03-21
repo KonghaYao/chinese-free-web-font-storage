@@ -28,6 +28,7 @@ const font_name_cn = (Index as Record<string, { name: string }>)[font]?.name;
     defaultFontCSS={__CDN__ + `/packages/${font}/dist/${fileName}/result.css`}
     title={font_name + ' - 中文网字计划'}
     style={style}
+    keywords={font_name_cn}
     image={__CDN__ + `/packages/${font}/dist/${fileName}/preview.svg`}
 >
     <section class="grid grid-cols-6 lg:grid-cols-12 gap-4 p-4 lg:max-w-6xl lg:m-auto">
