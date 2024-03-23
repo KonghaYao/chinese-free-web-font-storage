@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@konghayao/cn-font-split':
-        specifier: ^4.11.0
-        version: 4.11.0
+        specifier: ^4.12.0
+        version: 4.12.0
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
@@ -70,15 +70,19 @@ importers:
 
   packages/jxzk: {}
 
+  packages/lxgwmanhei: {}
+
   packages/lxgwwenkai: {}
 
   packages/mksjh: {}
+
+  packages/mkwtyt: {}
 
   packages/mkzyt: {}
 
   packages/mzxst: {}
 
-  packages/pxzs: {}
+  packages/pmzdxxt: {}
 
   packages/qtbfsxt: {}
 
@@ -96,13 +100,21 @@ importers:
 
   packages/stmdxf: {}
 
+  packages/syftjkt: {}
+
+  packages/sypxzs: {}
+
   packages/syst: {}
 
   packages/tjl: {}
 
+  packages/xiaolai: {}
+
   packages/xuandongkaishu: {}
 
   packages/yidianyan: {}
+
+  packages/yozai: {}
 
   packages/ysbth: {}
 
@@ -151,17 +163,18 @@ packages:
     resolution: {integrity: sha512-BckHvA2XdjRBVAWe2uceNuRf78lBeI28kyWEbfr/Q2pE17POkwuZ6WWY/UMv8FL9iBxhW4xfDoNLM9UVZaTeUQ==}
     dev: false
 
-  /@konghayao/cn-font-split@4.11.0:
-    resolution: {integrity: sha512-liRJKYYgyxmpV1wxArb1yGiPZ9ck9DOd0ml4fHmUaHgs00MBYu7N2fWidQU/XVktB7oEQ2DYgiYqyYy4zPfC3Q==}
+  /@konghayao/cn-font-split@4.12.0:
+    resolution: {integrity: sha512-hD6ytiRJo+m2+b/Accl7blyDtUM5CuUal21USPe6PgPl/0v1T4ujdXJOnpNHGOv16+QzdxcOREgyW3JIIpDqZw==}
     hasBin: true
     dependencies:
       '@chinese-fonts/font-contours': 1.0.0
       '@chinese-fonts/wawoff2': 2.0.5
       '@japont/unicode-range': 1.0.0
-      '@konghayao/harfbuzzjs': 8.2.2
-      '@konghayao/opentype.js': 2023.11.20
+      '@konghayao/harfbuzzjs': 8.3.1
+      '@konghayao/opentype.js': 2024.3.19
       '@napi-rs/woff-build': 0.1.1
       byte-size: 8.1.1
+      font-sharp: 4.11.3(@konghayao/harfbuzzjs@8.3.1)
       fs-extra: 11.2.0
       md5: 2.3.0
       os-locale: 6.0.2
@@ -172,12 +185,12 @@ packages:
       - supports-color
     dev: false
 
-  /@konghayao/harfbuzzjs@8.2.2:
-    resolution: {integrity: sha512-fWz2KcZX9qLmYZtd5F1mX3maaeqsF2iSNriXe23IZGirlIodunEvtphz18FJkDhPRBgNs7yBkZ+YzdVIRpiLOA==}
+  /@konghayao/harfbuzzjs@8.3.1:
+    resolution: {integrity: sha512-w0MZaFTF7O4YtXvUH/brV9VqvY5OfYxlZ9xDtqM3vrAIyq/KAckvJHyqWeMdmMQ9aCqWRfgZOLfhX3HQivWdOg==}
     dev: false
 
-  /@konghayao/opentype.js@2023.11.20:
-    resolution: {integrity: sha512-08iEkCdIZiZiLrKCZ2V57jg/tHX2PnJpgc7aSFFm84q4GT5ZeKjVWKVw4YKg5iAfc/OVkXceNP5+i4L4oCoB+A==}
+  /@konghayao/opentype.js@2024.3.19:
+    resolution: {integrity: sha512-BL8ymzIcpRkMZdM5/KjKuQcQi4/7ygodnd6cu8m3aipCaFWNzp2hGJG/aNLsTxUX4tfWu6kk51pKmcP1a0IpHA==}
     hasBin: true
     dependencies:
       eslint-plugin-local-rules: 2.0.1
@@ -1066,6 +1079,14 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
+
+  /font-sharp@4.11.3(@konghayao/harfbuzzjs@8.3.1):
+    resolution: {integrity: sha512-XnLHdbQHsJjUq9vPpL2/q4eviYfSEjoWblxKdSPxNrWUmn/uZBJEtXMzxN282CSXoCIrvbo9k3LlBRFvHtorZQ==}
+    peerDependencies:
+      '@konghayao/harfbuzzjs': ^8
+    dependencies:
+      '@konghayao/harfbuzzjs': 8.3.1
     dev: false
 
   /for-in@1.0.2:

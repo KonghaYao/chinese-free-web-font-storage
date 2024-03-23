@@ -13,9 +13,9 @@ const input = mri(argv);
 
 // chinese-fonts@snapmail.cc
 const imagekit = new ImageKit({
-    publicKey: "public_qBVBt6ceitU5sKA6JWgIOZnyqBw=",
+    publicKey: process.env.IMAGEKIT_PUBLIC,
     privateKey: process.env.IMAGEKIT_TOKEN,
-    urlEndpoint: "https://ik.imagekit.io/chinesefonts/",
+    urlEndpoint: process.env.IMAGEKIT_ENDPOINT,
 });
 
 const files = await glob(`./packages/**/*.svg`, {
@@ -26,7 +26,7 @@ let cache = new Set();
 try {
     const data = await fs.promises.readFile("./scripts/.upload_cache", "utf-8");
     cache = new Set(JSON.parse(data));
-} catch (e) {}
+} catch (e) { }
 
 const uploadFolder = async (iterator) => {
     const file = await fs.promises.readFile(iterator);
