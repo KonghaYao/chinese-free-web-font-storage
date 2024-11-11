@@ -31,8 +31,8 @@ export default () => {
             resultList([]);
             const arrayBuffer = await file()!.arrayBuffer();
             return cnFontSplit({
-                destFold: '',
-                FontPath: new Uint8Array(arrayBuffer),
+                outDir: '',
+                input: new Uint8Array(arrayBuffer),
                 previewImage: {},
                 log(...args) {
                     logMessage((i) => [...i, args.join(' ')]);
@@ -45,10 +45,15 @@ export default () => {
                             : new Uint8Array(await new Blob([file]).arrayBuffer());
                     resultList((i) => [...i, { name: path, buffer }]);
                 },
-            }).then((res) => {
-                Notice.success($t('c6e54d3220f071c30f4369084b2d44d9'));
-                return res;
-            });
+            })
+                .then((res) => {
+                    Notice.success($t('c6e54d3220f071c30f4369084b2d44d9'));
+                    return res;
+                })
+                .catch((e) => {
+                    console.error(e);
+                    throw e;
+                });
         },
         {
             immediately: false,
