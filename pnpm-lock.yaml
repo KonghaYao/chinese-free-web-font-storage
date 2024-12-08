@@ -50,9 +50,12 @@ importers:
       animejs:
         specifier: ^3.2.2
         version: 3.2.2
+      buffer:
+        specifier: ^6.0.3
+        version: 6.0.3
       cn-font-split-wasm:
-        specifier: ^1.2.0
-        version: 1.2.0
+        specifier: ^1.2.1
+        version: 1.2.1
       copy-to-clipboard:
         specifier: ^3.3.3
         version: 3.3.3
@@ -2121,8 +2124,8 @@ packages:
   cn-font-metrics@2.1.6:
     resolution: {integrity: sha512-FwUzUb2SKm3QO6Jnb25kr0S8MqmfoZ43EJxDro8lV9KFlSPXvGihrM4TyMFaqMgi0HCRMcGdPzI1NANHlxDoug==}
 
-  cn-font-split-wasm@1.2.0:
-    resolution: {integrity: sha512-Om/+DyTbk7ez4ElkqSkP6DWRjt5AmL0zBQwFAcWiBFgLch1v+Ws/60bj0xxCwotKjHrhIRs6rBYJZz5q/lYM0w==}
+  cn-font-split-wasm@1.2.1:
+    resolution: {integrity: sha512-Q1AsJzhnBr2O2JVcs0ixQTPkiumQjdEa5Sxn/5XrZyLWOM9EKwBEpS/tMlIQ7CwTBs9nrj+DoscmRAGYG29zQg==}
 
   cn-font-split@5.2.2:
     resolution: {integrity: sha512-p8zxHrzsjZHexV2HIF84juvE7Pg/b19YAl75hHzcsb3wshS5z+OCx1fzzTxeeSCBXHC6KG9E1cBIOeWq6s43dA==}
@@ -7711,7 +7714,7 @@ snapshots:
       - encoding
       - webpack-sources
 
-  cn-font-split-wasm@1.2.0:
+  cn-font-split-wasm@1.2.1:
     dependencies:
       '@tybys/wasm-util': 0.9.0
       buffer: 6.0.3
