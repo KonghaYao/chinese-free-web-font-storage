@@ -7,11 +7,8 @@ import { fontSplit, proto, StaticWasm } from 'cn-font-split-wasm';
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
 const wasm = new StaticWasm(
-    'https:/ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.0-beta-1/cn-font-split-7.0.0-beta-1-wasm32-wasi.Oz.wasm'
+    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.0-beta-1/cn-font-split-7.0.0-beta-1-wasm32-wasi.Oz.wasm'
 );
-wasm.wasmBuffer = fetch(
-    'https:/ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.0-beta-1/cn-font-split-7.0.0-beta-1-wasm32-wasi.Oz.wasm'
-).then((res) => res.arrayBuffer());
 export default () => {
     const file = atom<File | null>(null);
     const logMessage = ArrayAtom<string[]>(['选择字体，即可开始构建字体分包']);
