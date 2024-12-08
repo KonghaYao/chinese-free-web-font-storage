@@ -3,15 +3,13 @@ import { DragDropButton } from '~/components/DragButton/index';
 import { ArrayAtom, atom, classHelper, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '~/Notice';
-import { fontSplit, proto } from 'cn-font-split-wasm';
-import { Buffer } from 'buffer';
+import { fontSplit, proto, StaticWasm } from 'cn-font-split-wasm';
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
-const preload = fetch(
+const wasm = new StaticWasm(
     'https:/ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.0-beta-1/cn-font-split-7.0.0-beta-1-wasm32-wasi.Oz.wasm'
-).then((res) => res.arrayBuffer());
+);
 export default () => {
-    globalThis.Buffer = Buffer;
     const file = atom<File | null>(null);
     const logMessage = ArrayAtom<string[]>(['选择字体，即可开始构建字体分包']);
     const resultList = atom<{ name: string; buffer: Uint8Array }[]>([]);
@@ -29,7 +27,6 @@ export default () => {
             logMessage(['分包中，请坐和放宽']);
             resultList([]);
 
-            const bufferSource = new Uint8Array(await preload).slice(0);
             const startTime = performance.now();
             const arrayBuffer = await file()!.arrayBuffer();
             return fontSplit(
@@ -37,7 +34,7 @@ export default () => {
                     out_dir: '',
                     input: new Uint8Array(arrayBuffer),
                 },
-                (imports) => WebAssembly.instantiate(bufferSource, imports as any),
+                wasm.WasiHandle,
                 {
                     logger(str, type) {
                         logMessage((i) => [...i, str]);
