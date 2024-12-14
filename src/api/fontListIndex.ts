@@ -51,7 +51,7 @@ export const getHotLink = asyncCache(async () => {
 });
 
 export const sortFontListByRemoteCount = async <
-    T extends { id: string; name: string; hot: boolean },
+    T extends { id: string; name: string; hot: boolean; remotePath: any[] },
 >(
     files: T[]
 ): Promise<T[]> => {
@@ -64,9 +64,16 @@ export const sortFontListByRemoteCount = async <
             if (item) {
                 item.hot = true;
             }
-            return item;
+            return item!;
         })
         .filter(Boolean);
     // 解析最终的结果
-    return [...new Set([...hot, ...files])] as T[];
+    return [...new Set([...sortGrid(hot), ...files])] as T[];
+};
+
+/** 使得三列布局更紧凑 */
+export const sortGrid = <T extends { id: string; remotePath: any[] }>(files: T[]): T[] => {
+    return files.sort((a, b) => {
+        return a.remotePath.length - b.remotePath.length;
+    });
 };
