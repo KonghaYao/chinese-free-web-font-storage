@@ -3,11 +3,11 @@ import { DragDropButton } from '~/components/DragButton/index';
 import { ArrayAtom, atom, classHelper, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '~/Notice';
-import { fontSplit, proto, StaticWasm } from 'cn-font-split-wasm';
+import { fontSplit, proto, StaticWasm } from 'cn-font-split/dist/wasm/index';
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
 const wasm = new StaticWasm(
-    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.1/libffi-wasm32-wasip1.wasm'
+    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.2/libffi-wasm32-wasip1.wasm'
 );
 export default () => {
     const file = atom<File | null>(null);
@@ -31,7 +31,7 @@ export default () => {
             const arrayBuffer = await file()!.arrayBuffer();
             return fontSplit(
                 {
-                    out_dir: '',
+                    outDir: '',
                     input: new Uint8Array(arrayBuffer),
                 },
                 wasm.WasiHandle,
