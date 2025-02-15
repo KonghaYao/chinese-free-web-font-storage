@@ -71,7 +71,7 @@
         "solid-mdx": "^0.0.7",
         "tailwindcss": "^3.4.17",
         "unplugin-auto-import": "^19.0.0",
-        "vinxi": "^0.5.3"
+        "vinxi": "^0.5.0"
     },
     "browserslist": [
         "last 2 version",
@@ -80,6 +80,7 @@
     ],
     "resolutions": {
         "@solid-primitives/refs": "1.0.8",
+        "vinxi": "0.5.1",
         "@solid-primitives/utils":"6.2.3"
     }
 }
