@@ -1,4 +1,4 @@
 // @refresh reload
 import './polyfill';
 import { mount, StartClient } from '@solidjs/start/client';
-mount(() => <StartClient />, document.getElementById('app')!);
+export default mount(() => <StartClient />, document.getElementById('app')!);
