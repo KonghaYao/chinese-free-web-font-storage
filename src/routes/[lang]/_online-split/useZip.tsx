@@ -1,4 +1,5 @@
-import { saveAs } from 'file-saver';
+import save from 'file-saver';
+const { saveAs } = save;
 import { resource, type Atom } from '@cn-ui/reactive';
 import { Notice } from '~/Notice';
 
