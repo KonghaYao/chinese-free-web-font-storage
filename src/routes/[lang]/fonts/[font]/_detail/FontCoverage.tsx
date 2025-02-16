@@ -25,8 +25,8 @@ const range = [
     ['注音扩展', 0x31a0, 0x31ba],
 ] as [string, number, number][];
 export default (props: { reporter: FontReporter }) => {
-    const total = props.reporter.subsetDetail.reduce((col, cur) => {
-        return col + String.fromCharCode(cur.chars);
+    const total = props.reporter.subsetDetail!.reduce((col, cur) => {
+        return col + String.fromCharCode(...cur.chars!);
     }, '');
 
     const result = range.map(([name, min, max]) => {

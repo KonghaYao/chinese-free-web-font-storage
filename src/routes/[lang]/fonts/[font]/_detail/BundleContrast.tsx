@@ -3,7 +3,7 @@ import prettyBytes from 'pretty-bytes';
 
 /** 展示打包数据的信息 */
 export const BundleContrast = (props: { reporter: FontReporter }) => {
-    const bundleMessage = props.reporter.bundleMessage;
+    const bundleMessage = props.reporter.bundleMessage!;
     return (
         <div class="rounded-lg bg-white p-4 ">
             <h2 class="pb-4 text-lg">{$t('1e0ec07b9dc50393b26d2cc2ff30ff61')}</h2>
@@ -11,15 +11,14 @@ export const BundleContrast = (props: { reporter: FontReporter }) => {
                 <li>
                     {$t('768b24856a32ff199b6f65225626991c')}
                     <span class="float-right text-green-600">
-                        {prettyBytes(bundleMessage.originBytes)} {prettyBytes(bundleMessage.bundledBytes)} |
-                        {(
-                            (bundleMessage.bundledBytes * 100) /
-                            bundleMessage.originBytes
-                        ).toFixed(2)}
+                        {prettyBytes(bundleMessage.originBytes!)}{' '}
+                        {prettyBytes(bundleMessage.bundledBytes!)} |
+                        {((bundleMessage.bundledBytes! * 100) / bundleMessage.originBytes!).toFixed(
+                            2
+                        )}
                         %
                     </span>
                 </li>
-
             </ul>
         </div>
     );

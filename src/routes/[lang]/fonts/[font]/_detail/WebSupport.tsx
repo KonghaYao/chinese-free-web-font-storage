@@ -1,6 +1,5 @@
 import { ensureFontMessageString } from '~/utils/ensureFontMessageString';
 import { AllCDN } from '~/global';
-import type { NameTable } from 'cn-font-split/dist/templates/reporter';
 import type { FontReporter } from 'cn-font-split';
 import { Code } from '~/components/Code';
 
@@ -9,7 +8,8 @@ export default (props: { reporter: FontReporter }) => {
 
     const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
     const theme = 'github-light' as const;
-    const message = (props.reporter.message.windows as NameTable) ?? props.reporter.message;
+    /** @ts-ignore */
+    const message = props.reporter.message.windows || {};
     return (
         <>
             <header class="my-4 text-lg">

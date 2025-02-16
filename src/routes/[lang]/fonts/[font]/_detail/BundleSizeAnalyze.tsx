@@ -2,7 +2,7 @@ import { ECharts } from '../../../../../components/ECharts';
 import { FontReporter } from 'cn-font-split';
 /** 打包分片分析*/
 export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
-    const { subsetDetail: data } = props.reporter;
+    const subsetDetail = props.reporter.subsetDetail!;
 
     return (
         <ECharts
@@ -10,7 +10,7 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: data.map((i) => i.fileName.slice(0, 7)),
+                    data: subsetDetail.map((i) => i.fileName!.slice(0, 7)),
                 },
                 grid: {
                     top: '25%',
@@ -36,13 +36,13 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                     trigger: 'axis',
                 },
                 textStyle: {
-                    fontFamily: props.reporter.css.family,
+                    fontFamily: props.reporter.css!.family,
                 },
                 title: {
                     top: '5%',
                     left: '5%',
-                    text: props.reporter.css.family,
-                    subtext: `总共 ${data.length} 分包; `,
+                    text: props.reporter.css!.family,
+                    subtext: `总共 ${subsetDetail.length} 分包; `,
                 },
                 series: [
                     {
@@ -58,7 +58,7 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                         markLine: {
                             data: [{ type: 'average', name: 'Avg' }],
                         },
-                        data: data.map((i) => i.bytes>>10),
+                        data: subsetDetail.map((i) => i.bytes! >> 10),
                     },
                     {
                         name: '分包字符数',
@@ -67,12 +67,11 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                         markLine: {
                             data: [{ type: 'average', name: 'Avg' }],
                         },
-                        data: data.map((i) => i.chars.length),
+                        data: subsetDetail.map((i) => i.chars!.length),
                     },
                 ],
             }}
-            onReady={(chart) => {
-            }}
+            onReady={(chart) => {}}
         ></ECharts>
     );
 };

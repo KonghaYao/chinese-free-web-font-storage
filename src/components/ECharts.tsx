@@ -1,6 +1,4 @@
-import { isServer } from 'solid-js/web';
 import { atom } from '@cn-ui/reactive';
-import { onCleanup, onMount } from 'solid-js';
 import { type EChartsCoreOption, type ECharts as _ECharts } from 'echarts/core';
 import { createAsync } from '@solidjs/router';
 const renderSVGChart = async (reporter: EChartsCoreOption, dom: HTMLElement | null = null) => {
