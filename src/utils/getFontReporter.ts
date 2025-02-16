@@ -1,4 +1,4 @@
-import { decodeReporter } from 'cn-font-split';
+import { decodeReporter } from 'cn-font-split/dist/createAPI';
 import { __CDN__ } from '../global';
 const cache = new Map<string, Promise<any>>();
 export const getFontReporter = (font: string, fileName: string) => {
