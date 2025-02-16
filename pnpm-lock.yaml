@@ -137,8 +137,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.2)
       cn-font-split:
-        specifier: ^7.2.3
-        version: 7.2.3
+        specifier: ^7.2.4
+        version: 7.2.4
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
@@ -2136,8 +2136,8 @@ packages:
   cn-font-metrics@2.1.6:
     resolution: {integrity: sha512-FwUzUb2SKm3QO6Jnb25kr0S8MqmfoZ43EJxDro8lV9KFlSPXvGihrM4TyMFaqMgi0HCRMcGdPzI1NANHlxDoug==}
 
-  cn-font-split@7.2.3:
-    resolution: {integrity: sha512-Rwv0XblHF4X3tdoWSjL8P5/tB2q0XKw8tF1nz9kBKSe0gAiOPBoQUP8ZT+qADPZxqs/6UgcOHPL+5uAoMXkxNg==}
+  cn-font-split@7.2.4:
+    resolution: {integrity: sha512-3rLeiGCSjJJPmk4rtPOXTYFim2ZnrTmkwkOMCmLBrzKcqTZUFrB1u9rSi2NwgZI+2N4J7iNY/mjwemW6s6Y9sA==}
     hasBin: true
 
   code-excerpt@4.0.0:
@@ -7877,7 +7877,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  cn-font-split@7.2.3:
+  cn-font-split@7.2.4:
     dependencies:
       buffer: 6.0.3
       commander: 12.1.0
@@ -11567,7 +11567,7 @@ snapshots:
   vite-plugin-font@5.1.0:
     dependencies:
       cn-font-metrics: 2.1.6
-      cn-font-split: 7.2.3
+      cn-font-split: 7.2.4
       fontaine: 0.5.0
       fs-extra: 11.3.0
       glob: 11.0.1

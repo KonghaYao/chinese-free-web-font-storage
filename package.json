@@ -18,7 +18,7 @@
         "@types/fs-extra": "^9.0.13",
         "@types/md5": "^2.3.5",
         "autoprefixer": "^10.4.20",
-        "cn-font-split": "^7.2.3",
+        "cn-font-split": "^7.2.4",
         "fs-extra": "^11.3.0",
         "i18nation": "^1.5.1",
         "lenis": "^1.1.20",

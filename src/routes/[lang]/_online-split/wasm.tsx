@@ -3,17 +3,17 @@ import { DragDropButton } from '~/components/DragButton/index';
 import { ArrayAtom, atom, classHelper, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '~/Notice';
-import { fontSplit, proto, StaticWasm } from 'cn-font-split/dist/wasm/index';
+import { fontSplit, StaticWasm } from 'cn-font-split/dist/wasm/index';
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
 const wasm = new StaticWasm(
-    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.0.2/libffi-wasm32-wasip1.wasm'
+    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.2.1/libffi-wasm32-wasip1.wasm'
 );
 export default () => {
     const file = atom<File | null>(null);
     const logMessage = ArrayAtom<string[]>(['选择字体，即可开始构建字体分包']);
     const resultList = atom<{ name: string; buffer: Uint8Array }[]>([]);
-    const PluginVersion = atom('7.0.0-beta-1');
+    const PluginVersion = atom('7.2.3');
 
     /** 监控 zip 压缩 */
     const createZip = useZip(() => {
@@ -51,7 +51,7 @@ export default () => {
                 );
                 const reporter = res.find((i) => i?.name === 'reporter.bin')!;
                 if (reporter) {
-                    return proto.OutputReport.deserializeBinary(reporter.data);
+                    return decodeReporter(reporter.data);
                 }
                 return {} as any;
             });

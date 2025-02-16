@@ -1,19 +1,17 @@
-import { FontReporter } from 'cn-font-split';
+import type { FontReporter } from 'cn-font-split';
 import FontCoverage from './FontCoverage';
 export const BasicMessage = (props: { reporter: FontReporter }) => {
     const { name: font_name } = useParams();
     return (
         <>
             <section class="col-span-6 lg:col-span-12 grid grid-cols-2 border-card p-12 hover:border-emerald-500 gap-8">
-                <div class='overflow-hidden flex flex-col'>
+                <div class="overflow-hidden flex flex-col">
                     <header class="rounded-md p-2 bg-blue-600 text-white text-lg mb-6">
                         {$t('289fd0d6ffaf86171d9d0ea8f4c9ca3a')}
                     </header>
                     <table class="my-4 w-full table-fixed">
                         <tbody>
-                            {Object.entries(
-                                props.reporter.message.windows
-                            ).map(([key, val]) => {
+                            {Object.entries(props.reporter.message.windows).map(([key, val]) => {
                                 return (
                                     <tr class=" transition-colors hover:bg-white">
                                         <td class="px-4 text-sky-600">{key}</td>

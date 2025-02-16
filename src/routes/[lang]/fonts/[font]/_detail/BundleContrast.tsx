@@ -1,4 +1,4 @@
-import { FontReporter } from 'cn-font-split';
+import type { FontReporter } from 'cn-font-split';
 import prettyBytes from 'pretty-bytes';
 
 /** 展示打包数据的信息 */

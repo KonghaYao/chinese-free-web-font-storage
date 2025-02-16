@@ -1,5 +1,5 @@
 import { ECharts } from '../../../../../components/ECharts';
-import { FontReporter } from 'cn-font-split';
+import type { FontReporter } from 'cn-font-split';
 /** 打包分片分析*/
 export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
     const subsetDetail = props.reporter.subsetDetail!;
