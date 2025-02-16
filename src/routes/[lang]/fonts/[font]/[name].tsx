@@ -33,7 +33,7 @@ export default () => {
             <div
                 class="grid grid-cols-6 lg:grid-cols-12 gap-8 p-4 lg:max-w-6xl lg:m-auto"
                 style={{
-                    'font-family': `"${reporter()?.css.family}"`,
+                    'font-family': `'${reporter()?.css.family}'`,
                     'font-weight': reporter()?.css.weight,
                 }}
             >

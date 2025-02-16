@@ -1,20 +1,16 @@
-import { ensureFontMessageString } from '~/utils/ensureFontMessageString';
-import { UnicodeRange } from '@japont/unicode-range';
 import { ECharts } from '../../../../../components/ECharts';
-import type { NameTable } from 'cn-font-split/dist/templates/reporter';
 import { FontReporter } from 'cn-font-split';
 /** 打包分片分析*/
 export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
-    const { data } = props.reporter;
+    const { subsetDetail: data } = props.reporter;
 
-    const message = (props.reporter.message.windows as NameTable) ?? props.reporter.message;
     return (
         <ECharts
             options={{
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: data.map((i) => i.name.slice(0, 7)),
+                    data: data.map((i) => i.fileName.slice(0, 7)),
                 },
                 grid: {
                     top: '25%',
@@ -40,12 +36,12 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                     trigger: 'axis',
                 },
                 textStyle: {
-                    fontFamily: ensureFontMessageString(message.fontFamily),
+                    fontFamily: props.reporter.css.family,
                 },
                 title: {
                     top: '5%',
                     left: '5%',
-                    text: ensureFontMessageString(message.fontFamily),
+                    text: props.reporter.css.family,
                     subtext: `总共 ${data.length} 分包; `,
                 },
                 series: [
@@ -62,7 +58,7 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                         markLine: {
                             data: [{ type: 'average', name: 'Avg' }],
                         },
-                        data: data.map((i) => i.size >> 10),
+                        data: data.map((i) => i.bytes>>10),
                     },
                     {
                         name: '分包字符数',
@@ -71,24 +67,11 @@ export const BundleSizeAnalyze = (props: { reporter: FontReporter }) => {
                         markLine: {
                             data: [{ type: 'average', name: 'Avg' }],
                         },
-                        data: data.map((i) => UnicodeRange.parse(i.chars.split(',')).length),
+                        data: data.map((i) => i.chars.length),
                     },
                 ],
             }}
             onReady={(chart) => {
-                chart.on('click', (value) => {
-                    const hash = value.name;
-
-                    console.log(
-                        String.fromCharCode(
-                            ...UnicodeRange.parse(
-                                props.reporter.data
-                                    .find((i) => i.name.startsWith(hash))
-                                    ?.chars.split(',') || []
-                            )
-                        )
-                    );
-                });
             }}
         ></ECharts>
     );
