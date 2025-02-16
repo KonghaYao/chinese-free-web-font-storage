@@ -1,6 +1,6 @@
 import { atom, resource } from '@cn-ui/reactive';
-import { FontAnalyze } from 'font-analyze';
-import { Match, Switch, batch } from 'solid-js';
+import type { FontAnalyze } from 'font-analyze';
+import { Match, Switch } from 'solid-js';
 import './analyze.css';
 import { DragDropButton } from '~/components/DragButton';
 import { StringObjectToTable } from './Coverage/StringObjectToTable';
@@ -27,11 +27,15 @@ export default () => {
             if (f().name.endsWith('.woff2')) {
                 const { convert } = await import(
                     /** @ts-ignore */
-                    'https://jsdelivr.deno.dev/npm/cn-font-split/dist/browser/index.js'
+                    'https://jsdelivr.deno.dev/npm/cn-font-split@6/dist/browser/index.js'
                 );
                 buffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
             }
             fontURL(URL.createObjectURL(new Blob([buffer])));
+            const { FontAnalyze } = await import(
+                /** @ts-ignore */
+                'https://jsdelivr.deno.dev/npm/font-analyze@1.3.3'
+            );
             return FontAnalyze(buffer, {
                 charsetLoader(name) {
                     return fetch(

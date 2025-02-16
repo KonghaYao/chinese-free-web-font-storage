@@ -27,7 +27,7 @@ export default defineConfig({
             ),
         },
     },
-    middleware: "./src/middleware.ts",
+    middleware: './src/middleware.ts',
     ssr: true,
     vite: {
         build: {
