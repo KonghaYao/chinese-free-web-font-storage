@@ -22,8 +22,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       '@konghayao/opentype.js':
-        specifier: ^2024.5.25
-        version: 2024.5.25
+        specifier: ^2023.11.20
+        version: 2023.11.20
       '@mdx-js/mdx':
         specifier: ^2.3.0
         version: 2.3.0
@@ -905,10 +905,6 @@ packages:
 
   '@konghayao/opentype.js@2023.11.20':
     resolution: {integrity: sha512-08iEkCdIZiZiLrKCZ2V57jg/tHX2PnJpgc7aSFFm84q4GT5ZeKjVWKVw4YKg5iAfc/OVkXceNP5+i4L4oCoB+A==}
-    hasBin: true
-
-  '@konghayao/opentype.js@2024.5.25':
-    resolution: {integrity: sha512-v21TwE1gD/GsfD+6l941lQTMTjM3my8xZfvi9fcqmd04kM7561cKrosoJnSU2W0BrYjo3+hACWtSI/qlcAlVRQ==}
     hasBin: true
 
   '@langchain/core@0.2.36':
@@ -6251,8 +6247,6 @@ snapshots:
   '@konghayao/opentype.js@2023.11.20':
     dependencies:
       eslint-plugin-local-rules: 2.0.1
-
-  '@konghayao/opentype.js@2024.5.25': {}
 
   '@langchain/core@0.2.36(openai@4.85.1(ws@8.18.0)(zod@3.24.2))':
     dependencies:

@@ -40,7 +40,7 @@
         "@cn-ui/core": "^2.11.1",
         "@cn-ui/reactive": "^4.11.0",
         "@japont/unicode-range": "^1.0.0",
-        "@konghayao/opentype.js": "^2024.5.25",
+        "@konghayao/opentype.js": "^2023.11.20",
         "@mdx-js/mdx": "^2.3.0",
         "@microsoft/fetch-event-source": "^2.0.1",
         "@minht11/solid-virtual-container": "^0.2.1",
@@ -80,6 +80,6 @@
     ],
     "resolutions": {
         "@solid-primitives/refs": "1.0.8",
-        "@solid-primitives/utils":"6.2.3"
+        "@solid-primitives/utils": "6.2.3"
     }
 }
