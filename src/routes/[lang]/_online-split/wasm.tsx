@@ -3,7 +3,7 @@ import { DragDropButton } from '~/components/DragButton/index';
 import { ArrayAtom, atom, classHelper, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';
 import { Notice } from '~/Notice';
-import { fontSplit, StaticWasm } from 'cn-font-split/dist/wasm/index';
+import { fontSplit, decodeReporter, StaticWasm } from 'cn-font-split/dist/wasm/index';
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
 const wasm = new StaticWasm(
