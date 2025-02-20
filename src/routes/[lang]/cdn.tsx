@@ -115,9 +115,7 @@ export default () => {
                         😀
                     </p>
                 </section>
-                <Suspense>
-                    <SearchBox />
-                </Suspense>
+                <SearchBox />
             </main>
         </Layout>
     );
