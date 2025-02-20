@@ -9,7 +9,7 @@ export default (props: { reporter: FontReporter }) => {
     const CDNs = AllCDN.map((i) => i + `/packages/${font}/dist/${font_name}`);
     const theme = 'github-light' as const;
     /** @ts-ignore */
-    const message = props.reporter.message.windows || {};
+    const message = props.reporter.css || {};
     return (
         <>
             <header class="my-4 text-lg">
@@ -118,9 +118,7 @@ export default (props: { reporter: FontReporter }) => {
                 <Code
                     lang="css"
                     theme={theme}
-                    code={`article {\n    font-family:'${ensureFontMessageString(
-                        message.fontFamily
-                    )}';\n    font-weight:'${ensureFontMessageString(message.fontSubFamily) ?? '400'}'\n};`}
+                    code={`article {\n    font-family:'${message.family}';\n    font-weight:'${message.weight}'\n};`}
                 />
             </div>
             <A
