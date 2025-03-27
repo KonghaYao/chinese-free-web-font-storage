@@ -137,8 +137,8 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.2)
       cn-font-split:
-        specifier: ^7.2.4
-        version: 7.2.4
+        specifier: ^7.2.6
+        version: 7.2.6
       fs-extra:
         specifier: ^11.3.0
         version: 11.3.0
@@ -185,8 +185,8 @@ importers:
         specifier: ^2.2.5
         version: 2.2.5(mime-types@2.1.35)(vite@6.1.0(@types/node@22.13.4)(jiti@2.4.2)(less@4.2.2)(terser@5.39.0)(yaml@2.7.0))
       vite-plugin-font:
-        specifier: ^5.1.0
-        version: 5.1.0
+        specifier: ^5.1.1
+        version: 5.1.1
 
 packages:
 
@@ -2136,8 +2136,8 @@ packages:
   cn-font-metrics@2.1.6:
     resolution: {integrity: sha512-FwUzUb2SKm3QO6Jnb25kr0S8MqmfoZ43EJxDro8lV9KFlSPXvGihrM4TyMFaqMgi0HCRMcGdPzI1NANHlxDoug==}
 
-  cn-font-split@7.2.4:
-    resolution: {integrity: sha512-3rLeiGCSjJJPmk4rtPOXTYFim2ZnrTmkwkOMCmLBrzKcqTZUFrB1u9rSi2NwgZI+2N4J7iNY/mjwemW6s6Y9sA==}
+  cn-font-split@7.2.6:
+    resolution: {integrity: sha512-5zbHcaOQdDrOKo5LjiVZeJTltjxt8okiDKbVxsQ69LWVleK7b27IKWmk5dRo6B9qw2M98f4ebWvpLd//FA0Wpw==}
     hasBin: true
 
   code-excerpt@4.0.0:
@@ -2167,6 +2167,10 @@ packages:
 
   commander@12.1.0:
     resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
+    engines: {node: '>=18'}
+
+  commander@13.1.0:
+    resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
 
   commander@2.20.3:
@@ -4343,8 +4347,8 @@ packages:
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
 
-  proto-to-cli@1.1.5:
-    resolution: {integrity: sha512-ivcbpgCa2yTJYTTdQTXkz6XqeHhsdzXKxI4jRnjOWyQkWwjilI3tQ0hzLCHSGPjO4LwYK5x1P8a+wINF9AzvFQ==}
+  proto-to-cli@1.2.0:
+    resolution: {integrity: sha512-RvTJOj3dhfl1zcAW0KZCXkzV0Tz2+Ji9mH5umt0uopDjnaNR0IU2uzeeKv3uigmnjbtyUALuixcFZ8AuQjQ1sA==}
     hasBin: true
 
   protobufjs@7.4.0:
@@ -5230,8 +5234,8 @@ packages:
       mime-types: ^2.1.35
       vite: '>=2.9.6'
 
-  vite-plugin-font@5.1.0:
-    resolution: {integrity: sha512-afbEUBQO5uTOj9iFipjTcg2CMvurWGw4WDZk+hhGtp97s6HRllnF4gto28DG9Qndx2UcMaz5asuVoWjo12NNyw==}
+  vite-plugin-font@5.1.1:
+    resolution: {integrity: sha512-yZOKgHMKsB4Q8XmTtDcRXx03sYpeoLNGRWiUiwrOPKIfv+zEXNVTuyyVRPbktbPUsuOIsPFgubCdGgZBW/v02A==}
 
   vite-plugin-solid@2.11.1:
     resolution: {integrity: sha512-X9vbbK6AOOA6yxSsNl1VTuUq5y4BG9AR6Z5F/J1ZC2VO7ll8DlSCbOL+RcZXlRbxn0ptE6OI5832nGQhq4yXKQ==}
@@ -7877,14 +7881,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  cn-font-split@7.2.4:
+  cn-font-split@7.2.6:
     dependencies:
       buffer: 6.0.3
       commander: 12.1.0
       fs-extra: 11.3.0
       google-protobuf: 3.21.4
       koffi: 2.10.1
-      proto-to-cli: 1.1.5
+      proto-to-cli: 1.2.0
 
   code-excerpt@4.0.0:
     dependencies:
@@ -7907,6 +7911,8 @@ snapshots:
   commander@10.0.1: {}
 
   commander@12.1.0: {}
+
+  commander@13.1.0: {}
 
   commander@2.20.3: {}
 
@@ -10419,9 +10425,10 @@ snapshots:
 
   proto-list@1.2.4: {}
 
-  proto-to-cli@1.1.5:
+  proto-to-cli@1.2.0:
     dependencies:
-      commander: 12.1.0
+      change-case: 5.4.4
+      commander: 13.1.0
       fs-extra: 11.3.0
       protobufjs: 7.4.0
 
@@ -11564,10 +11571,10 @@ snapshots:
       vite: 6.1.0(@types/node@22.13.4)(jiti@2.4.2)(less@4.2.2)(terser@5.39.0)(yaml@2.7.0)
       watchpack: 2.4.2
 
-  vite-plugin-font@5.1.0:
+  vite-plugin-font@5.1.1:
     dependencies:
       cn-font-metrics: 2.1.6
-      cn-font-split: 7.2.4
+      cn-font-split: 7.2.6
       fontaine: 0.5.0
       fs-extra: 11.3.0
       glob: 11.0.1
