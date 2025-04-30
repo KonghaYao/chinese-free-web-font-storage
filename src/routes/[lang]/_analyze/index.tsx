@@ -27,19 +27,19 @@ export default () => {
             if (f().name.endsWith('.woff2')) {
                 const { convert } = await import(
                     /** @ts-ignore */
-                    'https://jsdelivr.deno.dev/npm/cn-font-split@6/dist/browser/index.js'
+                    'https://cdn.jsdelivr.net/npm/cn-font-split@6/dist/browser/index.js'
                 );
                 buffer = await convert(new Uint8Array(buffer), 'truetype', 'woff2');
             }
             fontURL(URL.createObjectURL(new Blob([buffer])));
             const { FontAnalyze } = await import(
                 /** @ts-ignore */
-                'https://jsdelivr.deno.dev/npm/font-analyze@1.3.3'
+                'https://cdn.jsdelivr.net/npm/font-analyze@1.3.3'
             );
             return FontAnalyze(buffer, {
                 charsetLoader(name) {
                     return fetch(
-                        `https://jsdelivr.deno.dev/npm/font-analyze@1.3.3/data/${name}`
+                        `https://cdn.jsdelivr.net/npm/font-analyze@1.3.3/data/${name}`
                     ).then((res) => res.json());
                 },
             }).then((result) => {

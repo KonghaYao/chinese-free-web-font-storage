@@ -7,7 +7,7 @@ import { fontSplit, decodeReporter, StaticWasm } from 'cn-font-split/dist/wasm/i
 import { useZip } from './useZip';
 import { getTestingFile } from './getVersions';
 const wasm = new StaticWasm(
-    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.6.1/libffi-wasm32-wasip1.wasm'
+    'https://ik.imagekit.io/github/KonghaYao/cn-font-split/releases/download/7.6.2/libffi-wasm32-wasip1.wasm'
 );
 export default () => {
     const file = atom<File | null>(null);

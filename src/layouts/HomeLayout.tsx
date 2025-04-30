@@ -33,7 +33,7 @@ export default (props: LayoutType) => {
                 href="https://chinese-fonts-cdn.netlify.app"
                 crossOrigin="anonymous"
             />
-            <Link rel="preconnect" href="https://jsdelivr.deno.dev/" crossOrigin="anonymous" />
+            <Link rel="preconnect" href="https://cdn.jsdelivr.net/" crossOrigin="anonymous" />
             <link
                 rel="stylesheet"
                 href="https://chinese-fonts-cdn.netlify.app/packages/jhlst/dist/%E4%BA%AC%E8%8F%AF%E8%80%81%E5%AE%8B%E4%BD%93v1_007/result.css"

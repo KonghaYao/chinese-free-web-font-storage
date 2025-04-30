@@ -4,7 +4,7 @@ import { Notice } from '~/Notice';
 export const PluginVersion = atom('');
 // 转为异步加载，防止文件发生阻塞
 let roots = [
-    'https://jsdelivr.deno.dev/npm/cn-font-split',
+    'https://cdn.jsdelivr.net/npm/cn-font-split',
     // 'https://cdn.jsdelivr.net/npm/cn-font-split',
 ];
 export const preload = () => {
@@ -34,7 +34,7 @@ export const preload = () => {
 /** 加载测试文件 */
 export const getTestingFile = () => {
     return fetch(
-        'https://jsdelivr.deno.dev/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
+        'https://cdn.jsdelivr.net/gh/KonghaYao/cn-font-split/packages/demo/public/SmileySans-Oblique.ttf'
     )
         .then((res) => res.blob())
         .then((res) => new File([res], 'SmileySans-Oblique.ttf'));
