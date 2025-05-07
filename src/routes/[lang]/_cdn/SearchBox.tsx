@@ -75,7 +75,7 @@ export const SearchBox = () => {
                                             alt=""
                                         />
                                         <span
-                                            title={`https://chinese-font.netlify.app/font-cdn/${remote.url}}`}
+                                            title={`https://chinese-fonts-cdn/${remote.url}}`}
                                             class="flex justify-evenly border-t pt-1 text-xs text-blue-400"
                                         >
                                             <span>{font.id}</span>
@@ -83,9 +83,7 @@ export const SearchBox = () => {
                                             <span
                                                 class="cursor-pointer text-blue-600 transition-colors"
                                                 onclick={() => {
-                                                    copy(
-                                                        `https://chinese-font.netlify.app/font-cdn/${remote.url}`
-                                                    );
+                                                    copy(`https://chinese-fonts-cdn/${remote.url}`);
                                                     Notice.success('复制 CDN 地址成功');
                                                     copied(true);
                                                 }}
@@ -106,7 +104,7 @@ export const SearchBox = () => {
                                         <div class="flex-1 overflow-hidden flex flex-col text-xs text-left gap-1 text-neutral-600 px-2 bg-gray-100">
                                             <h4>{$t('a5eb7686aca0662121e7c4f32c2f5bee')}</h4>
                                             <LinkCode
-                                                href={`https://chinese-font.netlify.app/font-cdn/${remote.url}`}
+                                                href={`https://chinese-fonts-cdn/${remote.url}`}
                                             ></LinkCode>
                                             <h4>{$t('e780454184b9e6853e444d6f372e7272')}</h4>
                                             <FontCode style={remote.style}></FontCode>
