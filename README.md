@@ -4,6 +4,8 @@
 
 [Netlify 网页](https://chinese-font.netlify.app/)
 
+[新模块 - font-now (直接上传并获取字体 CDN 链接)](https://font-now.netlify.app/)<br />
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4ab47951-5755-4360-9fe6-236bb5ee95db/deploy-status)](https://app.netlify.com/sites/chinese-font/deploys)
 
 ## 简介
@@ -14,6 +16,7 @@
 
 1. [中文字体切割插件 @konghayao/cn-font-split](https://github.com/KonghaYao/cn-font-split)
 2. [支持 Vite、Next、Nuxt、Webpack 的 vite-plugin-font](https://www.npmjs.com/package/vite-plugin-font)
+3. [支持用户自定义上传字体的字体 CDN 服务](https://github.com/KonghaYao/font-now)
 
 开发者只需要将字体源文件放置在 packages 文件夹下，项目将自动打包和分组。已发布到 NPM，欢迎广大开发者使用！
 
