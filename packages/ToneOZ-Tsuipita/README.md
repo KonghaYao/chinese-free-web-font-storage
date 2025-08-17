@@ -12,7 +12,7 @@
 
 ```html
 <link
-    href="https://unpkg.com/@chinese-fonts/ToneOZ-Tsuipita/dist/{具体的包名}/results.css"
+    href="https://unpkg.com/@chinese-fonts/toneoz-tsuipita/dist/{具体的包名}/results.css"
     rel="stylesheet"
 />
 ```
@@ -20,13 +20,13 @@
 ### 在项目中使用
 
 ```sh
-npm install @chinese-fonts/ToneOZ-Tsuipita
+npm install @chinese-fonts/toneoz-tsuipita
 ```
 
 ```ts
-import "@chinese-fonts/ToneOZ-Tsuipita/dist/{具体的包名}/results.css";
+import "@chinese-fonts/toneoz-tsuipita/dist/{具体的包名}/results.css";
 ```
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/fonts/ToneOZ-Tsuipita)
+详见 [官网](https://chinese-font.netlify.app/fonts/toneoz-tsuipita)

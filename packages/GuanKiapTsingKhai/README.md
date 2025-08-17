@@ -12,7 +12,7 @@
 
 ```html
 <link
-    href="https://unpkg.com/@chinese-fonts/GuanKiapTsingKhai/dist/{具体的包名}/results.css"
+    href="https://unpkg.com/@chinese-fonts/guan-kiap-tsing-khai/dist/{具体的包名}/results.css"
     rel="stylesheet"
 />
 ```
@@ -20,13 +20,13 @@
 ### 在项目中使用
 
 ```sh
-npm install @chinese-fonts/GuanKiapTsingKhai
+npm install @chinese-fonts/guan-kiap-tsing-khai
 ```
 
 ```ts
-import "@chinese-fonts/GuanKiapTsingKhai/dist/{具体的包名}/results.css";
+import "@chinese-fonts/guan-kiap-tsing-khai/dist/{具体的包名}/results.css";
 ```
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/fonts/GuanKiapTsingKhai)
+详见 [官网](https://chinese-font.netlify.app/fonts/guan-kiap-tsing-khai)

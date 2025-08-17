@@ -12,7 +12,7 @@
 
 ```html
 <link
-    href="https://unpkg.com/@chinese-fonts/ToneOZ-RadicalZ-Kai/dist/{具体的包名}/results.css"
+    href="https://unpkg.com/@chinese-fonts/toneoz-radicalz-kai/dist/{具体的包名}/results.css"
     rel="stylesheet"
 />
 ```
@@ -20,13 +20,13 @@
 ### 在项目中使用
 
 ```sh
-npm install @chinese-fonts/ToneOZ-RadicalZ-Kai
+npm install @chinese-fonts/toneoz-radicalz-kai
 ```
 
 ```ts
-import "@chinese-fonts/ToneOZ-RadicalZ-Kai/dist/{具体的包名}/results.css";
+import "@chinese-fonts/toneoz-radicalz-kai/dist/{具体的包名}/results.css";
 ```
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/fonts/ToneOZ-RadicalZ-Kai)
+详见 [官网](https://chinese-font.netlify.app/fonts/toneoz-radicalz-kai)

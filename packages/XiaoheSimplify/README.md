@@ -12,7 +12,7 @@
 
 ```html
 <link
-    href="https://unpkg.com/@chinese-fonts/XiaoheSimplify/dist/{具体的包名}/results.css"
+    href="https://unpkg.com/@chinese-fonts/xiaohe-simplify/dist/{具体的包名}/results.css"
     rel="stylesheet"
 />
 ```
@@ -20,13 +20,13 @@
 ### 在项目中使用
 
 ```sh
-npm install @chinese-fonts/XiaoheSimplify
+npm install @chinese-fonts/xiaohe-simplify
 ```
 
 ```ts
-import "@chinese-fonts/XiaoheSimplify/dist/{具体的包名}/results.css";
+import "@chinese-fonts/xiaohe-simplify/dist/{具体的包名}/results.css";
 ```
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/fonts/XiaoheSimplify)
+详见 [官网](https://chinese-font.netlify.app/fonts/xiaohe-simplify)

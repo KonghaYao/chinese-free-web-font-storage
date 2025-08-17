@@ -18,6 +18,13 @@ module.exports = (plop) => {
         // 完成命令行交互过后完成的一些动作
         actions({ name }) {
             if (!name) throw new Error("你没有写名称");
+            if (fse.existsSync(`./packages/${name}`)) {
+                throw new Error("该字体仓库已存在");
+            }
+            // npm 名称校验
+            if (!/^(@[a-z0-9-_~]+\/[a-z0-9-_~]+|[a-z0-9-_~]+)$/.test(name)) {
+                throw new Error("名称只能包含小写字母、数字、下划线和连字符");
+            }
             const path = fse.readdirSync("./templates/");
             fse.ensureDirSync(`./packages/${name}/fonts/`);
             return [

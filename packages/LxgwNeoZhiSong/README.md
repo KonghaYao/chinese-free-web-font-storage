@@ -12,7 +12,7 @@
 
 ```html
 <link
-    href="https://unpkg.com/@chinese-fonts/LxgwNeoZhiSong/dist/{具体的包名}/results.css"
+    href="https://unpkg.com/@chinese-fonts/lxgw-neo-zhi-song/dist/{具体的包名}/results.css"
     rel="stylesheet"
 />
 ```
@@ -20,13 +20,13 @@
 ### 在项目中使用
 
 ```sh
-npm install @chinese-fonts/LxgwNeoZhiSong
+npm install @chinese-fonts/lxgw-neo-zhi-song
 ```
 
 ```ts
-import "@chinese-fonts/LxgwNeoZhiSong/dist/{具体的包名}/results.css";
+import "@chinese-fonts/lxgw-neo-zhi-song/dist/{具体的包名}/results.css";
 ```
 
 ## 字体许可
 
-详见 [官网](https://chinese-font.netlify.app/fonts/LxgwNeoZhiSong)
+详见 [官网](https://chinese-font.netlify.app/fonts/lxgw-neo-zhi-song)
