@@ -1,18 +1,16 @@
 import { DebounceAtom, NullAtom, atom, reflect } from '@cn-ui/reactive';
 import { VModel } from '~/utils/VModel';
 import { __CDN__ } from '../../../global';
-import { Show } from 'solid-js';
+import { createResource, Show } from 'solid-js';
 import copy from 'copy-to-clipboard';
 import { Notice } from '../../../Notice';
-import { createAsync } from '@solidjs/router';
 import { getFontList } from '../_index/getFontList';
-import { clientOnly } from '@solidjs/start';
+import { Dialog } from '~/components/Feedback/Dialog';
 
-export const ClientCode = clientOnly(() => import('~/components/Code'));
 export const SearchBox = () => {
     const search = atom('');
     const ListContainer = NullAtom(null);
-    const data = createAsync(() => getFontList(), { initialValue: [] });
+    const [data] = createResource(() => getFontList(), { initialValue: [] });
     const items = DebounceAtom(
         reflect(() =>
             data().filter((i) => {
@@ -54,7 +52,7 @@ export const SearchBox = () => {
             >
                 {items().map((font) => {
                     return font.remotePath.map((remote) => {
-                        const copied = atom(false);
+                        const dialogVisible = atom(false);
                         return (
                             <>
                                 <li
@@ -62,7 +60,7 @@ export const SearchBox = () => {
                                     classList={{
                                         new: font.new,
                                         hot: font.hot,
-                                        'col-span-2': copied(),
+                                        // 'col-span-2': copied(),
                                     }}
                                 >
                                     <section class="flex-1 flex flex-col justify-between">
@@ -87,7 +85,7 @@ export const SearchBox = () => {
                                                         `https://chinese-fonts-cdn.deno.dev/${remote.url}`
                                                     );
                                                     Notice.success('复制 CDN 地址成功');
-                                                    copied(true);
+                                                    dialogVisible(true);
                                                 }}
                                             >
                                                 {$t('a2b4963719600f1e16ce18bcd60f863f')}
@@ -102,17 +100,30 @@ export const SearchBox = () => {
                                             </A>
                                         </span>
                                     </section>
-                                    <Show when={copied()}>
-                                        <div class="flex-1 overflow-hidden flex flex-col text-xs text-left gap-1 text-neutral-600 px-2 bg-gray-100">
-                                            <h4>{$t('a5eb7686aca0662121e7c4f32c2f5bee')}</h4>
-                                            <LinkCode
-                                                href={`https://chinese-fonts-cdn.deno.dev/${remote.url}`}
-                                            ></LinkCode>
-                                            <h4>{$t('e780454184b9e6853e444d6f372e7272')}</h4>
-                                            <FontCode style={remote.style}></FontCode>
-                                        </div>
-                                    </Show>
                                 </li>
+                                <Dialog
+                                    title={`${font.name} - CDN 使用指南`}
+                                    visible={dialogVisible}
+                                    onSubmit={() => dialogVisible(false)}
+                                >
+                                    <div class="flex flex-col h-full w-full p-4 gap-4 overflow-auto">
+                                        <h4 class="text-lg font-bold">
+                                            {$t('a5eb7686aca0662121e7c4f32c2f5bee')}
+                                        </h4>
+                                        <LinkCode
+                                            href={`https://chinese-fonts-cdn.deno.dev/${remote.url}`}
+                                        ></LinkCode>
+                                        <h4 class="text-lg font-bold">
+                                            {$t('e780454184b9e6853e444d6f372e7272')}
+                                        </h4>
+                                        <FontCode style={remote.style}></FontCode>
+                                        <h4 class="text-lg font-bold">在项目中安装</h4>
+                                        <NpmCode
+                                            font={font.id}
+                                            detailFontName={remote.name}
+                                        ></NpmCode>
+                                    </div>
+                                </Dialog>
                             </>
                         );
                     });
@@ -171,6 +182,32 @@ export const FontCode = (props: { style: string | number }) => {
                     <span class="line">
                         <span style="color:#999999">{'}'}</span>
                         <span style="color:#393A34">;</span>
+                    </span>
+                </code>
+            </pre>
+        </div>
+    );
+};
+
+export const NpmCode = (props: { font: string; detailFontName: string }) => {
+    return (
+        <div class="overflow-auto p-4 bg-white rounded-md">
+            <pre
+                class="shiki vitesse-light"
+                style="background-color:#ffffff;color:#393a34"
+                tabIndex={0}
+            >
+                <code>
+                    <span class="line">
+                        <span style="color:#1E754F">npm install </span>
+                        <span style="color:#B56959">@chinese-fonts/{props.font}</span>
+                    </span>
+                    <br />
+                    <span class="line">
+                        <span style="color:#848484">
+                            import '@chinese-fonts/{props.font}/dist/{props.detailFontName}
+                            /index.css';
+                        </span>
                     </span>
                 </code>
             </pre>

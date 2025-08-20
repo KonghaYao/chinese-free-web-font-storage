@@ -3,7 +3,6 @@ import { ServerLink } from './_cdn/CDNHome';
 import Hero from '~/assets/eirc-shi-pxfrGGnHVYA-unsplash.jpg?url';
 import Layout from '~/layouts/HomeLayout';
 import './_index/FontList.css';
-import { Suspense } from 'solid-js';
 
 export default () => {
     return (
