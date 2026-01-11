@@ -1,10 +1,11 @@
-import viteLogo from '~/assets/viteLogo.svg';
-import nextLogo from '~/assets/nextLogo.svg';
-import nuxtLogo from '~/assets/nuxtLogo.svg';
-import rspackLogo from '~/assets/rspackLogo.svg';
-import astroLogo from '~/assets/astroLogo.svg';
-import svelteLogo from '~/assets/svelteLogo.svg';
+import viteLogo from '~/assets/viteLogo.svg?url';
+import nextLogo from '~/assets/nextLogo.svg?url';
+import nuxtLogo from '~/assets/nuxtLogo.svg?url';
+import rspackLogo from '~/assets/rspackLogo.svg?url';
+import astroLogo from '~/assets/astroLogo.svg?url';
+import svelteLogo from '~/assets/svelteLogo.svg?url';
 import { For } from 'solid-js';
+import { $t } from '~/i18n';
 const linker = [
     {
         name: 'Vite',

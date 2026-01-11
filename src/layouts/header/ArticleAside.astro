@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+    lang: string;
+}
+
+const { lang } = Astro.props;
+
+// 获取当前语言的所有文章
+const allPosts = await getCollection('post', ({ slug }) => {
+    return slug.startsWith(`${lang}/`);
+});
+
+// 将文章按 section 分组
+const sections: Record<string, any[]> = {};
+allPosts.forEach((post) => {
+    const sectionName = post.data.article?.section || 'Default';
+    if (!sections[sectionName]) sections[sectionName] = [];
+
+    sections[sectionName].push({
+        frontmatter: post.data,
+        // 去掉语言前缀
+        path: `/post/${post.slug.split('/').slice(1).join('/')}`,
+    });
+});
+
+const getHref = (path: string) => {
+    return `/${lang}${path.startsWith('/') ? '' : '/'}${path}`;
+};
+---
+
+<ul class="flex-1">
+    {
+        Object.entries(sections).map(([sectionName, posts]) => {
+            return (
+                <li id={sectionName} class="mb-4">
+                    <details open={true}>
+                        <summary class="mb-3 cursor-pointer font-semibold text-cyan-900 list-none flex items-center gap-2">
+                            <span class="details-marker transition-transform">▶</span>
+                            {sectionName}
+                        </summary>
+                        <ul class="border-l border-neutral-100 ml-2">
+                            {posts.map(({ frontmatter, path }) => {
+                                return (
+                                    <li
+                                        class="line-clamp-2 border-l border-blue-200 py-1 pl-4 text-neutral-700 transition-all hover:border-blue-600 hover:text-cyan-700"
+                                        title={frontmatter?.title}>
+                                        <a href={getHref(path)} class="block w-full">
+                                            {frontmatter?.title}
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </details>
+                </li>
+            );
+        })
+    }
+</ul>
+
+<style>
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+    details[open] .details-marker {
+        transform: rotate(90deg);
+    }
+</style>

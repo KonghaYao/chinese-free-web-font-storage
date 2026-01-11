@@ -2,6 +2,7 @@ import './CDNHome.less';
 
 import Deno from '~/assets/logo/Deno.svg?url';
 import Netlify from '~/assets/logo/Netlify.svg?url';
+import { $t } from '~/i18n';
 export function ServerLink() {
     return (
         <div class="mb-12 flex h-10  gap-6  col-span-12">

@@ -1,11 +1,13 @@
 import { getAllSections } from '~/routes/[lang]/post/_post/getAllSections';
-import { createAsync } from '@solidjs/router';
 import { originLink } from '../../../../utils/originLink';
 import { For } from 'solid-js';
-
-export default () => {
-    const { lang } = useParams();
-    const sections = createAsync(() => getAllSections(lang), { initialValue: {} });
+import { A } from '~/i18n';
+import '~/polyfill';
+export default (props: {
+    sections?: Awaited<ReturnType<typeof getAllSections>>;
+    lang?: string;
+}) => {
+    const sections = () => props.sections || {};
     return (
         <ul class="flex-1">
             {Object.entries(sections()).map(([sectionName, posts]) => {
@@ -23,11 +25,7 @@ export default () => {
                                                 class="line-clamp-2 border-l border-blue-200 py-1 pl-4 text-neutral-700 transition-all hover:border-blue-600  hover:text-cyan-700"
                                                 title={frontmatter?.title}
                                             >
-                                                <A
-                                                    href={path}
-                                                    activeClass="text-cyan-700"
-                                                    onclick={originLink}
-                                                >
+                                                <A href={path} onclick={originLink}>
                                                     {frontmatter?.title}
                                                 </A>
                                             </li>

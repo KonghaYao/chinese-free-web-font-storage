@@ -7,10 +7,25 @@ export const getFontReporter = (font: string, fileName: string) => {
         return cache.get(tag)!;
     } else {
         const item = __CDN__ + `/packages/${font}/dist/${fileName}/reporter.bin`;
-        const p = fetch(item)
-            .then((res) => res.arrayBuffer())
+        const p = fetch(item, {
+            headers: {
+                referer: 'https://chinese-font.netlify.app/',
+                referrer: 'https://chinese-font.netlify.app/',
+                host: 'https://chinese-font.netlify.app/',
+            },
+        })
             .then((res) => {
-                return decodeReporter(new Uint8Array(res)).toObject();
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch reporter: ${res.status} ${res.statusText}`);
+                }
+                return res.arrayBuffer();
+            })
+            .then((res) => {
+                const data = new Uint8Array(res);
+                if (data.length === 0) {
+                    throw new Error('Reporter binary is empty');
+                }
+                return decodeReporter(data).toObject();
             })
             .then((res) => {
                 /** @ts-ignore */

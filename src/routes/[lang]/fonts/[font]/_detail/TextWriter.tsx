@@ -1,4 +1,5 @@
 import { atom } from '@cn-ui/reactive';
+import { $t } from '~/i18n';
 import { VModel } from '~/utils/VModel';
 
 export const TextWriter = () => {

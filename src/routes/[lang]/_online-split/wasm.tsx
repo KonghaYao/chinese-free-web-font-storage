@@ -1,4 +1,5 @@
 import { For, Show, createEffect } from 'solid-js';
+import { $t } from '~/i18n';
 import { DragDropButton } from '~/components/DragButton/index';
 import { ArrayAtom, atom, classHelper, resource } from '@cn-ui/reactive';
 import prettyBytes from 'pretty-bytes';

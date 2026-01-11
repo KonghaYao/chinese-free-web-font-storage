@@ -1,15 +1,11 @@
 import Layout from '~/layouts/HomeLayout';
-import { useContext } from 'solid-js';
-import { i18nContext } from '~/i18n';
-import { createAsync } from '@solidjs/router';
+
+import { $t, A } from '~/i18n';
 import { getAllSections } from './post/_post/getAllSections';
 import { originLink } from '~/utils/originLink';
 
-export default () => {
-    const { lang } = useContext(i18nContext) ?? {};
-    const sections = createAsync(() => getAllSections(lang), {
-        initialValue: {} as Awaited<ReturnType<typeof getAllSections>>,
-    });
+export default (props: { sections?: Awaited<ReturnType<typeof getAllSections>> }) => {
+    const sections = () => props.sections || {};
     return (
         <Layout
             title={$t('b8337dd9789e8259fd6543cbd43ac8c4')}
@@ -32,7 +28,7 @@ export default () => {
                                     {posts.map(({ frontmatter: post, path }) => {
                                         return (
                                             <li>
-                                                <A href={path} preload={false} onclick={originLink}>
+                                                <A href={path} onclick={originLink}>
                                                     <h3>{post.title}</h3>
 
                                                     <p class="my-2 line-clamp-1 text-xs text-gray-500">

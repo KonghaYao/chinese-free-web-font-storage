@@ -5,21 +5,15 @@ import WebSupport from './_detail/WebSupport';
 import { TimeAnalyze } from './_detail/TimeAnalyze';
 import { BundleSizeAnalyze } from './_detail/BundleSizeAnalyze';
 import { BundleContrast } from './_detail/BundleContrast';
-import { getFontReporter } from '../../../../utils/getFontReporter';
 import { Show } from 'solid-js';
 import { __CDN__ } from '~/global';
-import { createAsync } from '@solidjs/router';
 import { ColoredHeader } from './_detail/ColoredHeader';
 import { BasicMessage } from './_detail/BasicMessage';
 import './name.css';
 import Index from '../../../../../index.json';
-export default () => {
-    const { font, name: font_name } = useParams();
-    const reporter = createAsync(async () => {
-        const reporter = await getFontReporter(font!, font_name!);
-        return reporter;
-    });
-    const font_name_cn = (Index as Record<string, { name: string }>)[font]?.name;
+export default (props: { font?: string, name?: string, reporter?: any }) => {
+    const reporter = () => props.reporter;
+    const font_name_cn = (Index as Record<string, { name: string }>)[props.font!]?.name;
     return (
         <Layout
             title={font_name_cn + ' | 在线字体预览测试部署'}
@@ -28,7 +22,7 @@ export default () => {
         >
             <link
                 rel="stylesheet"
-                href={__CDN__ + `/packages/${font}/dist/${font_name}/result.css`}
+                href={__CDN__ + `/packages/${props.font}/dist/${props.name}/result.css`}
             />
             <div
                 class="grid grid-cols-6 lg:grid-cols-12 gap-8 p-4 lg:max-w-6xl lg:m-auto"
@@ -37,7 +31,7 @@ export default () => {
                     'font-weight': reporter()?.css.weight,
                 }}
             >
-                <ColoredHeader></ColoredHeader>
+                <ColoredHeader font={props.font!} font_name={props.name!}></ColoredHeader>
 
                 <section class="col-span-7 flex justify-center items-center border-card">
                     <div class="poetry col-span-5 p-8 leading-6">

@@ -1,0 +1,30 @@
+---
+import type { FontReporter } from 'cn-font-split';
+import prettyBytes from 'pretty-bytes';
+import { $t } from '~/i18n';
+
+interface Props {
+    reporter: FontReporter;
+}
+
+const { reporter } = Astro.props;
+
+/** 展示打包数据的信息 */
+const bundleMessage = reporter.bundleMessage!;
+---
+
+<div class="rounded-lg bg-white p-4">
+    <h2 class="pb-4 text-lg">{$t('1e0ec07b9dc50393b26d2cc2ff30ff61')}</h2>
+    <ul class="select-text text-gray-600">
+        <li>
+            {$t('768b24856a32ff199b6f65225626991c')}
+            <span class="float-right text-green-600">
+                {prettyBytes(bundleMessage.originBytes!)}
+                {prettyBytes(bundleMessage.bundledBytes!)} | {
+                    ((bundleMessage.bundledBytes! * 100) / bundleMessage.originBytes!).toFixed(2)
+                }
+                %
+            </span>
+        </li>
+    </ul>
+</div>

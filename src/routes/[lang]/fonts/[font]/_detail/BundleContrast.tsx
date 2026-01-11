@@ -1,5 +1,6 @@
 import type { FontReporter } from 'cn-font-split';
 import prettyBytes from 'pretty-bytes';
+import { $t } from '~/i18n';
 
 /** 展示打包数据的信息 */
 export const BundleContrast = (props: { reporter: FontReporter }) => {

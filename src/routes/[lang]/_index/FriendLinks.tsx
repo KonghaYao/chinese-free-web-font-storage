@@ -2,6 +2,7 @@ import GoogleFont from '~/assets/logo/GoogleFont.svg?url';
 import Netlify from '~/assets/logo/Netlify.svg?url';
 import FontSource from '~/assets/logo/Fontsource.svg?url';
 import Deno from '~/assets/logo/Deno.svg?url';
+import { $t, A } from '~/i18n';
 interface FriendLink {
     name: string;
     description: string;

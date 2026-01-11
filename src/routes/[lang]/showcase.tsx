@@ -1,4 +1,5 @@
 import Layout from '~/layouts/HomeLayout';
+import { $t, A } from '~/i18n';
 import { AddShowCase } from '~/components/Feedback/AddShowCase';
 import { ShowCaseLinks } from '~/configs';
 export default () => {

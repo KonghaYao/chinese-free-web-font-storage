@@ -1,45 +1,47 @@
 import { Popover } from '@cn-ui/core';
 import { classHelper } from '@cn-ui/reactive';
-import { useLocation } from '@solidjs/router';
-import { useContext } from 'solid-js';
+import { useContext, createMemo } from 'solid-js';
 import { i18nContext, languageConfig } from '~/i18n';
-export const LanguageSwitcher = () => {
-    const { lang } = useContext(i18nContext) ?? {};
+export const LanguageSwitcher = ({ lang }: { lang: string }) => {
     const config = languageConfig.languages;
-    const location = useLocation();
+
+    // 使用 createMemo 监听并解析当前路径
+    const pathname = createMemo(() =>
+        typeof window !== 'undefined' ? window.location.pathname : ''
+    );
+
     const LanguagesList = (props: { class?: string }) => {
-        return <nav class={classHelper.base("outline-none flex flex-col bg-gray-50 border rounded-2xl gap-4 p-4", props.class)()}>
-            {config.map((i) => {
-                return (
-                    <a
-                        classList={{
-                            selected: lang === i.lang,
-                        }}
-                        preload={false}
-                        href={
-                            '/' +
-                            i.lang +
-                            '/' +
-                            location.pathname.split('/').slice(2).join('/')
-                        }
-                        onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href = e.currentTarget.href;
-                        }}
-                    >
-                        {i.name}
-                    </a>
-                );
-            })}
-        </nav>
-    }
+        return (
+            <nav
+                class={classHelper.base(
+                    'outline-none flex flex-col bg-gray-50 border rounded-2xl gap-4 p-4',
+                    props.class
+                )()}
+            >
+                {config.map((i) => {
+                    const href = createMemo(() => {
+                        const parts = pathname().split('/').filter(Boolean);
+                        // 假设路径格式为 /[lang]/...
+                        const rest = parts.slice(1).join('/');
+                        return `/${i.lang}/${rest}`;
+                    });
+
+                    return (
+                        <a
+                            classList={{
+                                selected: lang === i.lang,
+                            }}
+                            href={href()}
+                        >
+                            {i.name}
+                        </a>
+                    );
+                })}
+            </nav>
+        );
+    };
     return (
-        <Popover
-            trigger="hover"
-            content={
-                <LanguagesList></LanguagesList>
-            }
-        >
+        <Popover trigger="hover" content={<LanguagesList></LanguagesList>}>
             <div class="flex items-center">
                 {/* MdiTranslate Icon */}
                 <svg
@@ -56,7 +58,7 @@ export const LanguageSwitcher = () => {
                 </svg>
                 {config.find((i) => i.lang === lang)?.name || ''}
                 {/* SEO 优化，保证能够被爬取到 */}
-                <LanguagesList class='hidden'></LanguagesList>
+                <LanguagesList class="hidden"></LanguagesList>
             </div>
         </Popover>
     );

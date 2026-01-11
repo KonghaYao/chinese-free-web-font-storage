@@ -21,17 +21,16 @@ export const toNpmName = (font: string) => {
     return font;
 };
 
-export const ColoredHeader = () => {
-    const { font, name: font_name } = useParams();
-    const font_name_cn = (Index as Record<string, { name: string }>)[font]?.name;
+export const ColoredHeader = (props: { font: string; font_name: string }) => {
+    const font_name_cn = (Index as Record<string, { name: string }>)[props.font]?.name;
     return (
         <section class="col-span-6 lg:col-span-12 text-2xl flex justify-center gap-12 my-12">
             <div class="flex-1">{font_name_cn}</div>
-            <div>{font}</div>
-            <div>{decodeURI(font_name)}</div>
+            <div>{props.font}</div>
+            <div>{decodeURI(props.font_name)}</div>
             <div class="flex gap-6 items-center">
                 <a
-                    href={`https://www.npmjs.com/package/@chinese-fonts/${toNpmName(font)}`}
+                    href={`https://www.npmjs.com/package/@chinese-fonts/${toNpmName(props.font)}`}
                     target="_blank"
                     class="text-blue-500 hover:text-blue-600"
                 >
@@ -42,7 +41,7 @@ export const ColoredHeader = () => {
                     ></img>
                 </a>
                 <a
-                    href={`https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch/packages/${font}/fonts`}
+                    href={`https://github.com/KonghaYao/chinese-free-web-font-storage/tree/branch/packages/${props.font}/fonts`}
                     target="_blank"
                     class="text-blue-500 hover:text-blue-600"
                 >

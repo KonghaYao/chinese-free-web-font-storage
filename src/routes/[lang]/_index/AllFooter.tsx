@@ -1,4 +1,5 @@
 import { URLLinkHelp } from '~/configs';
+import { $t } from '~/i18n';
 export default () => {
     return (
         <footer class="flex flex-col w-full bg-black text-white gap-8">

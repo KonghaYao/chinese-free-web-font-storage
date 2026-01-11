@@ -2,6 +2,7 @@ import save from 'file-saver';
 const { saveAs } = save;
 import { resource, type Atom } from '@cn-ui/reactive';
 import { Notice } from '~/Notice';
+import { $t } from '~/i18n';
 
 /** 压缩文件 */
 export function useZip(

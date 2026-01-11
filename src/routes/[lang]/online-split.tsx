@@ -1,5 +1,6 @@
 import { clientOnly } from '@solidjs/start';
 import Layout from '~/layouts/HomeLayout';
+import { $t, A } from '~/i18n';
 const WasmSplit = clientOnly(() => import('./_online-split/wasm'));
 export default () => {
     return (

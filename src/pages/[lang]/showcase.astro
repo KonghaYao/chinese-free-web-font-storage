@@ -1,0 +1,80 @@
+---
+import HomeLayout from '~/layouts/HomeLayout.astro';
+import { $t, languageConfig } from '~/i18n';
+import { ShowCaseLinks } from '~/configs';
+
+export function getStaticPaths() {
+    return [{ params: { lang: 'zh-cn' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+
+// 验证语言是否存在
+if (!languageConfig.languages.find((i) => i.lang === lang)) {
+    return Astro.redirect('/zh-cn/showcase');
+}
+
+const title = $t('87cdbf937e8ba000f52f13aac09717a5');
+const description = $t('7e5016b7d20256bff24dc4d541d8b192');
+const keywords = $t('1bf72502618f95a9f0e0b73f6afece1d');
+
+const showcaseItems = ShowCaseLinks();
+---
+
+<HomeLayout title={title} description={description} keywords={keywords} lang={lang}>
+    <section class="max-w-6xl m-auto">
+        <header class="h-[80vh] flex flex-col w-full justify-center items-center gap-4 pb-8">
+            <aside class="bg-rose-600 text-white rounded-md p-2 text-2xl">
+                {$t('c26febed146956b50a743a2fcabbc3b3')}
+            </aside>
+            <h2 class="text-7xl">
+                {$t('34b1e92fb11165d7b276639193fd58e3')}
+                <span class="text-blue-600 mx-[0.25em]">
+                    {$t('fb0c8b10747b8b7891d727e164244782')}
+                </span>
+                {$t('967cf7426422dac1cc625f4a4c1836be')}
+            </h2>
+        </header>
+
+        <ul
+            class="grid md:grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 pb-12 gap-8 mb-24 px-4"
+        >
+            {
+                showcaseItems.map((site, i) => (
+                    <>
+                        {i === 4 && (
+                            <li class="flex h-24 items-center justify-center md:col-span-2 lg:col-span-3">
+                                {$t('39d2219a5cddf8d3a2cc79e98cd33034')}
+                            </li>
+                        )}
+                        <li class={i % 4 === 0 ? 'md:col-span-2 md:row-span-2' : ''}>
+                            <article class="group relative flex aspect-video h-full w-full cursor-pointer flex-col overflow-hidden rounded-md bg-gray-600">
+                                <a
+                                    href={site.url}
+                                    rel="noopener"
+                                    target="_blank"
+                                    class="h-full w-full">
+                                    <span class="sr-only">{site.title}</span>
+                                    <img
+                                        src={site.image}
+                                        alt=""
+                                        class="h-full w-full object-cover"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+
+                                    <footer class="pointer-events-none absolute bottom-0 z-10 flex w-full flex-col gap-2 bg-gray-500/95 p-4 text-gray-100 opacity-0 transition-opacity duration-300 ease-out group-focus-within:opacity-100 group-hover:opacity-100">
+                                        <h2 class="text-xl font-bold">{site.title}</h2>
+                                        <p class="text-sm flex flex-row items-center gap-2">
+                                            <span>{site.url}</span>
+                                        </p>
+                                    </footer>
+                                </a>
+                            </article>
+                        </li>
+                    </>
+                ))
+            }
+        </ul>
+    </section>
+</HomeLayout>

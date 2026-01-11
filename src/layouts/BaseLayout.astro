@@ -1,0 +1,51 @@
+---
+import { languageConfig } from '~/i18n';
+import GlobalHeader from './GlobalHeader.astro';
+import '../app.css';
+interface Props {
+    title: string;
+    description: string;
+    keywords?: string;
+    lang: string;
+    noFollow?: boolean;
+}
+
+const { title, description, keywords, lang, noFollow } = Astro.props;
+
+await languageConfig.init(lang);
+
+const fontStyle = {
+    width: '100%',
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        {noFollow && <meta name="robots" content="noindex, nofollow" />}
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords || 'font, chinese, webfont'} />
+        <link rel="preconnect" href="https://chinese-fonts-cdn.deno.dev" crossorigin="anonymous" />
+        <link
+            rel="stylesheet"
+            href="https://chinese-fonts-cdn.deno.dev/packages/jhlst/dist/%E4%BA%AC%E8%8F%AF%E8%80%81%E5%AE%8B%E4%BD%93v1_007/result.css"
+        />
+    </head>
+    <body>
+        <div id="root">
+            <GlobalHeader lang={lang} />
+            <main style={fontStyle}>
+                <slot />
+            </main>
+        </div>
+    </body>
+</html>
+
+<style is:global>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+</style>

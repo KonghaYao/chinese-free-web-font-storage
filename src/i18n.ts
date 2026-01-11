@@ -1,6 +1,8 @@
 // @i18n-disable
 import i18n from 'i18next';
 import { createContext, createMemo, mergeProps, useContext } from 'solid-js';
+import { isServer } from 'solid-js/web';
+import { A } from './A';
 
 const createI18n = async (key: string, packages: () => Promise<any>) => {
     const i = i18n.createInstance();
@@ -48,7 +50,7 @@ class LanguageServer extends Map {
             }
         } else {
             // 而前端只需要配置当前语言包
-            this.loadSingleLanguage(lang);
+            await this.loadSingleLanguage(lang);
         }
     }
     async loadSingleLanguage(lang: string) {
@@ -57,6 +59,7 @@ class LanguageServer extends Map {
         await this.registerLanguage(config);
     }
     async registerLanguage(lang: LanguageConfig) {
+        if (this.has(lang.lang)) return;
         const instance = await createI18n(lang.lang, lang.translation);
         this.set(lang.lang, instance);
     }
@@ -78,35 +81,34 @@ const languageConfig = new LanguageServer([
     },
 ] as const);
 
-const defaultLanguage = isServer ? 'zh-cn' : location.pathname.split('/')[1];
+// 在 Astro 中，由于是顶层 await，我们需要确保环境正确
+const getInitialLang = () => {
+    if (isServer) return 'zh-cn';
+    return location.pathname.split('/')[1] || 'zh-cn';
+};
+
+const defaultLanguage = getInitialLang();
+// if (isServer) {
 await languageConfig.init(defaultLanguage);
+// }
+export const getLangFromURL = (url: string) => {
+    if (!url) return;
+    return new URL(url).href?.split('/')?.[1];
+};
+
 export const $t = (str: string, ...args: any) => {
-    let lang = useContext(i18nContext)?.lang ?? defaultLanguage;
+    let lang = getLangFromURL(globalThis.location?.toString()) ?? defaultLanguage;
     let instance = languageConfig.getInstance(lang);
     /** @ts-ignore */
     return instance?.t(str, ...args) ?? str; // 防止切换时导致 BUG
 };
 
-export const i18nContext = createContext({
-    lang: defaultLanguage,
-});
-
 export const watchLanguageRouter = () => {
     return createMemo(() => {
-        return { lang: useLocation().pathname.split('/')[1] };
+        if (isServer) return { lang: 'zh-cn' };
+        return { lang: window.location.pathname.split('/')[1] || 'zh-cn' };
     });
 };
 
-import { A as OriginA, useLocation } from '@solidjs/router';
-import { isServer } from 'solid-js/web';
-export const A: typeof OriginA = (props) => {
-    const lang = useContext(i18nContext)?.lang ?? 'zh-cn';
-    if (!props.href) props.href = '';
-    if (props.href?.startsWith('/')) {
-        return OriginA(mergeProps(props, { href: `/${lang}` + props.href }));
-    } else {
-        return OriginA(props);
-    }
-};
-
 export { languageConfig };
+export { A };

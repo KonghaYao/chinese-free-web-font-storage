@@ -4,17 +4,11 @@ import FontList from './_index/FontsList';
 import { FriendLinks } from './_index/FriendLinks';
 import PerformanceOfTool from './_index/PerformanceOfTool';
 import svg from './_index/website_title.svg?raw';
-import { languageConfig } from '~/i18n';
-import { useLocation, useNavigate } from '@solidjs/router';
+import { languageConfig, $t, A } from '~/i18n';
 
-export default () => {
-    const { lang } = useParams();
-    if (!languageConfig.languages.find((i) => i.lang === lang)) {
-        const location = useLocation();
-        const nav = useNavigate();
-        console.log(location.pathname);
-        return nav('/zh-cn' + location.pathname);
-    }
+export default (props: { lang?: string, list?: any[] }) => {
+    const lang = () => props.lang || 'zh-cn';
+    
     return (
         <Layout
             title={$t('049945050aa7435651ba3e2129a14e93')}
@@ -96,7 +90,7 @@ export default () => {
                 </aside>
             </section>
 
-            <FontList />
+            <FontList list={props.list} />
             <div
                 class="text-center text-6xl py-48  bg-line translate-y-24"
                 style={{

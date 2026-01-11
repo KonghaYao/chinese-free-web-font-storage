@@ -1,0 +1,20 @@
+---
+import HomeLayout from './HomeLayout.astro';
+import '~/style/markdown.less';
+import '~/style/markdown.table.less';
+import '~/style/post.css';
+
+export interface Props {
+    keywords?: string;
+    description: string;
+    title: string;
+    noFollow?: boolean;
+    lang: string;
+}
+
+const props = Astro.props;
+---
+
+<HomeLayout {...props}>
+    <slot />
+</HomeLayout>

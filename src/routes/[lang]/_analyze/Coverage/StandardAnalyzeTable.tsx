@@ -1,5 +1,6 @@
 import { ColoredNumber } from '~/utils/ColoredNumber';
 import { type Result } from '..';
+import { $t } from '~/i18n';
 
 export const StandardAnalyzeTable = (props: { data: Result['standard'] }) => {
     return (

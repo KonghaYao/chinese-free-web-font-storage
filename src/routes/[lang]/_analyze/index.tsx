@@ -1,4 +1,5 @@
 import { atom, resource } from '@cn-ui/reactive';
+import { $t } from '~/i18n';
 import type { FontAnalyze } from 'font-analyze';
 import { Match, Switch } from 'solid-js';
 import './analyze.css';

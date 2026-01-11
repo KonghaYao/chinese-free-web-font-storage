@@ -2,6 +2,7 @@ import { resource, computed } from '@cn-ui/reactive';
 import { Show, type JSX } from 'solid-js';
 import { ECharts } from '~/components/EChartsClient';
 import prettyBytes from 'pretty-bytes';
+import { $t } from '~/i18n';
 
 export type ImageKitAnalyzeData = {
     name: string;

@@ -5,6 +5,7 @@ import { RenderGlyph } from './RenderGlyph';
 import { For, Show } from 'solid-js';
 import { RenderGlyphDetail } from './RenderGlyphDetail';
 import { VModel } from '~/utils/VModel';
+import { $t } from '~/i18n';
 export interface GlyphConfig {
     fontScale: number;
     fontSize: number;

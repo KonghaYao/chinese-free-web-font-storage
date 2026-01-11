@@ -1,0 +1,83 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { $t, languageConfig } from '~/i18n';
+
+export function getStaticPaths() {
+    return [{ params: { lang: 'zh-cn' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+await languageConfig.init(lang);
+
+const allPosts = await getCollection('post', ({ id }) => {
+    return id.startsWith(`${lang}/`);
+});
+
+// 按 section 分组
+const sections = allPosts.reduce(
+    (acc, post) => {
+        const sectionName = post.data.article.section || 'General';
+        if (!acc[sectionName]) acc[sectionName] = [];
+        acc[sectionName].push(post);
+        return acc;
+    },
+    {} as Record<string, any[]>
+);
+
+const title = $t('b8337dd9789e8259fd6543cbd43ac8c4');
+const description = '中文网字计划文档列表';
+const keywords = $t('d607ec3c4aeb920414eb174e960e4b02');
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} lang={lang}>
+    <main class="py-4 px-12">
+        <h2 class="w-full py-8 text-3xl text-center">
+            {$t('7c6f314e2a20f07a459ee758be60ec60')}
+        </h2>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {
+                Object.entries(sections).map(([sectionName, posts]) => {
+                    return (
+                        <nav>
+                            <h2 class="my-2 border-b border-gray-300 py-2 text-2xl text-cyan-700">
+                                {sectionName}
+                            </h2>
+                            <ul class="space-y-4">
+                                {posts.map((post) => {
+                                    const slug = post.slug.split('/').slice(1).join('/');
+                                    return (
+                                        <li>
+                                            <a href={`/${lang}/post/${slug}`}>
+                                                <h3 class="font-bold hover:text-cyan-600 transition-colors">
+                                                    {post.data.title}
+                                                </h3>
+
+                                                <p class="my-2 line-clamp-1 text-xs text-gray-500">
+                                                    {post.data.description}
+                                                </p>
+                                                <aside class="flex gap-2 text-xs text-gray-500">
+                                                    <address>
+                                                        {Array.isArray(post.data.article.authors)
+                                                            ? post.data.article.authors.join(', ')
+                                                            : post.data.article.authors}
+                                                    </address>
+
+                                                    <time
+                                                        dateTime={post.data.article.pubDate.toISOString()}>
+                                                        {post.data.article.pubDate.toLocaleDateString()}
+                                                    </time>
+                                                </aside>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </nav>
+                    );
+                })
+            }
+        </section>
+    </main>
+</BaseLayout>

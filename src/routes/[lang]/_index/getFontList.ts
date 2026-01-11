@@ -1,6 +1,6 @@
 import { getFileListIndex } from '~/api/fontListIndex';
 
-export const getFontList = cache(async () => {
+export const getFontList = async () => {
     'use server';
     return getFileListIndex();
-}, 'getFontList');
+};

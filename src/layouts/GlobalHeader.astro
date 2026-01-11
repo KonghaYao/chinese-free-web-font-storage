@@ -1,0 +1,50 @@
+---
+import { LanguageSwitcher } from '../routes/[lang]/_index/LanguageSwitcher';
+import { NavMenus } from './header/NavMenus';
+import { $t } from '~/i18n';
+
+interface Props {
+    lang: string;
+}
+
+const { lang } = Astro.props;
+
+// 辅助函数，生成带语言前缀的链接
+const getHref = (path: string) => {
+    if (path.startsWith('http')) return path;
+    return `/${lang}${path.startsWith('/') ? '' : '/'}${path}`;
+};
+---
+
+<header
+    class="print:hidden sticky z-20 w-full top-0 left-0 h-16 flex items-center bg-white/70 gap-2 py-4 backdrop-blur-lg px-12 flex-wrap border-b"
+>
+    <a href={`/${lang}/`}>
+        <h1 class="text-black text-2xl">{$t('d48fdf306ce5b7eca8e902c19eaf2ba2')}</h1>
+    </a>
+    <span class="flex-1"></span>
+    <nav class="text-sky-700 flex gap-4 md:gap-6 items-center">
+        <a href={getHref('/cdn/')} class="hover:underline">
+            {$t('370b1608e64632e166a6cd16ef472560')}
+        </a>
+        <a href={getHref('/online-split/')} class="hidden sm:block hover:underline">
+            {$t('a90f69ca6f4dc557d780fac6904591ea')}
+        </a>
+        <a href={getHref('/article/')} class="hover:underline">
+            {$t('c75625dccf148721245b46b1e3e6c79f')}
+        </a>
+        <a
+            href={'https://github.com/KonghaYao/chinese-free-web-font-storage/issues'}
+            class="hidden sm:block hover:underline"
+            target="_blank"
+        >
+            {$t('4e770040c7cf35fb587b2d0b99df2a32')}
+        </a>
+        <a href={getHref('/showcase/')} class="hidden sm:block hover:underline">
+            {$t('1b467083c31ee80696dd477f7bd7530c')}
+        </a>
+
+        <NavMenus client:load lang={lang} />
+        <LanguageSwitcher client:load lang={lang} />
+    </nav>
+</header>

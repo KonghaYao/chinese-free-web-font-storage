@@ -5,6 +5,7 @@ import ChromeImage from '~/assets/logo/Chrome.svg?url';
 import FirefoxImage from '~/assets/logo/Firefox.svg?url';
 import AppleSafariImage from '~/assets/logo/Apple Safari.svg?url';
 import { DemoOfFontSplit } from '~/routes/[lang]/_index/DemoOfFontSplit';
+import { $t, A } from '~/i18n';
 const config = [
     {
         img: NodeImage,

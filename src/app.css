@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: KingHwa_OldSong;
+}
+
 .poetry {
     -ms-writing-mode: tb-rl;
     writing-mode: tb-rl;

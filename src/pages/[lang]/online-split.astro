@@ -1,0 +1,22 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import WasmSplit from '~/routes/[lang]/_online-split/wasm';
+import { $t, languageConfig } from '~/i18n';
+
+export function getStaticPaths() {
+    return [{ params: { lang: 'zh-cn' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+
+// 在服务端预初始化 i18n 以获取翻译
+await languageConfig.init(lang);
+
+const title = $t('9968557635555e59d673f29db4832aa0');
+const description = $t('799a430e341b71a8fbeee78f9180f6fa');
+const keywords = $t('b1b016d42d08a0b7838fa2d935d06246');
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} lang={lang}>
+    <WasmSplit client:only="solid-js" />
+</BaseLayout>

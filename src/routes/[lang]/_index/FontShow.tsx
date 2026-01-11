@@ -2,6 +2,7 @@ import { ThrottleAtom, atom } from '@cn-ui/reactive';
 import { createEffect, onMount } from 'solid-js';
 import { __CDN__ } from '../../../global';
 import anime from 'animejs';
+import { $t } from '~/i18n';
 const showAnime = () => {
     return anime({
         targets: '.showing-text span',

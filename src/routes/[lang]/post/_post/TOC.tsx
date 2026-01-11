@@ -10,8 +10,7 @@ export const TOC = (props: { heading: TocEntry[]; class?: string; pIds: string[]
                 const id = slugger.slug(i.value);
                 return (
                     <>
-                        <A
-                            preload={false}
+                        <a
                             class={
                                 'toc-item line-clamp-1 cursor-pointer rounded-md text-gray-600 hover:bg-green-100 hover:text-green-700 ' +
                                 ' article-level-' +
@@ -39,7 +38,7 @@ export const TOC = (props: { heading: TocEntry[]; class?: string; pIds: string[]
                             }}
                         >
                             {i.value}
-                        </A>
+                        </a>
                         <TOC heading={i.children} pIds={[...props.pIds, id]}></TOC>
                     </>
                 );

@@ -1,11 +1,12 @@
 import { FontShow } from './FontShow';
 import { __CDN__ } from '~/global';
 import './FontList.css';
-import { createAsync } from '@solidjs/router';
-import { getFontList } from './getFontList';
+import { $t, A } from '~/i18n';
+import { getFileListIndex } from '~/api/fontListIndex';
+import { resource } from '@cn-ui/reactive';
 
 export default () => {
-    const list = createAsync(() => getFontList());
+    const list = resource(() => getFileListIndex(), { initValue: [] });
     return (
         <section
             id="font-list"
@@ -21,7 +22,7 @@ export default () => {
                 <div class="gradient-line w-full flex-none h-px my-8"></div>
                 <nav class="overflow-x-hidden p-4 h-screen ">
                     <div class="font-list-ul gap-8 grid grid-cols-3">
-                        {list()?.map((item) => {
+                        {list().map((item) => {
                             return (
                                 <div
                                     class="glass-card"

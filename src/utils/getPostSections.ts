@@ -18,7 +18,6 @@ export const getSections = (lang: string) => {
 
 /** 在服务器端获取所有的md文件 */
 export const getArticlesInServer = async (lang: string) => {
-    if (!isServer) throw new Error('only run in server');
     const entries = await Promise.all(
         [...Object.entries(allContents)]
             .filter(([key, val]) => {

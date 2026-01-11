@@ -2,6 +2,7 @@ import { ensureFontMessageString } from '~/utils/ensureFontMessageString';
 import { AllCDN } from '~/global';
 import type { FontReporter } from 'cn-font-split';
 import { Code } from '~/components/Code';
+import { $t, A } from '~/i18n';
 
 export default (props: { reporter: FontReporter }) => {
     const { font, name: font_name } = useParams();

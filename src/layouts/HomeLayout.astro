@@ -1,0 +1,42 @@
+---
+import GlobalHeader from './GlobalHeader.astro';
+import { $t } from '~/i18n';
+import '~/app.css';
+export interface Props {
+    keywords?: string;
+    description: string;
+    title: string;
+    noFollow?: boolean;
+    lang: string;
+}
+
+const { title, description, keywords, noFollow, lang } = Astro.props;
+const defaultKeywords = $t('d43b734625429e539fb49080b13065d6');
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        {noFollow && <meta name="robots" content={$t('d420d9103588bf78dada339bb9b3660c')} />}
+        <meta name="description" content={description} />
+        <meta name="keywords" content={keywords ?? defaultKeywords} />
+        <link
+            rel="preconnect"
+            href="https://chinese-fonts-cdn.netlify.app"
+            crossorigin="anonymous"
+        />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin="anonymous" />
+        <link
+            rel="stylesheet"
+            href="https://chinese-fonts-cdn.netlify.app/packages/jhlst/dist/%E4%BA%AC%E8%8F%AF%E8%80%81%E5%AE%8B%E4%BD%93v1_007/result.css"
+        />
+        <base href={`/${lang}/`} />
+    </head>
+    <body class="min-h-screen">
+        <GlobalHeader lang={lang} />
+        <slot />
+    </body>
+</html>

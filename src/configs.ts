@@ -1,3 +1,4 @@
+import { $t } from '~/i18n';
 export const URLLinkHelp: Record<string, { url: string; desc: string }> = {
     fontSource: { url: 'https://fontsource.org', desc: '收集 Google Web 字体的网站' },
     opentype: {

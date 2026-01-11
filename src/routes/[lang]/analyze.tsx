@@ -1,5 +1,6 @@
 import { __CDN__ } from '../../global';
 import Layout from '~/layouts/HomeLayout';
+import { $t } from '~/i18n';
 import { clientOnly } from '@solidjs/start';
 
 const FontAnalyzeUI = clientOnly(() => import('./_analyze/index'));

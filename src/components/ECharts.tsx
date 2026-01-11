@@ -1,6 +1,6 @@
 import { atom } from '@cn-ui/reactive';
 import { type EChartsCoreOption, type ECharts as _ECharts } from 'echarts/core';
-import { createAsync } from '@solidjs/router';
+import { createResource } from 'solid-js';
 const renderSVGChart = async (reporter: EChartsCoreOption, dom: HTMLElement | null = null) => {
     const { echarts } = await import('../routes/[lang]/fonts/[font]/_detail/registerEcharts');
     const myChart = echarts.init(dom, null, {
@@ -20,10 +20,12 @@ export const ECharts = (props: {
     height?: string;
 }) => {
     const dom = atom<HTMLElement | null>(null);
-    const info = createAsync(async () => {
-        'use-server';
-        return (await renderSVGChart(props.options))!.renderToSVGString();
-    });
+    const [info] = createResource(
+        () => props.options,
+        async (options) => {
+            return (await renderSVGChart(options))!.renderToSVGString();
+        }
+    );
     // let myChart: _ECharts;
     // if (isServer) {
 
@@ -48,7 +50,7 @@ export const ECharts = (props: {
             ref={dom}
             class="m-auto flex w-full items-center justify-center rounded-xl bg-white"
             style={{ height: props.height ?? '400px' }}
-            innerHTML={info()}
+            innerHTML={info() || ''}
         ></div>
     );
 };

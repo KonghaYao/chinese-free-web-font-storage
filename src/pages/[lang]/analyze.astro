@@ -1,0 +1,20 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import FontAnalyzeUI from '~/routes/[lang]/_analyze/index';
+import { $t, languageConfig } from '~/i18n';
+
+export function getStaticPaths() {
+    return [{ params: { lang: 'zh-cn' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+
+// 在服务端预初始化 i18n 以获取翻译
+await languageConfig.init(lang);
+
+const title = $t('24dba98555da92ea160aa6a2107bb8c3');
+---
+
+<BaseLayout title={title} description="" keywords="" lang={lang}>
+    <FontAnalyzeUI client:only="solid-js" />
+</BaseLayout>

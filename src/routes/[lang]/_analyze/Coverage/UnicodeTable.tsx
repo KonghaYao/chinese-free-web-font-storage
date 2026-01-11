@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js';
 import { ColoredNumber } from '~/utils/ColoredNumber';
 import { type Result } from '..';
+import { $t } from '~/i18n';
 
 export const UnicodeTable = (props: { data: Result['unicode'] }) => {
     const [data, setData] = createSignal(props.data, { equals: false });

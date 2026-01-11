@@ -6,6 +6,7 @@ import copy from 'copy-to-clipboard';
 import { Notice } from '../../../Notice';
 import { getFontList } from '../_index/getFontList';
 import { Dialog } from '~/components/Feedback/Dialog';
+import { $t, A } from '~/i18n';
 
 export const SearchBox = () => {
     const search = atom('');
@@ -94,7 +95,6 @@ export const SearchBox = () => {
                                             <A
                                                 href={remote.href}
                                                 class="cursor-pointer transition-colors hover:text-green-600"
-                                                preload={false}
                                             >
                                                 {$t('51b5f4f4f1ea04b3dc2447016ab37662')}
                                             </A>

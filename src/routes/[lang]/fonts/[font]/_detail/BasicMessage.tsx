@@ -1,5 +1,6 @@
 import type { FontReporter } from 'cn-font-split';
 import FontCoverage from './FontCoverage';
+import { $t } from '~/i18n';
 export const BasicMessage = (props: { reporter: FontReporter }) => {
     const { name: font_name } = useParams();
     return (

@@ -1,0 +1,84 @@
+---
+import BaseLayout from '~/layouts/PostLayout.astro';
+import { $t } from '~/i18n';
+import ArticleAside from '~/layouts/header/ArticleAside.astro';
+import { TOC } from '~/routes/[lang]/post/_post/TOC';
+import { getCollection } from 'astro:content';
+
+// export async function getStaticPaths() {
+//     const posts = await getCollection('post');
+//     return posts.map((post) => {
+//         const [lang, ...slugParts] = post.slug.split('/');
+//         return {
+//             params: { lang, slug: slugParts.join('/') },
+//             props: { post },
+//         };
+//     });
+// }
+
+const { lang, slug } = Astro.params;
+const posts = await getCollection('post');
+const post = posts.find((post) => {
+    return post.slug === lang + '/' + slug;
+});
+if (!post) return Astro.redirect('/zh-cn/article');
+const { Content, headings } = await post.render();
+
+// TOC 需要的数据格式转换
+const tocHeadings = headings.map((h) => ({
+    value: h.text,
+    depth: h.depth,
+    children: [], // Astro 的 headings 是扁平的，TOC 组件可能需要处理
+}));
+---
+
+<BaseLayout
+    title={post.data.title}
+    description={post.data.description}
+    keywords={post.data.keywords}
+    lang={lang}
+>
+    <div class="flex justify-center max-w-[1440px] mx-auto">
+        <!-- 侧边栏：文章列表 -->
+        <aside
+            class="sticky top-16 self-start flex-col px-8 py-12 flex h-[calc(100vh-4rem)] flex-none w-[20rem] overflow-y-auto border-r"
+        >
+            <ArticleAside lang={lang} />
+        </aside>
+
+        <!-- 主体内容 -->
+        <main class="flex-1 min-w-0 select-text relative z-1 min-h-screen scroll-smooth">
+            <article class="markdown-body mx-auto block max-w-4xl py-12 px-6 lg:px-12">
+                <div class="prose prose-stone max-w-none">
+                    <Content />
+                </div>
+            </article>
+        </main>
+
+        <!-- 右侧：目录 (TOC) -->
+        <nav
+            class="sticky top-16 self-start flex-none w-64 px-8 py-12 block h-[calc(100vh-4rem)] overflow-y-auto border-l"
+        >
+            <div class="font-bold text-lg mb-4">{$t('7f1b21a571bc81517bbf8b85b1ef7ccd')}</div>
+            <TOC client:load heading={tocHeadings} pIds={[]} />
+        </nav>
+    </div>
+</BaseLayout>
+
+<style is:global>
+    .markdown-body {
+        font-family: inherit;
+    }
+    .toc-item {
+        @apply block py-1 text-sm transition-colors;
+    }
+    .article-level-2 {
+        @apply pl-0 font-medium;
+    }
+    .article-level-3 {
+        @apply pl-4 text-gray-500;
+    }
+    .article-level-4 {
+        @apply pl-8 text-gray-400;
+    }
+</style>
