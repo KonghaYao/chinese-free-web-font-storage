@@ -38,6 +38,7 @@
     },
     "dependencies": {
         "@astrojs/mdx": "^4.3.13",
+        "@astrojs/netlify": "^6.6.3",
         "@astrojs/solid-js": "^5.1.3",
         "@astrojs/tailwind": "^6.0.2",
         "@cn-ui/core": "^2.11.1",
