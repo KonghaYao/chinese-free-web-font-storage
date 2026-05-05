@@ -207,13 +207,13 @@ export type WatchTowerData = {
 export default () => {
     const data = resource<ImageKitAnalyzeData[]>(() => {
         return fetch(
-            'https://cache-api.deno.dev/index.js?url=https://imagekit-analyze.deno.dev/index.js'
+            'https://cache-api.konghayao.deno.net/index.js?url=https://imagekit-analyze.deno.dev/index.js'
         )
             .then((res) => res.json())
             .then((res) => res.filter(Boolean));
     });
     const watchTower = resource<WatchTowerData>(() => {
-        return fetch('https://cache-api.deno.dev/index.js?url=https://font-wt.deno.dev', {
+        return fetch('https://cache-api.konghayao.deno.net/index.js?url=https://font-wt.deno.dev', {
             method: 'post',
         }).then((res) => res.json());
     });

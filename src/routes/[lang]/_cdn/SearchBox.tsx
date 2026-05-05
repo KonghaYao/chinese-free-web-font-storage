@@ -74,7 +74,7 @@ export const SearchBox = () => {
                                             alt=""
                                         />
                                         <span
-                                            title={`https://chinese-fonts-cdn.deno.dev/${remote.url}}`}
+                                            title={`https://chinese-fonts-cdn.konghayao.deno.net/${remote.url}}`}
                                             class="flex justify-evenly border-t pt-1 text-xs text-blue-400"
                                         >
                                             <span>{font.id}</span>
@@ -83,7 +83,7 @@ export const SearchBox = () => {
                                                 class="cursor-pointer text-blue-600 transition-colors"
                                                 onclick={() => {
                                                     copy(
-                                                        `https://chinese-fonts-cdn.deno.dev/${remote.url}`
+                                                        `https://chinese-fonts-cdn.konghayao.deno.net/${remote.url}`
                                                     );
                                                     Notice.success('复制 CDN 地址成功');
                                                     dialogVisible(true);
@@ -111,7 +111,7 @@ export const SearchBox = () => {
                                             {$t('a5eb7686aca0662121e7c4f32c2f5bee')}
                                         </h4>
                                         <LinkCode
-                                            href={`https://chinese-fonts-cdn.deno.dev/${remote.url}`}
+                                            href={`https://chinese-fonts-cdn.konghayao.deno.net/${remote.url}`}
                                         ></LinkCode>
                                         <h4 class="text-lg font-bold">
                                             {$t('e780454184b9e6853e444d6f372e7272')}
