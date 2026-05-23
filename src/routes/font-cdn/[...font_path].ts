@@ -3,7 +3,7 @@ import type { APIEvent } from '@solidjs/start/server';
 export async function GET(event: APIEvent) {
     const url = event.request.url;
     const path = url.split('/font-cdn')[1];
-    return fetch(`https://chinese-fonts-cdn.konghayao.deno.net${path}`, {
+    return fetch(`https://cn-font.claude-code-best.win${path}`, {
         headers: event.request.headers,
         redirect: 'manual',
     }).then(async (res) => {
